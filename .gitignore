@@ -28,6 +28,10 @@
 *.gif
 *.png
 *のエイリアス
+*.xd
+
+!root/datas/*.pdf
+!root/datas/*.xd
 
 root/node_modules/
 root/sftp-config.json
