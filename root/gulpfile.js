@@ -1,16 +1,13 @@
-var nic = 'html/mimamori';
+var nic = 'html';
 
 // gulp
 var gulp = require('gulp');
 // webpack
-var webpack = require('gulp-webpack');
+var webpack = require('webpack-stream');
 var webpackConfig = require('./webpack.config.js');
 var del = require('del');
 // sass
 var sass = require('gulp-sass');
-
-// browser-sync
-var browserSync = require('browser-sync').create();
 
 // webpack
 var TS_SRC = './ts/*.ts';
@@ -23,10 +20,7 @@ gulp.task('clean', function() {
 gulp.task('webpack', function () {
     return gulp.src([TS_SRC])
         .pipe(webpack(webpackConfig))
-        .pipe(gulp.dest(JS_DEST))
-        .pipe(browserSync.reload({
-            stream: true
-        }));
+        .pipe(gulp.dest(JS_DEST));
 });
 
 
@@ -37,19 +31,7 @@ gulp.task('sass', function() {
     ])
     .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
 //    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(gulp.dest(nic+'/css/dest'))
-    .pipe(browserSync.reload({
-        stream: true
-    }));
-});
-
-
-// browser-sync
-gulp.task('browser-sync', () => {
-    return browserSync.init(null, {
-        proxy: "192.168.105.71:8001",
-        reloadDelay: 1000
-    });
+    .pipe(gulp.dest(nic+'/css/dest'));
 });
 
 
@@ -58,12 +40,9 @@ gulp.task('watch', function() {
     gulp.watch(TS_SRC, ['webpack']);
     gulp.watch([
         nic+'/css/scss/*.scss',
-        nic+'/css/scss/admin.scss',
-        nic+'/css/scss/admin/*.scss',
-        nic+'/css/scss/mypage/*.scss',
-        nic+'/css/scss/public/*.scss',
+        nic+'/css/scss/style.scss',
     ], ['sass']);
 });
 
-gulp.task('default', ['webpack', 'sass', 'browser-sync', 'watch']);
+gulp.task('default', ['webpack', 'sass', 'watch']);
 

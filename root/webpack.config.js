@@ -10,7 +10,7 @@ let config = {
         filename: '[name].js'
     },
     resolve: {
-        extensions:['', '.ts', '.webpack.js', '.web.js', '.js']
+        extensions:['.ts', '.webpack.js', '.web.js', '.js']
     },
     module: {
         loaders: [

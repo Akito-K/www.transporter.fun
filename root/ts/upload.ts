@@ -9,11 +9,17 @@ namespace Upload {
     export class MyUpload {
         public el: any;
         public uploadSizeLimitImage: number =   15000000;
-        public uploadSizeLimitZip:   number = 1000000000;
-        public uploadSizeLimitFree:  number = 1000000000;
         public enableExtensionsImage = ['jpg', 'jpeg', 'gif', 'png'];
+
+        public uploadSizeLimitZip:   number = 1000000000;
         public enableExtensionsZip   = ['zip'];
+
+        public uploadSizeLimitFree:  number = 1000000000;
         public enableExtensionsFree  = ['jpg', 'jpeg', 'gif', 'png', 'zip', 'rar', 'ai', 'eps', 'pdf', 'psd', 'doc', 'docx', 'xls', 'xlsx', 'ttp', 'ttpx', 'txt'];
+
+        public uploadSizeLimitExcel: number = 1000000000;
+        public enableExtensionsExcel = ['xls', 'xlsx'];
+
         private ext: string = 'jpg';
 
         constructor(
@@ -146,6 +152,10 @@ namespace Upload {
                     extensions = this.enableExtensionsImage;
                     limit = this.uploadSizeLimitImage;
 
+                }else if( type == "excel"){
+                    extensions = this.enableExtensionsExcel;
+                    limit = this.uploadSizeLimitExcel;
+
                 }else if( type == "all"){
                     extensions = this.enableExtensionsFree;
                     limit = this.uploadSizeLimitFree;
@@ -196,7 +206,7 @@ namespace Upload {
 
             $.ajax({
                 headers: {'X-CSRF-TOKEN': token},
-                url: '/mimamori/ajax/upload_file',
+                url: '/ajax/upload_file',
                 type: 'post',
                 data: fd,
                 dataType: 'json',
@@ -208,11 +218,14 @@ namespace Upload {
                     $('#ajaxing-uploading').show();
                 },
                 success: function( data ){
-//                    console.log(data);
-//                    if(target == "image"){
+                    console.log(data);
+                    if(target == "excel"){
+
+                    }else{
                         $('#bulletUploadedImage').css('background-image', 'url(' + data.path + '/' + data.filename +')');
                         $('#uploaded_id').val( data.uploaded_id );
                         $('#filepath').val( data.path + '/' + data.filename );
+                    }
 /*
                     }else{
                         $('#bulletFakeInput').val("");

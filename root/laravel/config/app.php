@@ -65,7 +65,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+//    'timezone' => 'UTC',
+    'timezone' => 'Asia/Tokyo',
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +79,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+//    'locale' => 'en',
+    'locale' => 'ja',
 
     /*
     |--------------------------------------------------------------------------
@@ -177,6 +179,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Collective\Html\HtmlServiceProvider::class,
+        App\Providers\MyFacadeServiceProvider::class,
+        'Intervention\Image\ImageServiceProvider',
     ],
 
     /*
@@ -225,6 +230,16 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+
+        'Func'   => MyFacade\MyFunctions::class,
+        'MyHTML' => MyFacade\MyHTML::class,
+        'MyForm' => MyFacade\MyForm::class,
+        'MyMail' => MyFacade\MyMail::class,
+
+        'Image' => 'Intervention\Image\Facades\Image',
 
     ],
 

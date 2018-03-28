@@ -24,7 +24,11 @@
     "autoload": {
         "classmap": [
             "database/seeds",
-            "database/factories"
+            "database/factories",
+            "app/MyFacades/MyFunctions/MyFunctions.php",
+            "app/MyFacades/MyHTML/MyHTML.php",
+            "app/MyFacades/MyForm/MyForm.php",
+            "app/MyFacades/MyMail/MyMail.php"
         ],
         "psr-4": {
             "App\\": "app/"
