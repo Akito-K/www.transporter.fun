@@ -10542,9 +10542,9 @@ exports.default = Func;
 Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(0);
 //import Holiday from './holiday';
-//import Calendar from './calendar';
-var upload_1 = __webpack_require__(3);
-var board_1 = __webpack_require__(4);
+var calendar_1 = __webpack_require__(3);
+var upload_1 = __webpack_require__(6);
+var board_1 = __webpack_require__(7);
 //import Customer from './customer';
 //import Model from './model';
 $(function () {
@@ -10552,7 +10552,7 @@ $(function () {
     // 休日カレンダー
     //    const HOLIDAY = new Holiday.calendar();
     // カレンダー
-    //    const CALENDAR = new Calendar.MyCalendar();
+    var CALENDAR = new calendar_1.default.MyCalendar();
     // ドラッグでアップロード
     var UPLOAD = new upload_1.default.MyUpload();
     // コンタクトボード
@@ -10564,6 +10564,280 @@ $(function () {
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var func_1 = __webpack_require__(1);
+var $ = __webpack_require__(0);
+var calJS = __webpack_require__(4);
+var Calendar;
+(function (Calendar) {
+    var MyCalendar = /** @class */ (function () {
+        function MyCalendar(calendar) {
+            if (calendar === void 0) { calendar = { year: 0, month: 0, day: 0 }; }
+            var _this = this;
+            this.calendar = calendar;
+            this.wdays = {
+                0: '日',
+                1: '月',
+                2: '火',
+                3: '水',
+                4: '木',
+                5: '金',
+                6: '土'
+            };
+            var today = new Date();
+            this.year = Number(today.getFullYear());
+            this.month = Number(today.getMonth()) + 1;
+            this.day = Number(today.getDate());
+            var self = this;
+            // 日付枠クリックでカレンダーを開く
+            $('.trigShowCalendar').click(function (e) {
+                self.el = $(this);
+                self.showCalendar(e);
+            });
+            // ×クリックでカレンダーを閉じる
+            $('.trigHideCalendar').click(function () {
+                _this.hideCalendar();
+            });
+            // 選択値を消す
+            $('.trigFlushDate').click(function () {
+                var target = $('#calendar').attr("data-target");
+                $('.trigShowCalendar[data-calendar="' + target + '"]').find('input').val("");
+                _this.hideCalendar();
+            });
+            // カレンダーの日付クリック
+            $('#calendar').on("click", "td", function () {
+                self.el = $(this);
+                var target = $('#calendar').attr("data-target");
+                self.calendar.year = Number($(this).attr("data-year"));
+                self.calendar.month = Number($(this).attr("data-month"));
+                self.calendar.day = Number($(this).attr("data-day"));
+                self.enterDate(target);
+            });
+            // カレンダーの前月
+            $('.trigPrevMonth').click(function () {
+                _this.month--;
+                if (_this.month === 0) {
+                    _this.month = 12;
+                    _this.year--;
+                }
+                _this.refreshCalendarBody();
+            });
+            // カレンダーの次月
+            $('.trigNextMonth').click(function () {
+                _this.month++;
+                if (_this.month === 13) {
+                    _this.month = 1;
+                    _this.year++;
+                }
+                _this.refreshCalendarBody();
+            });
+            // カレンダーの年月変更
+            $('.trigSelectYearMonth').change(function () {
+                _this.year = Number($('#calendar_year').val());
+                _this.month = Number($('#calendar_month').val());
+                _this.refreshCalendarBody();
+            });
+            /*
+                        // 日付枠のテキスト変更でカレンダーを更新
+                        $('.trigShowCalendar input').keyup( function() {
+                            const vals = self.getDateInputs( $(this) );
+                            self.year  = vals.year;
+                            self.month  = vals.month;
+                            self.day  = vals.day;
+                            $('#calendar_year').val(self.year);
+                            $('#calendar_month').val(self.month);
+                            self.refreshCalendarBody();
+            
+                            const id = $(this).attr("id");
+                            $('#hide_' + id).val( $(this).val() );
+                        });
+            */
+        }
+        MyCalendar.prototype.getCurrentDay = function () {
+            var day = 0;
+            var vals = this.getDateInputs($('#' + this.target + '_at'));
+            if (this.matchDates(vals)) {
+                day = this.day = vals.day;
+            }
+            return day;
+        };
+        // カレンダーと日付入力欄の比較
+        MyCalendar.prototype.matchDates = function (args) {
+            return (args.year === this.year && args.month === this.month);
+        };
+        // 日付欄の入力値を取得
+        MyCalendar.prototype.getDateInputs = function (el) {
+            var val = el.val();
+            var vals;
+            if (val) {
+                vals = el.val().split('/');
+            }
+            else {
+                vals = [0, 0, this.day];
+            }
+            var args = {
+                year: Number(vals[0]),
+                month: Number(vals[1]),
+                day: Number(vals[2]),
+            };
+            return args;
+        };
+        // カレンダーを表示・非表示セット
+        MyCalendar.prototype.showCalendar = function (e) {
+            var hide = false;
+            if ($('.bulletCalendar').attr("data-show") !== "1") {
+                hide = false;
+            }
+            else if (this.target === this.el.data("calendar")) {
+                hide = true;
+            }
+            else {
+                hide = false;
+            }
+            if (hide) {
+                $('.bulletCalendar').hide().attr("data-show", "0");
+            }
+            else {
+                var input = this.el.children('input');
+                var vals = input.val().split('/');
+                if (vals[0] !== "") {
+                    this.year = Number(vals[0]);
+                    this.month = Number(vals[1]);
+                    $('#calendar_year').val(this.year);
+                    $('#calendar_month').val(this.month);
+                }
+                else {
+                    this.year = Number($('#calendar_year').val());
+                    this.month = Number($('#calendar_month').val());
+                }
+                this.target = this.el.data("calendar");
+                this.refreshCalendarBody();
+                var x = e.offsetX;
+                if ($(window).width() - 310 < x) {
+                    x = $(window).width() - 310;
+                }
+                $('.bulletCalendar').slideDown(100).attr("data-show", "1").attr("data-target", this.target).css({ left: x, top: e.pageY });
+                console.log(e.offsetY, e.pageY, e.clientY, e.screenY);
+            }
+        };
+        // カレンダーの中身を更新
+        MyCalendar.prototype.refreshCalendarBody = function () {
+            var cals = this.myGetCalArr();
+            var body = this.HTML(cals);
+            $('#calendar-body').html(body);
+            $('#calendar_year').val(this.year);
+            $('#calendar_month').val(this.month);
+        };
+        MyCalendar.prototype.hideCalendar = function () {
+            $('.bulletCalendar').hide().attr("data-show", "0");
+        };
+        // カレンダーの日付クリックで日付を入れる
+        MyCalendar.prototype.enterDate = function (target) {
+            if (this.el.attr("data-null") !== "1") {
+                var date = Number(this.el.html());
+                var val = this.calendar.year + "/" + this.calendar.month + "/" + date;
+                var dateAt = new Date(val);
+                var valStr = val + '（' + this.wdays[dateAt.getDay()] + '）';
+                $('#' + target + '_at').val(valStr);
+                $('#hide_' + target + '_at').val(val);
+                $('.bulletCalendar').hide().attr("data-show", "0");
+                if ($('#creates_day').length > 0) {
+                    if ($('#creates_day').data('flag_onchage_submit') == 1) {
+                        $('#creates_day').submit();
+                    }
+                }
+            }
+        };
+        /*
+                    // カレンダーの日付クリックで日付を入れる
+                public enterDate(): void {
+                    if(this.date.attr("data-null") !== "1"){
+                        const date = Number(this.date.html());
+                        const val = this.year + "/" + this.month + "/" + date;
+                        $('#date_' + this.target).val(val);
+                        $('.bulletCalendar').hide().attr("data-show", "0");
+                    }
+                }
+        */
+        /**
+         @return arr {
+            {  0,  0,  1,  2,  3,  4,  5},
+            {  6,  7,  8,  9, 10, 11, 12},
+            { 13, 14, 15, 16, 17, 18, 19},
+            { 20, 21, 22, 23, 24, 25, 26},
+            { 27, 28, 29, 30, 31,  0,  0},
+            {  0,  0,  0,  0,  0,  0,  0},
+         }
+        */
+        MyCalendar.prototype.myGetCalArr = function () {
+            var calendar = new calJS({ year: this.year, month: this.month });
+            var cal = calendar.getCalArr();
+            var cals = [];
+            var self = this;
+            Object.keys(cal).forEach(function (key) {
+                var newKey = Math.floor(Number(key) / 7);
+                if (Number(key) % 7 == 0) {
+                    cals[newKey] = [];
+                }
+                if (cal[key].month == self.month - 1) {
+                    cals[newKey].push(cal[key].date);
+                }
+                else {
+                    cals[newKey].push(0);
+                }
+            });
+            return cals;
+        };
+        // カレンダーの日付 HTML 生成
+        MyCalendar.prototype.HTML = function (cals) {
+            var day = this.getCurrentDay();
+            var body = "";
+            var self = this;
+            Object.keys(cals).forEach(function (i) {
+                if (func_1.default.sum(cals[i]) > 0) {
+                    body += '<tr>';
+                    Object.keys(cals[i]).forEach(function (wday) {
+                        if (Number(cals[i][wday]) > 0) {
+                            var sel = (day === cals[i][wday]) ? " selected" : "";
+                            //console.log(day, self.year, self.month);
+                            body += '<td class="wday' + wday + sel + '" data-year="' + self.year + '" data-month="' + self.month + '" data-day="' + cals[i][wday] + '">' + cals[i][wday] + '</td>';
+                        }
+                        else {
+                            body += '<td class="wday' + wday + '" data-null="1"></td>';
+                        }
+                    });
+                    body += '</tr>';
+                }
+            });
+            return body;
+        };
+        return MyCalendar;
+    }());
+    Calendar.MyCalendar = MyCalendar;
+})(Calendar || (Calendar = {}));
+exports.default = Calendar;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(5);
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+(function(b,c){ true?module.exports=c():'function'==typeof define&&define.amd?define([],c):'object'==typeof exports?exports.Cal=c():b.Cal=c()})(this,function(){return function(a){function b(e){if(c[e])return c[e].exports;var f=c[e]={i:e,l:!1,exports:{}};return a[e].call(f.exports,f,f.exports,b),f.l=!0,f.exports}var c={};return b.m=a,b.c=c,b.i=function(e){return e},b.d=function(e,f,g){b.o(e,f)||Object.defineProperty(e,f,{configurable:!1,enumerable:!0,get:g})},b.n=function(e){var f=e&&e.__esModule?function(){return e['default']}:function(){return e};return b.d(f,'a',f),f},b.o=function(e,f){return Object.prototype.hasOwnProperty.call(e,f)},b.p='',b(b.s=0)}([function(a,b){'use strict';function c(h,j){if(!(h instanceof j))throw new TypeError('Cannot call a class as a function')}Object.defineProperty(b,'__esModule',{value:!0});var e=function(){function h(j,k){for(var m=0;m<k.length;m++){var n=k[m];n.enumerable=n.enumerable||!1,n.configurable=!0,'value'in n&&(n.writable=!0),Object.defineProperty(j,n.key,n)}}return function(j,k,m){return k&&h(j.prototype,k),m&&h(j,m),j}}(),f={getToday:function(){var j=new Date;return{year:j.getFullYear(),month:j.getMonth()+1,date:j.getDate()}},getWeekMap:function(j,k){var m=j&&7===j.length&&Array.isArray(j),n=m?j:k?['\u6708','\u706B','\u6C34','\u6728','\u91D1','\u571F','\u65E5']:['\u65E5','\u6708','\u706B','\u6C34','\u6728','\u91D1','\u571F'],o=k?1:0;return{DAY_STR:n,GAP:o}},pad2:function(j){return('0'+j).slice(-2)}},g=function(){function h(j){c(this,h),j=j||{};var k=f.getToday();this.year=0|j.year||k.year,this.month=0|j.month||k.month,this.date=0|j.date||k.date,this._weekMap=f.getWeekMap(j.dayStrArr,!!j.fromMonday),this._calArr=this._generateCalArr(),this._dayArr=this._generateDayArr()}return e(h,[{key:'getCalArr',value:function(){return this._calArr.slice()}},{key:'getDayArr',value:function(){return this._dayArr.slice()}},{key:'_generateCalArr',value:function(){for(var k=this._weekMap,m=k.DAY_STR,n=k.GAP,o=new Date(this.year,this.month-1,1),p=new Date(this.year,this.month,0),q=this.year,r=this.month,s=m[o.getDay()],t=p.getDate(),u=function(){var E=m.indexOf(s);return 0===E&&1===n?5:E-1-n}(),v=1===r?q-1:q,w=1===r?12:r-1,x=new Date(v,w,0),y=x.getDate(),z=12===r?q+1:q,A=12===r?1:r+1,B=[],C=0;42>C;C++){var D=C-u;B[C]=1>D?this._getDayObj({y:v,m:w,d:y+D,i:C,isNextMonth:!1,isLastMonth:!0}):t<D?this._getDayObj({y:z,m:A,d:D-t,i:C,isNextMonth:!0,isLastMonth:!1}):this._getDayObj({y:q,m:r,d:D,i:C,isNextMonth:!1,isLastMonth:!1})}return B}},{key:'_generateDayArr',value:function(){for(var k=this._weekMap,m=k.DAY_STR,n=k.GAP,o=[],p=0,q=m.length;p<q;p++)o[p]={str:m[p],no:(p+n)%7};return o}},{key:'_getDayObj',value:function(k){var m=this._weekMap,n=m.DAY_STR,o=m.GAP,p=k.y,q=k.m,r=k.d,s=k.i,t=p+'',u=f.pad2(q),v=f.pad2(r),w=n[s%7],x=(s+o)%7,y=k.isNextMonth,z=k.isLastMonth,A=!z&&!y&&r===this.date;return{YYYYMMDD:t+u+v,YYYY:t,MM:u,DD:v,DAY:w,year:p,month:Math.max(0,q-1),date:r,day:x,isBaseDate:A,isSunday:0==x,isSaturday:6==x,isNextMonth:y,isLastMonth:z}}}]),h}();b.default=g,a.exports=g}])});
+
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10705,7 +10979,7 @@ var Upload;
                     extensions = this.enableExtensionsImage;
                     limit = this.uploadSizeLimitImage;
                 }
-                else if (type == "excel") {
+                else if (type == "spreadsheet") {
                     extensions = this.enableExtensionsExcel;
                     limit = this.uploadSizeLimitExcel;
                 }
@@ -10767,11 +11041,14 @@ var Upload;
                 },
                 success: function (data) {
                     console.log(data);
-                    if (target == "excel") {
+                    if (target == "pagemeta") {
+                        $('#bulletUploadedImage').html(data.original_filename);
+                        $('#upload_id').val(data.upload_id);
+                        $('#filepath').val(data.path + '/' + data.filename);
                     }
                     else {
                         $('#bulletUploadedImage').css('background-image', 'url(' + data.path + '/' + data.filename + ')');
-                        $('#uploaded_id').val(data.uploaded_id);
+                        $('#upload_id').val(data.upload_id);
                         $('#filepath').val(data.path + '/' + data.filename);
                     }
                     /*
@@ -10833,7 +11110,7 @@ exports.default = Upload;
 
 
 /***/ }),
-/* 4 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

@@ -43,6 +43,13 @@ namespace Calendar {
                 this.hideCalendar();
             });
 
+            // 選択値を消す
+            $('.trigFlushDate').click( () => {
+                const target = $('#calendar').attr("data-target");
+                $('.trigShowCalendar[data-calendar="'+target+'"]').find('input').val("");
+                this.hideCalendar();
+            });
+
             // カレンダーの日付クリック
             $('#calendar').on("click", "td", function(){
                 self.el = $(this);

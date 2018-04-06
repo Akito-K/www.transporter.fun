@@ -17,7 +17,7 @@ class CreateCarsTable extends Migration
             $table->increments('id');
             $table->string('car_id', 32)->unique();
             $table->string('name', 64)->nullable();
-            $table->integer('count')->unsigned()->default(0);
+            $table->float('ton', 8, 1)->nullable();
 
             $table->datetime('created_at');
             $table->datetime('updated_at');

@@ -152,7 +152,7 @@ namespace Upload {
                     extensions = this.enableExtensionsImage;
                     limit = this.uploadSizeLimitImage;
 
-                }else if( type == "excel"){
+                }else if( type == "spreadsheet"){
                     extensions = this.enableExtensionsExcel;
                     limit = this.uploadSizeLimitExcel;
 
@@ -219,11 +219,14 @@ namespace Upload {
                 },
                 success: function( data ){
                     console.log(data);
-                    if(target == "excel"){
+                    if(target == "pagemeta"){
+                        $('#bulletUploadedImage').html(data.original_filename);
+                        $('#upload_id').val( data.upload_id );
+                        $('#filepath').val( data.path + '/' + data.filename );
 
                     }else{
                         $('#bulletUploadedImage').css('background-image', 'url(' + data.path + '/' + data.filename +')');
-                        $('#uploaded_id').val( data.uploaded_id );
+                        $('#upload_id').val( data.upload_id );
                         $('#filepath').val( data.path + '/' + data.filename );
                     }
 /*

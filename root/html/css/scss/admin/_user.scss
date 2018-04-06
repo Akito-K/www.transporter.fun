@@ -1,0 +1,34 @@
+// 共通
+@media all {
+    .user {
+        &__table {
+        }
+        &__row {
+            &--banned {
+                .user__cell {
+                    opacity: 0.2;
+                }
+            }
+        }
+        &__cell {
+            &--icon {
+                width: 100px;
+            }
+            &__img {
+                display: block;
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    }
+}
+// スマホ
+@media(max-width: 767px) {
+    .user {
+    }
+}
+// TAB・PC
+@media(min-width: 768px){
+    .user {
+    }
+}

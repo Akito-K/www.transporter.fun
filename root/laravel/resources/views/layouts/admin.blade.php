@@ -112,7 +112,7 @@
             <div class="pull-right hidden-xs">Powered by AdminLTE</div>
 
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2017- <a href="#">社会福祉法人ささゆり会</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; 2018- <a href="#">トランスポーター CO.,LTD.</a></strong> All rights reserved.
         </footer>
 
     </div><!-- ./wrapper -->

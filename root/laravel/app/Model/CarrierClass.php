@@ -19,6 +19,12 @@ class CarrierClass extends Model
         return $new_id;
     }
 
+    public static function getDatas(){
+        $datas = CarrierClass::get();
+
+        return $datas;
+    }
+
     public static function getData($unique_id){
         $data = CarrierClass::where('class_id', $unique_id)->first();
 

@@ -10,6 +10,12 @@ class Pref extends Model
     protected $dates = ['created_at'];
     protected $guarded = ['id'];
 
+    public static function getDatas(){
+        $datas = Pref::get();
+
+        return $datas;
+    }
+
     public static function getData($code){
         $data = Pref::where('code', $code)->first();
 

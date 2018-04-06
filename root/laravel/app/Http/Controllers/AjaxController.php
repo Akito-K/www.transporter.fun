@@ -310,38 +310,48 @@ class AjaxController extends Controller
         $type              = $request->input('type');
         $target            = $request->input('target');
         $posted            = $request->file('file')->isValid();
+        $root = \Func::getRootPath();
 
         if($posted){
             $filename = $upload_id.'.'.$extension;
-            // アップロード先のディレクトリを取得
-            $dirs = Upload::getDirectories($target);
-
-            // オリジナルファイルを保存
-            Upload::saveFromUpload($request, $dirs['fullpath'], $filename);
-
+            // いったん EC2 の tmp ディレクトリに保存
+            $path = '/html/tmp';
+            Upload::moveUploadFile($request, $root.$path, $filename);
             // DB Insert
             Upload::insert([
                 'upload_id' => $upload_id,
-                'dirpath' => $dirs['path'],
+                'dirpath' => $path,
                 'extension' => $extension,
                 'original_filename' => $original_filename,
                 'created_at' => new \Datetime(),
                 'updated_at' => new \Datetime(),
                 ]);
 
-            if($type == "image"){
-                // 3サイズにリサイズして保存
-                foreach(['lg', 'md', 'sm'] as $size){
-                    $width = Upload::getWidth($size);
-                    $from_fullpath = $dirs['fullpath'].'/'.$filename;
-                    $to_fullpath = $dirs['fullpath'].'/'.$upload_id.'_'.$size.'.'.$extension;
-                    Upload::resizeAndSave( $width, $from_fullpath, $to_fullpath );
-                }
+            if($target == "image"){
+                // リサイズして tmp ディレクトリに保存
+                $resize = [
+                    'width' => Upload::getResizeWidth('md'),
+                    'from_fullpath' => $root.$path.'/'.$filename,
+                    'to_fullpath' => $root.$path.'/'.$upload_id.'_md.'.$extension,
+                ];
+                Upload::Resize( $resize );
+
+                echo $upload_id.'_md.'.$extension.'?'.time();
 
                 $data = [
-                    'path' => $dirs['path'],
-                    'filename' => $upload_id.'_sm.'.$extension,
-                    'uploaded_id' => $upload_id,
+                    'path' => '/tmp',
+                    'filename' => $upload_id.'_md.'.$extension,
+                    'upload_id' => $upload_id,
+                    ];
+
+                return json_encode($data);
+
+            }else{
+                $data = [
+                    'path' => '/tmp',
+                    'filename' => $filename,
+                    'upload_id' => $upload_id,
+                    'original_filename' => $original_filename,
                     ];
 
                 return json_encode($data);

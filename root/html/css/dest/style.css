@@ -10006,6 +10006,26 @@ input[type="number"] {
   .form-control[readonly] {
     background-color: #fff;
   }
+  .my-thumbnail {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 100%;
+  }
+  .my-thumbnail__img {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    border: 1px solid #eee;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
 }
 
 @media (min-width: 1000px) {

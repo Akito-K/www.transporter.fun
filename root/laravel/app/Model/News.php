@@ -9,7 +9,7 @@ class News extends Model
 {
     use softDeletes;
     protected $table = 'news';
-    protected $dates = ['deleted_at'];
+    protected $dates = ['date_at', 'publish_start_at', 'publish_close_at', 'deleted_at'];
     protected $guarded = ['id'];
 
     public static function getNewId(){
@@ -17,6 +17,12 @@ class News extends Model
         $new_id = 'NWS-'.$date_at->format('ymd-His-').\Func::getRandStr("Aa0", 5);
 
         return $new_id;
+    }
+
+    public static function getDatas(){
+        $datas = News::orderBy('date_at', 'DESC')->get();
+
+        return $datas;
     }
 
     public static function getData($unique_id){

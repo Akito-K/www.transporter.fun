@@ -9,23 +9,22 @@ class S3 extends Model {
 
     private $s3;
     private $config = [
-/*
-        'key' => 'AKIAJ4KLDRZ6IIMZQGAQ',
-        'secret' => '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',
-*/
-
         'credentials' => [
-            'key' => 'AKIAJ4KLDRZ6IIMZQGAQ',
-            'secret' => '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',
+            'key' => 'AKIAICOYQOQXVWSPTLMQ',
+            'secret' => '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',
             ],
 
         'region' => 'ap-northeast-1',
         'version' => '2006-03-01',
         ];
-    private $bucket = 'img.sjp-osaka-sandai-museum.com';
+    private $bucket = 's3.transporter.fun';
 
     function __construct(){
         $this->s3 = S3Client::factory($this->config);
+    }
+
+    public function getBucket(){
+        return $this->bucket;
     }
 
     public function Put($keyname, $filepath){

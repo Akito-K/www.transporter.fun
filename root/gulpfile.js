@@ -41,6 +41,7 @@ gulp.task('watch', function() {
     gulp.watch([
         nic+'/css/scss/*.scss',
         nic+'/css/scss/style.scss',
+        nic+'/css/scss/admin/*.scss',
     ], ['sass']);
 });
 

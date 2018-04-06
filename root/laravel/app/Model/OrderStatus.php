@@ -19,6 +19,12 @@ class OrderStatus extends Model
         return $new_id;
     }
 
+    public static function getDatas(){
+        $datas = OrderStatus::get();
+
+        return $datas;
+    }
+
     public static function getData($unique_id){
         $data = OrderStatus::where('status_id', $unique_id)->first();
 

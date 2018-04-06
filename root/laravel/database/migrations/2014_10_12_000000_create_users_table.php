@@ -21,8 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
 
-            $table->string('carrier_id', 32)->index();
-            $table->string('owner_id', 32)->index();
+            $table->string('carrier_id', 32)->nullable()->index();
+            $table->string('owner_id', 32)->nullable()->index();
             $table->string('name', 32)->nullable();
             $table->string('sei', 32)->nullable();
             $table->string('mei', 32)->nullable();

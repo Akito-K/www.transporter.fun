@@ -15,6 +15,25 @@
             box-shadow: 0 0 10px 1px #666;
             position: relative;
         }
+        &__flush {
+            position: absolute;
+            display: inline-block;
+            height: 24px;
+            text-align: center;
+            color: #fff;
+            background-color: #999;
+            line-height: 24px;
+            font-size: 11px;
+            border: 1px solid #aaa;
+            top: -27px;
+            left: 0;
+            cursor: pointer;
+            padding: 0 3px;
+            border-radius: 10px;
+            &:hover {
+                background-color: #888;
+            }
+        }
         &__close {
             position: absolute;
             display: block;

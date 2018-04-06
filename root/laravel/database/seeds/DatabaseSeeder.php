@@ -28,7 +28,7 @@ use App\Model\News;
 use App\Model\Order;
 use App\Model\OrderProgress;
 use App\Model\OrderStatus;
-use App\Model\OrderValue;
+//use App\Model\OrderValue;
 use App\Model\Owner;
 use App\Model\Pref;
 use App\Model\Report;
@@ -36,6 +36,17 @@ use App\Model\ReportTemp;
 use App\Model\Upload;
 use App\Model\UserToAddress;
 use App\Model\UserToAuthority;
+
+use App\Model\Cargo;
+use App\Model\CargoValue;
+use App\Model\OrderToCargo;
+use App\Model\CargoCategory;
+use App\Model\CargoName;
+use App\Model\CargoForm;
+use App\Model\EvaluationStar;
+use App\Model\EvaluationItem;
+use App\Model\OrderRequest;
+use App\Model\OrderRequestOption;
 
 class DatabaseSeeder extends Seeder
 {
@@ -84,6 +95,17 @@ class DatabaseSeeder extends Seeder
         //$this->LogSeeder();
         //$this->Seeder();
         //$this->Seeder();
+
+        //$this->CargoSeeder();
+        //$this->CargoValueSeeder();
+        //$this->OrderToCargoSeeder();
+        $this->CargoCategorySeeder();
+        $this->CargoNameSeeder();
+        $this->CargoFormSeeder();
+        //$this->EvaluationStarSeeder();
+        $this->EvaluationItemSeeder();
+        //$this->OrderRequestSeeder();
+        $this->OrderRequestOptionSeeder();
 
     }
 
@@ -349,4 +371,80 @@ class DatabaseSeeder extends Seeder
             }
         }
     }
+
+    public function CargoCategorySeeder(){
+        $table_name = 'cargo_categories';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    CargoCategory::create($data);
+                }
+            }
+        }
+    }
+
+    public function CargoNameSeeder(){
+        $table_name = 'cargo_names';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    CargoName::create($data);
+                }
+            }
+        }
+    }
+
+    public function CargoFormSeeder(){
+        $table_name = 'cargo_forms';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    CargoForm::create($data);
+                }
+            }
+        }
+    }
+
+    public function EvaluationItemSeeder(){
+        $table_name = 'evaluation_items';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    EvaluationItem::create($data);
+                }
+            }
+        }
+    }
+
+    public function OrderRequestOptionSeeder(){
+        $table_name = 'order_request_options';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    OrderRequestOption::create($data);
+                }
+            }
+        }
+    }
+
 }

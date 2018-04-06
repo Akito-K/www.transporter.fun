@@ -1,6 +1,8 @@
 <div class="calendar bulletCalendar draggable" id="calendar">
     <div class="calendar__block" id="calendar-box">
+        <span class="calendar__flush trigFlushDate">値を消す</span>
         <span class="calendar__close trigHideCalendar"><i class="fa fa-close"></i></span>
+
         <div class="calendar__head">
             <span class="fake-link calendar__head__cell calendar__head__cell--arrow trigPrevMonth"><i class="fa fa-chevron-left"></i></span>
             <div class="calendar__head__cell calendar__head__cell--year">
