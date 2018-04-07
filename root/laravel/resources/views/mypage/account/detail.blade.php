@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.mypage')
 @section('content')
 
     <div class="box">
@@ -64,21 +64,13 @@
                     <th class="user__cell">最終ログイン日時</th>
                     <td class="user__cell">{{ \Func::dateFormat($data->last_logined_at, 'Y/n/j(wday)') }} {{ \Func::dateFormat($data->last_logined_at, 'H:i:s') }}</td>
                 </tr>
-                <tr>
-                    <th class="user__cell">BAN</th>
-                    <td class="user__cell">{{ $data->banned_at }}</td>
-                </tr>
 
             </table>
 
         </div>
     </div>
 
-    @if(!$data->banned_at)
-    <p><a href="{{ url('') }}/admin/user/{!! $data->hashed_id !!}/edit" class="btn btn-warning btn-block btn-lg">編集する</a></p>
-    @endif
-
-    <p><a href="{{ url('') }}/admin/user/{!! $data->hashed_id !!}/delete" class="btn btn-danger btn-block btn-sm">削除する</a></p>
-    <p><a href="{{ url('') }}/admin/user" class="btn btn-block btn-primary">一覧へ戻る</a></p>
+    <p><a href="{{ url('') }}/mypage/account/edit" class="btn btn-warning btn-block btn-lg">編集する</a></p>
+    <p><a href="{{ url('') }}/mypage/account" class="btn btn-block btn-primary">一覧へ戻る</a></p>
 
 @endsection

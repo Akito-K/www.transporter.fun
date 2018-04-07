@@ -65,11 +65,13 @@ class userController extends adminController
 
         $user_id = MyUser::getNewId();
         // 画像保存
-        $upload = Upload::getData($request['upload_id']);
-        $s3 = new S3();
-        $icon_filepath = Upload::saveResizedImages($upload, $s3, 'md');
-        $http = env('S3_SSL', 'http');
-        $request['icon_filepath'] = $http.'://'.$s3->getBucket().'/'.$icon_filepath;
+        if($request['upload_id']){
+            $upload = Upload::getData($request['upload_id']);
+            $s3 = new S3();
+            $icon_filepath = Upload::saveResizedImages($upload, $s3, 'md');
+            $http = env('S3_SSL', 'http');
+            $request['icon_filepath'] = $http.'://'.$s3->getBucket().'/'.$icon_filepath;
+        }
 
         // ユーザー情報挿入
         MyUser::insertData($request, $user_id);
@@ -94,11 +96,13 @@ class userController extends adminController
         }
 
         // 画像保存
-        $upload = Upload::getData($request['upload_id']);
-        $s3 = new S3();
-        $icon_filepath = Upload::saveResizedImages($upload, $s3, 'md');
-        $http = env('S3_SSL', 'http');
-        $request['icon_filepath'] = $http.'://'.$s3->getBucket().'/'.$icon_filepath;
+        if($request['upload_id']){
+            $upload = Upload::getData($request['upload_id']);
+            $s3 = new S3();
+            $icon_filepath = Upload::saveResizedImages($upload, $s3, 'md');
+            $http = env('S3_SSL', 'http');
+            $request['icon_filepath'] = $http.'://'.$s3->getBucket().'/'.$icon_filepath;
+        }
 
         // ユーザー情報更新
         MyUser::updateData($request);

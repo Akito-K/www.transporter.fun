@@ -32,9 +32,11 @@
                 <td class="user__cell user__cell--name">{{ $data->carrier_id }}</td>
                 <td class="user__cell user__cell--action">
                     <a href="{{ url('') }}/admin/user/{{ $data->hashed_id }}/detail" class="btn btn-primary">詳細</a>
+                    @if(!$data->banned_at)
                     <a href="{{ url('') }}/admin/user/{{ $data->hashed_id }}/edit" class="btn btn-warning">編集</a>
-                    <a href="{{ url('') }}/admin/user/{{ $data->hashed_id }}/delete" class="btn btn-danger">削除</a>
                     <a href="{{ url('') }}/admin/user/{{ $data->hashed_id }}/ban" class="btn btn-default">BAN</a>
+                    @endif
+                    <a href="{{ url('') }}/admin/user/{{ $data->hashed_id }}/delete" class="btn btn-danger">削除</a>
                 </td>
             </tr>
             @endforeach

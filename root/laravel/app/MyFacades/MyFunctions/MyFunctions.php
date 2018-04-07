@@ -541,5 +541,16 @@ class MyFunctions
         return $ary;
     }
 
+    /**
+     * @param invert
+     * date1 が大きい場合: 1
+     * date2 が大きい場合: 0
+     * date1 と date2 が等しい場合：0
+     */
+    public static function isOver( \Datetime $date2){
+        $date1 = new \Datetime();
+
+        return $date2->diff($date1)->invert? false: true;
+     }
 
 }

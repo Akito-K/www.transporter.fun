@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('mei', 32)->nullable();
             $table->string('sei_kana', 32)->nullable();
             $table->string('mei_kana', 32)->nullable();
-            $table->string('email', 150)->unique();
+            $table->string('email', 150);
 
             $table->string('mobile', 20)->nullable();
             $table->string('tel', 20)->nullable();

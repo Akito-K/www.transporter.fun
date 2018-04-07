@@ -23,12 +23,31 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get ('/', 'HomeController@index');
 Auth::routes();
 
+// ユーザー登録
+Route::get ('/signup',              'common\signupController@email');
+Route::post('/signup',              'common\signupController@sendSignupMail');
+Route::get ('/signup/{signup_key}', 'common\signupController@create1');
+Route::post('/signup/{signup_key}', 'common\signupController@create2');
+Route::post('/signup/complete',     'common\signupController@insert');
+
+
+// メールアドレス変更認証
+Route::get ('/authorization/{authorization_code}',          'common\authorizationController@authorization');
+
 Route::group(['middleware' => ['auth']], function () {
 
 
     // MYPAGE = = = = = = = = = = = =
     Route::get ('/mypage',                                  'mypage\homeController@dashboard');
     Route::get ('/mypage/dashboard',                        'mypage\homeController@dashboard');
+
+    //   アカウント
+    Route::get ('/mypage/account',                          'mypage\accountController@showDetail');
+    Route::get ('/mypage/account/edit',                     'mypage\accountController@edit');
+    Route::post('/mypage/account/update',                   'mypage\accountController@update');
+    Route::get ('/mypage/account/email',                    'mypage\accountController@email');
+    Route::post('/mypage/account/email',                    'mypage\accountController@sendAuthorizationMail');
+
 
     // ADMIN = = = = = = = = = = = =
     Route::get ('/admin',                                   'admin\homeController@dashboard');

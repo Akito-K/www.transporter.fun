@@ -11,7 +11,7 @@ class MyUser extends Model
 {
     use SoftDeletes;
     protected $table = 'users';
-    protected $dates = ['created_at', 'deleted_at', 'last_logined_at'];
+    protected $dates = ['created_at', 'deleted_at', 'last_logined_at', 'banned_at'];
     protected $guarded = ['id'];
     protected $hidden =['password', 'remember_token'];
 
@@ -106,7 +106,7 @@ class MyUser extends Model
      * @param Request
      * @return
      */
-    public static function updateData($request){
+    public static function updateData($request, $ignores=[]){
         $now_at = new \Datetime();
         $datas = [
             'login_id' => $request['login_id'],
@@ -121,6 +121,12 @@ class MyUser extends Model
             'icon_filepath' => $request['icon_filepath'],
             'updated_at' => $now_at,
             ];
+
+        if(!empty($ignores)){
+            foreach($ignores as $ignore){
+                unset($datas[$ignore]);
+            }
+        }
 
         MyUser::where('hashed_id', $request['hashed_id'])->update($datas);
     }
