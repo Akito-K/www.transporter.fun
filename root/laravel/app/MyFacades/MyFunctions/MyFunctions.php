@@ -592,4 +592,24 @@ class MyFunctions
         return $date2->diff($date1)->invert? false: true;
      }
 
+     public static function getZipCode($data){
+        if( isset($data->zip1) && isset($data->zip2) ){
+
+            return $data->zip1.'-'.$data->zip2;
+        }
+     }
+
+     public static function getAddress($data){
+        if( isset($data->pref_code) && isset($data->city) && isset($data->address) ){
+            $pref = Pref::getData( $data->pref_code );
+
+            return $pref->name.' '.$data->city.' '.$data->address;
+        }
+     }
+
+
+
+
+
+
 }

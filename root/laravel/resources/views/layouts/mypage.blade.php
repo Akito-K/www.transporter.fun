@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="{{ url('') }}/css/AdminLTE/AdminLTE.min.css" rel="stylesheet">
     <link href="{{ url('') }}/css/AdminLTE/all_skins.min.css" rel="stylesheet">
-    <link href="{{ url('') }}/css/dest/admin.css" rel="stylesheet">
+    <link href="{{ url('') }}/css/dest/mypage.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>

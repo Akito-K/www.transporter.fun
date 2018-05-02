@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Model\UserToAddress;
 
 class Address extends Model
 {
@@ -17,6 +18,15 @@ class Address extends Model
         $new_id = 'ADR-'.$date_at->format('ymd-His-').\Func::getRandStr("Aa0", 5);
 
         return $new_id;
+    }
+
+    public static function getDatas($user_id){
+        $datas = UserToAddress::where('user_to_addresses.user_id', $user_id)
+                                ->join('addresses', 'user_to_addresses.address_id', '=', 'addresses.address_id')
+                                ->select('addresses.*')
+                                ->get();
+
+        return $datas;
     }
 
     public static function getData($unique_id){

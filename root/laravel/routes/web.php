@@ -52,6 +52,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get ('/mypage',                                  'mypage\homeController@dashboard');
     Route::get ('/mypage/dashboard',                        'mypage\homeController@dashboard');
 
+    //   登録状況
+     Route::get ('/mypage/status',                           'mypage\homeController@status');
+
     //   アカウント
     Route::get ('/mypage/account',                          'mypage\accountController@showDetail');
     Route::get ('/mypage/account/edit',                     'mypage\accountController@edit');
@@ -59,6 +62,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get ('/mypage/account/email',                    'mypage\accountController@email');
     Route::post('/mypage/account/email',                    'mypage\accountController@sendAuthorizationMail');
 
+    //   住所情報
+    Route::get ('/mypage/address',                          'mypage\addressController@showList');
+    Route::get ('/mypage/address/edit',                     'mypage\addressController@edit');
+    Route::post('/mypage/address/update',                   'mypage\addressController@update');
+    Route::get ('/mypage/address/{address_id}/delete',      'mypage\addressController@delete');
 
     // ADMIN = = = = = = = = = = = =
     Route::get ('/admin',                                   'admin\homeController@dashboard');
