@@ -22,4 +22,8 @@ class Pref extends Model
         return $data;
     }
 
+    public static function getNames(){
+        return Pref::pluck('name', 'code')->toArray();
+    }
+
 }

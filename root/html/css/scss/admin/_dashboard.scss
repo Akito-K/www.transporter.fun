@@ -11,6 +11,23 @@
         }
         &__lists {
         }
+        &__buttons {
+            @include flexbox();
+            &--sm {
+                width: 300px;
+            }
+        }
+        &__button {
+            width: 300px;
+            padding: 60px 0;
+            margin: 0 10px;
+            font-size: 130%;
+            border-radius: 12px;
+            &--sm {
+                padding: 20px 0;
+                margin: 5px 10px;
+            }
+        }
     }
 }
 // スマホ
@@ -18,20 +35,4 @@
 }
 // TAB・PC
 @media(min-width: 768px){
-    .dashboard {
-        &__lists {
-            @include flexbox();
-            border-bottom: 1px dotted #ccc;
-            padding: 5px 0;
-        }
-        &__list {
-            &--title {
-                width: 10%;
-                margin-right: 10px;
-            }
-            &--value {
-                width: 90%;
-            }
-        }
-    }
 }

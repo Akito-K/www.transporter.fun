@@ -20,7 +20,8 @@ class CreateAddressesTable extends Migration
             $table->string('sei', 32)->nullable();
             $table->string('mei', 32)->nullable();
 
-            $table->string('zip_code', 8)->nullable();
+            $table->string('zip1', 3)->nullable();
+            $table->string('zip2', 4)->nullable();
             $table->string('pref_code', 2)->nullable();
             $table->string('city', 64)->nullable();
             $table->string('address', 150)->nullable();

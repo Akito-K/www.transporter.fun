@@ -1,0 +1,38 @@
+// 共通
+@media all {
+    .dashboard {
+        &__block {
+            padding: 10px;
+        }
+        &__title {
+            @include fsize(18);
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        &__lists {
+        }
+        &__buttons {
+            @include flexbox();
+            &--sm {
+                width: 300px;
+            }
+        }
+        &__button {
+            width: 300px;
+            padding: 60px 0;
+            margin: 0 10px;
+            font-size: 130%;
+            border-radius: 12px;
+            &--sm {
+                padding: 20px 0;
+                margin: 5px 10px;
+            }
+        }
+    }
+}
+// スマホ
+@media(max-width: 767px) {
+}
+// TAB・PC
+@media(min-width: 768px){
+}

@@ -29,6 +29,7 @@ class MailSignup extends Mailable
      */
     public function build()
     {
-        return $this->view('mailbody.signup.email');
+        return $this->subject('【トランスポーター】アカウント発行手続きのご案内')
+                    ->view('mailbody.signup.email');
     }
 }

@@ -1,0 +1,30 @@
+// 共通
+@media all {
+    .status {
+        &__block {
+            padding: 10px;
+        }
+        &__box {
+            padding: 20px;
+        }
+        &__lists {
+            @include flexbox();
+            border-bottom: 1px dotted #ccc;
+            padding: 5px 0;
+        }
+        &__list {
+            width: 20%;
+            margin-right: 10px;
+            &--title {
+            }
+            &--value {
+            }
+        }
+    }
+}
+// スマホ
+@media(max-width: 767px) {
+}
+// TAB・PC
+@media(min-width: 768px){
+}

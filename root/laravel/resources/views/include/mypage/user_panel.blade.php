@@ -4,6 +4,6 @@
     <div class="pull-left info">
         <p>{!! \Auth::user()->name?: \Auth::user()->sei.\Auth::user()->mei !!}さん</p>
         <!-- Status -->
-        <a href="/mimamori/mypage/user"><i class="fa fa-circle text-success"></i> Online</a>
+        <a href="{{ url('') }}/mypage/account"><i class="fa fa-circle text-success"></i> Online</a>
     </div>
 </div>

@@ -20,6 +20,7 @@ class S3 extends Model {
     private $bucket = 's3.transporter.fun';
 
     function __construct(){
+        $this->bucket = env('S3_BUCKET', 's3.transporter.fun');
         $this->s3 = S3Client::factory($this->config);
     }
 

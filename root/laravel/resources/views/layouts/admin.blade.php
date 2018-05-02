@@ -35,9 +35,9 @@
             <!-- Logo -->
             <a href="{{ url('') }}/admin" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>み</b>も</span>
+                <span class="logo-mini"><b>T</b>P</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>みま</b>もり</span>
+                <span class="logo-lg"><b>Trans</b>Porter</span>
             </a>
 
             <!-- Header Navbar -->

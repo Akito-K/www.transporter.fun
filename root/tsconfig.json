@@ -7,6 +7,8 @@
     },
     "files": [
         "ts/script.ts",
+        "ts/signup.ts",
+
         "ts/admin.ts",
         "ts/config.ts",
         "ts/func.ts",
@@ -16,6 +18,7 @@
         "ts/board.ts",
         "ts/customer.ts",
         "ts/note.ts",
+
         "typings/index.d.ts"
     ]
 }

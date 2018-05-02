@@ -34,9 +34,9 @@
             <!-- Logo -->
             <a href="{{ url('') }}/mypage" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>み</b>も</span>
+                <span class="logo-mini"><b>T</b>P</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>みま</b>もり</span>
+                <span class="logo-lg"><b>Trans</b>Porter</span>
             </a>
 
             <!-- Header Navbar -->
@@ -112,7 +112,7 @@
             <div class="pull-right hidden-xs">Powered by AdminLTE</div>
 
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2017- <a href="#">社会福祉法人ささゆり会</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; 2018- <a href="#">トランスポーター CO.,LTD.</a></strong> All rights reserved.
         </footer>
 
         <!-- Control Sidebar -->
