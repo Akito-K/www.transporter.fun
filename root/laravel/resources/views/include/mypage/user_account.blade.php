@@ -19,7 +19,7 @@
         <!-- Menu Footer-->
         <li class="user-footer">
             <div class="pull-left">
-                <a href="/mimamori/mypage/user" class="btn btn-default btn-flat">プロフィール</a>
+                <a href="{{ url('') }}/mypage/account" class="btn btn-default btn-flat">プロフィール</a>
             </div>
             <div class="pull-right">
                 {!! \MyHTML::logout('ログアウト', 'btn btn-default btn-flat') !!}

@@ -21,6 +21,15 @@ class Address extends Model
 
     public static function getData($unique_id){
         $data = Address::where('address_id', $unique_id)->first();
+        if(!$data){
+            $data = new \stdClass();
+            $data->pref_code = NULL;
+            $data->city = NULL;
+            $data->address = NULL;
+            $data->zip1 = NULL;
+            $data->zip2 = NULL;
+            $data->tel = NULL;
+        }
 
         return $data;
     }

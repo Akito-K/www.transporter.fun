@@ -40,8 +40,9 @@ gulp.task('watch', function() {
     gulp.watch(TS_SRC, ['webpack']);
     gulp.watch([
         nic+'/css/scss/*.scss',
-        nic+'/css/scss/style.scss',
         nic+'/css/scss/admin/*.scss',
+        nic+'/css/scss/mypage/*.scss',
+        nic+'/css/scss/common/*.scss',
     ], ['sass']);
 });
 

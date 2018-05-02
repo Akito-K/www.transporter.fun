@@ -1,3 +1,9 @@
+AuthUserFile "/var/www/html/htpasswd/.htpasswd"
+AuthName "Development"
+AuthType BASIC
+require valid-user
+
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes

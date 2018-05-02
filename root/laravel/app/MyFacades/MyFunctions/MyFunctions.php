@@ -52,12 +52,19 @@ class MyFunctions
         return MessageUnopen::getUnreadMessageCount($user_id);
     }
 
+    public static function getS3URL(){
+        $http = env('S3_SSL', 'http');
+        $bucket = env('S3_BUCKET');
+
+        return $http.'://'.$bucket;
+    }
+
     // 自分のアイコン画像パス
     public static function myIcon(){
         if(\Auth::user()->icon_filepath){
             $img = env('IMG').\Auth::user()->icon_filepath;
         }else{
-            $img = '/img/common/no-image.png';
+            $img = \Func::getS3URL().'/img/common/no-image.png';
         }
 
         return $img;
@@ -71,7 +78,7 @@ class MyFunctions
                 $img = str_replace('_sm', '_'.$size, $img);
             }
         }else{
-            $img = '/img/common/no-image.png';
+            $img = \Func::getS3URL().'/img/common/no-image.png';
         }
 
         return $img;
@@ -124,6 +131,38 @@ class MyFunctions
         }
 
         return $result;
+    }
+
+    public static function isTelNo($string){
+        return preg_match('/[0-9]{2,4}\-[0-9]{2,4}\-[0-9]{2,4}/', $string);
+    }
+
+    public static function telFormat($ary=[]){
+        $tel = NULL;
+        if( $ary[1] && $ary[2] && $ary[3] ){
+            $tel = implode('-', $ary);
+        }
+
+        return $tel;
+    }
+
+    public static function telFormatDecode($string=""){
+        if( \Func::isTelNo($string) ){
+            $ary = explode('-', $string);
+            $data = [
+                1 => $ary[0],
+                2 => $ary[1],
+                3 => $ary[2],
+            ];
+        }else{
+            $data = [
+                1 => "",
+                2 => "",
+                3 => "",
+            ];
+        }
+
+        return $data;
     }
 
     public static function getWeekDay($datetime){

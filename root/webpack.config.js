@@ -4,7 +4,8 @@ var webpack = require('webpack');
 var env = process.env.NODE_ENV;
 let config = {
     entry: {
-        admin :'./ts/admin.ts'
+//        admin :'./ts/admin.ts'
+        script :'./ts/script.ts'
     },
     output: {
         filename: '[name].js'
