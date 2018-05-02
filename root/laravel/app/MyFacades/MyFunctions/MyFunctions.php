@@ -9,6 +9,7 @@ use App\Model\Upload;
 use App\Model\MessageUnopen;
 use App\Model\UserToAuthority;
 use App\Model\MyUser;
+use App\Model\Pref;
 
 class MyFunctions
 {
