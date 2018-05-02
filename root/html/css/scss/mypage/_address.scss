@@ -1,0 +1,55 @@
+// 共通
+@media all {
+    .address {
+        &__block {
+            margin-bottom: 20px;
+        }
+        &__boxes {
+        }
+        &__box {
+            padding: 10px;
+            &__title {
+                color: #999;
+                font-weight: bold;
+                @include fsize(18);
+            }
+        }
+        &__box-wrap {
+            margin-left: 10px;
+        }
+    }
+}
+// スマホ
+@media(max-width: 767px) {
+    .address {
+    }
+}
+// TAB・PC
+@media(min-width: 768px){
+    .address {
+        &__box-wrap {
+            border: 1px solid #ccc;
+            width: 100%;
+            max-width: 400px;
+            padding: 10px 20px;
+        }
+        &__lists {
+            @include flexbox();
+            border-bottom: 1px dotted #ccc;
+            padding: 10px 0;
+            margin: 0;
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+        &__list {
+            margin-right: 10px;
+            &--title {
+                width: 30%;
+            }
+            &--value {
+                width: 70%;
+            }
+        }
+    }
+}
