@@ -11,6 +11,32 @@
         }
         &__lists {
         }
+    }
+}
+// スマホ
+@media(max-width: 767px) {
+    .dashboard {
+        &__buttons {
+            padding: 20px 0;
+        }
+        &__button {
+            width: calc(100% - 20px);
+            padding: 60px 0;
+            margin: 10px;
+            font-size: 110%;
+            border-radius: 12px;
+            &--sm {
+                padding: 20px 0;
+                margin: 5px 10px;
+            }
+        }
+    }
+}
+// TAB・PC
+@media(min-width: 768px){
+    .dashboard {
+        &__lists {
+        }
         &__buttons {
             @include flexbox();
             &--sm {
@@ -29,10 +55,4 @@
             }
         }
     }
-}
-// スマホ
-@media(max-width: 767px) {
-}
-// TAB・PC
-@media(min-width: 768px){
 }

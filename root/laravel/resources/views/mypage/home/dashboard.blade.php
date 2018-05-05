@@ -34,7 +34,7 @@
                     @if( !$me->carrier_id )
                     <a href="{{ url('') }}/mypage/transporter" class="dashboard__button btn btn-primary">運送会社として利用開始する</a>
                     @else
-                    <a href="{{ url('') }}/carrier" class="dashboard__button btn btn-primary">運送会社として利用開始する</a>
+                    <a href="{{ url('') }}/carrier" class="dashboard__button btn btn-primary">運送会社ページへ</a>
                     @endif
                 </div>
             </div>

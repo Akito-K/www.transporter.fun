@@ -15,7 +15,7 @@ class CreateUserToAddressesTable extends Migration
     {
         Schema::create('user_to_addresses', function (Blueprint $table) {
             $table->string('user_id', 32);
-            $table->string('role', 32);
+            $table->string('role', 32)->nullable();
             $table->string('address_id', 32);
 
             $table->datetime('created_at');

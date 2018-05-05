@@ -25,12 +25,12 @@
 
 <ul class="signup__conf__lists">
     <li class="signup__conf__list signup__conf__list--title">郵便番号</li>
-    <li class="signup__conf__list signup__conf__list--value">〒{{ $address->zip1 }}-{{ $address->zip2 }}</li>
+    <li class="signup__conf__list signup__conf__list--value">〒{{ $data->zip1 }}-{{ $data->zip2 }}</li>
 </ul>
 
 <ul class="signup__conf__lists">
     <li class="signup__conf__list signup__conf__list--title">ご住所</li>
-    <li class="signup__conf__list signup__conf__list--value">{{ $prefs[ $address->pref_code ] }}<br />{{ $address->city }}<br />{{ $address->address }}</li>
+    <li class="signup__conf__list signup__conf__list--value">{{ $prefs[ $data->pref_code ] }}<br />{{ $data->city }}<br />{{ $data->address }}</li>
 </ul>
 
 <ul class="signup__conf__lists">

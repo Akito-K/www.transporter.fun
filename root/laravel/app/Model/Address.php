@@ -33,6 +33,10 @@ class Address extends Model
         $data = Address::where('address_id', $unique_id)->first();
         if(!$data){
             $data = new \stdClass();
+            $data->id = NULL;
+            $data->name = NULL;
+            $data->sei = NULL;
+            $data->mei = NULL;
             $data->pref_code = NULL;
             $data->city = NULL;
             $data->address = NULL;

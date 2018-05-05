@@ -35,7 +35,7 @@
                     </div>
 
                     <p class="signup__to-epsilon__to-next">
-                        <a href="{!! url('') !!}/signup/{{ $data->key }}/accepted" class="btn btn-warning bulletNextBtnEpsilon" disabled>上記すべてに同意の上 決済申し込みに進む</a>
+                        <a href="{!! url('') !!}/signup/{{ $data->key }}/epsilon" class="btn btn-warning bulletNextBtnEpsilon" disabled>上記すべてに同意の上 決済申し込みに進む</a>
                     </p>
 
                     <a href="{!! url('') !!}/signup/{{ $signup_key }}/accept" class="btn btn-primary">前のページに戻る</a>

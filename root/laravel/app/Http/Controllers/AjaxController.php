@@ -4,20 +4,73 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Upload;
-use App\Model\MyUser;
-use App\Model\Board;
-use App\Model\Message;
-use App\Model\MessageUnopened;
-use App\Model\UserToFacility;
-use App\Model\NoteBathing;
-use App\Model\NoteNail;
-use App\Model\NoteReha;
-use App\Model\NoteMeal;
-use App\Model\NoteMouthcare;
+use App\Model\Address;
+use App\Model\Pref;
+
+//use App\Model\MyUser;
+//use App\Model\Board;
+//use App\Model\Message;
+//use App\Model\MessageUnopened;
 
 class AjaxController extends Controller
 {
 
+    public function uploadFile(Request $request){
+        $upload_id         = Upload::getNewId();
+        $original_filename = $request->input('name');
+        $extension         = $request->input('ext');
+        $type              = $request->input('type');
+        $target            = $request->input('target');
+        $posted            = $request->file('file')->isValid();
+        $root = \Func::getRootPath();
+
+        if($posted){
+            $filename = $upload_id.'.'.$extension;
+            // いったん EC2 の tmp ディレクトリに保存
+            $path = '/html/tmp';
+            Upload::moveUploadFile($request, $root.$path, $filename);
+            // DB Insert
+            Upload::insert([
+                'upload_id' => $upload_id,
+                'dirpath' => $path,
+                'extension' => $extension,
+                'original_filename' => $original_filename,
+                'created_at' => new \Datetime(),
+                'updated_at' => new \Datetime(),
+                ]);
+
+            if($target == "image"){
+                // リサイズして tmp ディレクトリに保存
+                $resize = [
+                    'width' => Upload::getResizeWidth('md'),
+                    'from_fullpath' => $root.$path.'/'.$filename,
+                    'to_fullpath' => $root.$path.'/'.$upload_id.'_md.'.$extension,
+                ];
+                Upload::Resize( $resize );
+
+                echo $upload_id.'_md.'.$extension.'?'.time();
+
+                $data = [
+                    'path' => '/tmp',
+                    'filename' => $upload_id.'_md.'.$extension,
+                    'upload_id' => $upload_id,
+                    ];
+
+                return json_encode($data);
+
+            }else{
+                $data = [
+                    'path' => '/tmp',
+                    'filename' => $filename,
+                    'upload_id' => $upload_id,
+                    'original_filename' => $original_filename,
+                    ];
+
+                return json_encode($data);
+            }
+        }
+    }
+/*
     public function getUnreadCount(Request $request){
         $count = MessageUnopened::where('receiver_user_id', \Auth::user()->user_id)->count();
         return $count;
@@ -154,24 +207,6 @@ class AjaxController extends Controller
             }
 
             $pushed = Message::pushNewMessage($board_id, $body, $memo, $filepath);
-/*
-            $board = Board::getData($board_id);
-            $user = MyUser::where('user_id', $board->user_id)->first();
-            $sender_user_id = \Auth::user()->user_id;
-            $message_id = Message::getNewId();
-
-            $data = [
-                'message_id' => $message_id,
-                'board_id' => $board_id,
-                'sender_user_id' => $sender_user_id,
-                'body' => $body,
-                'filepath' => $filepath,
-                'flag_memo' => $memo? 1: NULL,
-                'created_at' => new \Datetime(),
-                'updated_at' => new \Datetime(),
-            ];
-            Message::insert($data);
-*/
             $board = $pushed->board;
             $user = $pushed->user;
             $message_id = $pushed->message_id;
@@ -205,24 +240,6 @@ class AjaxController extends Controller
         $memo = $request['memo'];
 
         $pushed = Message::pushNewMessage($board_id, $body, $memo);
-/*
-        $board = Board::getData($board_id);
-        $user = MyUser::where('user_id', $board->user_id)->first();
-        $sender_user_id = \Auth::user()->user_id;
-        $message_id = Message::getNewId();
-
-        $data = [
-            'message_id' => $message_id,
-            'board_id' => $board_id,
-            'sender_user_id' => $sender_user_id,
-            'body' => $body,
-            'filepath' => NULL,
-            'flag_memo' => $memo? 1: NULL,
-            'created_at' => new \Datetime(),
-            'updated_at' => new \Datetime(),
-        ];
-        Message::insert($data);
-*/
         $board = $pushed->board;
         $user = $pushed->user;
         $message_id = $pushed->message_id;
@@ -250,11 +267,8 @@ class AjaxController extends Controller
     }
 
     // 未読に追加
-    /**
-     * 職員からのメッセージの時、送信先の利用者に未読が付く
-     * 利用者からのメッセージの時、所属施設の全職員に未読が付く
-     */
-/*
+    // * 職員からのメッセージの時、送信先の利用者に未読が付く
+    // * 利用者からのメッセージの時、所属施設の全職員に未読が付く
     public function addUnopened($message_id, $board_id, $board_user_id){
         if(\Auth::user()->flag_staff){
             // 職員から
@@ -271,7 +285,7 @@ class AjaxController extends Controller
             }
         }
     }
-*/
+
     public function getOver10(Request $request){
         $board_id = $request['board_id'];
         $board = Board::getData($board_id);
@@ -301,61 +315,6 @@ class AjaxController extends Controller
             'remain' => count($over10),
             ]);
     }
+*/
 
-    public function uploadFile(Request $request){
-//        $upload_id         = $request->input('upload_id');
-        $upload_id         = Upload::getNewId();
-        $original_filename = $request->input('name');
-        $extension         = $request->input('ext');
-        $type              = $request->input('type');
-        $target            = $request->input('target');
-        $posted            = $request->file('file')->isValid();
-        $root = \Func::getRootPath();
-
-        if($posted){
-            $filename = $upload_id.'.'.$extension;
-            // いったん EC2 の tmp ディレクトリに保存
-            $path = '/html/tmp';
-            Upload::moveUploadFile($request, $root.$path, $filename);
-            // DB Insert
-            Upload::insert([
-                'upload_id' => $upload_id,
-                'dirpath' => $path,
-                'extension' => $extension,
-                'original_filename' => $original_filename,
-                'created_at' => new \Datetime(),
-                'updated_at' => new \Datetime(),
-                ]);
-
-            if($target == "image"){
-                // リサイズして tmp ディレクトリに保存
-                $resize = [
-                    'width' => Upload::getResizeWidth('md'),
-                    'from_fullpath' => $root.$path.'/'.$filename,
-                    'to_fullpath' => $root.$path.'/'.$upload_id.'_md.'.$extension,
-                ];
-                Upload::Resize( $resize );
-
-                echo $upload_id.'_md.'.$extension.'?'.time();
-
-                $data = [
-                    'path' => '/tmp',
-                    'filename' => $upload_id.'_md.'.$extension,
-                    'upload_id' => $upload_id,
-                    ];
-
-                return json_encode($data);
-
-            }else{
-                $data = [
-                    'path' => '/tmp',
-                    'filename' => $filename,
-                    'upload_id' => $upload_id,
-                    'original_filename' => $original_filename,
-                    ];
-
-                return json_encode($data);
-            }
-        }
-    }
 }

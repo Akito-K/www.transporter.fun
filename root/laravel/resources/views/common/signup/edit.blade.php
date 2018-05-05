@@ -48,30 +48,30 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">郵便番号</label>
                             <div class="col-md-6">
-                                <input id="zip1" type="text" class="form-control form-control--mini form-control--20" name="zip1" value="{!! old('zip1')?: $address->zip1 !!}" required autofocus>
+                                <input id="zip1" type="text" class="form-control form-control--mini form-control--20" name="zip1" value="{!! old('zip1')?: $data->zip1 !!}" required autofocus>
                                 -
-                                <input id="zip2" type="text" class="form-control form-control--mini form-control--30" name="zip2" value="{!! old('zip2')?: $address->zip2 !!}" required onKeyUp="AjaxZip3.zip2addr('zip1', 'zip2', 'pref_code','city', 'address');">
+                                <input id="zip2" type="text" class="form-control form-control--mini form-control--30" name="zip2" value="{!! old('zip2')?: $data->zip2 !!}" required onKeyUp="AjaxZip3.zip2addr('zip1', 'zip2', 'pref_code','city', 'address');">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="pref_code" class="col-md-4 control-label">都道府県</label>
                             <div class="col-md-6">
-                                {!! \Form::select('pref_code', $prefs, old('pref_code')?: $address->pref_code, ['class' => 'form-control']) !!}
+                                {!! \Form::select('pref_code', $prefs, old('pref_code')?: $data->pref_code, ['class' => 'form-control']) !!}
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="city" class="col-md-4 control-label">市区郡</label>
                             <div class="col-md-6">
-                                <input id="city" type="text" class="form-control" name="city" value="{!! old('city')?: $address->city !!}" required>
+                                <input id="city" type="text" class="form-control" name="city" value="{!! old('city')?: $data->city !!}" required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="address" class="col-md-4 control-label">以降の住所</label>
                             <div class="col-md-6">
-                                <input id="address" type="text" class="form-control" name="address" value="{!! old('address')?: $address->address !!}">
+                                <input id="address" type="text" class="form-control" name="address" value="{!! old('address')?: $data->address !!}">
                             </div>
                         </div>
 

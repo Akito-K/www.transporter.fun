@@ -1,0 +1,216 @@
+// 共通
+@media all {
+    .signup {
+        &__type {
+            &__boxes {
+                @include flexbox();
+                @include flexAlign(center);
+            }
+            &__box {
+                padding: 20px 0;
+                margin: 0 2%;
+                border-radius: 8px;
+                background-color: #fff;
+                &--owner {
+                    width: 60%;
+                    border: 3px solid #fff;
+                    &[data-select="1"] {
+                        background-color: #ff7878;
+                    }
+                    &[data-select="0"] {
+                        border: 3px double #ff7878;
+                    }
+                }
+                &--carrier {
+                    width: 80%;
+                    border: 3px solid #fff;
+                    &[data-select="1"] {
+                        background-color: #6da2ff;
+                        a {
+                            color: #fff;
+                        }
+                    }
+                    &[data-select="0"] {
+                        border: 3px double #6da2ff;
+                    }
+                }
+
+
+
+                &__t-wrap {
+                    display:table;
+                    height: 100px;
+                    width: 100%;
+                }
+                &__t-row {
+                    display:table-row;
+                    width: 100%;
+                }
+                &__t-cell {
+                    display:table-cell;
+                    width: 100%;
+                    text-align: center;
+                    vertical-align: middle;
+                }
+            }
+        }
+        &__box {
+            &__lists {
+                @include flexbox();
+                @include flexAlign(center);
+            }
+            &__list {
+                box-sizing: border-box;
+                padding: 5px;
+                &--title {
+                    width: 15%;
+                }
+                &--value {
+                    width: 40%;
+                }
+            }
+        }
+
+        &__accept {
+            margin-bottom: 20px;
+            &__title {
+                padding: 10px 0;
+            }
+            &__box {
+                padding: 10px;
+                height: 100px;
+                overflow-y: scroll;
+                border: 1px solid #666;
+            }
+        }
+
+        &__conf {
+            margin: 0 auto 40px;
+            &__lists {
+            }
+            &__list {
+                &--title {
+                }
+                &--value {
+                }
+            }
+        }
+
+        &__to-epsilon {
+            margin-bottom: 20px;
+            &__title {
+                padding: 10px 0;
+            }
+            &__lists {
+                @include flexbox();
+                @include flexAlign(center);
+                cursor: pointer;
+            }
+            &__list {
+                &--check {
+                    font-size: 24px;
+                    color: #f00;
+                    width: 20px;
+                    height: 20px;
+                    padding: 0;
+                    border: 1px solid #999;
+                    border-radius: 2px;
+                    position: relative;
+                    .fa {
+                        position: absolute;
+                        top: -15px;
+                        left: -5px;
+                        font-size: 150%;
+                    }
+                }
+                &--body {
+                    font-size: 18px;
+                    width: calc(100% - 100px);
+                }
+            }
+        }
+
+    }
+}
+// スマホ
+@media(max-width: 767px) {
+    .signup {
+        &__type {
+            &__boxes {
+                padding: 20px 10px;
+            }
+        }
+
+        &__conf {
+            &__lists {
+                padding: 8px 4px;
+            }
+            &__list {
+                &--title {
+                    background-color: #eee;
+                    padding: 2px 5px;
+                }
+                &--value {
+                    padding: 2px 10px;
+                }
+            }
+        }
+
+        &__to-epsilon {
+            &__lists {
+                padding: 0 0 0 10px;
+            }
+            &__list {
+                &--body {
+                    width: 100%;
+                    padding: 20px 0 20px 20px;
+                }
+            }
+        }
+    }
+}
+// TAB・PC
+@media(min-width: 768px){
+    .signup {
+        &__type {
+            &__boxes {
+                padding: 20px 80px;
+            }
+        }
+
+        &__conf {
+            width: 60%;
+            padding: 10px 20px;
+            border: 1px solid #999;
+            border-radius: 12px;
+            &__lists {
+                @include flexbox();
+                padding: 8px 16px;
+                border-bottom: 1px dotted #ccc;
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+            &__list {
+                &--title {
+                    width: 40%;
+                }
+                &--value {
+                    width: 80%;
+                }
+            }
+        }
+
+        &__to-epsilon {
+            &__lists {
+                padding: 0 20px;
+            }
+            &__list {
+                &--body {
+                    width: calc(100% - 100px);
+                    padding: 20px;
+                }
+            }
+        }
+    }
+}

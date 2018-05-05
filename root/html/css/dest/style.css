@@ -4260,7 +4260,7 @@ td, th {
 
 html {
   font-size: 10px;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
@@ -9480,7 +9480,7 @@ button.close {
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
   filter: alpha(opacity=50);
   opacity: .5;
 }
@@ -9566,7 +9566,7 @@ button.close {
   text-indent: -999px;
   cursor: pointer;
   background-color: #000\9;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
   border: 1px solid #fff;
   border-radius: 10px;
 }
@@ -10124,6 +10124,9 @@ input[type="number"] {
   .panel-default > .panel-heading {
     background-color: #fff;
   }
+}
+
+@media all {
   .signup__type__boxes {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -10133,7 +10136,6 @@ input[type="number"] {
     -ms-flex-align: center;
     -webkit-align-items: center;
     align-items: center;
-    padding: 20px 80px;
   }
   .signup__type__box {
     padding: 20px 0;
@@ -10212,8 +10214,76 @@ input[type="number"] {
     border: 1px solid #666;
   }
   .signup__conf {
-    width: 60%;
     margin: 0 auto 40px;
+  }
+  .signup__to-epsilon {
+    margin-bottom: 20px;
+  }
+  .signup__to-epsilon__title {
+    padding: 10px 0;
+  }
+  .signup__to-epsilon__lists {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .signup__to-epsilon__list--check {
+    font-size: 24px;
+    color: #f00;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: 1px solid #999;
+    border-radius: 2px;
+    position: relative;
+  }
+  .signup__to-epsilon__list--check .fa {
+    position: absolute;
+    top: -15px;
+    left: -5px;
+    font-size: 150%;
+  }
+  .signup__to-epsilon__list--body {
+    font-size: 18px;
+    width: calc(100% - 100px);
+  }
+}
+
+@media (max-width: 767px) {
+  .signup__type__boxes {
+    padding: 20px 10px;
+  }
+  .signup__conf__lists {
+    padding: 8px 4px;
+  }
+  .signup__conf__list--title {
+    background-color: #eee;
+    padding: 2px 5px;
+  }
+  .signup__conf__list--value {
+    padding: 2px 10px;
+  }
+  .signup__to-epsilon__lists {
+    padding: 0 0 0 10px;
+  }
+  .signup__to-epsilon__list--body {
+    width: 100%;
+    padding: 20px 0 20px 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .signup__type__boxes {
+    padding: 20px 80px;
+  }
+  .signup__conf {
+    width: 60%;
     padding: 10px 20px;
     border: 1px solid #999;
     border-radius: 12px;
@@ -10235,45 +10305,10 @@ input[type="number"] {
   .signup__conf__list--value {
     width: 80%;
   }
-  .signup__to-epsilon {
-    margin-bottom: 20px;
-  }
-  .signup__to-epsilon__title {
-    padding: 10px 0;
-  }
   .signup__to-epsilon__lists {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
     padding: 0 20px;
-    cursor: pointer;
-  }
-  .signup__to-epsilon__list {
-    box-sizing: border-box;
-  }
-  .signup__to-epsilon__list--check {
-    font-size: 24px;
-    color: #f00;
-    width: 20px;
-    height: 20px;
-    padding: 0;
-    border: 1px solid #999;
-    border-radius: 2px;
-    position: relative;
-  }
-  .signup__to-epsilon__list--check .fa {
-    position: absolute;
-    top: -15px;
-    left: -5px;
-    font-size: 150%;
   }
   .signup__to-epsilon__list--body {
-    font-size: 18px;
     width: calc(100% - 100px);
     padding: 20px;
   }
