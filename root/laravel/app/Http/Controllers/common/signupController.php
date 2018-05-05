@@ -100,9 +100,8 @@ class signupController extends Controller
         $prefs = Pref::getNames();
         $prefs = \Func::array_append($prefs, [ 0 => '---' ], true);
         $data = Signup::getData($signup_key);
-        $address = Address::getData($data->address_id);
 
-        return view('common.signup.edit', compact('signup_key', 'prefs', 'pagemeta', 'data', 'address'));
+        return view('common.signup.edit', compact('signup_key', 'prefs', 'pagemeta', 'data'));
     }
 
     public function update(Request $request){
@@ -111,13 +110,14 @@ class signupController extends Controller
             'zip2' => 'required|size:4',
             'pref_code' => 'required|size:2',
             'city' => 'required',
+            'address' => 'required',
             'sei' => 'required|max:20',
             'mei' => 'required|max:20',
             ];
         $this->validate($request, $validates);
 
         $date_at = new \DatetimeImmutable();
-        $address_id = Address::getNewId();
+//        $address_id = Address::getNewId();
 
         $data = Signup::getData($request['signup_key']);
         $data->sei = $request['sei'];
@@ -125,16 +125,23 @@ class signupController extends Controller
         $data->sei_kana = $request['sei_kana'];
         $data->mei_kana = $request['mei_kana'];
 
-        $data->address_id = $address_id;
+        $data->zip1 = $request['zip1'];
+        $data->zip2 = $request['zip2'];
+        $data->pref_code = $request['pref_code'];
+        $data->city = $request['city'];
+        $data->address = $request['address'];
+
         $data->mobile = \Func::telFormat( $request['mobiles'] );
         $data->tel = \Func::telFormat( $request['tels'] );
         $data->flag_owner = $request['flag_owner']? true: false;
         $data->flag_carrier = $request['flag_carrier']? true: false;
+
         $data->updated_at = $date_at;
         unset($data->mobiles);
         unset($data->tels);
-        $data->save();
 
+        $data->save();
+/*
         $data = [
             'address_id' => $address_id,
             'name' => '登録住所',
@@ -150,7 +157,7 @@ class signupController extends Controller
             'updated_at' => $date_at,
         ];
         Address::insert($data);
-
+*/
         return redirect('/signup/'.$request['signup_key'].'/accept');
     }
 
@@ -158,10 +165,10 @@ class signupController extends Controller
     public function accept( $signup_key, Request $request ){
         $pagemeta = Pagemeta::getPagemeta('CM-SU-');
         $data = Signup::getData($signup_key);
-        $address = Address::getData($data->address_id);
+//        $address = Address::getData($data->address_id);
         $prefs = Pref::getNames();
 
-        return view('common.signup.accept', compact('pagemeta', 'signup_key', 'data', 'address', 'prefs'));
+        return view('common.signup.accept', compact('pagemeta', 'signup_key', 'data', 'prefs'));
     }
 
     // 同意後 運送会社登録ありならエプシロンへのリンク / 無しなら完了へリダイレクト
@@ -178,11 +185,71 @@ class signupController extends Controller
         }
     }
 
-    public function complete( $signup_key, Request $request ){
-        $pagemeta = Pagemeta::getPagemeta('CM-SU-');
+    public function completeOwner( $signup_key, Request $request ){
         $signup = Signup::getData($signup_key);
 
         $user_id = MyUser::getNewId();
+        $data = $this->makeUserData($user_id, $signup);
+        MyUser::insert($data);
+
+        $date_at = new \DatetimeImmutable();
+        if($data['owner_id']){
+            $owner = [
+                'owner_id' => $data['owner_id'],
+                'zip1' => $signup->zip1,
+                'zip2' => $signup->zip2,
+                'pref_code' => $signup->pref_code,
+                'city' => $signup->city,
+                'address' => $signup->address,
+                'tel' => $signup->tel,
+                'created_at' => $date_at,
+                'updated_at' => $date_at,
+            ];
+            Owner::insert($owner);
+        }
+
+        if($data['carrier_id']){
+            $carrier = [
+                'carrier_id' => $data['carrier_id'],
+                'zip1' => $signup->zip1,
+                'zip2' => $signup->zip2,
+                'pref_code' => $signup->pref_code,
+                'city' => $signup->city,
+                'address' => $signup->address,
+                'tel' => $signup->tel,
+                'created_at' => $date_at,
+                'updated_at' => $date_at,
+            ];
+            Carrier::insert($carrier);
+        }
+
+/*
+        $data = [
+            'user_id' => $user_id,
+            'role' => 'user',
+            'address_id' => $signup->address_id,
+            'created_at' => $date_at,
+            'updated_at' => $date_at,
+        ];
+        UserToAddress::insert($data);
+*/
+        $user = MyUser::getData( sha1($user_id) );
+        \Auth::loginUsingId($user->id);
+
+        $pagemeta = Pagemeta::getPagemeta('CM-SU-');
+        return view('common.signup.complete', compact('pagemeta'));
+/*
+        if($signup->flag_owner && $signup->flag_carrier){
+            return view('common.signup.complete_both', compact('pagemeta'));
+        }elseif($signup->flag_carrier){
+            return view('common.signup.complete_carrier', compact('pagemeta'));
+        }else{
+            return view('common.signup.complete_owner', compact('pagemeta'));
+        }
+*/
+    }
+
+    public function makeUserData($user_id, $signup){
         $hashed_id = sha1( $user_id );
         $date_at = new \DatetimeImmutable();
         $data = [
@@ -196,35 +263,23 @@ class signupController extends Controller
             'mei' => $signup->mei,
             'sei_kana' => $signup->sei_kana,
             'mei_kana' => $signup->mei_kana,
+
+            'zip1' => $signup->zip1,
+            'zip2' => $signup->zip2,
+            'pref_code' => $signup->pref_code,
+            'city' => $signup->city,
+            'address' => $signup->address,
+
             'mobile' => $signup->mobile,
             'tel' => $signup->tel,
             'owner_id' => $signup->flag_owner? Owner::getNewId(): NULL,
             'carrier_id' => $signup->flag_carrier? Carrier::getNewId(): NULL,
             'last_logined_at' => $date_at,
-            'updated_at' => $date_at,
-            'updated_at' => $date_at,
-        ];
-        MyUser::insert($data);
-
-        $data = [
-            'user_id' => $user_id,
-            'role' => 'user',
-            'address_id' => $signup->address_id,
             'created_at' => $date_at,
             'updated_at' => $date_at,
         ];
-        UserToAddress::insert($data);
 
-        $user = MyUser::getData($hashed_id);
-        \Auth::loginUsingId($user->id);
-
-        if($signup->flag_owner && $signup->flag_carrier){
-            return view('common.signup.complete_both', compact('pagemeta'));
-        }elseif($signup->flag_carrier){
-            return view('common.signup.complete_carrier', compact('pagemeta'));
-        }else{
-            return view('common.signup.complete_owner', compact('pagemeta'));
-        }
+        return $data;
     }
 
 }

@@ -64,7 +64,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     //   住所情報
     Route::get ('/mypage/address',                          'mypage\addressController@showList');
-    Route::get ('/mypage/address/edit',                     'mypage\addressController@edit');
+    Route::get ('/mypage/address/{address_id}/detail',      'mypage\addressController@showDetail');
+    Route::get ('/mypage/address/create',                   'mypage\addressController@create');
+    Route::post('/mypage/address/insert',                   'mypage\addressController@insert');
+    Route::get ('/mypage/address/{address_id}/edit',        'mypage\addressController@edit');
     Route::post('/mypage/address/update',                   'mypage\addressController@update');
     Route::get ('/mypage/address/{address_id}/delete',      'mypage\addressController@delete');
 
@@ -172,5 +175,6 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::post('/ajax/upload_file',                            'AjaxController@uploadFile');
+//Route::post('/ajax/add_address',                            'AjaxController@addAddress');
 
 //Route::get ('/cron/run', 'cronController@logWeather');

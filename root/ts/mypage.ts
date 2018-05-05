@@ -5,7 +5,8 @@ import Func from './func';
 //import Holiday from './holiday';
 import Calendar from './calendar';
 import Upload from './upload';
-import Board from './board';
+import Address from './address';
+//import Board from './board';
 //import Customer from './customer';
 //import Model from './model';
 
@@ -18,6 +19,8 @@ $(() => {
     const CALENDAR = new Calendar.MyCalendar();
     // ドラッグでアップロード
     const UPLOAD = new Upload.MyUpload();
+    // 住所情報
+    const ADDRESS = new Address.MyAddress();
     // コンタクトボード
 //    const BOARD = new Board.MyBoard();
     // 顧客

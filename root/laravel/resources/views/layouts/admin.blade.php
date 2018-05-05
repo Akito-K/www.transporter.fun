@@ -128,6 +128,8 @@
     <script src="{{ url('') }}/js/AdminLTE/app.min.js"></script>
     <script src="{{ url('') }}/js/dest/admin.js?{!! time() !!}"></script>
 
+    <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+
     <script>
         $('.draggable').draggable();
     </script>

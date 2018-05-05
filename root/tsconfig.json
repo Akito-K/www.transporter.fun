@@ -8,8 +8,9 @@
     "files": [
         "ts/script.ts",
         "ts/signup.ts",
-
+        "ts/mypage.ts",
         "ts/admin.ts",
+        "ts/address.ts",
         "ts/config.ts",
         "ts/func.ts",
         "ts/holiday.ts",
