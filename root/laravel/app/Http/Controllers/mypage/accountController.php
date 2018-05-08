@@ -9,6 +9,7 @@ use App\Model\MyUser;
 use App\Model\UserToAuthority;
 use App\Model\Authority;
 use App\Model\Pagemeta;
+use App\Model\Pref;
 use App\Model\Log;
 use App\Model\Upload;
 use App\Model\S3;
@@ -24,9 +25,10 @@ class accountController extends mypageController
         $me = $request['me'];
         $pagemeta = Pagemeta::getPagemeta('MY-USR-01');
         $data = MyUser::getUser($me->hashed_id);
+        $prefs = pref::getNames();
         Log::saveData( 'mypage\newsController@showDetail', 'user_id', $data->user_id, true );
 
-        return view('mypage.account.detail', compact('pagemeta', 'data', 'me'));
+        return view('mypage.account.detail', compact('pagemeta', 'data', 'me', 'prefs'));
     }
 
     public function edit(Request $request){
@@ -34,9 +36,11 @@ class accountController extends mypageController
 
         $pagemeta = Pagemeta::getPagemeta('MY-USR-02');
         $data = MyUser::getUser($me->hashed_id);
+        $prefs = pref::getNames();
+        \Func::array_append($prefs, [ 0 => '---' ], true);
         Log::saveData( 'mypage\accountController@insert', 'user_id', $data->user_id, true);
 
-        return view('mypage.account.edit', compact('pagemeta', 'data', 'me'));
+        return view('mypage.account.edit', compact('pagemeta', 'data', 'me', 'prefs'));
     }
 
     public function update(Request $request){
@@ -44,7 +48,7 @@ class accountController extends mypageController
         $user = MyUser::getData($me->hashed_id);
 
         // Validation
-        $this->validationUpdate($request, $user);
+        $this->validateUpdate($request, $user);
 
         // 画像保存
         if($request['upload_id']){
@@ -74,7 +78,7 @@ class accountController extends mypageController
         return view('mypage.account.email', compact('pagemeta', 'data', 'me'));
     }
 
-    public function validationUpdate($request, $user){
+    public function validateUpdate($request, $user){
         $validates = [
             'name' => 'required|max:20',
             'sei' => 'required|max:20',

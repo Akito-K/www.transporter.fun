@@ -26,13 +26,13 @@
             <div class="dashboard__block">
                 <div class="dashboard__buttons">
                     @if( !$me->owner_id )
-                    <a href="{{ url('') }}/mypage/owner" class="dashboard__button btn btn-danger">荷主として利用開始する</a>
+                    <a href="{{ url('') }}/mypage/start/owner" class="dashboard__button btn btn-danger">荷主として利用開始する</a>
                     @else
                     <a href="{{ url('') }}/owner" class="dashboard__button btn btn-danger">荷主ページへ</a>
                     @endif
 
                     @if( !$me->carrier_id )
-                    <a href="{{ url('') }}/mypage/transporter" class="dashboard__button btn btn-primary">運送会社として利用開始する</a>
+                    <a href="{{ url('') }}/mypage/start/carrier" class="dashboard__button btn btn-primary">運送会社として利用開始する</a>
                     @else
                     <a href="{{ url('') }}/carrier" class="dashboard__button btn btn-primary">運送会社ページへ</a>
                     @endif

@@ -76,11 +76,27 @@
                         </tr>
                         <tr>
                             <th>携帯番号</th>
-                            <td>{!! Form::text('mobile', old('mobile'), ['class' => 'form-control form-control--mini form-control--60']) !!}</td>
+                            <td>
+                                <ul class="params">
+                                    <li class="param param-30">{!! Form::text('mobiles[1]', old('mobiles[1]'), ['class' => 'form-control']) !!}</li>
+                                    <li class="param param-10">-</li>
+                                    <li class="param param-40">{!! Form::text('mobiles[2]', old('mobiles[2]'), ['class' => 'form-control']) !!}</li>
+                                    <li class="param param-10">-</li>
+                                    <li class="param param-40">{!! Form::text('mobiles[3]', old('mobiles[3]'), ['class' => 'form-control']) !!}</li>
+                                </ul>
+                            </td>
                         </tr>
                         <tr>
                             <th>電話番号</th>
-                            <td>{!! Form::text('tel', old('tel'), ['class' => 'form-control form-control--mini form-control--60']) !!}</td>
+                            <td>
+                                <ul class="params">
+                                    <li class="param param-30">{!! Form::text('tels[1]', old('tels[1]'), ['class' => 'form-control']) !!}</li>
+                                    <li class="param param-10">-</li>
+                                    <li class="param param-40">{!! Form::text('tels[2]', old('tels[2]'), ['class' => 'form-control']) !!}</li>
+                                    <li class="param param-10">-</li>
+                                    <li class="param param-40">{!! Form::text('tels[3]', old('tels[3]'), ['class' => 'form-control']) !!}</li>
+                                </ul>
+                            </td>
                         </tr>
 
                         <tr>

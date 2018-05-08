@@ -176,7 +176,7 @@ namespace Calendar {
 
                 $('.bulletCalendar').slideDown(100).attr("data-show", "1").attr("data-target", this.target).css({left: x, top: e.pageY});
 
-                console.log(e.offsetY, e.pageY, e.clientY, e.screenY);
+                //console.log(e.offsetY, e.pageY, e.clientY, e.screenY);
             }
         }
 

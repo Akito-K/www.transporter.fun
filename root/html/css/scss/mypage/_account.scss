@@ -1,0 +1,25 @@
+// 共通
+@media all {
+    .account {
+    }
+}
+// スマホ
+@media(max-width: 767px) {
+    .account {
+        &__thumbnail {
+            display: block;
+            width: 50%;
+            margin: 0 auto;
+        }
+    }
+}
+// TAB・PC
+@media(min-width: 768px){
+    .account {
+        &__box {
+            width: 100%;
+            max-width: 600px;
+            border: 1px solid #ccc;
+        }
+    }
+}

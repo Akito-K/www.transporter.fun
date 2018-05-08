@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Model\Upload;
 use App\Model\Address;
 use App\Model\Pref;
+use App\Model\MyUser;
 
-//use App\Model\MyUser;
 //use App\Model\Board;
 //use App\Model\Message;
 //use App\Model\MessageUnopened;
@@ -70,6 +70,19 @@ class AjaxController extends Controller
             }
         }
     }
+
+    public function quoteUserAccount(Request $request){
+        $data = MyUser::getUser($request['hashed_id']);
+
+        return json_encode( $data );
+    }
+
+    public function quoteAddress(Request $request){
+        $data = Address::getData($request['address_id']);
+
+        return json_encode( $data );
+    }
+
 /*
     public function getUnreadCount(Request $request){
         $count = MessageUnopened::where('receiver_user_id', \Auth::user()->user_id)->count();

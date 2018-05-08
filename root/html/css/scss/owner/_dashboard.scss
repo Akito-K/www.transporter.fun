@@ -1,0 +1,17 @@
+// 共通
+@media all {
+    .dashboard {
+        &__block {
+        }
+    }
+}
+// スマホ
+@media(max-width: 767px) {
+    .dashboard {
+    }
+}
+// TAB・PC
+@media(min-width: 768px){
+    .dashboard {
+    }
+}

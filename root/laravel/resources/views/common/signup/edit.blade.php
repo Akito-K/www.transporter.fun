@@ -78,18 +78,18 @@
                         <div class="form-group">
                             <label for="mobile1" class="col-md-4 control-label">携帯電話番号</label>
                             <div class="col-md-6">
-                                <input id="mobile1" type="text" class="form-control form-control--mini form-control--20" name="mobiles[1]" value="{!! old('mobile[1]')?: $data->mobiles[1] !!}">
-                                 - <input id="mobile2" type="text" class="form-control form-control--mini form-control--20" name="mobiles[2]" value="{!! old('mobile[2]')?: $data->mobiles[2] !!}">
-                                 - <input id="mobile3" type="text" class="form-control form-control--mini form-control--20" name="mobiles[3]" value="{!! old('mobile[3]')?: $data->mobiles[3] !!}">
+                                <input id="mobile1" type="text" class="form-control form-control--mini form-control--20" name="mobiles[1]" value="{!! old('mobiles[1]')?: $data->mobiles[1] !!}">
+                                 - <input id="mobile2" type="text" class="form-control form-control--mini form-control--20" name="mobiles[2]" value="{!! old('mobiles[2]')?: $data->mobiles[2] !!}">
+                                 - <input id="mobile3" type="text" class="form-control form-control--mini form-control--20" name="mobiles[3]" value="{!! old('mobiles[3]')?: $data->mobiles[3] !!}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="tel1" class="col-md-4 control-label">固定電話番号</label>
                             <div class="col-md-6">
-                                <input id="tel1" type="text" class="form-control form-control--mini form-control--20" name="tels[1]" value="{!! old('tel[1]')?: $data->tels[1] !!}">
-                                 - <input id="tel2" type="text" class="form-control form-control--mini form-control--20" name="tels[2]" value="{!! old('tel[2]')?: $data->tels[2] !!}">
-                                 - <input id="tel3" type="text" class="form-control form-control--mini form-control--20" name="tels[3]" value="{!! old('tel[3]')?: $data->tels[3] !!}">
+                                <input id="tel1" type="text" class="form-control form-control--mini form-control--20" name="tels[1]" value="{!! old('tels[1]')?: $data->tels[1] !!}">
+                                 - <input id="tel2" type="text" class="form-control form-control--mini form-control--20" name="tels[2]" value="{!! old('tels[2]')?: $data->tels[2] !!}">
+                                 - <input id="tel3" type="text" class="form-control form-control--mini form-control--20" name="tels[3]" value="{!! old('tels[3]')?: $data->tels[3] !!}">
                             </div>
                         </div>
 

@@ -15,9 +15,9 @@ class adminController extends Controller
     public function __construct(Request $request)
     {
         // ログイン時の処理
-        $this->middleware('logined');
+        //$this->middleware('logined');
 
         // 管理者認証
-        $this->middleware('adminAuth');
+        //$this->middleware('adminAuth');
     }
 }

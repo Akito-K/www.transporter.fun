@@ -35,6 +35,8 @@ class MyUser extends Model
         if(!empty($datas)){
             foreach($datas as $k => $data){
                 $data->authorities = UserToAuthority::getAuthorityIds($data->user_id);
+                $data->mobiles = \Func::telFormatDecode($data->mobile);
+                $data->tels = \Func::telFormatDecode($data->tel);
                 $ary[] = $data;
             }
         }
@@ -46,6 +48,8 @@ class MyUser extends Model
         $data = MyUser::getData($hashed_id);
         if($data){
             $data->authorities = UserToAuthority::getAuthorityIds($data->user_id);
+            $data->mobiles = \Func::telFormatDecode($data->mobile);
+            $data->tels = \Func::telFormatDecode($data->tel);
         }
 
         return $data;
@@ -92,8 +96,15 @@ class MyUser extends Model
             'sei_kana' => $request['sei_kana'],
             'mei_kana' => $request['mei_kana'],
             'email' => $request['email'],
-            'mobile' => $request['mobile'],
-            'tel' => $request['tel'],
+/*
+            'zip1' => $request['zip1'],
+            'zip2' => $request['zip2'],
+            'pref_code' => $request['pref_code'],
+            'city' => $request['city'],
+            'address' => $request['address'],
+*/
+            'mobile' => \Func::telFormat( $request['mobiles'] ),
+            'tel' => \Func::telFormat( $request['tels'] ),
             'icon_filepath' => $request['icon_filepath'],
             'created_at' => $now_at,
             'updated_at' => $now_at,
@@ -108,7 +119,7 @@ class MyUser extends Model
      */
     public static function updateData($request, $ignores=[]){
         $now_at = new \Datetime();
-        $datas = [
+        $data = [
             'login_id' => $request['login_id'],
             'name' => $request['name'],
             'sei' => $request['sei'],
@@ -116,19 +127,26 @@ class MyUser extends Model
             'sei_kana' => $request['sei_kana'],
             'mei_kana' => $request['mei_kana'],
             'email' => $request['email'],
-            'mobile' => $request['mobile'],
-            'tel' => $request['tel'],
+
+            'zip1' => $request['zip1'],
+            'zip2' => $request['zip2'],
+            'pref_code' => $request['pref_code'],
+            'city' => $request['city'],
+            'address' => $request['address'],
+
+            'mobile' => \Func::telFormat( $request['mobiles'] ),
+            'tel' => \Func::telFormat( $request['tels'] ),
             'icon_filepath' => $request['icon_filepath'],
             'updated_at' => $now_at,
             ];
 
         if(!empty($ignores)){
             foreach($ignores as $ignore){
-                unset($datas[$ignore]);
+                unset($data[$ignore]);
             }
         }
 
-        MyUser::where('hashed_id', $request['hashed_id'])->update($datas);
+        MyUser::where('hashed_id', $request['hashed_id'])->update($data);
     }
 
     public static function deleteData($hashed_id){

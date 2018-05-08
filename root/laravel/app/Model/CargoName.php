@@ -30,4 +30,8 @@ class CargoName extends Model
 
         return $data;
     }
+
+    public static function getNames(){
+        return CargoName::pluck('name', 'name_id')->toArray();
+    }
 }

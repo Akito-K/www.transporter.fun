@@ -60,5 +60,9 @@ class Kernel extends HttpKernel
 
         'logined' => \App\Http\Middleware\Logined::class,
         'adminAuth' => \App\Http\Middleware\AdminAuth::class,
+
+        'mypage'  => \App\Http\Middleware\mypage::class,
+        'owner'   => \App\Http\Middleware\owner::class,
+        'carrier' => \App\Http\Middleware\carrier::class,
     ];
 }

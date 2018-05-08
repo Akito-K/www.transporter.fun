@@ -10026,6 +10026,106 @@ input[type="number"] {
     background-position: center center;
     background-repeat: no-repeat;
   }
+  .must {
+    position: relative;
+  }
+  .must:after {
+    content: " ※必須項目";
+    color: #f00;
+    font-size: 80%;
+  }
+  .params {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+  .params-left {
+    padding: 5px;
+    border-bottom: 1px dotted #ccc;
+  }
+  .param {
+    text-align: center;
+  }
+  .param-left {
+    text-align: left;
+  }
+  .param-10 {
+    width: 10%;
+  }
+  .param-20 {
+    width: 20%;
+  }
+  .param-30 {
+    width: 30%;
+  }
+  .param-40 {
+    width: 40%;
+  }
+  .param-50 {
+    width: 50%;
+  }
+  .param-60 {
+    width: 60%;
+  }
+  .param-70 {
+    width: 70%;
+  }
+  .param-80 {
+    width: 80%;
+  }
+  .param-90 {
+    width: 90%;
+  }
+  .param-100 {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .lists {
+    padding: 5px 0;
+  }
+  .list {
+    box-sizing: border-box;
+  }
+  .list-title {
+    padding: 4px 4px;
+    background-color: #f3f3f3;
+  }
+  .list-value {
+    padding: 4px 8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .lists {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+    border-bottom: 1px dotted #999;
+    margin-bottom: 0;
+  }
+  .list {
+    box-sizing: border-box;
+    padding: 8px 16px;
+  }
+  .list-title {
+    width: 30%;
+    background-color: #f3f3f3;
+  }
+  .list-value {
+    width: 70%;
+  }
 }
 
 @media (min-width: 1000px) {

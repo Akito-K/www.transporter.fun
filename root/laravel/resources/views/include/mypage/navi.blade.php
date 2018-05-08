@@ -1,6 +1,6 @@
-<li class="navi__list navi__list--parent"><span class="navi__list__parent"><i class="fa fa-users"></i> ユーザー</span></li>
-<li class="navi__list navi__list--child"><a href="{{ url('') }}/mypage/account"><i class="fa fa-user"></i> <span>アカウント</span></a></li>
-<li class="navi__list navi__list--child"><a href="{{ url('') }}/mypage/status"><i class="fa fa-yen"></i> <span>登録状況</span></a></li>
+<li class="navi__list navi__list--parent"><span class="navi__list__parent"><i class="fa fa-users"></i> アカウント</span></li>
+<li class="navi__list navi__list--child"><a href="{{ url('') }}/mypage/account"><i class="fa fa-user"></i> <span>登録情報</span></a></li>
+<li class="navi__list navi__list--child"><a href="{{ url('') }}/mypage/status"><i class="fa fa-yen"></i> <span>ご利用状況</span></a></li>
 <li class="navi__list navi__list--child"><a href="{{ url('') }}/mypage/address"><i class="fa fa-list-alt"></i> <span>住所情報</span></a></li>
 
 @if( !\Auth::user()->carrier_id )

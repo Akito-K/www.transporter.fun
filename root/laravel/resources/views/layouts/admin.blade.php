@@ -24,7 +24,7 @@
     <script type="text/javascript" src="https://ajaxzip3.github.io/ajaxzip3.js" charset="utf-8"></script>
 
 </head>
-<body class="hold-transition sidebar-mini {!! $pagemeta->body_class !!} @if(\Func::isManager()) skin-blue @else skin-green @endif">
+<body class="hold-transition sidebar-mini {!! $pagemeta->body_class !!} skin-green">
 
 @include('include.admin.ajaxing')
 
@@ -72,6 +72,7 @@
                     <li class="header">MENU</li>
 
                     <!-- Optionally, you can add icons to the links -->
+                    @include('include.navi')
                     @include('include.admin.navi')
 
                 </ul><!-- /.sidebar-menu -->

@@ -7,10 +7,11 @@
         &__boxes {
         }
         &__box {
-            padding: 10px 20px;
+            padding: 10px 0;
             &--list {
                 border: 1px solid #ccc;
                 margin: 8px 8px 16px;
+                padding: 10px 20px;
             }
             &__title {
                 color: #999;

@@ -10544,7 +10544,7 @@ var $ = __webpack_require__(0);
 //import Holiday from './holiday';
 var calendar_1 = __webpack_require__(3);
 var upload_1 = __webpack_require__(6);
-var address_1 = __webpack_require__(7);
+var quote_1 = __webpack_require__(7);
 //import Board from './board';
 //import Customer from './customer';
 //import Model from './model';
@@ -10557,7 +10557,7 @@ $(function () {
     // ドラッグでアップロード
     var UPLOAD = new upload_1.default.MyUpload();
     // 住所情報
-    var ADDRESS = new address_1.default.MyAddress();
+    var QUOTE = new quote_1.default.MyQuote();
     // コンタクトボード
     //    const BOARD = new Board.MyBoard();
     // 顧客
@@ -11120,31 +11120,33 @@ exports.default = Upload;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(0);
-var Address;
-(function (Address) {
-    var MyAddress = /** @class */ (function () {
-        //        public el: any;
-        //        public defaultTextareaHeight: number = 30;
-        //        public defaultTextareaLineHeight: number = 20;
-        function MyAddress(ajaxing) {
+var Quote;
+(function (Quote) {
+    var MyQuote = /** @class */ (function () {
+        function MyQuote(ajaxing) {
             if (ajaxing === void 0) { ajaxing = false; }
             var _this = this;
             this.ajaxing = ajaxing;
             var self = this;
             // 以前のメッセージ読み込み
-            $('#trigAddAddress').click(function () {
-                var k = Number($('#trigAddAddress').attr("data-k"));
-                _this.ajaxAddAddress(k);
+            $('#trigQuoteUserAccount').click(function () {
+                if (window.confirm('入力値を消してアカウント登録情報を使用しますか？')) {
+                    var id = $('#trigQuoteUserAccount').data('id');
+                    _this.ajaxQuoteUserAccount(id);
+                }
+                else {
+                    return false;
+                }
             });
         }
-        MyAddress.prototype.ajaxAddAddress = function (k) {
+        MyQuote.prototype.ajaxQuoteUserAccount = function (id) {
             var self = this;
             self.ajaxing = true;
             var token = $('meta[name="csrf-token"]').attr('content');
-            var D = { k: k };
+            var D = { hashed_id: id };
             $.ajax({
                 headers: { 'X-CSRF-TOKEN': token },
-                url: '/ajax/add_address',
+                url: '/ajax/quote_user_account',
                 type: 'post',
                 data: D,
                 dataType: 'json',
@@ -11153,8 +11155,15 @@ var Address;
                     $('#ajaxing-waiting').show();
                 },
                 success: function (data) {
-                    $('#bulletAddressBoxes').append(data.view);
-                    $('#trigAddAddress').attr("data-k", data.k2);
+                    //console.log(data);
+                    $('#zip1').val(data.zip1);
+                    $('#zip2').val(data.zip2);
+                    $('#pref_code').val(data.pref_code);
+                    $('#city').val(data.city);
+                    $('#address').val(data.address);
+                    $('#tels-1').val(data.tels[1]);
+                    $('#tels-2').val(data.tels[2]);
+                    $('#tels-3').val(data.tels[3]);
                 },
                 complete: function () {
                     // 実行中画面を消す
@@ -11163,11 +11172,11 @@ var Address;
                 }
             });
         };
-        return MyAddress;
+        return MyQuote;
     }());
-    Address.MyAddress = MyAddress;
-})(Address || (Address = {}));
-exports.default = Address;
+    Quote.MyQuote = MyQuote;
+})(Quote || (Quote = {}));
+exports.default = Quote;
 
 
 /***/ })

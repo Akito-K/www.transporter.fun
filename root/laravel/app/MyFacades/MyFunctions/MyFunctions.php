@@ -423,13 +423,13 @@ class MyFunctions
     }
 
     // 連想配列に配列を追加する
-    public static function array_append($bases, $adds, $pre=null){
+    public static function array_append(&$bases, $adds, $pre=null){
         if($pre){
             // 先頭に追加
-            return array_merge($adds, $bases);
+            $bases = array_merge($adds, $bases);
         }else{
             // 末尾に追加
-            return array_merge($bases, $adds);
+            $bases = array_merge($bases, $adds);
         }
     }
 
@@ -470,30 +470,31 @@ class MyFunctions
         $user_id = $user_id?: \Auth::user()->user_id;
         $authorities = UserToAuthority::getAuthorityIds($user_id);
 
-        return in_array('99', $authorities);
+        return in_array('9999', $authorities);
     }
 
     public static function isManager($user_id=null){
         $user_id = $user_id?: \Auth::user()->user_id;
         $authorities = UserToAuthority::getAuthorityIds($user_id);
 
-        return in_array('AT03', $authorities);
+        return in_array('99', $authorities);
     }
 
-    public static function isWriter($user_id=null){
-        $user_id = $user_id?: \Auth::user()->user_id;
-        $authorities = UserToAuthority::getAuthorityIds($user_id);
-
-        return in_array('AT02', $authorities);
+    public static function isCarrier($user_id=null){
+        return \Auth::user()->carrier_id !== NULL;
     }
 
+    public static function isOwner($user_id=null){
+        return \Auth::user()->owner_id !== NULL;
+    }
+/*
     public static function isViewer($user_id=null){
         $user_id = $user_id?: \Auth::user()->user_id;
         $authorities = UserToAuthority::getAuthorityIds($user_id);
 
         return in_array('AT01', $authorities);
     }
-
+*/
     public static function getStaff($user_id){
         $data = MyUser::where('user_id', $user_id)->first();
 

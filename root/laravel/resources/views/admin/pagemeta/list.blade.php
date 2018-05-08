@@ -5,6 +5,8 @@
         <div class="box-body">
             <h2 class="page-header">一覧</h2>
 
+            <p><a href="{{ url('') }}/admin/pagemeta/create" class="btn btn-block btn-primary">route のエクセルから再登録する</a></p>
+
             @if( !empty($datas))
                 <table class="pagemeta__table--list">
                     <tr>
@@ -25,7 +27,6 @@
                 </table>
             @endif
 
-            <a href="{{ url('') }}/admin/pagemeta/create" class="btn btn-block btn-primary">route のエクセルから再登録する</a>
         </div>
     </div>
 

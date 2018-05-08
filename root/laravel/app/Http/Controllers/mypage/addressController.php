@@ -27,7 +27,7 @@ class addressController extends mypageController
         $pagemeta = Pagemeta::getPagemeta('MY-ADR-02');
         $data = Address::getData($address_id);
         $prefs = pref::getNames();
-        $prefs = \Func::array_append($prefs, [ 0 => '---' ], true);
+        \Func::array_append($prefs, [ 0 => '---' ], true);
 
         Log::saveData( 'mypage\addressController@showDetail', 'address_id', $address_id, true);
 
@@ -37,7 +37,7 @@ class addressController extends mypageController
     public function create(){
         $pagemeta = Pagemeta::getPagemeta('MY-ADR-03');
         $prefs = pref::getNames();
-        $prefs = \Func::array_append($prefs, [ 0 => '---' ], true);
+        \Func::array_append($prefs, [ 0 => '---' ], true);
 
         Log::saveData( 'mypage\addressController@create');
 
@@ -58,7 +58,7 @@ class addressController extends mypageController
         $pagemeta = Pagemeta::getPagemeta('MY-ADR-06');
         $data = Address::getData($address_id);
         $prefs = pref::getNames();
-        $prefs = \Func::array_append($prefs, [ 0 => '---' ], true);
+        \Func::array_append($prefs, [ 0 => '---' ], true);
 
         Log::saveData( 'mypage\addressController@edit', 'address_id', $address_id, true);
 
@@ -99,7 +99,6 @@ class addressController extends mypageController
             'zip_code' => 'requires|numeric',
             'city' => 'required',
             'address' => 'required',
-            'tel' => 'required',
         ];
 
         $this->validate($request, $validates);
@@ -115,7 +114,6 @@ class addressController extends mypageController
             'zip_code' => 'requires|numeric',
             'city' => 'required',
             'address' => 'required',
-            'tel' => 'required',
         ];
 
         $this->validate($request, $validates);
@@ -134,7 +132,7 @@ class addressController extends mypageController
             'pref_code' => $request['pref_code'],
             'city' => $request['city'],
             'address' => $request['address'],
-            'tel' => $request['tel'],
+            'tel' => \Func::telFormat( $request['tels'] ),
             'created_at' => $now_at,
             'updated_at' => $now_at,
         ];
@@ -159,7 +157,7 @@ class addressController extends mypageController
             'pref_code' => $request['pref_code'],
             'city' => $request['city'],
             'address' => $request['address'],
-            'tel' => $request['tel'],
+            'tel' => \Func::telFormat( $request['tels'] ),
             'updated_at' => $now_at,
         ];
         if( isset($request['name']) ){

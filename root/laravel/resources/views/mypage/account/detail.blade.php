@@ -5,72 +5,86 @@
         <div class="box-body">
             <h2 class="page-header">詳細</h2>
 
-            <table class="user__table">
-                <tr>
-                    <th class="user__cell">ログインID</th>
-                    <td class="user__cell">{{ $data->login_id }}</td>
-                </tr>
-                <tr>
-                    <th class="user__cell">ログインパスワード</th>
-                    <td class="user__cell">***</td>
-                </tr>
-                <tr>
-                    <th>画像</th>
-                    <td class="user__cell">
-                        <span class="user__cell__img">
-                            <span class="my-thumbnail">
-                                <span class="my-thumbnail__img" style="background-image: url({!! \Func::getImage($data->icon_filepath) !!});"></span>
+            <div class="account__block">
+                <div class="account__box">
+                    <ul class="lists account__lists">
+                        <li class="list list-title account__list">ログインID</li>
+                        <li class="list list-value account__list">{{ $data->login_id }}</li>
+                    </ul>
+                    <ul class="lists account__lists">
+                        <li class="list list-title account__list">ログインパスワード</li>
+                        <li class="list list-value account__list">***</li>
+                    </ul>
+                    <ul class="lists account__lists">
+                        <li class="list list-title account__list">アイコン</li>
+                        <li class="list list-value account__list">
+                            <span class="account__thumbnail">
+                                <span class="my-thumbnail">
+                                    <span class="my-thumbnail__img" style="background-image: url({!! \Func::getImage($data->icon_filepath) !!});"></span>
+                                </span>
                             </span>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="user__cell">表示名</th>
-                    <td class="user__cell">{{ $data->name }}</td>
-                </tr>
+                        </li>
+                    </ul>
+                    <ul class="lists account__lists">
+                        <li class="list list-title account__list">表示名</li>
+                        <li class="list list-value account__list">{{ $data->name }}</li>
+                    </ul>
+                    <ul class="lists account__lists">
+                        <li class="list list-title account__list">氏名</li>
+                        <li class="list list-value account__list">{{ $data->sei }} {{ $data->mei }}</li>
+                    </ul>
+                    <ul class="lists account__lists">
+                        <li class="list list-title account__list">シメイ</li>
+                        <li class="list list-value account__list">{{ $data->sei_kana }} {{ $data->mei_kana }}</li>
+                    </ul>
+                    <!--ul class="lists account__lists">
+                        <li class="list list-title account__list">荷主ID</li>
+                        <li class="list list-value account__list">{{ $data->owner_id }}</li>
+                    </ul>
+                    <ul class="lists account__lists">
+                        <li class="list list-title account__list">運送会社ID</li>
+                        <li class="list list-value account__list">{{ $data->carrier_id }}</li>
+                    </ul-->
+                    <ul class="lists account__lists">
+                        <li class="list list-title account__list">メールアドレス</li>
+                        <li class="list list-value account__list">{{ $data->email }}</li>
+                    </ul>
 
-                <tr>
-                    <th class="user__cell">しめい</th>
-                    <td class="user__cell">{{ $data->sei_kana }} {{ $data->mei_kana }}</td>
-                </tr>
-                <tr>
-                    <th class="user__cell">氏名</th>
-                    <td class="user__cell">{{ $data->sei }} {{ $data->mei }}</td>
-                </tr>
+                    <ul class="lists">
+                        <li class="list list-title">郵便番号</li>
+                        <li class="list list-value">〒 {{ $data->zip1 }} - {{ $data->zip2 }}</li>
+                    </ul>
+                    <ul class="lists">
+                        <li class="list list-title">都道府県</li>
+                        <li class="list list-value">{{ $prefs[ $data->pref_code ] }}</li>
+                    </ul>
+                    <ul class="lists">
+                        <li class="list list-title">市区町</li>
+                        <li class="list list-value">{{ $data->city }}</li>
+                    </ul>
+                    <ul class="lists">
+                        <li class="list list-title">以降の住所</li>
+                        <li class="list list-value">{{ $data->address }}</li>
+                    </ul>
 
-                <tr>
-                    <th class="user__cell">荷主ID</th>
-                    <td class="user__cell">{{ $data->owner_id }}</td>
-                </tr>
-                <tr>
-                    <th class="user__cell">運送会社ID</th>
-                    <td class="user__cell">{{ $data->carrier_id }}</td>
-                </tr>
-
-                <tr>
-                    <th class="user__cell">メールアドレス</th>
-                    <td class="user__cell">{{ $data->email }}</td>
-                </tr>
-                <tr>
-                    <th class="user__cell">携帯番号</th>
-                    <td class="user__cell">{{ $data->mobile }}</td>
-                </tr>
-                <tr>
-                    <th class="user__cell">電話番号</th>
-                    <td class="user__cell">{{ $data->tel }}</td>
-                </tr>
-
-                <tr>
-                    <th class="user__cell">最終ログイン日時</th>
-                    <td class="user__cell">{{ \Func::dateFormat($data->last_logined_at, 'Y/n/j(wday)') }} {{ \Func::dateFormat($data->last_logined_at, 'H:i:s') }}</td>
-                </tr>
-
-            </table>
+                    <ul class="lists account__lists">
+                        <li class="list list-title account__list">携帯電話番号</li>
+                        <li class="list list-value account__list">{{ $data->mobile }}</li>
+                    </ul>
+                    <ul class="lists account__lists">
+                        <li class="list list-title account__list">固定電話番号</li>
+                        <li class="list list-value account__list">{{ $data->tel }}</li>
+                    </ul>
+                    <ul class="lists account__lists">
+                        <li class="list list-title account__list">最終ログイン日時</li>
+                        <li class="list list-value account__list">{{ \Func::dateFormat($data->last_logined_at, 'Y/n/j(wday)') }} {{ \Func::dateFormat($data->last_logined_at, 'H:i:s') }}</li>
+                    </ul>
+                </div>
+            </div>
 
         </div>
     </div>
 
-    <p><a href="{{ url('') }}/mypage/account/edit" class="btn btn-warning btn-block btn-lg">編集する</a></p>
-    <p><a href="{{ url('') }}/mypage/account" class="btn btn-block btn-primary">一覧へ戻る</a></p>
+    <p><a href="{{ url('') }}/mypage/account/edit" class="btn btn-warning btn-block">編集する</a></p>
 
 @endsection

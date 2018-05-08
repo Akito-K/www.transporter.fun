@@ -15,6 +15,6 @@ class mypageController extends Controller
     public function __construct(Request $request)
     {
         // ログイン時の処理
-        $this->middleware('logined');
+        //$this->middleware('logined');
     }
 }

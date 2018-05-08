@@ -4,9 +4,11 @@ var webpack = require('webpack');
 var env = process.env.NODE_ENV;
 let config = {
     entry: {
-//        admin  :'./ts/admin.ts'
 //        script :'./ts/script.ts'
-        mypage :'./ts/mypage.ts'
+//        admin  :'./ts/admin.ts'
+//        mypage :'./ts/mypage.ts'
+        owner :'./ts/owner.ts'
+//        carrier :'./ts/carrier.ts'
     },
     output: {
         filename: '[name].js'

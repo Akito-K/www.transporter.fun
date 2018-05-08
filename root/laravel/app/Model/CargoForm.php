@@ -30,4 +30,8 @@ class CargoForm extends Model
 
         return $data;
     }
+
+    public static function getNames(){
+        return CargoForm::pluck('name', 'form_id')->toArray();
+    }
 }

@@ -43,6 +43,8 @@ gulp.task('watch', function() {
         nic+'/css/scss/admin/*.scss',
         nic+'/css/scss/mypage/*.scss',
         nic+'/css/scss/common/*.scss',
+        nic+'/css/scss/owner/*.scss',
+        nic+'/css/scss/carrier/*.scss',
     ], ['sass']);
 });
 

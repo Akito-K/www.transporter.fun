@@ -8,6 +8,8 @@
     "files": [
         "ts/script.ts",
         "ts/signup.ts",
+        "ts/carrier.ts",
+        "ts/owner.ts",
         "ts/mypage.ts",
         "ts/admin.ts",
         "ts/address.ts",

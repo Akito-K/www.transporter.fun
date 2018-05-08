@@ -71,6 +71,7 @@
                     <li class="header">MENU</li>
 
                     <!-- Optionally, you can add icons to the links -->
+                    @include('include.navi')
                     @include('include.mypage.navi')
 
                 </ul><!-- /.sidebar-menu -->

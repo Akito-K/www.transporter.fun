@@ -21,16 +21,35 @@ class Address extends Model
     }
 
     public static function getDatas($user_id){
+        $ary = [];
         $datas = UserToAddress::where('user_to_addresses.user_id', $user_id)
                                 ->join('addresses', 'user_to_addresses.address_id', '=', 'addresses.address_id')
                                 ->select('addresses.*')
                                 ->get();
+
+        if(!empty($datas)){
+            foreach($datas as $k => $data){
+                $data->tels = \Func::telFormatDecode($data->tel);
+                $ary[] = $data;
+            }
+        }
+
+        return $ary;
+    }
+
+    public static function getNames($user_id){
+        $datas = UserToAddress::where('user_to_addresses.user_id', $user_id)
+                                ->join('addresses', 'user_to_addresses.address_id', '=', 'addresses.address_id')
+                                ->select('addresses.*')
+                                ->pluck('addresses.name', 'addresses.address_id')
+                                ->toArray();
 
         return $datas;
     }
 
     public static function getData($unique_id){
         $data = Address::where('address_id', $unique_id)->first();
+
         if(!$data){
             $data = new \stdClass();
             $data->id = NULL;
@@ -43,6 +62,9 @@ class Address extends Model
             $data->zip1 = NULL;
             $data->zip2 = NULL;
             $data->tel = NULL;
+            $data->tels = [ 1 => '', 2 => '', 3 => '' ];
+        }else{
+            $data->tels = \Func::telFormatDecode($data->tel);
         }
 
         return $data;

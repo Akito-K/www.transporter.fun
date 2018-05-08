@@ -1,0 +1,79 @@
+// 共通
+@media all {
+    .order {
+        &__block {
+            margin-bottom: 20px;
+        }
+        &__boxes {
+        }
+        &__box {
+            margin-bottom: 30px;
+            &.initial-close {
+                display: none;
+            }
+            &__title {
+                @include fsize(20);
+                color: #333;
+                background-color: #eee;
+                margin-left: 40px;
+                width: calc(100% - 40px);
+                padding: 8px;
+                position: relative;
+                &::before {
+                    position: absolute;
+                    top: 5px;
+                    left: -40px;
+                    display: block;
+                    width: 30px;
+                    height: 30px;
+                    text-align: center;
+                    line-height: 30px;
+                    border-radius: 50%;
+                    background-color: #999;
+                    color: #fff;
+                    font-size: 20px;
+                    font-family: "FontAwesome";
+                    -webkit-transition-property:-webkit-transform;
+                    -webkit-transition-duration:.3s;
+                    transition-property:-webkit-transform;
+                    transition-duration:.3s;
+                }
+                &[data-open="1"] {
+                    &::before {
+                        content: "\f068";
+                   }
+                }
+                &[data-open="0"] {
+                    &::before {
+                        content: "\f067";
+                         -webkit-transform: rotate(90deg);
+                        transform: rotate(90deg);
+                    }
+                }
+            }
+
+            .radiobox--span {
+                span {
+                    padding: 0 8px;
+                }
+            }
+        }
+    }
+}
+// スマホ
+@media(max-width: 767px) {
+    .order {
+        &__box {
+            padding: 10px 0;
+            border-bottom: 1px dotted #bbb;
+        }
+    }
+}
+// TAB・PC
+@media(min-width: 768px){
+    .order {
+        &__box {
+            padding: 10px 0;
+        }
+    }
+}

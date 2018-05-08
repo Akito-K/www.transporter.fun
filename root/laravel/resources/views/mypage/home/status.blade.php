@@ -7,17 +7,17 @@
 
             <div class="status__block">
                 <div class="status__box">
-                    <ul class="status__lists">
-                        <li class="status__list">表示名</li>
-                        <li class="status__list">{{ $me->name }}</li>
+                    <ul class="lists">
+                        <li class="list list-title">表示名</li>
+                        <li class="list list-value">{{ $me->name }}</li>
                     </ul>
-                    <ul class="status__lists">
-                        <li class="status__list">荷主登録</li>
-                        <li class="status__list">無料会員</li>
+                    <ul class="lists">
+                        <li class="list list-title">荷主登録</li>
+                        <li class="list list-value">無料会員</li>
                     </ul>
-                    <ul class="status__lists">
-                        <li class="status__list">運送会社登録</li>
-                        <li class="status__list">トライアル会員【残り12日】</li>
+                    <ul class="lists">
+                        <li class="list list-title">運送会社登録</li>
+                        <li class="list list-value">トライアル会員【残り12日】</li>
                     </ul>
                 </div>
             </div>

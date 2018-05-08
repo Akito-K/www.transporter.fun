@@ -98,7 +98,7 @@ class signupController extends Controller
     public function edit($signup_key, Request $request){
         $pagemeta = Pagemeta::getPagemeta('CM-SU-');
         $prefs = Pref::getNames();
-        $prefs = \Func::array_append($prefs, [ 0 => '---' ], true);
+        \Func::array_append($prefs, [ 0 => '---' ], true);
         $data = Signup::getData($signup_key);
 
         return view('common.signup.edit', compact('signup_key', 'prefs', 'pagemeta', 'data'));
