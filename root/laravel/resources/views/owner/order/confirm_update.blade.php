@@ -3,10 +3,10 @@
 
 <div class="box">
     <div class="box-body">
-        <h2 class="page-header">案件登録</h2>
+        <h2 class="page-header">案件編集</h2>
 
         <div class="order__block">
-            {!! Form::open(['url' => 'owner/order/insert', 'class' => 'order__boxes']) !!}
+            {!! Form::open(['url' => 'owner/order/update', 'class' => 'order__boxes']) !!}
 
                 <h4 class="order__box__title trigAccordOrderBox" data-open="1">基本情報</h4>
                 <div class="order__box bulletAccordOrderBox">
@@ -198,7 +198,7 @@
         </div>
 
         <p>
-            <a href="{{ url('') }}/owner/order/create" class="btn btn-block btn-primary">入力に戻る</a>
+            <a href="{{ url('') }}/owner/order/{{ $data->order_id }}/edit" class="btn btn-block btn-primary">編集に戻る</a>
         </p>
 
     </div>

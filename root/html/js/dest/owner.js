@@ -11264,7 +11264,8 @@ var Order;
                 var count = Number($('#paramCount').val());
                 var weight = Number($('#paramWeight').val());
                 var total = count * weight;
-                $('#bulletTotalWeight').html(func_1.default.numberFormat(total));
+                $('span.bulletTotalWeight').html(func_1.default.numberFormat(total));
+                $('input.bulletTotalWeight').val(total);
             });
         }
         return MyOrder;

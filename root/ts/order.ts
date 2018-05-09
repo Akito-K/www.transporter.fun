@@ -32,7 +32,8 @@ namespace Order {
                 const count: number = Number($('#paramCount').val());
                 const weight: number = Number($('#paramWeight').val());
                 const total = count * weight;
-                $('#bulletTotalWeight').html( Func.numberFormat(total) );
+                $('span.bulletTotalWeight').html( Func.numberFormat(total) );
+                $('input.bulletTotalWeight').val( total );
             });
 
         }

@@ -601,12 +601,36 @@ class MyFunctions
         }
      }
 
-     public static function getAddress($data){
-        if( isset($data->pref_code) && isset($data->city) && isset($data->address) ){
-            $pref = Pref::getData( $data->pref_code );
-
-            return $pref->name.' '.$data->city.' '.$data->address;
+     public static function getAddress($data, $views=['pref', 'city', 'address']){
+        $str = "";
+        $bodies = [];
+        if( in_array('zip', $views) ){
+            if( isset($data->zip1) && isset($data->zip2) ){
+                $bodies[] = '〒 '.$data->zip1.' - '.$data->zip2;
+            }
         }
+        if( in_array('pref', $views) ){
+            if( isset($data->pref_code) ){
+                $pref = Pref::getData( $data->pref_code );
+                $bodies[] = $pref->name;
+            }
+        }
+        if( in_array('city', $views) ){
+            if( isset($data->city) ){
+                $bodies[] = $data->city;
+            }
+        }
+        if( in_array('address', $views) ){
+            if( isset($data->address) ){
+                $bodies[] = $data->address;
+            }
+        }
+
+        if(!empty($bodies)){
+            $str = implode('', $bodies);
+        }
+
+        return $str;
      }
 
 

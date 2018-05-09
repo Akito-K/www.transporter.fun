@@ -40,7 +40,6 @@ use App\Model\UserToAuthority;
 use App\Model\Cargo;
 use App\Model\CargoValue;
 use App\Model\OrderToCargo;
-use App\Model\CargoCategory;
 use App\Model\CargoName;
 use App\Model\CargoForm;
 use App\Model\EvaluationStar;
@@ -99,7 +98,6 @@ class DatabaseSeeder extends Seeder
         //$this->CargoSeeder();
         //$this->CargoValueSeeder();
         //$this->OrderToCargoSeeder();
-        $this->CargoCategorySeeder();
         $this->CargoNameSeeder();
         $this->CargoFormSeeder();
         //$this->EvaluationStarSeeder();
@@ -367,21 +365,6 @@ class DatabaseSeeder extends Seeder
             if(!empty($datas)){
                 foreach($datas as $data){
                     Pref::create($data);
-                }
-            }
-        }
-    }
-
-    public function CargoCategorySeeder(){
-        $table_name = 'cargo_categories';
-
-        DB::table( $table_name )->delete();
-        if( isset( $this->datas[ $table_name ])){
-            $datas = $this->datas[ $table_name ];
-
-            if(!empty($datas)){
-                foreach($datas as $data){
-                    CargoCategory::create($data);
                 }
             }
         }

@@ -5,33 +5,46 @@
     <div class="box-body">
         <h2 class="page-header">案件情報</h2>
 
-        <div class="order__block">
-            <div class="order__boxes">
-                @if(!empty($datas))
-                @foreach($datas as $k => $data)
-                <div class="order__box order__box--list">
-                    <h5 class="order__box__title">{!! sprintf('%02d', $k+1) !!} 「{{ $data->name }}」</h5>
-                    <p class="order__box__body">
-                        〒{!! \Func::getZipCode($data) !!}<br>
-                        {!! \Func::getAddress($data) !!}<br>
-                        {{ $data->sei }} {{ $data->mei }}<span class="order__box__body__ate"> 宛</span>
-                    </p>
-                    <p class="order__box__buttons">
-                        <a href="{{ url('') }}/owner/order/{{ $data->order_id }}/detail" class="btn btn-primary btn-sm">詳細</a>
-                        <a href="{{ url('') }}/owner/order/{{ $data->order_id }}/edit" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> 編集</a>
-                        @if( $data->name != '登録住所')
-                        <a href="{{ url('') }}/owner/order/{{ $data->order_id }}/delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> 削除</a>
-                        @endif
-                    </p>
-                </div>
-                @endforeach
-                @endif
+        <div class="orders__block">
+            <p><a href="{{ url('') }}/owner/order/create" class="btn btn-warning btn-block">新しく登録する</a></p>
+
+            <div class="orders__table-wrap">
+                <table class="orders__table">
+                    <tr>
+                        <th>No</th>
+                        <th>案件名</th>
+                        <th>発送地</th>
+                        <th>到着地</th>
+                        <th>見積依頼日時</th>
+                        <th>募集終了日時</th>
+                        <th>ステータス</th>
+                        <th>見積り数</th>
+                        <th>各種操作</th>
+                    </tr>
+
+                    @if(!empty($datas))
+                    @foreach($datas as $k => $data)
+                    <tr>
+                        <td>{{ $k+1 }}</td>
+                        <td>{{ $data->name }}</td>
+                        <td>{!! \Func::getAddress($data->send, ['pref', 'city']) !!}</td>
+                        <td>{!! \Func::getAddress($data->arrive, ['pref', 'city']) !!}</td>
+                        <td>{!! \Func::dateFormat($data->estimate_start_at, 'y/m/d H:i') !!}</td>
+                        <td>{!! \Func::dateFormat($data->estimate_close_at, 'y/m/d H:i') !!}</td>
+                        <td>{{ $status[$data->status_id] }}</td>
+                        <td>0</td>
+                        <td>
+                            @include('include.buttons.order', ['data' => $data])
+                        </td>
+                    </tr>
+                    @endforeach
+                    @endif
+                </table>
             </div>
         </div>
     </div>
 
 </div>
 
-<p><a href="{{ url('') }}/owner/order/create" class="btn btn-warning btn-block">新しく登録する</a></p>
 
 @endsection

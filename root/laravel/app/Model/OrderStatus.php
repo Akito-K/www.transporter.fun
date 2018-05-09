@@ -25,6 +25,10 @@ class OrderStatus extends Model
         return $datas;
     }
 
+    public static function getNames(){
+        return OrderStatus::pluck('name', 'status_id')->toArray();
+    }
+
     public static function getData($unique_id){
         $data = OrderStatus::where('status_id', $unique_id)->first();
 

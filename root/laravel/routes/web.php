@@ -97,8 +97,10 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/owner/order/confirm',                     'owner\orderController@confirm');
             Route::post('/owner/order/insert',                      'owner\orderController@insert');
             Route::get ('/owner/order/{order_id}/edit',             'owner\orderController@edit');
+            Route::post('/owner/order/{order_id}/confirm',          'owner\orderController@confirmUpdate');
             Route::post('/owner/order/update',                      'owner\orderController@update');
             Route::get ('/owner/order/{order_id}/delete',           'owner\orderController@delete');
+            Route::get ('/owner/order/{order_id}/duplicate',        'owner\orderController@duplicate');
         });
 
         // CARRIER = = = = = = = = = = = =
@@ -163,14 +165,6 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/admin/order_status/{status_id}/edit',             'admin\orderStatusController@edit');
             Route::post('/admin/order_status/update',                       'admin\orderStatusController@update');
             Route::get ('/admin/order_status/{status_id}/delete',           'admin\orderStatusController@delete');
-            // マスタ：CargoCategory
-            Route::get ('/admin/cargo_category',                            'admin\cargoCategoryController@showList');
-            Route::get ('/admin/cargo_category/{category_id}/detail',       'admin\cargoCategoryController@showDetail');
-            Route::get ('/admin/cargo_category/create',                     'admin\cargoCategoryController@create');
-            Route::post('/admin/cargo_category/insert',                     'admin\cargoCategoryController@insert');
-            Route::get ('/admin/cargo_category/{category_id}/edit',         'admin\cargoCategoryController@edit');
-            Route::post('/admin/cargo_category/update',                     'admin\cargoCategoryController@update');
-            Route::get ('/admin/cargo_category/{category_id}/delete',       'admin\cargoCategoryController@delete');
             // マスタ：CargoName
             Route::get ('/admin/cargo_name',                                'admin\cargoNameController@showList');
             Route::get ('/admin/cargo_name/{name_id}/detail',               'admin\cargoNameController@showDetail');
@@ -203,6 +197,28 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/admin/pref/{pref_code}/edit',                     'admin\prefController@edit');
             Route::post('/admin/pref/update',                               'admin\prefController@update');
             Route::get ('/admin/pref/{pref_code}/delete',                   'admin\prefController@delete');
+
+            // 案件登録オプション：希望車種
+            Route::get ('/admin/order_request_option/car',                              'admin\orderRequestOptionController@showCarList');
+            Route::get ('/admin/order_request_option/car/create',                       'admin\orderRequestOptionController@createCar');
+            Route::post('/admin/order_request_option/car/insert',                       'admin\orderRequestOptionController@insertCar');
+            Route::get ('/admin/order_request_option/car/{option_id}/edit',             'admin\orderRequestOptionController@editCar');
+            Route::post('/admin/order_request_option/car/update',                       'admin\orderRequestOptionController@updateCar');
+            Route::get ('/admin/order_request_option/car/{option_id}/delete',           'admin\orderRequestOptionController@deleteCar');
+            // 案件登録オプション：希望設備
+            Route::get ('/admin/order_request_option/equipment',                        'admin\orderRequestOptionController@showEquipmentList');
+            Route::get ('/admin/order_request_option/equipment/create',                 'admin\orderRequestOptionController@createEquipment');
+            Route::post('/admin/order_request_option/equipment/insert',                 'admin\orderRequestOptionController@insertEquipment');
+            Route::get ('/admin/order_request_option/equipment/{option_id}/edit',       'admin\orderRequestOptionController@editEquipment');
+            Route::post('/admin/order_request_option/equipment/update',                 'admin\orderRequestOptionController@updateEquipment');
+            Route::get ('/admin/order_request_option/equipment/{option_id}/delete',     'admin\orderRequestOptionController@deleteEquipment');
+            // 案件登録オプション：希望装備
+            Route::get ('/admin/order_request_option/other',                            'admin\orderRequestOptionController@showOtherList');
+            Route::get ('/admin/order_request_option/other/create',                     'admin\orderRequestOptionController@createOther');
+            Route::post('/admin/order_request_option/other/insert',                     'admin\orderRequestOptionController@insertOther');
+            Route::get ('/admin/order_request_option/other/{option_id}/edit',           'admin\orderRequestOptionController@editOther');
+            Route::post('/admin/order_request_option/other/update',                     'admin\orderRequestOptionController@updateOther');
+            Route::get ('/admin/order_request_option/other/{option_id}/delete',         'admin\orderRequestOptionController@deleteOther');
 
             // ログ
             Route::get ('/admin/log/{page?}',                       'admin\logController@showList');

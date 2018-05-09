@@ -1,0 +1,45 @@
+// 共通
+@media all {
+    .orders {
+        &__block {
+            margin-bottom: 20px;
+        }
+        &__table-wrap {
+        }
+        &__btn {
+            margin: 2px 0;
+        }
+    }
+}
+// スマホ
+@media(max-width: 767px) {
+    .orders {
+        &__table-wrap {
+            overflow-x: scroll;
+            white-space: nowrap;
+            &::-webkit-scrollbar {
+              height: 5px;
+            }
+            &::-webkit-scrollbar-track {
+                margin: 0 2px;
+                background: #ccc;
+                border-radius: 5px;
+            }
+            &::-webkit-scrollbar-thumb {
+                border-radius: 3px;
+                background: #666;
+            }
+        }
+        &__table {
+            th,
+            td {
+                font-size: 90%;
+            }
+        }
+    }
+}
+// TAB・PC
+@media(min-width: 768px){
+    .orders {
+    }
+}

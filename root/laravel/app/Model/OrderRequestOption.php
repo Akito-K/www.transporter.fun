@@ -12,16 +12,29 @@ class OrderRequestOption extends Model
     protected $dates = ['deleted_at'];
     protected $guarded = ['id'];
 
-    private static $umu = [0 => '無', 1 => '有'];
+    private static $umu = [0 => '不要', 1 => '要'];
 
     public static function getUmu(){
         return OrderRequestOption::$umu;
+    }
+
+    public static function getNewId(){
+        $date_at = new \Datetime();
+        $new_id = 'ORO-'.$date_at->format('ymd-His-').\Func::getRandStr("Aa0", 5);
+
+        return $new_id;
     }
 
     public static function getDatas(){
         $datas = OrderRequestOption::get();
 
         return $datas;
+    }
+
+    public static function getData($option_id){
+        $data = OrderRequestOption::where('option_id', $option_id)->first();
+
+        return $data;
     }
 
     public static function getCarNamesNest($datas){
@@ -74,6 +87,12 @@ class OrderRequestOption extends Model
         }
 
         return $ary;
+    }
+
+    public static function getTypeDatas($type){
+        $datas = OrderRequestOption::where('type', $type)->get();
+
+        return $datas;
     }
 
 }
