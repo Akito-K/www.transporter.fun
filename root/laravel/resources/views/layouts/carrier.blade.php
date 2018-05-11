@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="{{ url('') }}/css/AdminLTE/AdminLTE.min.css" rel="stylesheet">
     <link href="{{ url('') }}/css/AdminLTE/all_skins.min.css" rel="stylesheet">
-    <link href="{{ url('') }}/css/dest/mypage.css" rel="stylesheet">
+    <link href="{{ url('') }}/css/dest/carrier.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -72,7 +72,7 @@
 
                     <!-- Optionally, you can add icons to the links -->
                     @include('include.navi')
-                    @include('include.mypage.navi')
+                    @include('include.carrier.navi')
 
                 </ul><!-- /.sidebar-menu -->
             </section>
@@ -122,14 +122,21 @@
     <script src="{{ url('') }}/js/plugins/jquery-2.1.4.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ url('') }}/js/plugins/jquery-ui.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'></script>
 
     <!-- Bootstrap 3.3.5 -->
     <script src="{{ url('') }}/js/AdminLTE/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
     <script src="{{ url('') }}/js/AdminLTE/app.min.js"></script>
-    <script src="{{ url('') }}/js/dest/mypage.js"></script>
+    <script src="{{ url('') }}/js/dest/carrier.js"></script>
 
     <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+
+    <script>
+        $(function(){
+            $('.draggable').draggable();
+        });
+    </script>
 
 </body>
 </html>

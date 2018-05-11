@@ -19,6 +19,11 @@
     img {
         height: auto;
     }
+    table {
+        .align-right {
+            text-align: right;
+        }
+    }
 
     .img-fix {
         width: 100%;
@@ -98,9 +103,59 @@
         &-100 { width: 100%;}
     }
 
+    .stars {
+        display: inline-block;
+        position: relative;
+        padding: 0;
+        margin: 0;
+        width: 62px;
+        height: 13px;
+        &--val {
+            font-size: 9px;
+        }
+    }
+    .star {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        color: #000;
+        z-index: 10;
+        text-shadow: 0px 0px 0.1px #000;
+        font-size: 12px;
+        &--after {
+            color: #ff0;
+            overflow: hidden;
+            width: 0%;
+            height: 100%;
+            z-index: 11;
+        }
+    }
+
 }
 // スマホ
 @media(max-width: 767px) {
+    .table-scroll-wrap {
+        overflow-x: scroll;
+        white-space: nowrap;
+        &::-webkit-scrollbar {
+          height: 5px;
+        }
+        &::-webkit-scrollbar-track {
+            margin: 0 2px;
+            background: #ccc;
+            border-radius: 5px;
+        }
+        &::-webkit-scrollbar-thumb {
+            border-radius: 3px;
+            background: #666;
+        }
+    }
+    .table-scroll {
+        width: 100%;
+    }
+
     .lists {
         padding: 5px 0;
     }

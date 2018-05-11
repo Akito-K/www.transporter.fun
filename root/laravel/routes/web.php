@@ -90,6 +90,12 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/owner',                                   'owner\homeController@dashboard');
             Route::get ('/owner/dashboard',                         'owner\homeController@dashboard');
 
+            // 見積依頼
+            Route::get ('/owner/order/request/{order_id}',          'owner\order\requestController@create');
+            Route::post('/owner/order/request/confirm',             'owner\order\requestController@confirm');
+            Route::post('/owner/order/request/execute',             'owner\order\requestController@execute');
+            Route::get ('/owner/order/request/{order_id}/cancel',   'owner\order\requestController@cancel');
+
             // 案件
             Route::get ('/owner/order',                             'owner\orderController@showList');
             Route::get ('/owner/order/{order_id}/detail',           'owner\orderController@showDetail');
@@ -107,6 +113,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['middleware' => ['carrier']], function () {
             Route::get ('/carrier',                                 'carrier\homeController@dashboard');
             Route::get ('/carrier/dashboard',                       'carrier\homeController@dashboard');
+
+            // 見積依頼
+            Route::get ('/carrier/request',                         'carrier\requestController@showList');
+            Route::get ('/carrier/request/{order_id}/detail',       'carrier\requestController@showDetail');
+
+            // 見積作成
+            Route::get ('/carrier/order/estimate/{order_id}/create',    'carrier\order\estimateController@create');
         });
 
         // ADMIN = = = = = = = = = = = =
@@ -237,6 +250,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::post('/ajax/upload_file',                            'AjaxController@uploadFile');
 Route::post('/ajax/quote_user_account',                     'AjaxController@quoteUserAccount');
 Route::post('/ajax/quote_address',                          'AjaxController@quoteAddress');
-//Route::post('/ajax/add_address',                            'AjaxController@addAddress');
+Route::post('/ajax/add_estimate_item',                      'AjaxController@addEstimateItem');
+//Route::post('/ajax/add_estimate_item',                      'AjaxController@addEstimateItem');
 
 //Route::get ('/cron/run', 'cronController@logWeather');

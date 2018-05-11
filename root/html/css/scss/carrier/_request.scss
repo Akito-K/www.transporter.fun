@@ -1,0 +1,15 @@
+// 共通
+@media all {
+    .carrier {
+    }
+}
+// スマホ
+@media(max-width: 767px) {
+    .carrier {
+    }
+}
+// TAB・PC
+@media(min-width: 768px){
+    .carrier {
+    }
+}

@@ -25,4 +25,18 @@ class Estimate extends Model
         return $data;
     }
 
+    public static function getCount($order_id){
+        return Estimate::where('order_id', $order_id)->count();
+    }
+
+    public static function getMyEstimate($order_id, $carrier_id=NULL){
+        $carrier_id = $carrier_id?: \Auth::user()->carrier_id;
+        $data = Estimate::where('order_id', $order_id)
+                            ->where('carrier_id', $carrier_id)
+                            ->orderBy('id', 'DESC')
+                            ->first();
+
+        return $data;
+    }
+
 }

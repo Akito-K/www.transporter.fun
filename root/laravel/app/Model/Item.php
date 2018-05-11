@@ -19,6 +19,12 @@ class Item extends Model
         return $new_id;
     }
 
+    public static function getDatas($carrier_id){
+        $datas = Item::where('carrier_id', $carrier_id)->get();
+
+        return $datas;
+    }
+
     public static function getData($unique_id){
         $data = Item::where('item_id', $unique_id)->first();
 

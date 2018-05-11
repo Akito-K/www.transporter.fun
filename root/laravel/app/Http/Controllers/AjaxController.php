@@ -83,6 +83,17 @@ class AjaxController extends Controller
         return json_encode( $data );
     }
 
+    public function addEstimateItem(Request $request){
+        $latest_num = $request['latest_num'];
+        $html_options = $request['html_options'];
+        $num = $latest_num + 1;
+
+        return  json_encode([
+            'view' => view('include.carrier.estimate_item', compact('num', 'html_options') )->render(),
+            'new_num' => $num,
+            ]);
+    }
+
 /*
     public function getUnreadCount(Request $request){
         $count = MessageUnopened::where('receiver_user_id', \Auth::user()->user_id)->count();

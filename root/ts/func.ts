@@ -95,5 +95,14 @@ class Func {
         return false;
     }
 
+    static number( val ): number {
+        val = val.replace(/[^0-9]/g, '');
+        if( isNaN(val) ){
+            return 0;
+        }else{
+            return Number(val);
+        }
+    }
+
 }
 export default Func;

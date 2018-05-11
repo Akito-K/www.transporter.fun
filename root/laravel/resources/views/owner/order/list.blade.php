@@ -29,12 +29,12 @@
                         <td>{{ $data->name }}</td>
                         <td>{!! \Func::getAddress($data->send, ['pref', 'city']) !!}</td>
                         <td>{!! \Func::getAddress($data->arrive, ['pref', 'city']) !!}</td>
-                        <td>{!! \Func::dateFormat($data->estimate_start_at, 'y/m/d H:i') !!}</td>
-                        <td>{!! \Func::dateFormat($data->estimate_close_at, 'y/m/d H:i') !!}</td>
+                        <td>{!! \Func::dateFormat($data->estimate_start_at, 'y/n/j H:i') !!}</td>
+                        <td>{!! \Func::dateFormat($data->estimate_close_at, 'y/n/j H:i') !!}</td>
                         <td>{{ $status[$data->status_id] }}</td>
-                        <td>0</td>
+                        <td>{{ $data->estimate_count }} 件</td>
                         <td>
-                            @include('include.buttons.order', ['data' => $data])
+                            @include('include.buttons.owner.order', ['data' => $data])
                         </td>
                     </tr>
                     @endforeach

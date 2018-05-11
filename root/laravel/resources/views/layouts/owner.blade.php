@@ -122,7 +122,7 @@
     <script src="{{ url('') }}/js/plugins/jquery-2.1.4.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ url('') }}/js/plugins/jquery-ui.min.js"></script>
-
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="{{ url('') }}/js/AdminLTE/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
@@ -130,6 +130,12 @@
     <script src="{{ url('') }}/js/dest/owner.js"></script>
 
     <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+
+    <script>
+        $(function(){
+            $('.draggable').draggable();
+        });
+    </script>
 
 </body>
 </html>

@@ -17,4 +17,10 @@ class OrderToCargo extends Model
 
         return $datas;
     }
+
+    public static function getCargoId($order_id){
+        $data = OrderToCargo::where('order_id', $order_id)->orderBy('id', 'DESC')->first();
+
+        return $data? $data->cargo_id: '';
+    }
 }

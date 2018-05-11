@@ -141,7 +141,7 @@
                                 </li>
                                 @endif
                                 @elseif( isset($data->option_equipments[$key]) )
-                                <li class="param param-40 param-left">
+                                <li class="param param-40 param">
                                     {{ $umu[ $data->option_equipments[$key] ] }}
                                 </li>
                                 @endif
@@ -164,7 +164,7 @@
                                 <li class="param param-80 param-left">
                                     {{ $name }}
                                 </li>
-                                <li class="param param-40 param-left">
+                                <li class="param param-40 param">
                                     {{ $umu[ $data->option_others[$key] ] }}
                                 </li>
                             </ul>

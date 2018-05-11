@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Model\MyUser;
 
 class Owner extends Model
 {
@@ -21,6 +22,12 @@ class Owner extends Model
 
     public static function getData($unique_id){
         $data = Owner::where('owner_id', $unique_id)->first();
+
+        return $data;
+    }
+
+    public static function getUser($owner_id){
+        $data = MyUser::where('owner_id', $owner_id)->first();
 
         return $data;
     }

@@ -70,6 +70,7 @@ class Pagemeta extends Model
     }
 
     public static function format($datas){
+//        \Func::var_dump($datas);exit;
         $datas = $datas['route'];
         $ary = [];
         if(!empty($datas)){

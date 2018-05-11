@@ -6,6 +6,11 @@
         }
         &__table-wrap {
         }
+        &__table {
+            &__owner {
+                width: 180px;
+            }
+        }
         &__btn {
             margin: 2px 0;
         }

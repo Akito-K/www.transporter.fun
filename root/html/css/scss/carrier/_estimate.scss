@@ -1,0 +1,137 @@
+// 共通
+@media all {
+    .estimate {
+        &__to-item {
+            margin: 10px 0;
+            text-align: right;
+        }
+        &__block {
+            margin-top: 20px;
+            margin-bottom: 50px;
+        }
+        &__table {
+            th {
+                width: 16.6%;
+                height: 0;
+                padding: 0;
+                border: none;
+            }
+            &__cell {
+                padding: 2px 2px;
+                border: none;
+                &--title {
+                    text-align: center;
+                    padding: 8px;
+                    font-weight: bold;
+                    font-size: 115%;
+                }
+                &--line {
+                    border-bottom: 1px solid #ccc;
+                }
+                &--space {
+                    height: 30px;
+                }
+                &--quote {
+                    padding-left: 10px;
+                }
+                ul {
+                    margin: 0;
+                }
+            }
+            &__margin-top {
+                .estimate__table__cell {
+                    padding-top: 10px;
+                }
+            }
+            &__margin-bottom {
+                .estimate__table__cell {
+                    padding-bottom: 10px;
+                }
+            }
+
+            &__buttons {
+            }
+            &__button {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                font-size: 88%;
+                text-align: center;
+                line-height: 20px;
+                border-radius: 50%;
+                color: #fff;
+                cursor: pointer;
+                &--add {
+                    background-color: #d9534f;
+                    &:hover {
+                        background-color: #c9302c;
+                    }
+                }
+                &--remove {
+                    background-color: #337ab7;
+                    &:hover {
+                        background-color: #286090;
+                    }
+                }
+            }
+        }
+        &__theader {
+            &__name {
+                padding: 8px 0px;
+                color: #fff;
+                &:first-child {
+                    padding-left: 8px;
+                }
+            }
+        }
+
+        // セルホバーの打ち消し
+        &__table {
+            tr {
+                .estimate__table__cell {
+                    background-color: #fff;
+                }
+                .estimate__theader__name {
+                    background-color: #3C50CC;
+                }
+            }
+            tr:hover {
+                .estimate__table__cell {
+                    background-color: #fff;
+                }
+                .estimate__theader__name {
+                    background-color: #3C50CC;
+                }
+            }
+        }
+    }
+}
+// スマホ
+@media(max-width: 767px) {
+    .estimate {
+        &__block {
+            padding: 10px;
+//            max-width: 800px;
+//            margin-right: 50px;
+        }
+        &__table {
+            width: 180%;
+            border: 1px solid #ccc;
+        }
+    }
+}
+// TAB・PC
+@media(min-width: 768px){
+    .estimate {
+        &__to-item {
+            max-width: 800px;
+            margin-right: 50px;
+        }
+        &__block {
+            border: 1px solid #666;
+            padding: 10px;
+            max-width: 800px;
+            margin-right: 50px;
+        }
+    }
+}

@@ -4,12 +4,14 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Model\Owner;
+use App\Model\Estimate;
 
 class Order extends Model
 {
     use softDeletes;
     protected $table = 'orders';
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'send_at', 'arrive_at', 'estimate_start_at', 'estimate_close_at'];
     protected $guarded = ['id'];
 
 
@@ -23,11 +25,11 @@ class Order extends Model
     }
 
     private static $timezones = [
-        '0' => '未定',
-        '1' => '午前中',
-        '2' => '12～16時',
-        '3' => '16～20時',
-        '4' => '夜間',
+        0 => '未定',
+        1 => '午前中',
+        2 => '12～16時',
+        3 => '16～20時',
+        4 => '夜間',
     ];
 
     public static function getTimezones(){
@@ -50,6 +52,7 @@ class Order extends Model
                 $data->arrive = Order::getArriveAddress($data);
                 $data->send_tels = \Func::telFormatDecode($data->send_tel);
                 $data->arrive_tels = \Func::telFormatDecode($data->arrive_tel);
+                $data->estimate_count = Estimate::getCount($data->order_id);
                 $ary[] = $data;
             }
         }
@@ -65,6 +68,26 @@ class Order extends Model
         $data->arrive_tels = \Func::telFormatDecode($data->arrive_tel);
 
         return $data;
+    }
+
+    public static function getEstimatableDatas(){
+        $ary = [];
+        $datas = Order::where('status_id', 'ORD-STS-06')->orderBy('estimate_close_at', 'ASC')->get();
+        if(!empty($datas)){
+            foreach($datas as $data){
+                $data->send = Order::getSendAddress($data);
+                $data->arrive = Order::getArriveAddress($data);
+                $data->send_tels = \Func::telFormatDecode($data->send_tel);
+                $data->arrive_tels = \Func::telFormatDecode($data->arrive_tel);
+                $data->owner = Owner::getData($data->owner_id);
+                $data->user = Owner::getUser($data->owner_id);
+                $data->estimate_count = Estimate::getCount($data->order_id);
+                $data->my_estimate = Estimate::getMyEstimate($data->order_id);
+                $ary[] = $data;
+            }
+        }
+
+        return $ary;
     }
 
     public static function getSendAddress($data){
@@ -95,6 +118,46 @@ class Order extends Model
         ];
 
         return (object) $ary;
+    }
+
+    public static function getOrderRequestResults($data, $option_car_names, $option_equipments, $option_other_names){
+        $rst = new \stdClass();
+        $rst->car = '';
+        $rst->equipment = '';
+        $rst->other = '';
+
+        if( isset($option_car_names[ $data->option_car ]) ){
+            $rst->car = $option_car_names[ $data->option_car ];
+        }
+
+        $ary = [];
+        if(!empty($option_equipments)){
+            foreach($option_equipments as $key => $equipment){
+                if( isset($data->option_equipments[$key]) && $data->option_equipments[$key] > 0 ){
+                    $str = $equipment->name.' x '.$data->option_equipments[$key];
+                    $str .= $equipment->unit !== NULL ? $equipment->unit: '個';
+                    $ary[] = $str;
+                }
+            }
+        }
+        if(!empty($ary)){
+            $rst->equipment = implode(' / ', $ary);
+        }
+
+        $ary = [];
+        if(!empty($option_others)){
+            foreach($option_others as $key => $other){
+                if( isset($data->option_others[$key]) && $data->option_others[$key] > 0 ){
+                    $str = $other->name.' x 1個';
+                    $ary[] = $str;
+                }
+            }
+        }
+        if(!empty($ary)){
+            $rst->other = implode(' / ', $ary);
+        }
+
+        return $rst;
     }
 
 }

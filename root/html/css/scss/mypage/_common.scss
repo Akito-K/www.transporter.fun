@@ -44,7 +44,32 @@
         &--70 { width: 70%; }
         &--80 { width: 80%; }
         &--90 { width: 90%; }
+
+        &--sm {
+            padding: 6px 6px;
+        }
+        &--xsm {
+            height: 28px;
+            padding: 0px 4px;
+            border-radius: 2px;
+        }
+        &--xxsm {
+            height: 24px;
+            padding: 0px 4px;
+            border-radius: 1px;
+        }
+        &.readonly {
+            background-color: #ccc;
+        }
     }
+
+    .btn-xsm {
+        padding: 1px 9px;
+        font-size: 11px;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+
     .not-btn {
         background: none;
         border: none;

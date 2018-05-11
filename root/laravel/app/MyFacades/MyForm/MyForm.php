@@ -80,6 +80,29 @@ class MyForm
         return $body;
     }
 
+    // 時間選択肢
+    public static function selectHour($selected){
+        $body = '';
+        for($i=0; $i<=23; $i++){
+            $sel = ($i == $selected)? " selected": "";
+            $body .= '<option value="'.$i.'"'.$sel.'>'.$i.'</option>';
+        }
+
+        return $body;
+    }
+
+    // 分選択肢
+    public static function selectMinutes($selected){
+        $body = '';
+        for($j=0; $j<=3; $j++){
+            $i = $j * 15;
+            $sel = ($i == $selected)? " selected": "";
+            $body .= '<option value="'.$i.'"'.$sel.'>'.$i.'</option>';
+        }
+
+        return $body;
+    }
+
     /**
      * @param array (
      *     'url': string,
