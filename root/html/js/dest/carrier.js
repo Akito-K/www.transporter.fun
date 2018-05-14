@@ -10575,7 +10575,7 @@ $(function () {
     // 評価★
     var STAR = new star_1.default.MyStar();
     // 見積もり
-    var ESTIMATE = new estimate_1.default.MyEstimate();
+    var ESTIMATE = new estimate_1.default.MyEstimate(STAR);
     // コンタクトボード
     //    const BOARD = new Board.MyBoard();
     // 顧客
@@ -11156,7 +11156,7 @@ var Quote;
                     return false;
                 }
             });
-            // 選択しから住所情報を引用
+            // 選択肢から住所情報を引用
             $('.trigQuoteAddress').click(function () {
                 if (window.confirm('入力値を消して選択の住所を使用しますか？')) {
                     var type = $(this).data('type');
@@ -11306,14 +11306,20 @@ var Star;
         ) {
             //let self = this;
             if ($('.trigStar').length > 0) {
-                for (var i = 0; i < $('.trigStar').length; i++) {
-                    var obj = $('.trigStar').eq(i);
-                    var star = parseFloat(obj.find('.paramStar').html().replace('(', '').replace(')', ''));
-                    var val = Math.round(star / 5 * 100);
-                    obj.find('.bulletStar').animate({ width: val + '%' }, 2000);
-                }
+                this.viewStars();
             }
         }
+        MyStar.prototype.viewStars = function () {
+            for (var i = 0; i < $('.trigStar').length; i++) {
+                var obj = $('.trigStar').eq(i);
+                this.viewStar(obj);
+            }
+        };
+        MyStar.prototype.viewStar = function (obj) {
+            var star = parseFloat(obj.find('.paramStar').html().replace('(', '').replace(')', ''));
+            var val = Math.round(star / 5 * 100);
+            obj.find('.bulletStar').animate({ width: val + '%' }, 2000);
+        };
         return MyStar;
     }());
     Star.MyStar = MyStar;
@@ -11333,13 +11339,14 @@ var func_1 = __webpack_require__(1);
 var Estimate;
 (function (Estimate) {
     var MyEstimate = /** @class */ (function () {
-        function MyEstimate(ajaxing, htmlOptions) {
+        function MyEstimate(STAR, ajaxing, htmlOptions) {
             if (ajaxing === void 0) { ajaxing = false; }
             if (htmlOptions === void 0) { htmlOptions = ''; }
             var _this = this;
             this.ajaxing = ajaxing;
             this.htmlOptions = htmlOptions;
             var self = this;
+            this.MyStar = STAR;
             if ($('.paramQuoteItem').length > 0) {
                 this.htmlOptions = $('.paramQuoteItem').eq(0).html();
             }
@@ -11347,7 +11354,7 @@ var Estimate;
             $(document).on('click', '.trigRemoveItem', function () {
                 if (window.confirm('この項目を消しますか？')) {
                     var num = $(this).attr('data-num');
-                    $('.bulletItem[data-num="' + num + '"]').remove();
+                    $('.bulletRemoveItem[data-num="' + num + '"]').remove();
                     self.refreshTotal();
                 }
                 else {
@@ -11364,6 +11371,22 @@ var Estimate;
                 var num = Number($(this).attr('data-num'));
                 self.refreshSubTotal(num);
                 self.refreshTotal();
+            });
+            // 選択肢から商品情報を引用
+            $(document).on('click', '.trigQuoteItem', function () {
+                if (window.confirm('入力値を消して選択の商品を使用しますか？')) {
+                    var num = $(this).data('num');
+                    var itemId = $('.paramQuoteItem[data-num="' + num + '"] :selected').val();
+                    self.ajaxQuoteItem(itemId, num);
+                }
+                else {
+                    return false;
+                }
+            });
+            // 選択肢から見積対象の案件情報を引用
+            $('#trigQuoteOrder').click(function () {
+                var orderId = $('#paramQuoteOrder :selected').val();
+                self.ajaxQuoteOrder(orderId);
             });
         }
         MyEstimate.prototype.refreshSubTotal = function (num) {
@@ -11399,6 +11422,70 @@ var Estimate;
                     //console.log(data);
                     $('#bulletItems').append(data.view);
                     $('#trigAddItem').attr('data-num', data.new_num);
+                    $('.paramQuoteItem[data-num="' + data.new_num + '"]').html(self.htmlOptions);
+                },
+                complete: function () {
+                    // 実行中画面を消す
+                    $('#ajaxing-waiting').hide();
+                    self.ajaxing = false;
+                }
+            });
+        };
+        MyEstimate.prototype.ajaxQuoteItem = function (itemId, num) {
+            var self = this;
+            self.ajaxing = true;
+            var token = $('meta[name="csrf-token"]').attr('content');
+            var D = { item_id: itemId, num: num };
+            $.ajax({
+                headers: { 'X-CSRF-TOKEN': token },
+                url: '/ajax/quote_item',
+                type: 'post',
+                data: D,
+                dataType: 'json',
+                beforeSend: function () {
+                    // 実行中画面
+                    $('#ajaxing-waiting').show();
+                },
+                success: function (data) {
+                    //console.log(data);
+                    $('#code_' + num).val(data.code);
+                    $('#name_' + num).val(data.name);
+                    $('#amount_' + num).val(data.amount);
+                    $('#notes_' + num).val(data.notes);
+                    // 再計算
+                    self.refreshSubTotal(num);
+                    self.refreshTotal();
+                },
+                complete: function () {
+                    // 実行中画面を消す
+                    $('#ajaxing-waiting').hide();
+                    self.ajaxing = false;
+                }
+            });
+        };
+        MyEstimate.prototype.ajaxQuoteOrder = function (orderId) {
+            var self = this;
+            self.ajaxing = true;
+            var token = $('meta[name="csrf-token"]').attr('content');
+            var D = { order_id: orderId };
+            $.ajax({
+                headers: { 'X-CSRF-TOKEN': token },
+                url: '/ajax/quote_order',
+                type: 'post',
+                data: D,
+                dataType: 'json',
+                beforeSend: function () {
+                    // 実行中画面
+                    $('#ajaxing-waiting').show();
+                },
+                success: function (data) {
+                    //console.log(data);
+                    $('#bulletQuoteOrder').html(data.view);
+                    $('#bulletQuoteOrderOwner').html(data.owner);
+                    $('#bulletQuoteOrderName').html(data.name);
+                    if ($('.trigStar').length > 0) {
+                        self.MyStar.viewStars();
+                    }
                 },
                 complete: function () {
                     // 実行中画面を消す

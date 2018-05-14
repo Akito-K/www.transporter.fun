@@ -5,14 +5,17 @@ import Func from './func';
 
 namespace Estimate {
 
-
     export class MyEstimate {
 
+        private MyStar;
+
         constructor(
+            STAR,
             private ajaxing: boolean = false,
             private htmlOptions: string = '',
             ){
             let self = this;
+            this.MyStar = STAR;
 
             if( $('.paramQuoteItem').length > 0 ){
                 this.htmlOptions = $('.paramQuoteItem').eq(0).html();
@@ -22,7 +25,7 @@ namespace Estimate {
             $(document).on('click', '.trigRemoveItem', function(){
                 if( window.confirm('この項目を消しますか？') ){
                     const num = $(this).attr('data-num');
-                    $('.bulletItem[data-num="'+num+'"]').remove();
+                    $('.bulletRemoveItem[data-num="'+num+'"]').remove();
                     self.refreshTotal();
                 }else{
                     return false;
@@ -40,6 +43,23 @@ namespace Estimate {
                 const num = Number( $(this).attr('data-num') );
                 self.refreshSubTotal(num);
                 self.refreshTotal();
+            });
+
+            // 選択肢から商品情報を引用
+            $(document).on('click', '.trigQuoteItem', function(){
+                if( window.confirm('入力値を消して選択の商品を使用しますか？') ){
+                    const num = $(this).data('num');
+                    const itemId = $('.paramQuoteItem[data-num="'+num+'"] :selected').val();
+                    self.ajaxQuoteItem(itemId, num);
+                }else{
+                    return false;
+                }
+            });
+
+            // 選択肢から見積対象の案件情報を引用
+            $('#trigQuoteOrder').click( () => {
+                const orderId = $('#paramQuoteOrder :selected').val();
+                self.ajaxQuoteOrder(orderId);
             });
 
         }
@@ -80,6 +100,74 @@ namespace Estimate {
                     //console.log(data);
                     $('#bulletItems').append( data.view );
                     $('#trigAddItem').attr('data-num', data.new_num );
+                    $('.paramQuoteItem[data-num="'+data.new_num+'"]').html(self.htmlOptions);
+                },
+                complete: function(){
+                    // 実行中画面を消す
+                    $('#ajaxing-waiting').hide();
+                    self.ajaxing = false;
+                }
+            });
+        }
+
+        public ajaxQuoteItem(itemId, num): void{
+            let self = this;
+            self.ajaxing = true;
+            const token: string = $('meta[name="csrf-token"]').attr('content');
+            const D = {item_id: itemId, num: num};
+
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': token},
+                url: '/ajax/quote_item',
+                type: 'post',
+                data: D,
+                dataType: 'json',
+                beforeSend: function(){
+                    // 実行中画面
+                    $('#ajaxing-waiting').show();
+                },
+                success: function( data ){
+                    //console.log(data);
+                    $('#code_'+num).val( data.code );
+                    $('#name_'+num).val( data.name );
+                    $('#amount_'+num).val( data.amount );
+                    $('#notes_'+num).val( data.notes );
+                    // 再計算
+                    self.refreshSubTotal(num);
+                    self.refreshTotal();
+                },
+                complete: function(){
+                    // 実行中画面を消す
+                    $('#ajaxing-waiting').hide();
+                    self.ajaxing = false;
+                }
+            });
+        }
+
+        public ajaxQuoteOrder(orderId): void{
+            let self = this;
+            self.ajaxing = true;
+            const token: string = $('meta[name="csrf-token"]').attr('content');
+            const D = {order_id: orderId};
+
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': token},
+                url: '/ajax/quote_order',
+                type: 'post',
+                data: D,
+                dataType: 'json',
+                beforeSend: function(){
+                    // 実行中画面
+                    $('#ajaxing-waiting').show();
+                },
+                success: function( data ){
+                    //console.log(data);
+                    $('#bulletQuoteOrder').html( data.view );
+                    $('#bulletQuoteOrderOwner').html( data.owner );
+                    $('#bulletQuoteOrderName').html( data.name );
+                    if( $('.trigStar').length > 0 ){
+                        self.MyStar.viewStars();
+                    }
                 },
                 complete: function(){
                     // 実行中画面を消す

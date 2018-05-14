@@ -9,7 +9,7 @@ class Estimate extends Model
 {
     use softDeletes;
     protected $table = 'estimates';
-    protected $dates = ['deleted_at'];
+    protected $dates = ['estimated_at', 'limit_at', 'suggested_at', 'deleted_at'];
     protected $guarded = ['id'];
 
     public static function getNewId(){
@@ -26,13 +26,14 @@ class Estimate extends Model
     }
 
     public static function getCount($order_id){
-        return Estimate::where('order_id', $order_id)->count();
+        return Estimate::where('order_id', $order_id)->whereNotNull('suggested_at')->count();
     }
 
     public static function getMyEstimate($order_id, $carrier_id=NULL){
         $carrier_id = $carrier_id?: \Auth::user()->carrier_id;
         $data = Estimate::where('order_id', $order_id)
                             ->where('carrier_id', $carrier_id)
+                            ->whereNotNull('suggested_at')
                             ->orderBy('id', 'DESC')
                             ->first();
 

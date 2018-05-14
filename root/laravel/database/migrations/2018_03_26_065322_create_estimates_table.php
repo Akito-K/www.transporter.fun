@@ -18,7 +18,7 @@ class CreateEstimatesTable extends Migration
             $table->string('estimate_id', 32)->unique();
             $table->string('order_id', 32);
             $table->string('carrier_id', 32);
-            $table->string('client_name', 100);
+//            $table->string('client_name', 100);
             $table->string('order_name', 100);
 
             $table->text('suggest_message')->nullable();
@@ -27,8 +27,9 @@ class CreateEstimatesTable extends Migration
 
             $table->datetime('estimated_at');
             $table->datetime('limit_at');
+            $table->datetime('suggested_at')->nullable();
             $table->text('notes')->nullable();
-            $table->string('payment_code', 32);
+//            $table->string('payment_code', 32);
 
             $table->datetime('created_at');
             $table->datetime('updated_at');

@@ -1,6 +1,10 @@
 <a href="{{ url('') }}/carrier/request/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
 
-<a href="{{ url('') }}/carrier/order/estimate/{{ $data->order_id }}/create" class="orders__btn btn btn-warning btn-sm">見積作成</a>
+@if($data->my_estimate)
+<a href="{{ url('') }}/carrier/estimate/{{ $data->order_id }}" class="orders__btn btn btn-success btn-sm">見積一覧</a>
+@else
+<a href="{{ url('') }}/carrier/estimate/{{ $data->order_id }}/create" class="orders__btn btn btn-warning btn-sm">見積作成</a>
+@endif
 
 <?php /*
 @if( in_array($data->status_id, ['ORD-STS-11', 'ORD-STS-16', 'ORD-STS-21', 'ORD-STS-26', 'ORD-STS-31', 'ORD-STS-36', 'ORD-STS-41', 'ORD-STS-46']) )

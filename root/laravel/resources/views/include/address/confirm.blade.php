@@ -10,6 +10,10 @@ $prefix_pref_code = $prefix.'pref_code';
 $prefix_city = $prefix.'city';
 $prefix_address = $prefix.'address';
 $prefix_tel = $prefix.'tel';
+
+if(!isset($prefs)){
+    $prefs = \Func::getPrefNames();
+}
 ?>
 <ul class="lists">
     <li class="list list-title">氏名</li>

@@ -21,6 +21,8 @@ class CreateCarriersTable extends Migration
             $table->string('role', 32)->nullable();
             $table->float('star', 8, 2)->nullable();
 
+            $table->string('sei', 32)->nullable();
+            $table->string('mei', 32)->nullable();
             $table->string('zip1', 3)->nullable();
             $table->string('zip2', 4)->nullable();
             $table->string('pref_code', 2)->nullable();

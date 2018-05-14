@@ -7,6 +7,8 @@ use App\Model\Upload;
 use App\Model\Address;
 use App\Model\Pref;
 use App\Model\MyUser;
+use App\Model\Item;
+use App\Model\Order;
 
 //use App\Model\Board;
 //use App\Model\Message;
@@ -93,6 +95,24 @@ class AjaxController extends Controller
             'new_num' => $num,
             ]);
     }
+
+    public function quoteItem(Request $request){
+        $data = Item::getData($request['item_id']);
+
+        return json_encode( $data );
+    }
+
+    public function quoteOrder(Request $request){
+        $prefs = Pref::getNames();
+        $data = Order::getOrderData($request['order_id']);
+
+        return  json_encode([
+            'view' => view('include.carrier.order_estimate', compact('data', 'prefs') )->render(),
+            'owner' => $data->flag_hide_owner? '*** （非公開） 様': $data->owner->company.'<br />'.$data->user->sei.' '.$data->user->mei.'様',
+            'name' => $data->name,
+            ]);
+    }
+
 
 /*
     public function getUnreadCount(Request $request){

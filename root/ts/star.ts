@@ -12,18 +12,26 @@ namespace Star {
             //let self = this;
 
             if( $('.trigStar').length > 0 ){
-                for( let i: number = 0; i < $('.trigStar').length; i++){
-                    const obj = $('.trigStar').eq(i);
-                    const star: number = parseFloat( obj.find('.paramStar').html().replace('(', '').replace(')', '') );
-                    const val = Math.round( star / 5 * 100 );
-                    obj.find('.bulletStar').animate(
-                        {width: val+'%'},
-                        2000
-                        );
-                }
+                this.viewStars();
             }
-
         }
+
+        public viewStars(){
+            for( let i: number = 0; i < $('.trigStar').length; i++){
+                const obj = $('.trigStar').eq(i);
+                this.viewStar(obj);
+            }
+        }
+
+        public viewStar(obj){
+            const star: number = parseFloat( obj.find('.paramStar').html().replace('(', '').replace(')', '') );
+            const val = Math.round( star / 5 * 100 );
+            obj.find('.bulletStar').animate(
+                {width: val+'%'},
+                2000
+                );
+        }
+
 /*
         public ajaxQuoteUserAccount(id): void{
             let self = this;

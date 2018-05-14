@@ -112,7 +112,7 @@ class MyFunctions
      */
     public static function dateFormat($datetime, $format=NULL){
         $result = "";
-        if($datetime instanceof \Datetime){
+        if($datetime instanceof \Datetime || $datetime instanceof \DatetimeImmutable){
             $datetime_at = $datetime;
         }elseif(preg_match('/^[0-9]{4}-[0-9]{1, 2}-[0-9]{1, 2}[.]+/', $datetime)){
             $datetime_at = new \Datetime($datetime);
@@ -633,7 +633,9 @@ class MyFunctions
         return $str;
      }
 
-
+     public static function getPrefNames(){
+        return Pref::getNames();
+     }
 
 
 

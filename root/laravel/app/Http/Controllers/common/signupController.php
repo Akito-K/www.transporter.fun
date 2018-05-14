@@ -196,6 +196,8 @@ class signupController extends Controller
         if($data['owner_id']){
             $owner = [
                 'owner_id' => $data['owner_id'],
+                'sei' => $data['sei'],
+                'mei' => $data['mei'],
                 'zip1' => $signup->zip1,
                 'zip2' => $signup->zip2,
                 'pref_code' => $signup->pref_code,
@@ -211,6 +213,8 @@ class signupController extends Controller
         if($data['carrier_id']){
             $carrier = [
                 'carrier_id' => $data['carrier_id'],
+                'sei' => $data['sei'],
+                'mei' => $data['mei'],
                 'zip1' => $signup->zip1,
                 'zip2' => $signup->zip2,
                 'pref_code' => $signup->pref_code,

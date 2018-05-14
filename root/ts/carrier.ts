@@ -29,7 +29,7 @@ $(() => {
     // 評価★
     const STAR = new Star.MyStar();
     // 見積もり
-    const ESTIMATE = new Estimate.MyEstimate();
+    const ESTIMATE = new Estimate.MyEstimate(STAR);
     // コンタクトボード
 //    const BOARD = new Board.MyBoard();
     // 顧客

@@ -85,6 +85,9 @@
             padding: 5px;
             border-bottom: 1px dotted #ccc;
         }
+        &-align-top {
+            @include flexAlign(flex-start);
+        }
     }
     .param {
         text-align: center;

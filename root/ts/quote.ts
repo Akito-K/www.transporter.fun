@@ -23,7 +23,7 @@ namespace Quote {
                 }
             });
 
-            // 選択しから住所情報を引用
+            // 選択肢から住所情報を引用
             $('.trigQuoteAddress').click( function(){
                 if( window.confirm('入力値を消して選択の住所を使用しますか？') ){
                     const type = $(this).data('type');

@@ -9,35 +9,24 @@
             </tr>
             <tr>
                 <th>荷主名</th>
-                <td>
-                    @if( $data->flag_hide_owner )
-                    非公開
-                    @else
-                    <a href="{{ url('') }}/mypage/owner/{{ $data->owner_id }}/detail">{{ $data->user->name }}</a><br />
-                    @include('include.star', ['star' => $data->owner->star])
-                    @endif
-                </td>
+                <td>{!! $data->owner_with_star !!}</td>
             </tr>
             <tr>
                 <th>案件クラス</th>
-                <td>@if( isset($carrier_classes[$data->class_id]) ) {{ $carrier_classes[$data->class_id] }} @endif</td>
+                <td>{{ $data->carrier_class }}</td>
             </tr>
             <tr>
                 <th>発送予定日時</th>
                 <td>
-                    {{ $data->send_at }}
-                    @if( isset($timezones[ $data->send_timezone ]) )
-                    {{ $timezones[ $data->send_timezone ] }}
-                    @endif
+                    {!! \Func::dateFormat($data->send_at, 'Y/n/j(wday)') !!}
+                    {{ $data->send_timezone_str }}
                 </td>
             </tr>
             <tr>
                 <th>到着予定日時</th>
                 <td>
-                    {{ $data->arrive_at }}
-                    @if( isset($timezones[ $data->arrive_timezone ]) )
-                    {{ $timezones[ $data->arrive_timezone ] }}
-                    @endif
+                    {!! \Func::dateFormat($data->arrive_at, 'Y/n/j(wday)') !!}
+                    {{ $data->arrive_timezone_str }}
                 </td>
             </tr>
         </table>
@@ -66,7 +55,7 @@
         <table>
             <tr>
                 <th>品名</th>
-                <td>@if( isset($cargo_names[ $data->cargo_name ]) ){{ $cargo_names[ $data->cargo_name ] }} @endif</td>
+                <td>{{ $data->cargo_name }}</td>
             </tr>
             <tr>
                 <th>寸法（mm）</th>
@@ -88,7 +77,7 @@
             </tr>
             <tr>
                 <th>荷姿</th>
-                <td>@if( isset($cargo_forms[ $data->cargo_form ]) ) {{ $cargo_forms[ $data->cargo_form ] }} @endif</td>
+                <td>{{ $data->cargo_form }}</td>
             </tr>
         </table>
     </div>
@@ -98,15 +87,15 @@
         <table>
             <tr>
                 <th>車種</th>
-                <td>{{ $order_request_results->car }}</td>
+                <td>{{ $data->order_request_results->car }}</td>
             </tr>
             <tr>
                 <th>設備</th>
-                <td>{{ $order_request_results->equipment }}</td>
+                <td>{{ $data->order_request_results->equipment }}</td>
             </tr>
             <tr>
                 <th>装備</th>
-                <td>{{ $order_request_results->other }}</td>
+                <td>{{ $data->order_request_results->other }}</td>
             </tr>
         </table>
     </div>

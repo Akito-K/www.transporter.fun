@@ -10,7 +10,7 @@
         <h2 class="page-header">見積依頼作成</h2>
 
         <div class="request__block">
-            {!! Form::open(['url' => 'owner/order/request/confirm', 'class' => 'request__boxes']) !!}
+            {!! Form::open(['url' => 'owner/request/confirm', 'class' => 'request__boxes']) !!}
                 {!! Form::hidden('order_id', $data->order_id) !!}
 
                 <h4 class="order__box__title trigAccordOrderBox" data-open="1">案件情報</h4>

@@ -20,7 +20,7 @@ class Item extends Model
     }
 
     public static function getDatas($carrier_id){
-        $datas = Item::where('carrier_id', $carrier_id)->get();
+        $datas = Item::where('carrier_id', $carrier_id)->orderBy('id', 'DESC')->get();
 
         return $datas;
     }
@@ -30,5 +30,12 @@ class Item extends Model
 
         return $data;
     }
+
+    public static function getNames($carrier_id){
+        $datas = Item::where('carrier_id', $carrier_id)->orderBy('id', 'DESC')->pluck('name', 'item_id')->toArray();
+
+        return $datas;
+    }
+
 
 }

@@ -26,6 +26,7 @@ class orderController extends ownerController
 {
 
     public function showList(Request $request){
+        Log::saveData( 'owner\orderController@showList');
         $me = $request['me'];
 
         if( $request->session()->has('order.create.'.$me->hashed_id) ) {
@@ -41,41 +42,21 @@ class orderController extends ownerController
         $pagemeta = Pagemeta::getPagemeta('OW-ORD-01');
         $datas = Order::getDatas($me->owner_id);
         $status = OrderStatus::getNames();
-        Log::saveData( 'owner\orderController@showList');
 
         return view('owner.order.list', compact('pagemeta', 'datas', 'status'));
     }
 
     public function showDetail($order_id, Request $request){
+        Log::saveData( 'owner\orderController@showDetail', 'order_id', $order_id, true);
         $me = $request['me'];
         $pagemeta = Pagemeta::getPagemeta('OW-ORD-02');
+        $data = Order::getOrderData($order_id);
 
-        $carrier_classes = CarrierClass::getNames();
-        \Func::array_append($carrier_classes, [ 0 => '---' ], true);
-        $addresses = Address::getNames($me->user_id);
-        $timezones = Order::getTimezones();
-        $hide_owners = Order::getHideOwners();
-        $prefs = Pref::getNames();
-        \Func::array_append($prefs, [ 0 => '---' ], true);
-        $cargo_names = CargoName::getNames();
-        \Func::array_append($cargo_names, [ 0 => '---' ], true);
-        $cargo_forms = CargoForm::getNames();
-        \Func::array_append($cargo_forms, [ 0 => '---' ], true);
-        $option_datas = OrderRequestOption::getDatas();
-        $option_car_names = OrderRequestOption::getCarNamesNest($option_datas);
-        $option_equipments = OrderRequestOption::getEquipments($option_datas);
-        $option_other_names = OrderRequestOption::getOtherNames($option_datas);
-        $umu = OrderRequestOption::getUmu();
-
-        $data = $this->getData($order_id, $option_equipments, $option_other_names);
-//        \Func::var_dump($data);exit;
-
-        Log::saveData( 'owner\orderController@showDetail', 'order_id', $order_id, true);
-
-        return view('owner.order.detail', compact('data', 'pagemeta', 'carrier_classes', 'addresses', 'prefs', 'timezones', 'hide_owners', 'cargo_names', 'cargo_forms', 'option_car_names', 'option_equipments', 'option_other_names', 'umu'));
+        return view('owner.order.detail', compact('data', 'pagemeta'));
     }
 
     public function create(Request $request){
+        Log::saveData( 'owner\orderController@create');
         $me = $request['me'];
         $pagemeta = Pagemeta::getPagemeta('OW-ORD-03');
 
@@ -102,12 +83,11 @@ class orderController extends ownerController
             $data = $this->makeEmptyData( $option_equipments, $option_other_names );
         }
 
-        Log::saveData( 'owner\orderController@create');
-
         return view('owner.order.create', compact('data', 'pagemeta', 'carrier_classes', 'addresses', 'prefs', 'timezones', 'hide_owners', 'cargo_names', 'cargo_forms', 'option_car_names', 'option_equipments', 'option_other_names', 'umu'));
     }
 
     public function confirm(Request $request){
+        Log::saveData( 'owner\orderController@confirm');
         // Validation
         $this->validation($request);
 
@@ -133,24 +113,23 @@ class orderController extends ownerController
         $request->session()->forget('order.create.'.$me->hashed_id);
         $request->session()->put('order.create.'.$me->hashed_id, $data);
 
-        Log::saveData( 'owner\orderController@confirm');
 
         return view('owner.order.confirm', compact('data', 'pagemeta', 'carrier_classes', 'addresses', 'prefs', 'timezones', 'hide_owners', 'cargo_names', 'cargo_forms', 'option_car_names', 'option_equipments', 'option_other_names', 'umu'));
     }
 
     public function insert(Request $request){
+        Log::saveData( 'owner\orderController@insert');
         $me = $request['me'];
         $data = $request->session()->get('order.create.'.$me->hashed_id);
         $request->session()->forget('order.create.'.$me->hashed_id);
 
         $this->insertData( $data );
 
-        Log::saveData( 'owner\orderController@insert');
-
         return redirect('owner/order');
     }
 
     public function edit($order_id, Request $request){
+        Log::saveData( 'owner\orderController@edit', 'order_id', $order_id, true);
         $me = $request['me'];
         $pagemeta = Pagemeta::getPagemeta('OW-ORD-06');
 
@@ -173,18 +152,21 @@ class orderController extends ownerController
 
         if( $request->session()->has('order.edit.'.$me->hashed_id) ) {
             $data = $request->session()->get('order.edit.'.$me->hashed_id);
-//            \Func::var_dump($data);exit;
         }else{
             $data = $this->getData($order_id, $option_equipments, $option_other_names);
+            $data->hide_send_at = \Func::dateFormat($data->send_at, 'Y/n/j');
+            $data->hide_arrive_at = \Func::dateFormat($data->arrive_at, 'Y/n/j');
+            $data->send_at = \Func::dateFormat($data->send_at, 'Y/n/j(wday)');
+            $data->arrive_at = \Func::dateFormat($data->arrive_at, 'Y/n/j(wday)');
+            $data->send_timezone = Order::getTimezoneKey($data->send_timezone);
+            $data->arrive_timezone = Order::getTimezoneKey($data->arrive_timezone);
         }
-//        \Func::var_dump($data);exit;
-
-        Log::saveData( 'owner\orderController@edit', 'order_id', $order_id, true);
 
         return view('owner.order.edit', compact('data', 'pagemeta', 'carrier_classes', 'addresses', 'prefs', 'timezones', 'hide_owners', 'cargo_names', 'cargo_forms', 'option_car_names', 'option_equipments', 'option_other_names', 'umu'));
     }
 
     public function confirmUpdate(Request $request){
+        Log::saveData( 'owner\orderController@confirmUpdate');
         // Validation
         $this->validation($request);
 
@@ -213,18 +195,15 @@ class orderController extends ownerController
         $request->session()->forget('order.edit.'.$me->hashed_id);
         $request->session()->put('order.edit.'.$me->hashed_id, $data);
 
-        Log::saveData( 'owner\orderController@confirmUpdate');
-
         return view('owner.order.confirm_update', compact('data', 'pagemeta', 'carrier_classes', 'addresses', 'prefs', 'timezones', 'hide_owners', 'cargo_names', 'cargo_forms', 'option_car_names', 'option_equipments', 'option_other_names', 'umu'));
     }
     public function update(Request $request){
+        Log::saveData( 'owner\orderController@update');
         $me = $request['me'];
         $data = $request->session()->get('order.edit.'.$me->hashed_id);
         $request->session()->forget('order.edit.'.$me->hashed_id);
 
         $this->updateData( $data );
-
-        Log::saveData( 'owner\orderController@update');
 
         return redirect('owner/order');
     }
@@ -249,6 +228,12 @@ class orderController extends ownerController
         $option_equipments = OrderRequestOption::getEquipments($option_datas);
         $option_other_names = OrderRequestOption::getOtherNames($option_datas);
         $data = $this->getData($order_id, $option_equipments, $option_other_names);
+
+        $data->hide_send_at = $data->send_at;
+        $data->hide_arrive_at = $data->arrive_at;
+        $data->send_timezone = Order::getTimezoneKey($data->send_timezone);
+        $data->arrive_timezone = Order::getTimezoneKey($data->arrive_timezone);
+
         $this->insertData( $data );
 
         return redirect('owner/order');
@@ -611,7 +596,7 @@ class orderController extends ownerController
             'cargo_id' => $cargo_id,
             'name_id' => $request_data->cargo_name,
             'length' => $request_data->cargo_size_L,
-            'weight' => $request_data->cargo_size_W,
+            'width' => $request_data->cargo_size_W,
             'height' => $request_data->cargo_size_H,
             'count' => $request_data->cargo_count,
             'weight' => $request_data->cargo_weight,
@@ -646,9 +631,9 @@ class orderController extends ownerController
         $data->name = $request_data->name;
         $data->flag_hide_owner = $request_data->flag_hide_owner;
         $data->class_id = $request_data->class_id;
-        $data->send_at = $request_data->hide_send_at;
+        $data->send_at = $request_data->hide_send_at? new \Datetime($request_data->hide_send_at): NULL;
         $data->send_timezone = $request_data->send_timezone? $timezones[ $request_data->send_timezone ]: '';
-        $data->arrive_at = $request_data->hide_arrive_at;
+        $data->arrive_at = $request_data->hide_arrive_at? new \Datetime($request_data->hide_arrive_at): NULL;
         $data->arrive_timezone = $request_data->arrive_timezone? $timezones[ $request_data->arrive_timezone ]: '';
 
         $data->send_sei = $request_data->send_sei;

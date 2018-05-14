@@ -34,6 +34,21 @@
                 &--quote {
                     padding-left: 10px;
                 }
+                &--sm-title {
+                    vertical-align: top;
+                    font-size: 88%;
+                }
+                &--notes {
+                    padding-left: 10px;
+                }
+                &--total {
+                    text-align: left;
+                    font-weight: bold;
+                    font-size: 110%;
+                    padding: 20px;
+                }
+                &--carrier {
+                }
                 ul {
                     margin: 0;
                 }

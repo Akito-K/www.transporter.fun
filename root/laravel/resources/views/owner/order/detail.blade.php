@@ -19,43 +19,27 @@
                     <ul class="lists">
                         <li class="list list-title">荷主名を公開しない</li>
                         <li class="list list-value">
-                            {{ $hide_owners[ $data->flag_hide_owner ] }}
+                            {{ $data->hide_owner }}
                         </li>
                     </ul>
                     <ul class="lists">
                         <li class="list list-title">案件クラス</li>
                         <li class="list list-value">
-                            {{ $carrier_classes[$data->class_id] }}
+                            {{ $data->carrier_class }}
                         </li>
                     </ul>
                     <ul class="lists">
                         <li class="list list-title">発送予定日時</li>
                         <li class="list list-value">
-                            <ul class="params">
-                                <li class="param param-50">
-                                    {{ $data->send_at }}
-                                </li>
-                                <li class="param param-50">
-                                    @if( isset($timezones[ $data->send_timezone ]) )
-                                    {{ $timezones[ $data->send_timezone ] }}
-                                    @endif
-                                </li>
-                            </ul>
+                            {!! \Func::dateFormat($data->send_at, 'Y/n/j(wday)') !!}
+                            {{ $data->send_timezone_str }}
                         </li>
                     </ul>
                     <ul class="lists">
                         <li class="list list-title">到着予定日時</li>
                         <li class="list list-value">
-                            <ul class="params">
-                                <li class="param param-50">
-                                    {{ $data->arrive_at }}
-                                </li>
-                                <li class="param param-50">
-                                    @if( isset($timezones[ $data->arrive_timezone ]) )
-                                    {{ $timezones[ $data->arrive_timezone ] }}
-                                    @endif
-                                </li>
-                            </ul>
+                            {!! \Func::dateFormat($data->arrive_at, 'Y/n/j(wday)') !!}
+                            {{ $data->arrive_timezone_str }}
                         </li>
                     </ul>
                 </div>
@@ -75,7 +59,7 @@
                     <ul class="lists">
                         <li class="list list-title">品名</li>
                         <li class="list list-value">
-                            {{ $cargo_names[ $data->cargo_name ] }}
+                            {{ $data->cargo_name }}
                         </li>
                     </ul>
                     <ul class="lists">
@@ -108,7 +92,7 @@
                     <ul class="lists">
                         <li class="list list-title">荷姿</li>
                         <li class="list list-value">
-                            {{ $cargo_forms[ $data->cargo_form ] }}
+                            {{ $data->cargo_form }}
                         </li>
                     </ul>
                 </div>
@@ -117,11 +101,7 @@
                 <div class="order__box bulletAccordOrderBox">
                     <ul class="lists">
                         <li class="list list-title">希望車種</li>
-                        <li class="list list-value">
-                            @if( isset($option_car_names[ $data->option_car ]) )
-                            {{ $option_car_names[ $data->option_car ] }}
-                            @endif
-                        </li>
+                        <li class="list list-value">{{ $data->order_request_results->car }}</li>
                     </ul>
                 </div>
 
@@ -129,56 +109,11 @@
                 <div class="order__box bulletAccordOrderBox">
                     <ul class="lists">
                         <li class="list list-title">オプション設備</li>
-                        <li class="list list-value">
-
-                            @if(!empty($option_equipments))
-                            @foreach($option_equipments as $key => $equipment)
-                            @if( isset($data->option_equipments[$key]) && $data->option_equipments[$key] > 0 )
-                            <ul class="params params-left">
-                                <li class="param param-80 param-left">
-                                    {{ $equipment->name }}
-                                </li>
-
-                                @if($equipment->unit !== NULL)
-                                @if($data->option_equipments[$key] > 0)
-                                <li class="param param-40">
-                                    {{ $data->option_equipments[$key] }}
-                                    {{ $equipment->unit }}
-                                </li>
-                                @endif
-                                @elseif( isset($data->option_equipments[$key]) )
-                                <li class="param param-40 param">
-                                    {{ $umu[ $data->option_equipments[$key] ] }}
-                                </li>
-                                @endif
-
-                            </ul>
-                            @endif
-                            @endforeach
-                            @endif
-
-                        </li>
+                        <li class="list list-value">{{ $data->order_request_results->equipment }}</li>
                     </ul>
                     <ul class="lists">
                         <li class="list list-title">オプションその他</li>
-                        <li class="list list-value">
-
-                            @if(!empty($option_other_names))
-                            @foreach($option_other_names as $key => $name)
-                            @if( isset($data->option_others[$key]) && $data->option_others[$key] > 0 )
-                            <ul class="params params-left">
-                                <li class="param param-80 param-left">
-                                    {{ $name }}
-                                </li>
-                                <li class="param param-40 param">
-                                    {{ $umu[ $data->option_others[$key] ] }}
-                                </li>
-                            </ul>
-                            @endif
-                            @endforeach
-                            @endif
-
-                        </li>
+                        <li class="list list-value">{{ $data->order_request_results->other }}</li>
                     </ul>
                 </div>
 

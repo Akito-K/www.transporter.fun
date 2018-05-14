@@ -17,8 +17,8 @@
                         <th>到着地</th>
                         <th>見積依頼日時</th>
                         <th>募集終了日時</th>
-                        <th>見積り数</th>
-                        <th>提案日時</th>
+                        <th>全見積り数</th>
+                        <th>提出日時</th>
                         <th>各種操作</th>
                     </tr>
 
@@ -27,14 +27,7 @@
                     <tr>
                         <td>{{ $k+1 }}</td>
                         <td>{{ $data->name }}</td>
-                        <td>
-                            @if( $data->flag_hide_owner )
-                            ***（非公開）
-                            @else
-                            <a href="{{ url('') }}/mypage/owner/{{ $data->owner_id }}/detail">{{ $data->user->name }}</a><br />
-                            @include('include.star', ['star' => $data->owner->star])
-                            @endif
-                        </td>
+                        <td>{!! $data->owner_with_star !!}</td>
                         <td>{!! \Func::getAddress($data->send, ['pref', 'city']) !!}</td>
                         <td>{!! \Func::getAddress($data->arrive, ['pref', 'city']) !!}</td>
                         <td>{!! \Func::dateFormat($data->estimate_start_at, 'y/n/j H:i') !!}</td>

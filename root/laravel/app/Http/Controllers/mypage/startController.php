@@ -59,8 +59,6 @@ class startController extends mypageController
         $data = $request->session()->get('start.'.$me->hashed_id);
         $request->session()->forget('start.'.$me->hashed_id);
         unset($data['tels']);
-        unset($data['sei']);
-        unset($data['mei']);
         $date_at = new \DatetimeImmutable();
 
         // 荷主情報登録
@@ -179,8 +177,6 @@ class startController extends mypageController
         $data = $request->session()->get('start.'.$me->hashed_id);
         $request->session()->forget('start.'.$me->hashed_id);
         unset($data['tels']);
-        unset($data['sei']);
-        unset($data['mei']);
         $date_at = new \DatetimeImmutable();
 
         // 荷主情報登録

@@ -13764,6 +13764,12 @@ button.close {
     padding: 5px;
     border-bottom: 1px dotted #ccc;
   }
+  .params-align-top {
+    -webkit-box-align: flex-start;
+    -ms-flex-align: flex-start;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+  }
   .param {
     text-align: center;
   }
@@ -14163,6 +14169,9 @@ button.close {
   }
   .form-control.readonly {
     background-color: #ccc;
+  }
+  textarea.form-control--xsm {
+    height: 40px;
   }
   .btn-xsm {
     padding: 1px 9px;
@@ -14575,6 +14584,19 @@ button.close {
   }
   .estimate__table__cell--quote {
     padding-left: 10px;
+  }
+  .estimate__table__cell--sm-title {
+    vertical-align: top;
+    font-size: 88%;
+  }
+  .estimate__table__cell--notes {
+    padding-left: 10px;
+  }
+  .estimate__table__cell--total {
+    text-align: left;
+    font-weight: bold;
+    font-size: 110%;
+    padding: 20px;
   }
   .estimate__table__cell ul {
     margin: 0;

@@ -90,12 +90,6 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/owner',                                   'owner\homeController@dashboard');
             Route::get ('/owner/dashboard',                         'owner\homeController@dashboard');
 
-            // 見積依頼
-            Route::get ('/owner/order/request/{order_id}',          'owner\order\requestController@create');
-            Route::post('/owner/order/request/confirm',             'owner\order\requestController@confirm');
-            Route::post('/owner/order/request/execute',             'owner\order\requestController@execute');
-            Route::get ('/owner/order/request/{order_id}/cancel',   'owner\order\requestController@cancel');
-
             // 案件
             Route::get ('/owner/order',                             'owner\orderController@showList');
             Route::get ('/owner/order/{order_id}/detail',           'owner\orderController@showDetail');
@@ -107,6 +101,12 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/owner/order/update',                      'owner\orderController@update');
             Route::get ('/owner/order/{order_id}/delete',           'owner\orderController@delete');
             Route::get ('/owner/order/{order_id}/duplicate',        'owner\orderController@duplicate');
+
+            // 見積依頼
+            Route::get ('/owner/request/{order_id}',                'owner\requestController@create');
+            Route::post('/owner/request/confirm',                   'owner\requestController@confirm');
+            Route::post('/owner/request/execute',                   'owner\requestController@execute');
+            Route::get ('/owner/request/{order_id}/cancel',         'owner\requestController@cancel');
         });
 
         // CARRIER = = = = = = = = = = = =
@@ -119,7 +119,21 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/carrier/request/{order_id}/detail',       'carrier\requestController@showDetail');
 
             // 見積作成
-            Route::get ('/carrier/order/estimate/{order_id}/create',    'carrier\order\estimateController@create');
+            Route::get ('/carrier/estimate/{order_id}/create',      'carrier\estimateController@create');
+            Route::post('/carrier/estimate/confirm',                'carrier\estimateController@confirm');
+            Route::post('/carrier/estimate/insert',                 'carrier\estimateController@insert');
+
+            // 見積用商品
+            Route::get ('/carrier/item',                            'carrier\itemController@showList');
+            Route::get ('/carrier/item/{item_id}/detail',           'carrier\itemController@showDetail');
+            Route::get ('/carrier/item/create',                     'carrier\itemController@create');
+            Route::post('/carrier/item/insert',                     'carrier\itemController@insert');
+            Route::get ('/carrier/item/{item_id}/edit',             'carrier\itemController@edit');
+            Route::post('/carrier/item/update',                     'carrier\itemController@update');
+            Route::get ('/carrier/item/{item_id}/delete',           'carrier\itemController@delete');
+
+            // 案件
+            Route::get ('/carrier/work',                                'carrier\workController@showList');
         });
 
         // ADMIN = = = = = = = = = = = =
@@ -251,6 +265,8 @@ Route::post('/ajax/upload_file',                            'AjaxController@uplo
 Route::post('/ajax/quote_user_account',                     'AjaxController@quoteUserAccount');
 Route::post('/ajax/quote_address',                          'AjaxController@quoteAddress');
 Route::post('/ajax/add_estimate_item',                      'AjaxController@addEstimateItem');
+Route::post('/ajax/quote_item',                             'AjaxController@quoteItem');
+Route::post('/ajax/quote_order',                            'AjaxController@quoteOrder');
 //Route::post('/ajax/add_estimate_item',                      'AjaxController@addEstimateItem');
 
 //Route::get ('/cron/run', 'cronController@logWeather');

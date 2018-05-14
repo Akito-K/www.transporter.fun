@@ -13764,6 +13764,12 @@ button.close {
     padding: 5px;
     border-bottom: 1px dotted #ccc;
   }
+  .params-align-top {
+    -webkit-box-align: flex-start;
+    -ms-flex-align: flex-start;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+  }
   .param {
     text-align: center;
   }
@@ -14163,6 +14169,9 @@ button.close {
   }
   .form-control.readonly {
     background-color: #ccc;
+  }
+  textarea.form-control--xsm {
+    height: 40px;
   }
   .btn-xsm {
     padding: 1px 9px;
