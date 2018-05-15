@@ -3,22 +3,7 @@ namespace App\Http\Controllers\carrier;
 use App\Http\Controllers\carrierController;
 use Illuminate\Http\Request;
 
-use App\Model\Order;
-/*
-//use App\Model\MyUser;
-//use App\Model\Owner;
-use App\Model\CarrierClass;
-//use App\Model\UserToAddress;
-//use App\Model\Address;
-use App\Model\Pref;
-use App\Model\Cargo;
-use App\Model\OrderToCargo;
-use App\Model\CargoName;
-use App\Model\CargoForm;
-use App\Model\OrderRequest;
-use App\Model\OrderRequestOption;
-use App\Model\Estimate;
-*/
+use App\Model\Work;
 use App\Model\Pagemeta;
 use App\Model\Log;
 
@@ -27,24 +12,20 @@ class workController extends carrierController
     public function showList(Request $request){
         Log::saveData( 'carrier\workController@showList');
         $me = $request['me'];
-        $pagemeta = Pagemeta::getPagemeta('CR-RQS-01');
+        $pagemeta = Pagemeta::getPagemeta('CR-WRK-01');
 
-        if( $request->session()->has('estimate.create.'.$me->hashed_id) ) {
-            $request->session()->forget('estimate.create.'.$me->hashed_id);
-        }
+        $datas = Work::getDatas($me->carrier_id);
 
-        $datas = Order::getEstimatableDatas();
-
-        return view('carrier.request.list', compact('pagemeta', 'datas'));
+        return view('carrier.work.list', compact('pagemeta', 'datas'));
     }
 
-    public function showDetail($order_id, Request $request){
-        Log::saveData( 'carrier\workController@showDetail', 'order_id', $order_id, true);
+    public function showDetail($work_id, Request $request){
+        Log::saveData( 'carrier\workController@showDetail', 'work_id', $work_id, true);
         $me = $request['me'];
-        $pagemeta = Pagemeta::getPagemeta('CR-RQS-02');
-        $data = Order::getOrderData($order_id);
+        $pagemeta = Pagemeta::getPagemeta('CR-WRK-02');
+        $data = Work::getData($work_id);
 
-        return view('carrier.request.detail', compact('data', 'pagemeta'));
+        return view('carrier.work.detail', compact('pagemeta', 'data'));
     }
 
 }

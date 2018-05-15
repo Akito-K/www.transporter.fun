@@ -106,14 +106,18 @@
         &-100 { width: 100%;}
     }
 
+    .stars-wrap {
+        display: inline-block;
+    }
     .stars {
         display: inline-block;
         position: relative;
         padding: 0;
         margin: 0;
         width: 62px;
-        height: 13px;
+        height: 14px;
         &--val {
+            display: inline-block;
             font-size: 9px;
         }
     }
@@ -127,12 +131,19 @@
         z-index: 10;
         text-shadow: 0px 0px 0.1px #000;
         font-size: 12px;
+        &__lists {
+            width: 62px;
+            @include flexbox();
+            @include flexJustify(space-between);
+        }
         &--after {
             color: #ff0;
             overflow: hidden;
             width: 0%;
             height: 100%;
             z-index: 11;
+        }
+        &__child {
         }
     }
 

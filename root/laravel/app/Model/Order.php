@@ -63,11 +63,14 @@ class Order extends Model
         $datas = Order::where('owner_id', $owner_id)->orderBy('status_id', 'ASC')->get();
         if(!empty($datas)){
             foreach($datas as $data){
+                Order::addMoreData($data);
+/*
                 $data->send = Order::getSendAddress($data);
                 $data->arrive = Order::getArriveAddress($data);
                 $data->send_tels = \Func::telFormatDecode($data->send_tel);
                 $data->arrive_tels = \Func::telFormatDecode($data->arrive_tel);
                 $data->estimate_count = Estimate::getCount($data->order_id);
+*/
                 $ary[] = $data;
             }
         }
@@ -77,27 +80,22 @@ class Order extends Model
 
     public static function getData($unique_id){
         $data = Order::where('order_id', $unique_id)->first();
+        Order::addMoreData($data);
+/*
         $data->send = Order::getSendAddress($data);
         $data->arrive = Order::getArriveAddress($data);
         $data->send_tels = \Func::telFormatDecode($data->send_tel);
         $data->arrive_tels = \Func::telFormatDecode($data->arrive_tel);
-
+*/
         return $data;
     }
 
     public static function getEstimatableDatas(){
         $ary = [];
-        $datas = Order::where('status_id', 'ORD-STS-06')->orderBy('estimate_close_at', 'ASC')->get();
+        $datas = Order::where('status_id', 'O-01')->orderBy('estimate_close_at', 'ASC')->get();
         if(!empty($datas)){
             foreach($datas as $data){
-                $data->send = Order::getSendAddress($data);
-                $data->arrive = Order::getArriveAddress($data);
-                $data->send_tels = \Func::telFormatDecode($data->send_tel);
-                $data->arrive_tels = \Func::telFormatDecode($data->arrive_tel);
-//                $data->owner = Owner::getData($data->owner_id);
-                $data->owner_with_star = Order::getOwnerNameWithStar($data);
-                $data->estimate_count = Estimate::getCount($data->order_id);
-                $data->my_estimate = Estimate::getMyEstimate($data->order_id);
+                Order::addMoreData($data);
                 $ary[] = $data;
             }
         }
@@ -105,9 +103,24 @@ class Order extends Model
         return $ary;
     }
 
+    public static function addMoreData(&$data){
+        $data->send = Order::getSendAddress($data);
+        $data->arrive = Order::getArriveAddress($data);
+        $data->send_tels = \Func::telFormatDecode($data->send_tel);
+        $data->arrive_tels = \Func::telFormatDecode($data->arrive_tel);
+        $data->owner_with_star = Order::getOwnerNameWithStar($data);
+        $data->send_timezone_str = $data->send_timezone;
+        $data->arrive_timezone_str = $data->arrive_timezone;
+
+        $data->estimate_count = Estimate::getCount($data->order_id);
+        $data->my_estimate_count = Estimate::getMyCount($data->order_id);
+        $my_estimate = Estimate::getMyEstimate($data->order_id);
+        $data->my_estimated_at = $my_estimate? $my_estimate->estimated_at: '-';
+    }
+
     public static function getEstimatableDatasNames(){
         $ary = [];
-        $datas = Order::where('status_id', 'ORD-STS-06')->orderBy('estimate_close_at', 'ASC')->get();
+        $datas = Order::where('status_id', 'O-01')->orderBy('estimate_close_at', 'ASC')->get();
         if(!empty($datas)){
             foreach($datas as $data){
                 $data->owner = Owner::getData($data->owner_id);

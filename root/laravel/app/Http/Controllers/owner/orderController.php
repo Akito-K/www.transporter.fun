@@ -17,7 +17,7 @@ use App\Model\CargoName;
 use App\Model\CargoForm;
 use App\Model\OrderRequest;
 use App\Model\OrderRequestOption;
-use App\Model\OrderStatus;
+use App\Model\Status;
 
 use App\Model\Pagemeta;
 use App\Model\Log;
@@ -41,7 +41,7 @@ class orderController extends ownerController
 
         $pagemeta = Pagemeta::getPagemeta('OW-ORD-01');
         $datas = Order::getDatas($me->owner_id);
-        $status = OrderStatus::getNames();
+        $status = Status::getNames();
 
         return view('owner.order.list', compact('pagemeta', 'datas', 'status'));
     }
@@ -523,7 +523,7 @@ class orderController extends ownerController
             'arrive_address' => $request_data->arrive_address,
             'arrive_tel' => \Func::telFormat( $request_data->arrive_tels ),
 
-            'status_id' => 'ORD-STS-01',
+            'status_id' => 'O-00',
             'notes' => $request_data->notes,
             'amount_hope_min' => $request_data->amount_hope_min?: 0,
             'amount_hope_max' => $request_data->amount_hope_max?: 0,

@@ -119,9 +119,15 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/carrier/request/{order_id}/detail',       'carrier\requestController@showDetail');
 
             // 見積作成
+            Route::get ('/carrier/estimate',                        'carrier\estimateController@showList');
+            Route::get ('/carrier/estimate/{order_id}/list',        'carrier\estimateController@showOrderList');
+            Route::get ('/carrier/estimate/{estimate_id}/detail',   'carrier\estimateController@showDetail');
             Route::get ('/carrier/estimate/{order_id}/create',      'carrier\estimateController@create');
             Route::post('/carrier/estimate/confirm',                'carrier\estimateController@confirm');
             Route::post('/carrier/estimate/insert',                 'carrier\estimateController@insert');
+            Route::get ('/carrier/estimate/{estimate_id}/edit',     'carrier\estimateController@edit');
+            Route::post('/carrier/estimate/{estimate_id}/confirm',  'carrier\estimateController@confirmUpdate');
+            Route::post('/carrier/estimate/update',                 'carrier\estimateController@update');
 
             // 見積用商品
             Route::get ('/carrier/item',                            'carrier\itemController@showList');
@@ -133,7 +139,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/carrier/item/{item_id}/delete',           'carrier\itemController@delete');
 
             // 案件
-            Route::get ('/carrier/work',                                'carrier\workController@showList');
+            Route::get ('/carrier/work',                            'carrier\workController@showList');
         });
 
         // ADMIN = = = = = = = = = = = =
@@ -184,14 +190,16 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/admin/carrier_class/{class_id}/edit',             'admin\carrierClassController@edit');
             Route::post('/admin/carrier_class/update',                      'admin\carrierClassController@update');
             Route::get ('/admin/carrier_class/{class_id}/delete',           'admin\carrierClassController@delete');
-            // マスタ：OrderStatus
-            Route::get ('/admin/order_status',                              'admin\orderStatusController@showList');
-            Route::get ('/admin/order_status/{status_id}/detail',           'admin\orderStatusController@showDetail');
-            Route::get ('/admin/order_status/create',                       'admin\orderStatusController@create');
-            Route::post('/admin/order_status/insert',                       'admin\orderStatusController@insert');
-            Route::get ('/admin/order_status/{status_id}/edit',             'admin\orderStatusController@edit');
-            Route::post('/admin/order_status/update',                       'admin\orderStatusController@update');
-            Route::get ('/admin/order_status/{status_id}/delete',           'admin\orderStatusController@delete');
+            // マスタ：Status
+            Route::get ('/admin/status',                                    'admin\statusController@showList');
+/*
+            Route::get ('/admin/status/{status_id}/detail',                 'admin\statusController@showDetail');
+            Route::get ('/admin/status/create',                             'admin\statusController@create');
+            Route::post('/admin/status/insert',                             'admin\statusController@insert');
+            Route::get ('/admin/status/{status_id}/edit',                   'admin\statusController@edit');
+            Route::post('/admin/status/update',                             'admin\statusController@update');
+            Route::get ('/admin/status/{status_id}/delete',                 'admin\statusController@delete');
+*/
             // マスタ：CargoName
             Route::get ('/admin/cargo_name',                                'admin\cargoNameController@showList');
             Route::get ('/admin/cargo_name/{name_id}/detail',               'admin\cargoNameController@showDetail');

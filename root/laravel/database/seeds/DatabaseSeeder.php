@@ -26,8 +26,8 @@ use App\Model\MessageUnopen;
 use App\Model\MyUser;
 use App\Model\News;
 use App\Model\Order;
-use App\Model\OrderProgress;
-use App\Model\OrderStatus;
+use App\Model\StatusLog;
+use App\Model\Status;
 //use App\Model\OrderValue;
 use App\Model\Owner;
 use App\Model\Pref;
@@ -82,8 +82,8 @@ class DatabaseSeeder extends Seeder
         $this->CarrierToCarSeeder();
         $this->OrderSeeder();
         //$this->OrderValueSeeder();
-        //$this->OrderProgressSeeder();
-        $this->OrderStatusSeeder();
+        $this->StatusLogSeeder();
+        $this->StatusSeeder();
         //$this->BoardSeeder();
         //$this->MessageSeeder();
         //$this->MessageUnopenSeeder();
@@ -92,7 +92,7 @@ class DatabaseSeeder extends Seeder
         $this->PrefSeeder();
         //$this->UploadSeeder();
         //$this->LogSeeder();
-        //$this->Seeder();
+        $this->ItemSeeder();
         //$this->Seeder();
 
         $this->CargoSeeder();
@@ -355,8 +355,8 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-    public function OrderStatusSeeder(){
-        $table_name = 'order_statuses';
+    public function StatusLogSeeder(){
+        $table_name = 'status_logs';
 
         DB::table( $table_name )->delete();
         if( isset( $this->datas[ $table_name ])){
@@ -364,7 +364,21 @@ class DatabaseSeeder extends Seeder
 
             if(!empty($datas)){
                 foreach($datas as $data){
-                    OrderStatus::create($data);
+                    StatusLog::create($data);
+                }
+            }
+        }
+    }
+    public function StatusSeeder(){
+        $table_name = 'statuses';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    Status::create($data);
                 }
             }
         }
@@ -410,6 +424,21 @@ class DatabaseSeeder extends Seeder
             if(!empty($datas)){
                 foreach($datas as $data){
                     Pref::create($data);
+                }
+            }
+        }
+    }
+
+    public function ItemSeeder(){
+        $table_name = 'items';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    Item::create($data);
                 }
             }
         }

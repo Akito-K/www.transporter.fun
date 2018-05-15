@@ -17,8 +17,48 @@ use App\Model\Log;
 
 class estimateController extends carrierController
 {
+    public function showList (Request $request){
+        Log::saveData( 'carrier\estimateController@showList');
+
+        $me = $request['me'];
+        $pagemeta = Pagemeta::getPagemeta('OW-ESM-01');
+        $datas = Estimate::getEstimates();
+
+        return view('carrier.estimate.list', compact('pagemeta', 'datas'));
+    }
+
+    public function showOrderList ($order_id, Request $request){
+        Log::saveData( 'carrier\estimateController@showOrderList', 'order_id', $order_id, true);
+
+        $me = $request['me'];
+        $pagemeta = Pagemeta::getPagemeta('OW-ESM-01');
+        $datas = Estimate::getOrderEstimates($order_id);
+
+        return view('carrier.estimate.list', compact('pagemeta', 'datas'));
+    }
+
+    public function showDetail ($estimate_id, Request $request){
+        $order_id = $request['order_id'];
+        Log::saveData( 'carrier\estimateController@showDetail', 'estimate_id', $estimate_id, true);
+/*
+        // Validation
+        $this->validation($request);
+
+        $me = $request['me'];
+        $pagemeta = Pagemeta::getPagemeta('OW-ESM-04');
+        $data = Order::getOrderData($order_id);
+        $carrier = Carrier::getData($me->carrier_id);
+
+        $estimate_data = $this->makeData($request);
+        $request->session()->forget('estimate.create.'.$me->hashed_id);
+        $request->session()->put('estimate.create.'.$me->hashed_id, $estimate_data);
+
+        return view('carrier.estimate.confirm', compact('data', 'pagemeta', 'estimate_data', 'carrier', 'me'));
+*/
+    }
+
     public function create($order_id, Request $request){
-        Log::saveData( 'carrier\requestController@create', 'order_id', $order_id, true);
+        Log::saveData( 'carrier\estimateController@create', 'order_id', $order_id, true);
 
         $me = $request['me'];
         $pagemeta = Pagemeta::getPagemeta('OW-ESM-03');
@@ -40,7 +80,7 @@ class estimateController extends carrierController
 
     public function confirm(Request $request){
         $order_id = $request['order_id'];
-        Log::saveData( 'carrier\requestController@confirm', 'order_id', $order_id, true);
+        Log::saveData( 'carrier\estimateController@confirm', 'order_id', $order_id, true);
 
         // Validation
         $this->validation($request);
@@ -64,7 +104,7 @@ class estimateController extends carrierController
 
         $this->insertData( $data );
 
-        Log::saveData( 'carrier\requestController@insert', 'order_id', $data->order_id, true);
+        Log::saveData( 'carrier\estimateController@insert', 'order_id', $data->order_id, true);
 
         return redirect('carrier/work');
     }

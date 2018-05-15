@@ -17,8 +17,9 @@
                         <th>到着地</th>
                         <th>見積依頼日時</th>
                         <th>募集終了日時</th>
-                        <th>全見積り数</th>
-                        <th>提出日時</th>
+                        <th>作成数</th>
+                        <th>提案日時</th>
+                        <th>全提案数</th>
                         <th>各種操作</th>
                     </tr>
 
@@ -32,14 +33,11 @@
                         <td>{!! \Func::getAddress($data->arrive, ['pref', 'city']) !!}</td>
                         <td>{!! \Func::dateFormat($data->estimate_start_at, 'y/n/j H:i') !!}</td>
                         <td>{!! \Func::dateFormat($data->estimate_close_at, 'y/n/j H:i') !!}</td>
+
+                        <td>{{ $data->my_estimate_count }} 件</td>
+                        <td>{{ $data->my_estimated_at }}</td>
                         <td>{{ $data->estimate_count }} 件</td>
-                        <td>
-                            @if($data->my_estimate)
-                            {{ $data->my_estimate->estimated_at }}
-                            @else
-                            -
-                            @endif
-                        </td>
+
                         <td>
                             @include('include.buttons.carrier.request', ['data' => $data])
                         </td>

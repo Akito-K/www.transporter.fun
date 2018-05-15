@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 //use App\Model\MyUser;
 use App\Model\Owner;
 use App\Model\Order;
-use App\Model\OrderProgress;
+use App\Model\StatusLog;
 
 use App\Model\Pagemeta;
 use App\Model\Log;
@@ -61,18 +61,17 @@ class requestController extends ownerController
         //if( $now_at >= $order->estimate_start_at && $now_at <= $order->estimate_close_at){
         if( $now_at < $order->estimate_close_at){
             $order->estimate_start_at = $now_at;
-            $order->status_id = 'ORD-STS-06';
+            $order->status_id = 'O-01';
             $order->updated_at = $now_at;
             $order->save();
 
             $progress = [
                 'order_id' => $order_id,
                 'status_id' => $order->status_id,
-                'applied_at' => $now_at,
                 'created_at' => $now_at,
                 'updated_at' => $now_at,
             ];
-            OrderProgress::insert($progress);
+            StatusLog::insert($progress);
 
             // sendMail
             // $data->body;

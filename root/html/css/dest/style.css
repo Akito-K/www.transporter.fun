@@ -10093,15 +10093,19 @@ input[type="number"] {
   .param-100 {
     width: 100%;
   }
+  .stars-wrap {
+    display: inline-block;
+  }
   .stars {
     display: inline-block;
     position: relative;
     padding: 0;
     margin: 0;
     width: 62px;
-    height: 13px;
+    height: 14px;
   }
   .stars--val {
+    display: inline-block;
     font-size: 9px;
   }
   .star {
@@ -10114,6 +10118,17 @@ input[type="number"] {
     z-index: 10;
     text-shadow: 0px 0px 0.1px #000;
     font-size: 12px;
+  }
+  .star__lists {
+    width: 62px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
   }
   .star--after {
     color: #ff0;
