@@ -64,13 +64,6 @@ class Order extends Model
         if(!empty($datas)){
             foreach($datas as $data){
                 Order::addMoreData($data);
-/*
-                $data->send = Order::getSendAddress($data);
-                $data->arrive = Order::getArriveAddress($data);
-                $data->send_tels = \Func::telFormatDecode($data->send_tel);
-                $data->arrive_tels = \Func::telFormatDecode($data->arrive_tel);
-                $data->estimate_count = Estimate::getCount($data->order_id);
-*/
                 $ary[] = $data;
             }
         }
@@ -81,12 +74,6 @@ class Order extends Model
     public static function getData($unique_id){
         $data = Order::where('order_id', $unique_id)->first();
         Order::addMoreData($data);
-/*
-        $data->send = Order::getSendAddress($data);
-        $data->arrive = Order::getArriveAddress($data);
-        $data->send_tels = \Func::telFormatDecode($data->send_tel);
-        $data->arrive_tels = \Func::telFormatDecode($data->arrive_tel);
-*/
         return $data;
     }
 
@@ -295,6 +282,60 @@ class Order extends Model
         }
 
         $data->order_request_results = $rst;
+    }
+
+
+
+
+
+
+
+
+
+
+    public static function saveData( $request_data, $order_id ){
+        $date_at = new \Datetime();
+        $timezones = Order::getTimezones();
+        $request_data = (object) $request_data;
+        // Order
+        $data = [
+            'order_id' => $order_id,
+            'owner_id' => \Auth::user()->owner_id,
+            'name' => $request_data->name,
+            'flag_hide_owner' => $request_data->flag_hide_owner,
+            'class_id' => $request_data->class_id,
+            'send_at' => $request_data->hide_send_at,
+            'send_timezone' => $request_data->send_timezone? $timezones[ $request_data->send_timezone ]: '',
+            'arrive_at' => $request_data->hide_arrive_at,
+            'arrive_timezone' => $request_data->arrive_timezone? $timezones[ $request_data->arrive_timezone ]: '',
+
+            'send_sei' => $request_data->send_sei,
+            'send_mei' => $request_data->send_mei,
+            'send_zip1' => $request_data->send_zip1,
+            'send_zip2' => $request_data->send_zip2,
+            'send_pref_code' => $request_data->send_pref_code,
+            'send_city' => $request_data->send_city,
+            'send_address' => $request_data->send_address,
+            'send_tel' => \Func::telFormat( $request_data->send_tels ),
+
+            'arrive_sei' => $request_data->arrive_sei,
+            'arrive_mei' => $request_data->arrive_mei,
+            'arrive_zip1' => $request_data->arrive_zip1,
+            'arrive_zip2' => $request_data->arrive_zip2,
+            'arrive_pref_code' => $request_data->arrive_pref_code,
+            'arrive_city' => $request_data->arrive_city,
+            'arrive_address' => $request_data->arrive_address,
+            'arrive_tel' => \Func::telFormat( $request_data->arrive_tels ),
+
+            'status_id' => 'O-00',
+            'notes' => $request_data->notes,
+            'amount_hope_min' => $request_data->amount_hope_min?: 0,
+            'amount_hope_max' => $request_data->amount_hope_max?: 0,
+
+            'created_at' => $date_at,
+            'updated_at' => $date_at,
+        ];
+        Order::insert($data);
     }
 
 }

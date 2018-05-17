@@ -18,7 +18,7 @@ class addressController extends mypageController
         $me = $request['me'];
         $pagemeta = Pagemeta::getPagemeta('MY-ADR-01');
         $datas = Address::getDatas($me->user_id);
-        Log::saveData( 'mypage\addressController@showList');
+        Log::saveData( __METHOD__ );
 
         return view('mypage.address.list', compact('pagemeta', 'datas'));
     }
@@ -29,7 +29,7 @@ class addressController extends mypageController
         $prefs = pref::getNames();
         \Func::array_append($prefs, [ 0 => '---' ], true);
 
-        Log::saveData( 'mypage\addressController@showDetail', 'address_id', $address_id, true);
+        Log::saveData( __METHOD__ , 'address_id', $address_id, true);
 
         return view('mypage.address.detail', compact('pagemeta', 'data', 'prefs'));
     }
@@ -39,7 +39,7 @@ class addressController extends mypageController
         $prefs = pref::getNames();
         \Func::array_append($prefs, [ 0 => '---' ], true);
 
-        Log::saveData( 'mypage\addressController@create');
+        Log::saveData( __METHOD__ );
 
         return view('mypage.address.create', compact('pagemeta', 'prefs'));
     }
@@ -49,7 +49,7 @@ class addressController extends mypageController
         $this->validationInsert($request);
         $this->insertData($request);
 
-        Log::saveData( 'mypage\addressController@insert');
+        Log::saveData( __METHOD__ );
 
         return redirect('mypage/address');
     }
@@ -60,7 +60,7 @@ class addressController extends mypageController
         $prefs = pref::getNames();
         \Func::array_append($prefs, [ 0 => '---' ], true);
 
-        Log::saveData( 'mypage\addressController@edit', 'address_id', $address_id, true);
+        Log::saveData( __METHOD__ , 'address_id', $address_id, true);
 
         return view('mypage.address.edit', compact('pagemeta', 'data', 'prefs'));
     }
@@ -70,13 +70,13 @@ class addressController extends mypageController
         $this->validationUpdate($request);
         $this->updateData($request);
 
-        Log::saveData( 'mypage\addressController@update');
+        Log::saveData( __METHOD__ );
 
         return redirect('mypage/address');
     }
 
     public function delete($address_id, Request $request){
-        Log::saveData( 'mypage\addressController@delete', 'address_id', $address_id, true);
+        Log::saveData( __METHOD__ , 'address_id', $address_id, true);
 
         Address::where('address_id', $request['address_id'])
                 ->delete();

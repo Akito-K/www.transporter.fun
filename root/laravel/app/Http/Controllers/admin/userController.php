@@ -21,7 +21,7 @@ class userController extends adminController
         $pagemeta = Pagemeta::getPagemeta('AD-USR-01');
         $users = MyUser::getUsers();
         $authorities = Authority::getNames();
-        Log::saveData( 'admin\userController@showList' );
+        Log::saveData( __METHOD__ );
 
         return view('admin.user.list', compact('pagemeta', 'users', 'authorities', 'me'));
     }
@@ -31,7 +31,7 @@ class userController extends adminController
         $pagemeta = Pagemeta::getPagemeta('AD-USR-02');
         $data = MyUser::getUser($hashed_id);
         $authorities = Authority::getNames();
-        Log::saveData( 'admin\newsController@showDetail', 'user_id', $data->user_id, true );
+        Log::saveData( __METHOD__ , 'user_id', $data->user_id, true );
 
         return view('admin.user.detail', compact('pagemeta', 'data', 'authorities', 'me'));
     }
@@ -41,7 +41,7 @@ class userController extends adminController
 
         $pagemeta = Pagemeta::getPagemeta('AD-USR-03');
         $authorities = Authority::getNames();
-        Log::saveData( 'admin\userController@create' );
+        Log::saveData( __METHOD__ );
 
         return view('admin.user.create', compact('pagemeta', 'authorities', 'me'));
     }
@@ -52,7 +52,7 @@ class userController extends adminController
         $pagemeta = Pagemeta::getPagemeta('AD-USR-06');
         $data = MyUser::getUser($hashed_id);
         $authorities = Authority::getNames();
-        Log::saveData( 'admin\userController@insert', 'user_id', $data->user_id, true);
+        Log::saveData( __METHOD__ , 'user_id', $data->user_id, true);
 
         return view('admin.user.edit', compact('pagemeta', 'data', 'authorities', 'me'));
     }
@@ -78,7 +78,7 @@ class userController extends adminController
         // 権限更新
         UserToAuthority::updateDatas($request, $user_id);
 
-        Log::saveData( 'admin\userController@insert', 'user_id', $user_id, true );
+        Log::saveData( __METHOD__ , 'user_id', $user_id, true );
 
         return redirect('admin/user/'.sha1($user_id).'/detail');
     }
@@ -109,7 +109,7 @@ class userController extends adminController
         // 権限更新
         UserToAuthority::updateDatas($request, $user->user_id);
 
-        Log::saveData( 'admin\userController@update', 'user_id', $user->user_id, true );
+        Log::saveData( __METHOD__ , 'user_id', $user->user_id, true );
 
         return redirect('admin/user/'.$hashed_id.'/detail');
     }
@@ -118,7 +118,7 @@ class userController extends adminController
         $user = MyUser::getData($hashed_id);
         MyUser::deleteData($hashed_id);
         UserToAuthority::deleteData($user->user_id);
-        Log::saveData( 'admin\userController@delete', 'user_id', $user->user_id, true );
+        Log::saveData( __METHOD__ , 'user_id', $user->user_id, true );
 
         return redirect('admin/user');
     }
@@ -126,7 +126,7 @@ class userController extends adminController
     public function ban($hashed_id){
         $user = MyUser::getData($hashed_id);
         MyUser::ban($hashed_id);
-        Log::saveData( 'admin\userController@ban', 'user_id', $user->user_id, true );
+        Log::saveData( __METHOD__ , 'user_id', $user->user_id, true );
 
         return redirect('admin/user');
     }

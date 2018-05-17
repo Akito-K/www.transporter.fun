@@ -14,7 +14,7 @@ class itemController extends carrierController
 
     public function showList(Request $request){
         $me = $request['me'];
-        Log::saveData( 'carrier\itemController@showList');
+        Log::saveData( __METHOD__ );
         $pagemeta = Pagemeta::getPagemeta('CR-ITM-01');
         $datas = Item::getDatas($me->carrier_id);
 
@@ -22,7 +22,7 @@ class itemController extends carrierController
     }
 
     public function showDetail($item_id, Request $request){
-        Log::saveData( 'carrier\itemController@showDetail', 'item_id', $item_id, true);
+        Log::saveData( __METHOD__ , 'item_id', $item_id, true);
         $pagemeta = Pagemeta::getPagemeta('CR-ITM-02');
         $data = Item::getData($item_id);
 
@@ -30,14 +30,14 @@ class itemController extends carrierController
     }
 
     public function create(Request $request){
-        Log::saveData( 'carrier\itemController@create');
+        Log::saveData( __METHOD__ );
         $pagemeta = Pagemeta::getPagemeta('CR-ITM-03');
 
         return view('carrier.item.create', compact('pagemeta'));
     }
 
     public function insert(Request $request){
-        Log::saveData( 'carrier\itemController@insert');
+        Log::saveData( __METHOD__ );
         // Validation
         $this->validation($request);
         $this->insertData($request);
@@ -48,13 +48,13 @@ class itemController extends carrierController
     public function edit($item_id, Request $request){
         $pagemeta = Pagemeta::getPagemeta('CR-ITM-06');
         $data = Item::getData($item_id);
-        Log::saveData( 'carrier\itemController@edit', 'item_id', $item_id, true);
+        Log::saveData( __METHOD__ , 'item_id', $item_id, true);
 
         return view('carrier.item.edit', compact('pagemeta', 'data'));
     }
 
     public function update(Request $request){
-        Log::saveData( 'carrier\itemController@update', 'item_id', $request['item_id'], true);
+        Log::saveData( __METHOD__ , 'item_id', $request['item_id'], true);
         // Validation
         $this->validation($request);
         $this->updateData($request);
@@ -64,7 +64,7 @@ class itemController extends carrierController
     }
 
     public function delete($item_id, Request $request){
-        Log::saveData( 'carrier\itemController@delete', 'item_id', $item_id, true);
+        Log::saveData( __METHOD__ , 'item_id', $item_id, true);
         Item::where('item_id', $item_id)->delete();
 
         return redirect('carrier/item');

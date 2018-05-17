@@ -10,7 +10,7 @@ use App\Model\Log;
 class workController extends carrierController
 {
     public function showList(Request $request){
-        Log::saveData( 'carrier\workController@showList');
+        Log::saveData( __METHOD__ );
         $me = $request['me'];
         $pagemeta = Pagemeta::getPagemeta('CR-WRK-01');
 
@@ -20,7 +20,7 @@ class workController extends carrierController
     }
 
     public function showDetail($work_id, Request $request){
-        Log::saveData( 'carrier\workController@showDetail', 'work_id', $work_id, true);
+        Log::saveData( __METHOD__ , 'work_id', $work_id, true);
         $me = $request['me'];
         $pagemeta = Pagemeta::getPagemeta('CR-WRK-02');
         $data = Work::getData($work_id);

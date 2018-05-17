@@ -14,6 +14,23 @@
 Auth::routes();
 Route::get ('/',     'HomeController@index');
 
+
+
+/*
+// テストコード
+Route::get ('/testcode/confirming',                 'testcode\confirmingController@showList');
+Route::get ('/testcode/confirming/create',          'testcode\confirmingController@create');
+Route::post('/testcode/confirming/confirm',         'testcode\confirmingController@confirm');
+Route::post('/testcode/confirming/insert',          'testcode\confirmingController@insert');
+Route::get ('/testcode/confirming/{id}/edit',       'testcode\confirmingController@edit');
+Route::post('/testcode/confirming/{id}/confirm',    'testcode\confirmingController@confirmUpdate');
+Route::post('/testcode/confirming/update',          'testcode\confirmingController@update');
+Route::get ('/testcode/confirming/{id}/delete',     'testcode\confirmingController@delete');
+*/
+
+
+
+
 // ユーザー登録
   // メアド入力
 Route::get ('/signup',                          'common\signupController@email');
@@ -94,9 +111,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/owner/order',                             'owner\orderController@showList');
             Route::get ('/owner/order/{order_id}/detail',           'owner\orderController@showDetail');
             Route::get ('/owner/order/create',                      'owner\orderController@create');
+            Route::post('/owner/order/create',                      'owner\orderController@create');
             Route::post('/owner/order/confirm',                     'owner\orderController@confirm');
             Route::post('/owner/order/insert',                      'owner\orderController@insert');
             Route::get ('/owner/order/{order_id}/edit',             'owner\orderController@edit');
+            Route::post('/owner/order/{order_id}/edit',             'owner\orderController@edit');
             Route::post('/owner/order/{order_id}/confirm',          'owner\orderController@confirmUpdate');
             Route::post('/owner/order/update',                      'owner\orderController@update');
             Route::get ('/owner/order/{order_id}/delete',           'owner\orderController@delete');
@@ -128,6 +147,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/carrier/estimate/{estimate_id}/edit',     'carrier\estimateController@edit');
             Route::post('/carrier/estimate/{estimate_id}/confirm',  'carrier\estimateController@confirmUpdate');
             Route::post('/carrier/estimate/update',                 'carrier\estimateController@update');
+            Route::get ('/carrier/estimate/{estimate_id}/delete',   'carrier\estimateController@delete');
 
             // 見積用商品
             Route::get ('/carrier/item',                            'carrier\itemController@showList');

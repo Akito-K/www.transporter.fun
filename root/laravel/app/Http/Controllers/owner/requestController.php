@@ -15,7 +15,7 @@ class requestController extends ownerController
 {
 
     public function create($order_id, Request $request){
-        Log::saveData( 'owner\requestController@create', 'order_id', $order_id, true);
+        Log::saveData( __METHOD__ , 'order_id', $order_id, true);
         $me = $request['me'];
         $pagemeta = Pagemeta::getPagemeta('OW-MRQ-01');
         $data = Order::getOrderData($order_id);
@@ -30,7 +30,7 @@ class requestController extends ownerController
     }
 
     public function confirm(Request $request){
-        Log::saveData( 'owner\requestController@confirm');
+        Log::saveData( __METHOD__ );
 
         // Validation
         $this->validation($request);
@@ -77,13 +77,13 @@ class requestController extends ownerController
             // $data->body;
         }
 
-        Log::saveData( 'owner\requestController@execute');
+        Log::saveData( __METHOD__ );
 
         return redirect('owner/order');
     }
 
     public function cancel($order_id, Request $request){
-        Log::saveData( 'owner\orderController@delete', 'order_id', $order_id, true);
+        Log::saveData( __METHOD__ , 'order_id', $order_id, true);
 
         Order::where('order_id', $order_id)->delete();
 

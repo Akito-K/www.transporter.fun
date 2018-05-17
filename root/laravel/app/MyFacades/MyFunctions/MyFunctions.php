@@ -637,7 +637,13 @@ class MyFunctions
         return Pref::getNames();
      }
 
+     public static function isValidated( $errors ){
+        \Func::var_dump( $errors );exit;
+     }
 
+     public static function isBacked(){
+        \Func::var_dump( $_SERVER );exit;
+     }
 
 
 }

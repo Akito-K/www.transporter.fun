@@ -3,10 +3,10 @@
 
 <div class="box">
     <div class="box-body">
-        <h2 class="page-header">見積作成（確認画面）</h2>
+        <h2 class="page-header">見積詳細</h2>
 
         <div class="request__block">
-            {!! Form::open(['url' => 'carrier/estimate/insert', 'class' => 'request__boxes']) !!}
+            <div class="request__boxes">
 
                 <h4 class="order__box__title trigAccordOrderBox" data-open="0">案件情報</h4>
                 <div class="request__order bulletAccordOrderBox initial-close" id="bulletQuoteOrder">
@@ -113,13 +113,13 @@
 
                 </div>
 
-                {!! Form::submit('この内容で保存する', ['class' => 'btn btn-block btn-warning btn-submit'] ) !!}
-            {!! \Form::close() !!}
+            </div>
 
         </div>
 
         <p>
-            <a href="{{ url('') }}/carrier/estimate/{{ $estimate_data->order_id }}/create" class="btn btn-block btn-primary">入力画面に戻る</a>
+            <a href="{{ url('') }}/carrier/estimate/{{ $estimate_data->order_id }}/list" class="btn btn-block btn-primary">この案件の見積一覧に戻る</a>
+            <a href="{{ url('') }}/carrier/estimate/" class="btn btn-block btn-primary">作成した見積一覧に戻る</a>
         </p>
 
     </div>

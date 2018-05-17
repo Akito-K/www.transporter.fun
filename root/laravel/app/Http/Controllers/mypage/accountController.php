@@ -26,7 +26,7 @@ class accountController extends mypageController
         $pagemeta = Pagemeta::getPagemeta('MY-USR-01');
         $data = MyUser::getUser($me->hashed_id);
         $prefs = pref::getNames();
-        Log::saveData( 'mypage\newsController@showDetail', 'user_id', $data->user_id, true );
+        Log::saveData( __METHOD__ , 'user_id', $data->user_id, true );
 
         return view('mypage.account.detail', compact('pagemeta', 'data', 'me', 'prefs'));
     }
@@ -38,7 +38,7 @@ class accountController extends mypageController
         $data = MyUser::getUser($me->hashed_id);
         $prefs = pref::getNames();
         \Func::array_append($prefs, [ 0 => '---' ], true);
-        Log::saveData( 'mypage\accountController@insert', 'user_id', $data->user_id, true);
+        Log::saveData( __METHOD__ , 'user_id', $data->user_id, true);
 
         return view('mypage.account.edit', compact('pagemeta', 'data', 'me', 'prefs'));
     }
@@ -63,7 +63,7 @@ class accountController extends mypageController
         // ユーザー情報更新
         MyUser::updateData($request, ['email']);
 
-        Log::saveData( 'mypage\accountController@update', 'user_id', $user->user_id, true );
+        Log::saveData( __METHOD__ , 'user_id', $user->user_id, true );
 
         return redirect('mypage/account');
     }
@@ -73,7 +73,7 @@ class accountController extends mypageController
 
         $pagemeta = Pagemeta::getPagemeta('MY-USR-04');
         $data = MyUser::getUser($me->hashed_id);
-        Log::saveData( 'mypage\accountController@email', 'user_id', $data->user_id, true);
+        Log::saveData( __METHOD__ , 'user_id', $data->user_id, true);
 
         return view('mypage.account.email', compact('pagemeta', 'data', 'me'));
     }

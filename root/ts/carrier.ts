@@ -28,7 +28,7 @@ $(() => {
     const ORDER = new Order.MyOrder();
     // 評価★
     const STAR = new Star.MyStar();
-    // 見積もり
+    // 見積
     const ESTIMATE = new Estimate.MyEstimate(STAR);
     // コンタクトボード
 //    const BOARD = new Board.MyBoard();

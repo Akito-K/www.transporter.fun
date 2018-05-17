@@ -7,10 +7,10 @@
 
 <div class="box">
     <div class="box-body">
-        <h2 class="page-header">見積作成</h2>
+        <h2 class="page-header">見積編集</h2>
 
         <div class="request__block">
-            {!! Form::open(['url' => 'carrier/estimate/confirm', 'class' => 'request__boxes']) !!}
+            {!! Form::open(['url' => 'carrier/estimate/'.$estimate_data->estimate_id.'/confirm', 'class' => 'request__boxes']) !!}
                 <ul class="lists">
                     <li class="list list">
                         {!! Form::select('order_id', $select_orders_names, $data->order_id, ['class' => 'form-control', 'id' => 'paramQuoteOrder']) !!}
@@ -50,13 +50,13 @@
                                     </td>
                                     <td class="estimate__table__cell align-right">見積番号</td>
                                     <td class="estimate__table__cell align-right" colspan="2">
-                                        {!! Form::text('number', '', ['class' => 'form-control form-control--xsm']) !!}
+                                        {!! Form::text('number', old('number')?: $estimate_data->estimate_number, ['class' => 'form-control form-control--xsm']) !!}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="estimate__table__cell align-right">見積日</td>
                                     <td class="estimate__table__cell align-right" colspan="2">
-                                        @include('include.date_input', ['date_input_name' => 'estimated', 'placeholder' => '必須', 'req_data' => $estimate_data, 'add_class' => 'form-control--xsm', 'default_input_at' => $default_estimated_at ])
+                                        @include('include.date_input', ['date_input_name' => 'estimated', 'placeholder' => '必須', 'req_data' => $estimate_data, 'add_class' => 'form-control--xsm', 'default_input_at' => new \DatetimeImmutable($estimate_data->estimated_at) ])
                                     </td>
                                 </tr>
                                 <tr>
@@ -65,7 +65,7 @@
                                     </td>
                                     <td class="estimate__table__cell align-right">有効期限</td>
                                     <td class="estimate__table__cell align-right" colspan="2">
-                                        @include('include.date_input', ['date_input_name' => 'limit', 'placeholder' => '必須', 'req_data' => $estimate_data, 'add_class' => 'form-control--xsm', 'default_input_at' => $default_limit_at ])
+                                        @include('include.date_input', ['date_input_name' => 'limit', 'placeholder' => '必須', 'req_data' => $estimate_data, 'add_class' => 'form-control--xsm', 'default_input_at' => new \DatetimeImmutable($estimate_data->limit_at) ])
                                     </td>
                                 </tr>
                                 <tr>
@@ -82,9 +82,28 @@
 
                             <tbody class="estimate__tbody" id="bulletItems">
 
-                                @if(!empty($estimate_data->items))
+                                <?php
+                                if( !old('code[0]') ){
+                                    $item_datas = $estimate_data->items;
+                                }else{
+                                    $item_datas = [];
+                                    $old = old('code');
+                                    foreach($old as $num => $v){
+                                        $item = new \stdClass();
+                                        $item->code     = old('code['.$num.']');
+                                        $item->name     = old('name['.$num.']');
+                                        $item->amount   = old('amount['.$num.']');
+                                        $item->count    = old('count['.$num.']');
+                                        $item->subtotal = old('subtotal['.$num.']');
+                                        $item->notes    = old('notes['.$num.']');
+                                        $item_datas[$num] = $item;
+                                    }
+                                }
+                                ?>
+
+                                @if(!empty($item_datas))
                                 @php $num = 0; @endphp
-                                @foreach( $estimate_data->items as $num => $item )
+                                @foreach( $item_datas as $num => $item )
                                 <tr class="estimate__table__margin-top bulletRemoveItem" data-num="{{ $num }}">
                                     <td class="estimate__table__cell estimate__table__cell--quote" colspan="3">
                                         {!! \Form::select('item['.$num.']', $items, old('item['.$num.']'), ['class' => 'form-control form-control--mini form-control--60 form-control--xxsm paramQuoteItem', 'data-num' => $num]) !!}

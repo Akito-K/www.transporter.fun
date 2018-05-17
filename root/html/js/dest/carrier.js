@@ -10574,7 +10574,7 @@ $(function () {
     var ORDER = new order_1.default.MyOrder();
     // 評価★
     var STAR = new star_1.default.MyStar();
-    // 見積もり
+    // 見積
     var ESTIMATE = new estimate_1.default.MyEstimate(STAR);
     // コンタクトボード
     //    const BOARD = new Board.MyBoard();

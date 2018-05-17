@@ -28,7 +28,7 @@ class startController extends mypageController
         }else{
             $data = $this->makeEmptyData();
         }
-        Log::saveData( 'mypage\startController@createOwner', 'user_id', $me->user_id, true );
+        Log::saveData( __METHOD__ , 'user_id', $me->user_id, true );
 
         return view('mypage.start.owner.create', compact('pagemeta', 'me', 'prefs', 'data'));
     }
@@ -47,7 +47,7 @@ class startController extends mypageController
         $request->session()->forget('start.'.$me->hashed_id);
         $request->session()->put('start.'.$me->hashed_id, $data);
 
-        Log::saveData( 'mypage\startController@confirmOwner', 'user_id', $me->user_id, true );
+        Log::saveData( __METHOD__ , 'user_id', $me->user_id, true );
 
         return view('mypage.start.owner.confirm', compact('pagemeta', 'data', 'user', 'prefs'));
     }
@@ -74,7 +74,7 @@ class startController extends mypageController
         ];
         MyUser::where('hashed_id', $me->hashed_id)->update($user_data);
 
-        Log::saveData( 'mypage\startController@executeOwner', 'user_id', $me->user_id, true );
+        Log::saveData( __METHOD__ , 'user_id', $me->user_id, true );
 
         return redirect('owner');
     }
@@ -146,7 +146,7 @@ class startController extends mypageController
         }else{
             $data = $this->makeEmptyData();
         }
-        Log::saveData( 'mypage\startController@createCarrier', 'user_id', $me->user_id, true );
+        Log::saveData( __METHOD__ , 'user_id', $me->user_id, true );
 
         return view('mypage.start.carrier.create', compact('pagemeta', 'me', 'prefs', 'data'));
     }
@@ -165,7 +165,7 @@ class startController extends mypageController
         $request->session()->forget('start.'.$me->hashed_id);
         $request->session()->put('start.'.$me->hashed_id, $data);
 
-        Log::saveData( 'mypage\startController@confirmCarrier', 'user_id', $me->user_id, true );
+        Log::saveData( __METHOD__ , 'user_id', $me->user_id, true );
 
         return view('mypage.start.carrier.confirm', compact('pagemeta', 'data', 'user', 'prefs'));
     }
@@ -192,7 +192,7 @@ class startController extends mypageController
         ];
         MyUser::where('hashed_id', $me->hashed_id)->update($user_data);
 
-        Log::saveData( 'mypage\startController@executeCarrier', 'user_id', $me->user_id, true );
+        Log::saveData( __METHOD__ , 'user_id', $me->user_id, true );
 
         return redirect('carrier');
     }

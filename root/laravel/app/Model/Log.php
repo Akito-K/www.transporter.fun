@@ -12,7 +12,7 @@ class Log extends Model
     protected $dates = ['deleted_at'];
     protected $guarded = ['id'];
 
-    public static function saveData ( $controller, $target=NULL, $value=NULL, $result=NULL ){
+    public static function saveData ( $controller, $target=NULL, $value=NULL, $result=true ){
         $user_id = \Auth::user()->user_id;
         $data = [
             'user_id' => $user_id,

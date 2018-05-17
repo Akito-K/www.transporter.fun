@@ -3,10 +3,10 @@
 
 <div class="box">
     <div class="box-body">
-        <h2 class="page-header">見積作成（確認画面）</h2>
+        <h2 class="page-header">見積編集（確認画面）</h2>
 
         <div class="request__block">
-            {!! Form::open(['url' => 'carrier/estimate/insert', 'class' => 'request__boxes']) !!}
+            {!! Form::open(['url' => 'carrier/estimate/update', 'class' => 'request__boxes']) !!}
 
                 <h4 class="order__box__title trigAccordOrderBox" data-open="0">案件情報</h4>
                 <div class="request__order bulletAccordOrderBox initial-close" id="bulletQuoteOrder">
@@ -40,7 +40,7 @@
                                 <tr>
                                     <td class="estimate__table__cell align-right">見積日</td>
                                     <td class="estimate__table__cell" colspan="2">:
-                                        {{ date_format($estimate_data->estimated_at, 'Y年n月j日') }}</td>
+                                        {{ \Func::dateFormat($estimate_data->estimated_at, 'Y年n月j日') }}</td>
                                 </tr>
                                 <tr>
                                     <td class="estimate__table__cell" colspan="3">
@@ -48,7 +48,7 @@
                                     </td>
                                     <td class="estimate__table__cell align-right">有効期限</td>
                                     <td class="estimate__table__cell" colspan="2">:
-                                        {{ date_format($estimate_data->limit_at, 'Y年n月j日') }}</td>
+                                        {{ \Func::dateFormat($estimate_data->limit_at, 'Y年n月j日') }}</td>
                                 </tr>
                                 <tr>
                                     <td class="estimate__table__cell estimate__table__cell--space" colspan="6"></td>
@@ -113,13 +113,13 @@
 
                 </div>
 
-                {!! Form::submit('この内容で保存する', ['class' => 'btn btn-block btn-warning btn-submit'] ) !!}
+                {!! Form::submit('この内容で更新する', ['class' => 'btn btn-block btn-warning btn-submit'] ) !!}
             {!! \Form::close() !!}
 
         </div>
 
         <p>
-            <a href="{{ url('') }}/carrier/estimate/{{ $estimate_data->order_id }}/create" class="btn btn-block btn-primary">入力画面に戻る</a>
+            <a href="{{ url('') }}/carrier/estimate/{{ $estimate_data->order_id }}/edit" class="btn btn-block btn-primary">編集画面に戻る</a>
         </p>
 
     </div>

@@ -6,6 +6,20 @@ use Illuminate\Support\Facades\DB;
 
 class MyForm
 {
+    // ラジオボタン
+    public static function radioChild($name, $key, $flag_hecked, $option=[]){
+        $body = '<input type="radio" name="'.$name.'" value="'.$key.'"';
+        foreach($option as $k => $v){
+            $body .= ' '.$k.'="'.$v.'"';
+        }
+        if($flag_hecked){
+            $body .= ' checked="checked"';
+        }
+        $body .= '>';
+
+        return $body;
+    }
+
     // ラジオボタンのセット
     public static function radio($name, $values, $checked_value=NULL, $options=[], $delimitter=NULL){
         $body = "";
@@ -14,8 +28,8 @@ class MyForm
         if(!empty($values)){
             foreach($values as $key => $val){
                 $option = $options;
-                $option['id'] = isset($options['id'])? $options['id'].'-'.$key: 'select-'.$name.'-'.$key;
-                $str = \Form::radio($name, $key, $key === $checked_value, $option);
+                $option['id'] = isset($options['id'])? $options['id'].'-'.$key: 'radio-'.$name.'-'.$key;
+                $str = \MyForm::radioChild($name, $key, $key === $checked_value, $option);
                 $str .= ' <label for="'.$option['id'].'">'.$val.'</label>';
                 $bodies[] = $str;
             }
