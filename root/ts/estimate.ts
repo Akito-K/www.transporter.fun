@@ -17,8 +17,8 @@ namespace Estimate {
             let self = this;
             this.MyStar = STAR;
 
-            if( $('.paramQuoteItem').length > 0 ){
-                this.htmlOptions = $('.paramQuoteItem').eq(0).html();
+            if( $('#paramQuoteItem').length > 0 ){
+                this.htmlOptions = $('#paramQuoteItem').html();
             }
 
             // 項目削除

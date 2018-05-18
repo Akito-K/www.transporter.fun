@@ -19,47 +19,23 @@
                 </div>
 
                 <div class="order__box bulletAccordOrderBox">
-<?php /*
-                    <ul class="lists">
-                        <li class="list list-title">受付開始日時</li>
-                        <li class="list list-value">
-                            <ul class="params">
-                                <li class="param param-50">
-                                    <div class="date-input trigShowCalendar" data-calendar="estimate_start">
-                                        {!! Form::text('estimate_start_at', old('estimate_start_at')?: $req_data->estimate_start_at, ['id' => 'estimate_start_at', 'placeholder' => '必須', 'class' => 'form-control', 'readonly' => 'readonly']) !!}
-                                        {!! Form::hidden('hide_estimate_start_at', old('hide_estimate_start_at')?: $req_data->hide_estimate_start_at, ['id' => 'hide_estimate_start_at']) !!}
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                </li>
-                                <li class="param param-50">
-                                    <select name="estimate_start_at_hour" class="form-control form-control--mini form-control--40 form-control--sm">
-                                        {!! \MyForm::selectHour( old('estimate_start_at_hour')?: $req_data->estimate_start_at_hour?: 10 ) !!}
-                                    </select>時
-                                    <select name="estimate_start_at_minutes" class="form-control form-control--mini form-control--40 form-control--sm">
-                                        {!! \MyForm::selectMinutes( old('estimate_start_at_minutes')?: $req_data->estimate_start_at_minutes?: 0 ) !!}
-                                    </select>分
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-*/ ?>
                     <ul class="lists">
                         <li class="list list-title">受付終了日時</li>
                         <li class="list list-value">
                             <ul class="params">
                                 <li class="param param-50">
                                     <div class="date-input trigShowCalendar" data-calendar="estimate_close">
-                                        {!! Form::text('estimate_close_at', old('estimate_close_at')?: $req_data->estimate_close_at, ['id' => 'estimate_close_at', 'placeholder' => '必須', 'class' => 'form-control', 'readonly' => 'readonly']) !!}
-                                        {!! Form::hidden('hide_estimate_close_at', old('hide_estimate_close_at')?: $req_data->hide_estimate_close_at, ['id' => 'hide_estimate_close_at']) !!}
+                                        {!! Form::text('estimate_close_at', old('estimate_close_at'), ['id' => 'estimate_close_at', 'placeholder' => '必須', 'class' => 'form-control', 'readonly' => 'readonly']) !!}
+                                        {!! Form::hidden('hide_estimate_close_at', old('hide_estimate_close_at'), ['id' => 'hide_estimate_close_at']) !!}
                                         <i class="fa fa-calendar"></i>
                                     </div>
                                 </li>
                                 <li class="param param-50">
                                     <select name="estimate_close_at_hour" class="form-control form-control--mini form-control--40 form-control--sm">
-                                        {!! \MyForm::selectHour( old('estimate_close_at_hour')?: $req_data->estimate_close_at_hour?: 10 ) !!}
+                                        {!! \MyForm::selectHour( old('estimate_close_at_hour')?: 10 ) !!}
                                     </select>時
                                     <select name="estimate_close_at_minutes" class="form-control form-control--mini form-control--40 form-control--sm">
-                                        {!! \MyForm::selectMinutes( old('estimate_close_at_minutes')?: $req_data->estimate_close_at_minutes?: 0 ) !!}
+                                        {!! \MyForm::selectMinutes( old('estimate_close_at_minutes')?: 0 ) !!}
                                     </select>分
                                 </li>
                             </ul>
@@ -68,7 +44,7 @@
                     <ul class="lists">
                         <li class="list list-title">メッセージ</li>
                         <li class="list list-value">
-                            {!! \Form::textarea('body', old('body')?: $req_data->body, ['class' => 'form-control']) !!}
+                            {!! \Form::textarea('body', old('body'), ['class' => 'form-control']) !!}
                         </li>
                     </ul>
                 </div>

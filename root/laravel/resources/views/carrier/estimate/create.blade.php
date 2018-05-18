@@ -5,6 +5,8 @@
 {!! MyHTML::errorMessage($errors) !!}
 {!! MyHTML::flashMessage() !!}
 
+{!! \Form::select('', $items, '', ['class' => 'block-hide', 'id' => 'paramQuoteItem' ]) !!}
+
 <div class="box">
     <div class="box-body">
         <h2 class="page-header">見積作成</h2>
@@ -50,13 +52,13 @@
                                     </td>
                                     <td class="estimate__table__cell align-right">見積番号</td>
                                     <td class="estimate__table__cell align-right" colspan="2">
-                                        {!! Form::text('number', '', ['class' => 'form-control form-control--xsm']) !!}
+                                        {!! Form::text('number', old('number'), ['class' => 'form-control form-control--xsm']) !!}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="estimate__table__cell align-right">見積日</td>
                                     <td class="estimate__table__cell align-right" colspan="2">
-                                        @include('include.date_input', ['date_input_name' => 'estimated', 'placeholder' => '必須', 'req_data' => $estimate_data, 'add_class' => 'form-control--xsm', 'default_input_at' => $default_estimated_at ])
+                                        @include('include.date_create', ['date_input_name' => 'estimated', 'placeholder' => '必須', 'add_class' => 'form-control--xsm', 'default_input_at' => new \DatetimeImmutable() ])
                                     </td>
                                 </tr>
                                 <tr>
@@ -65,7 +67,7 @@
                                     </td>
                                     <td class="estimate__table__cell align-right">有効期限</td>
                                     <td class="estimate__table__cell align-right" colspan="2">
-                                        @include('include.date_input', ['date_input_name' => 'limit', 'placeholder' => '必須', 'req_data' => $estimate_data, 'add_class' => 'form-control--xsm', 'default_input_at' => $default_limit_at ])
+                                        @include('include.date_create', ['date_input_name' => 'limit', 'placeholder' => '必須', 'add_class' => 'form-control--xsm', 'default_input_at' => new \DatetimeImmutable('+1 month -1 day') ])
                                     </td>
                                 </tr>
                                 <tr>
@@ -82,12 +84,12 @@
 
                             <tbody class="estimate__tbody" id="bulletItems">
 
-                                @if(!empty($estimate_data->items))
                                 @php $num = 0; @endphp
-                                @foreach( $estimate_data->items as $num => $item )
+                                @if(!empty( old('code') ))
+                                @foreach( old('code') as $num => $v )
                                 <tr class="estimate__table__margin-top bulletRemoveItem" data-num="{{ $num }}">
                                     <td class="estimate__table__cell estimate__table__cell--quote" colspan="3">
-                                        {!! \Form::select('item['.$num.']', $items, old('item['.$num.']'), ['class' => 'form-control form-control--mini form-control--60 form-control--xxsm paramQuoteItem', 'data-num' => $num]) !!}
+                                        {!! \Form::select('item['.$num.']', $items, old('item.'.$num), ['class' => 'form-control form-control--mini form-control--60 form-control--xxsm paramQuoteItem', 'data-num' => $num]) !!}
                                         <button type="button" class="btn btn-default btn-xsm trigQuoteItem" data-num="{{ $num }}">入力</button>
                                     </td>
                                     <td class="estimate__table__cell align-right" colspan="3">
@@ -98,19 +100,19 @@
                                 </tr>
                                 <tr class="bulletRemoveItem" data-num="{{ $num }}">
                                     <td class="estimate__table__cell">
-                                        {!! Form::text('code['.$num.']', old('code['.$num.']')?: $estimate_data->items[$num]->code, ['class' => 'form-control  form-control--xsm', 'data-num' => $num, 'id' => 'code_0', 'placeholder' => '型番' ]) !!}
+                                        {!! Form::text('item_code['.$num.']', old('item_code.'.$num), ['class' => 'form-control  form-control--xsm', 'data-num' => $num, 'id' => 'code_0', 'placeholder' => '型番' ]) !!}
                                     </td>
                                     <td class="estimate__table__cell" colspan="2">
-                                        {!! Form::text('name['.$num.']', old('name['.$num.']')?: $estimate_data->items[$num]->name, ['class' => 'form-control  form-control--xsm', 'data-num' => $num, 'id' => 'name_0', 'placeholder' => '名称' ]) !!}
+                                        {!! Form::text('item_name['.$num.']', old('item_name.'.$num), ['class' => 'form-control  form-control--xsm', 'data-num' => $num, 'id' => 'name_0', 'placeholder' => '名称' ]) !!}
                                     </td>
                                     <td class="estimate__table__cell">
-                                        {!! Form::number('amount['.$num.']', old('amount['.$num.']')?: $estimate_data->items[$num]->amount, ['class' => 'form-control  form-control--xsm trigCalculateSubTotal paramAmount', 'data-num' => $num, 'id' => 'amount_0', 'placeholder' => '単価' ]) !!}
+                                        {!! Form::number('item_amount['.$num.']', old('item_amount.'.$num), ['class' => 'form-control  form-control--xsm trigCalculateSubTotal paramAmount', 'data-num' => $num, 'id' => 'amount_0', 'placeholder' => '単価' ]) !!}
                                     </td>
                                     <td class="estimate__table__cell">
-                                        {!! Form::number('count['.$num.']', old('count['.$num.']')?: $estimate_data->items[$num]->count, ['class' => 'form-control  form-control--xsm trigCalculateSubTotal paramCount', 'data-num' => $num, 'placeholder' => '数量' ]) !!}
+                                        {!! Form::number('item_count['.$num.']', old('item_count.'.$num), ['class' => 'form-control  form-control--xsm trigCalculateSubTotal paramCount', 'data-num' => $num, 'placeholder' => '数量' ]) !!}
                                     </td>
                                     <td class="estimate__table__cell">
-                                        {!! Form::text('subtotal['.$num.']', old('subtotal['.$num.']')?: $estimate_data->items[$num]->subtotal, ['class' => 'form-control  form-control--xsm paramSubtotal bulletSubTotal readonly', 'readonly' => 'readonly', 'data-num' => $num, 'placeholder' => '小計' ]) !!}
+                                        {!! Form::text('item_subtotal['.$num.']', old('item_subtotal.'.$num), ['class' => 'form-control  form-control--xsm paramSubtotal bulletSubTotal readonly', 'readonly' => 'readonly', 'data-num' => $num, 'placeholder' => '小計' ]) !!}
                                     </td>
                                 </tr>
                                 <tr class="estimate__table__margin-bottom bulletRemoveItem" data-num="{{ $num }}">
@@ -118,7 +120,7 @@
                                         （特記事項）
                                     </td>
                                     <td class="estimate__table__cell estimate__table__cell--notes estimate__table__cell--line" colspan="4">
-                                        {!! Form::textarea('notes['.$num.']', old('notes['.$num.']')?: $estimate_data->items[$num]->notes, ['class' => 'form-control form-control--xsm paramNote bulletNotes', 'data-num' => $num, 'id' => 'notes_0', 'placeholder' => '' ]) !!}
+                                        {!! Form::textarea('item_notes['.$num.']', old('item_notes.'.$num), ['class' => 'form-control form-control--xsm paramNote bulletNotes', 'data-num' => $num, 'id' => 'notes_'.$num, 'placeholder' => '' ]) !!}
                                     </td>
                                     <td class="estimate__table__cell estimate__table__cell--line"></td>
                                 </tr>
@@ -138,11 +140,11 @@
                                 <tr>
                                     <td class="estimate__table__cell" colspan="2">
                                         合計金額<br />
-                                        {!! Form::text('total', old('total')?: $estimate_data->total, ['class' => 'form-control  form-control--mini form-control--80 readonly', 'readonly' => 'readonly', 'id' => 'bulletTotal']) !!} 円
+                                        {!! Form::text('total', old('total'), ['class' => 'form-control  form-control--mini form-control--80 readonly', 'readonly' => 'readonly', 'id' => 'bulletTotal']) !!} 円
                                     </td>
                                     <td class="estimate__table__cell" colspan="4">
                                         特記事項<br />
-                                        {!! Form::textarea('notes', old('notes')?: $estimate_data->notes, ['class' => 'form-control']) !!}
+                                        {!! Form::textarea('notes', old('notes'), ['class' => 'form-control']) !!}
                                     </td>
                                 </tr>
                             </tbody>

@@ -13850,6 +13850,9 @@ button.close {
     height: 100%;
     z-index: 11;
   }
+  .block-hide {
+    display: none;
+  }
 }
 
 @media (max-width: 767px) {

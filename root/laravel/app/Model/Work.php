@@ -46,4 +46,15 @@ class Work extends Model
 
         return $data;
     }
+
+    public static function saveData($request_data, $estimate_id){
+        $request_data = (object) $request_data;
+        $work_id = Work::getNewId();
+        $data = new Work;
+        $data->work_id = $work_id;
+        $data->order_id = $request_data->order_id;
+        $data->estimate_id = $estimate_id;
+        $data->carrier_id = \Auth::user()->carrier_id;
+        $data->save();
+    }
 }

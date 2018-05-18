@@ -74,6 +74,7 @@ class Order extends Model
     public static function getData($unique_id){
         $data = Order::where('order_id', $unique_id)->first();
         Order::addMoreData($data);
+
         return $data;
     }
 
@@ -112,7 +113,7 @@ class Order extends Model
             foreach($datas as $data){
                 $data->owner = Owner::getData($data->owner_id);
                 $val = $data->name.'／';
-                $val .= $data->flag_hide_owner? '***（非公開）': $data->owner->company.$data->owner->sei.$data->owner->mei;
+                $val .= $data->flag_hide_owner? '***（非公開）': $data->owner->company.' '.$data->owner->sei.$data->owner->mei;
                 $ary[ $data->order_id ] = $val.'様';
             }
         }
@@ -292,6 +293,18 @@ class Order extends Model
 
 
 
+    public static function duplicateData($old_order_id, $new_order_id){
+        $date_at = new \Datetime();
+        $old_data = Order::where('order_id', $old_order_id)->first();
+        $new_data = $old_data->replicate();
+        $new_data->name .= '_コピー';
+        $new_data->order_id = $new_order_id;
+        $new_data->status_id = 'O-00';
+        $new_data->estimate_start_at = NULL;
+        $new_data->estimate_close_at = NULL;
+
+        $new_data->save();
+    }
 
     public static function saveData( $request_data, $order_id ){
         $date_at = new \Datetime();
@@ -336,6 +349,50 @@ class Order extends Model
             'updated_at' => $date_at,
         ];
         Order::insert($data);
+    }
+
+    public static function updateData( $request_data ){
+        $date_at = new \Datetime();
+        $timezones = Order::getTimezones();
+        $request_data = (object) $request_data;
+
+        $order_id = $request_data->order_id;
+        $data = Order::where('order_id', $order_id)->first();
+
+        $data->name = $request_data->name;
+        $data->flag_hide_owner = $request_data->flag_hide_owner;
+        $data->class_id = $request_data->class_id;
+        $data->send_at = $request_data->hide_send_at? new \Datetime($request_data->hide_send_at): NULL;
+        $data->send_timezone = $request_data->send_timezone? $timezones[ $request_data->send_timezone ]: '';
+        $data->arrive_at = $request_data->hide_arrive_at? new \Datetime($request_data->hide_arrive_at): NULL;
+        $data->arrive_timezone = $request_data->arrive_timezone? $timezones[ $request_data->arrive_timezone ]: '';
+        $data->send_sei = $request_data->send_sei;
+        $data->send_mei = $request_data->send_mei;
+        $data->send_zip1 = $request_data->send_zip1;
+        $data->send_zip2 = $request_data->send_zip2;
+        $data->send_pref_code = $request_data->send_pref_code;
+        $data->send_city = $request_data->send_city;
+        $data->send_address = $request_data->send_address;
+        $data->send_tel = \Func::telFormat( $request_data->send_tels );
+
+        $data->arrive_sei = $request_data->arrive_sei;
+        $data->arrive_mei = $request_data->arrive_mei;
+        $data->arrive_zip1 = $request_data->arrive_zip1;
+        $data->arrive_zip2 = $request_data->arrive_zip2;
+        $data->arrive_pref_code = $request_data->arrive_pref_code;
+        $data->arrive_city = $request_data->arrive_city;
+        $data->arrive_address = $request_data->arrive_address;
+        $data->arrive_tel = \Func::telFormat( $request_data->arrive_tels );
+
+        $data->status_id = 'O-00';
+        $data->notes = $request_data->notes;
+        $data->amount_hope_min = $request_data->amount_hope_min?: 0;
+        $data->amount_hope_max = $request_data->amount_hope_max?: 0;
+        $data->estimate_start_at = NULL;
+        $data->estimate_close_at = NULL;
+
+        $data->updated_at = $date_at;
+        $data->save();
     }
 
 }

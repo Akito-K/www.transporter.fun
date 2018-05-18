@@ -99,4 +99,22 @@ class Estimate extends Model
         $data->count = Estimate::getCount($data->order_id);
         $data->order = Order::getOrderData($data->order_id);
     }
+
+
+    public static function saveData( $request_data, $estimate_id ){
+        $request_data = (object) $request_data;
+        $order = Order::where('order_id', $request_data->order_id)->first();
+
+        $data = new Estimate;
+        $data->estimate_id = $estimate_id;
+        $data->order_id = $request_data->order_id;
+        $data->carrier_id = \Auth::user()->carrier_id;
+        $data->order_name = $order->name;
+        $data->estimate_number = $request_data->number;
+        $data->estimated_at = new \Datetime( $request_data->hide_estimated_at );
+        $data->limit_at = new \Datetime( $request_data->hide_limit_at );
+        $data->notes = $request_data->notes;
+        $data->save();
+    }
+
 }

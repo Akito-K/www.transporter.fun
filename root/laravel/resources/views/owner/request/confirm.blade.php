@@ -15,26 +15,22 @@
                 </div>
 
                 <div class="order__box bulletAccordOrderBox">
-<?php /*
-                    <ul class="lists">
-                        <li class="list list-title">受付開始日時</li>
-                        <li class="list list-value">
-                            {{ $req_data->estimate_start_at }}
-                            {{ $req_data->estimate_start_at_hour }}:{!! sprintf('%02d',  $req_data->estimate_start_at_minutes) !!}
-                        </li>
-                    </ul>
-*/ ?>
                     <ul class="lists">
                         <li class="list list-title">受付終了日時</li>
                         <li class="list list-value">
-                            {{ $req_data->estimate_close_at }}
-                            {{ $req_data->estimate_close_at_hour }}:{!! sprintf('%02d',  $req_data->estimate_close_at_minutes) !!}
+                            {{ old('estimate_close_at') }}
+                            {{ old('estimate_close_at_hour') }}:{!! sprintf('%02d',  old('estimate_close_at_minutes') ) !!}
+
+                            {!! Form::hidden('hide_estimate_close_at', old('hide_estimate_close_at') ) !!}
+                            {!! Form::hidden('estimate_close_at_hour', old('estimate_close_at_hour') ) !!}
+                            {!! Form::hidden('estimate_close_at_minutes', old('estimate_close_at_minutes') ) !!}
                         </li>
                     </ul>
                     <ul class="lists">
                         <li class="list list-title">メッセージ</li>
-                        <li class="list list-value">{!! \Func::N2BR($req_data->body) !!}
+                        <li class="list list-value">{!! \Func::N2BR( old('body') ) !!}
                         </li>
+                        {!! Form::hidden('body', old('body') ) !!}
                     </ul>
                 </div>
 

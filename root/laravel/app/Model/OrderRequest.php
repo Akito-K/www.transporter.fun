@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Model\OrderRequestOption;
 
 class OrderRequest extends Model
 {
@@ -25,9 +26,55 @@ class OrderRequest extends Model
         return $datas;
     }
 
+    public static function addData(&$data, $order_id){
+        $option_datas = OrderRequestOption::getDatas();
+        $option_equipments = OrderRequestOption::getEquipments($option_datas);
+        $option_other_names = OrderRequestOption::getOtherNames($option_datas);
+
+        OrderRequest::addCarData($data, $order_id);
+        OrderRequest::addEquipmentDatas($data, $order_id, $option_equipments);
+        OrderRequest::addOtherDatas($data, $order_id, $option_other_names);
+    }
+
+    public static function addCarData(&$data, $order_id){
+        $data->option_car = OrderRequest::where('order_id', $order_id)->where('type', 'car')->orderBy('id', 'DESC')->value('option_id');
+    }
+
+    public static function addEquipmentDatas(&$data, $order_id, $option_equipments){
+        $ary = [];
+        $request_equipments = OrderRequest::where('order_id', $order_id)->where('type', 'equipment')->orderBy('id', 'ASC')->pluck('count', 'option_id')->toArray();
+        foreach($option_equipments as $key => $equipments){
+            if($equipments->unit === NULL){
+                $ary[$key] = isset($request_equipments[$key])? $request_equipments[$key]: 0;
+            }else{
+                $ary[$key] = isset($request_equipments[$key])? $request_equipments[$key]: '';
+            }
+        }
+        $data->option_equipments = $ary;
+    }
+
+    public static function addOtherDatas(&$data, $order_id, $option_other_names){
+        $ary = [];
+        $request_others = OrderRequest::where('order_id', $order_id)->where('type', 'other')->orderBy('id', 'ASC')->pluck('count', 'option_id')->toArray();
+        foreach($option_other_names as $key => $name){
+            $ary[$key] = isset($request_others[$key])? $request_others[$key]: 0;
+        }
+        $data->option_others = $ary;
+    }
 
 
 
+    public static function duplicateData($old_order_id, $new_order_id){
+        $date_at = new \Datetime();
+        $old_datas = OrderRequest::where('order_id', $old_order_id)->get();
+        if($old_datas){
+            foreach($old_datas as $old_data){
+                $new_data = $old_data->replicate();
+                $new_data->order_id = $new_order_id;
+                $new_data->save();
+            }
+        }
+    }
 
     public static function saveData( $request_data, $order_id ){
         $date_at = new \Datetime();

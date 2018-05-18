@@ -7,6 +7,7 @@
 
         <div class="request__block">
             {!! Form::open(['url' => 'carrier/estimate/insert', 'class' => 'request__boxes']) !!}
+                {!! Form::hidden('order_id', old('order_id') ) !!}
 
                 <h4 class="order__box__title trigAccordOrderBox" data-open="0">案件情報</h4>
                 <div class="request__order bulletAccordOrderBox initial-close" id="bulletQuoteOrder">
@@ -35,12 +36,16 @@
                                     </td>
                                     <td class="estimate__table__cell align-right">見積番号</td>
                                     <td class="estimate__table__cell" colspan="2">:
-                                        {{ $estimate_data->number }}</td>
+                                        {{ old('number') }}
+                                        {!! Form::hidden('number', old('number') ) !!}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="estimate__table__cell align-right">見積日</td>
                                     <td class="estimate__table__cell" colspan="2">:
-                                        {{ date_format($estimate_data->estimated_at, 'Y年n月j日') }}</td>
+                                        {{ old('estimated_at') }}
+                                        {!! Form::hidden('hide_estimated_at', old('hide_estimated_at') ) !!}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="estimate__table__cell" colspan="3">
@@ -48,7 +53,9 @@
                                     </td>
                                     <td class="estimate__table__cell align-right">有効期限</td>
                                     <td class="estimate__table__cell" colspan="2">:
-                                        {{ date_format($estimate_data->limit_at, 'Y年n月j日') }}</td>
+                                        {{ old('limit_at') }}
+                                        {!! Form::hidden('hide_limit_at', old('hide_limit_at') ) !!}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="estimate__table__cell estimate__table__cell--space" colspan="6"></td>
@@ -64,24 +71,30 @@
 
                             <tbody class="estimate__tbody" id="bulletItems">
 
-                                @if(!empty($estimate_data->items))
-                                @foreach( $estimate_data->items as $num => $item )
+                                @if(!empty( old('item_code') ))
+                                @foreach( old('item_code') as $num => $v )
                                 <tr class="estimate__table__margin-top">
-                                    <td class="estimate__table__cell">{{ $item->code }}</td>
-                                    <td class="estimate__table__cell" colspan="2">{{ $item->name }}</td>
-                                    <td class="estimate__table__cell">{{ $item->amount }}</td>
-                                    <td class="estimate__table__cell">{{ $item->count }}</td>
-                                    <td class="estimate__table__cell">{!! number_format( $item->amount * $item->count ) !!}</td>
+                                    <td class="estimate__table__cell">{{ old('item_code.'.$num) }}</td>
+                                    <td class="estimate__table__cell" colspan="2">{{ old('item_name.'.$num) }}</td>
+                                    <td class="estimate__table__cell">{{ old('item_amount.'.$num) }}</td>
+                                    <td class="estimate__table__cell">{{ old('item_count.'.$num) }}</td>
+                                    <td class="estimate__table__cell">{!! number_format( str_replace(',', '', old('item_subtotal.'.$num) ) ) !!}</td>
                                 </tr>
                                 <tr class="estimate__table__margin-bottom">
                                     <td class="estimate__table__cell estimate__table__cell--sm-title estimate__table__cell--line align-right">
                                         （特記事項）
                                     </td>
                                     <td class="estimate__table__cell estimate__table__cell--notes estimate__table__cell--line" colspan="4">
-                                        {!! \Func::N2BR($item->notes)  !!}
+                                        {!! \Func::N2BR( old('item_notes.'.$num) )  !!}
                                     </td>
                                     <td class="estimate__table__cell estimate__table__cell--line"></td>
                                 </tr>
+                                {!! Form::hidden('item_code['.$num.']', old('item_code.'.$num) ) !!}
+                                {!! Form::hidden('item_name['.$num.']', old('item_name.'.$num) ) !!}
+                                {!! Form::hidden('item_amount['.$num.']', old('item_amount.'.$num) ) !!}
+                                {!! Form::hidden('item_count['.$num.']', old('item_count.'.$num) ) !!}
+                                {!! Form::hidden('item_subtotal['.$num.']', old('item_subtotal.'.$num) ) !!}
+                                {!! Form::hidden('item_notes['.$num.']', old('item_notes.'.$num) ) !!}
                                 @endforeach
                                 @endif
 
@@ -91,11 +104,12 @@
                                 <tr>
                                     <td class="estimate__table__cell estimate__table__cell--total" colspan="2">
                                         合計金額<br />
-                                        {{ number_format($estimate_data->total) }} 円
+                                        {{ number_format( str_replace(',', '', old('total') ) ) }} 円
                                     </td>
                                     <td class="estimate__table__cell" colspan="4">
                                         特記事項<br />
-                                        {!! \Func::N2BR( $estimate_data->notes ) !!}
+                                        {!! \Func::N2BR( old('notes') ) !!}
+                                        {!! Form::hidden('notes', old('notes') ) !!}
                                     </td>
                                 </tr>
                                 <tr>
@@ -104,7 +118,7 @@
                                 <tr>
                                     <td class="estimate__table__cell" colspan="4">
                                     <td class="estimate__table__cell estimate__table__cell--carrier align-right" colspan="2">
-                                        作成者・・・{{ $carrier->company }}<br />（担当：{{ $me->sei }}）
+                                        作成者・・・{{ $carrier->company }}<br />（担当：{{ $carrier->sei }}{{ $carrier->mei }}）
                                     </td>
                                 </tr>
                             </tbody>
@@ -119,7 +133,7 @@
         </div>
 
         <p>
-            <a href="{{ url('') }}/carrier/estimate/{{ $estimate_data->order_id }}/create" class="btn btn-block btn-primary">入力画面に戻る</a>
+            <a href="{{ url('') }}/carrier/estimate/{{ old('order_id') }}/create" class="btn btn-block btn-primary">入力画面に戻る</a>
         </p>
 
     </div>

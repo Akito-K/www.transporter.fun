@@ -6,7 +6,12 @@
         <h2 class="page-header">案件登録</h2>
 
         <div class="order__block">
+            @if( $action == 'create' )
             {!! Form::open(['url' => 'owner/order/insert', 'class' => 'order__boxes']) !!}
+            @elseif( $action == 'edit' )
+            {!! Form::open(['url' => 'owner/order/update', 'class' => 'order__boxes']) !!}
+                {!! Form::hidden('order_id', old('order_id')) !!}
+            @endif
 
                 <h4 class="order__box__title trigAccordOrderBox" data-open="1">基本情報</h4>
                 <div class="order__box bulletAccordOrderBox">
@@ -200,13 +205,21 @@
                     </ul>
                 </div>
 
+                @if( $action == 'create' )
                 {!! Form::submit('この内容で登録する', ['class' => 'btn btn-block btn-warning btn-submit'] ) !!}
+                @elseif( $action == 'edit' )
+                {!! Form::submit('この内容で更新する', ['class' => 'btn btn-block btn-warning btn-submit'] ) !!}
+                @endif
             {!! \Form::close() !!}
 
         </div>
 
         <p>
+            @if( $action == 'create' )
             <a href="{{ url('') }}/owner/order/create" class="btn btn-block btn-primary">入力に戻る</a>
+            @elseif( $action == 'edit' )
+            <a href="{{ url('') }}/owner/order/{{ old('order_id') }}/edit" class="btn btn-block btn-primary">編集に戻る</a>
+            @endif
         </p>
 
     </div>

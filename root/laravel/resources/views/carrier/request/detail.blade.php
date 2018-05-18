@@ -40,12 +40,12 @@
 
                 <h4 class="order__box__title trigAccordOrderBox" data-open="1">発送元</h4>
                 <div class="order__box bulletAccordOrderBox">
-                    @include('include.address.confirm', ['prefix' => 'send_'])
+                    @include('include.address.detail', ['prefix' => 'send_'])
                 </div>
 
                 <h4 class="order__box__title trigAccordOrderBox" data-open="1">配送先</h4>
                 <div class="order__box bulletAccordOrderBox">
-                    @include('include.address.confirm', ['prefix' => 'arrive_'])
+                    @include('include.address.detail', ['prefix' => 'arrive_'])
                 </div>
 
                 <h4 class="order__box__title trigAccordOrderBox" data-open="1">運搬物</h4>
