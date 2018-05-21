@@ -47,12 +47,14 @@ namespace Estimate {
 
             // 選択肢から商品情報を引用
             $(document).on('click', '.trigQuoteItem', function(){
-                if( window.confirm('入力値を消して選択の商品を使用しますか？') ){
-                    const num = $(this).data('num');
-                    const itemId = $('.paramQuoteItem[data-num="'+num+'"] :selected').val();
-                    self.ajaxQuoteItem(itemId, num);
-                }else{
-                    return false;
+                const num = $(this).data('num');
+                const itemId = $('.paramQuoteItem[data-num="'+num+'"] :selected').val();
+                if( itemId != '0'){
+                    if( window.confirm('入力値を消して選択の商品を使用しますか？') ){
+                        self.ajaxQuoteItem(itemId, num);
+                    }else{
+                        return false;
+                    }
                 }
             });
 
@@ -71,13 +73,13 @@ namespace Estimate {
         }
 
         public refreshTotal(): void{
+            let total = 0;
             if( $('.paramSubtotal').length > 0 ){
-                let total = 0;
                 for( let i = 0; i < $('.paramSubtotal').length; i++){
                     total += Func.number( $('.paramSubtotal').eq(i).val() );
                 }
-                $('#bulletTotal').val( Func.numberFormat(total) );
             }
+            $('#bulletTotal').val( Func.numberFormat(total) );
         }
 
         public ajaxAddItem(num): void{

@@ -5,6 +5,7 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Model\Owner;
+use App\Model\Carrier;
 use App\Model\Estimate;
 
 use App\Model\CarrierClass;
@@ -58,6 +59,89 @@ class Order extends Model
         return $new_id;
     }
 
+    public static function getDatas( $owner_id ){
+        $datas = Order::where('owner_id', $owner_id)->orderBy('status_id', 'ASC')->get();
+
+        return $datas;
+    }
+
+    public static function getData( $order_id ){
+        $data = Order::where('order_id', $order_id)->first();
+
+        return $data;
+    }
+
+    public static function getEstimatableDatasNames(){
+        $ary = [];
+        $datas = Order::where('status_id', 'O-10')->orderBy('estimate_close_at', 'ASC')->get();
+        if(!empty($datas)){
+            foreach($datas as $data){
+                $owner = Owner::getData($data->owner_id);
+                $val = $data->name.'／';
+                $val .= $data->flag_hide_owner? '***（非公開）': $owner->company.' '.$owner->sei.$owner->mei;
+                $val .= '様';
+                $ary[ $data->order_id ] = $val;
+            }
+        }
+
+        return $ary;
+    }
+
+    public static function getOrdersFromOwnerSide( $owner_id ){
+        $ary = [];
+        $datas = Order::getDatas( $owner_id );
+        if(!empty($datas)){
+            foreach($datas as $data){
+                Order::addDeliveryData($data);
+                Order::addEstimateCount($data);
+                //Order::addOwnerData($data);
+                //Order::addCarrierData($data);
+                $ary[] = $data;
+            }
+        }
+
+        return $ary;
+    }
+
+    public static function getOrderFromOwnerSide( $order_id ){
+        $data = Order::getData( $order_id );
+        Order::addDeliveryData($data);
+        Order::addEstimateCount($data);
+        //Order::addOwnerData($data);
+        //Order::addCarrierData($data);
+
+        return $data;
+    }
+/*
+    public static function getOrdersFromCarrierSide( $owner_id ){
+        $ary = [];
+        $datas = Order::getDatas( $owner_id );
+        if(!empty($datas)){
+            foreach($datas as $data){
+                Order::addDeliveryData($data);
+                Order::addEstimateData($data);
+                Order::addOwnerData($data);
+                //Order::addCarrierData($data);
+                $ary[] = $data;
+            }
+        }
+
+        return $ary;
+    }
+*/
+    public static function getOrderFromCarrierSide( $order_id ){
+        $data = Order::getData( $order_id );
+        Order::addDeliveryData($data);
+        Order::addOrderRequests($data);
+        Order::addCarrierClass($data);
+        Order::addOwnerData($data);
+        //Order::addEstimateData($data);
+        //Order::addCarrierData($data);
+
+        return $data;
+    }
+
+/*
     public static function getDatas($owner_id){
         $ary = [];
         $datas = Order::where('owner_id', $owner_id)->orderBy('status_id', 'ASC')->get();
@@ -71,19 +155,23 @@ class Order extends Model
         return $ary;
     }
 
-    public static function getData($unique_id){
-        $data = Order::where('order_id', $unique_id)->first();
+    public static function getData($order_id){
+        $data = Order::where('order_id', $order_id)->first();
         Order::addMoreData($data);
 
         return $data;
     }
+*/
 
     public static function getEstimatableDatas(){
         $ary = [];
-        $datas = Order::where('status_id', 'O-01')->orderBy('estimate_close_at', 'ASC')->get();
+        $datas = Order::where('status_id', 'O-10')->orderBy('estimate_close_at', 'ASC')->get();
         if(!empty($datas)){
             foreach($datas as $data){
-                Order::addMoreData($data);
+                Order::addDeliveryData($data);
+                Order::addOwnerData($data);
+                Order::addEstimateCount($data);
+                Order::addMyEstimateData($data);
                 $ary[] = $data;
             }
         }
@@ -91,35 +179,57 @@ class Order extends Model
         return $ary;
     }
 
-    public static function addMoreData(&$data){
+    public static function addDeliveryData(&$data){
         $data->send = Order::getSendAddress($data);
         $data->arrive = Order::getArriveAddress($data);
         $data->send_tels = \Func::telFormatDecode($data->send_tel);
         $data->arrive_tels = \Func::telFormatDecode($data->arrive_tel);
-        $data->owner_with_star = Order::getOwnerNameWithStar($data);
         $data->send_timezone_str = $data->send_timezone;
         $data->arrive_timezone_str = $data->arrive_timezone;
+    }
 
+    public static function addOwnerData(&$data, $owner = NULL){
+        $owner = $owner?: Owner::getData($data->owner_id);
+        $data->owner_name = Order::getOwnerName($data, $owner);
+        $data->owner_name_with_star = Order::getOwnerNameWithStar($data, $owner);
+    }
+/*
+    public static function addCarrierData(&$data, $carrier = NULL){
+        $carrier = $carrier?: Carrier::getData($data->carrier_id);
+        $data->carrier_name = Order::getCarrierName($data, $carrier);
+        $data->carrier_name_with_star = Order::getCarrierNameWithStar($data, $carrier);
+    }
+*/
+    public static function addEstimateCount(&$data){
         $data->estimate_count = Estimate::getCount($data->order_id);
+    }
+
+    public static function addMyEstimateData(&$data){
+        $data->my_estimate_data = Estimate::getMySuggestedData($data->order_id);
         $data->my_estimate_count = Estimate::getMyCount($data->order_id);
-        $my_estimate = Estimate::getMyEstimate($data->order_id);
-        $data->my_estimated_at = $my_estimate? $my_estimate->estimated_at: '-';
     }
 
-    public static function getEstimatableDatasNames(){
-        $ary = [];
-        $datas = Order::where('status_id', 'O-01')->orderBy('estimate_close_at', 'ASC')->get();
-        if(!empty($datas)){
-            foreach($datas as $data){
-                $data->owner = Owner::getData($data->owner_id);
-                $val = $data->name.'／';
-                $val .= $data->flag_hide_owner? '***（非公開）': $data->owner->company.' '.$data->owner->sei.$data->owner->mei;
-                $ary[ $data->order_id ] = $val.'様';
-            }
-        }
-
-        return $ary;
+    public static function addHideOwner(&$data){
+        $hide_owners = Order::getHideOwners();
+        $data->hide_owner_str = $hide_owners[$data->flag_hide_owner];
     }
+
+    public static function addCarrierClass(&$data){
+        $carrier_classes = CarrierClass::getNames();
+        $data->carrier_class = isset($carrier_classes[$data->class_id])? $carrier_classes[$data->class_id]: '';
+    }
+
+    public static function addOrderRequests(&$data){
+        $option_datas = OrderRequestOption::getDatas();
+        $option_car_names = OrderRequestOption::getCarNames($option_datas);
+        $option_equipments = OrderRequestOption::getEquipments($option_datas);
+        $option_other_names = OrderRequestOption::getOtherNames($option_datas);
+
+        Order::addOrderCargo($data);
+        Order::addOrderRequest($data, $option_equipments, $option_other_names);
+        Order::addOrderRequestResults($data, $option_car_names, $option_equipments, $option_other_names);
+    }
+
 
     public static function getSendAddress($data){
         $ary = [
@@ -150,8 +260,7 @@ class Order extends Model
 
         return (object) $ary;
     }
-
-
+/*
     public static function getOrderData($order_id){
         $option_datas = OrderRequestOption::getDatas();
         $option_car_names = OrderRequestOption::getCarNames($option_datas);
@@ -171,19 +280,19 @@ class Order extends Model
         $hide_owners = Order::getHideOwners();
         $carrier_classes = CarrierClass::getNames();
         $data->carrier_class = isset($carrier_classes[$data->class_id])? $carrier_classes[$data->class_id]: '';
-        $data->send_tels = \Func::telFormatDecode($data->send_tel);
-        $data->arrive_tels = \Func::telFormatDecode($data->arrive_tel);
-        $data->send_timezone_str = $data->send_timezone;
-        $data->arrive_timezone_str = $data->arrive_timezone;
+//        $data->send_tels = \Func::telFormatDecode($data->send_tel);
+//        $data->arrive_tels = \Func::telFormatDecode($data->arrive_tel);
+//        $data->send_timezone_str = $data->send_timezone;
+//        $data->arrive_timezone_str = $data->arrive_timezone;
 
-        $owner = Owner::getData($data->owner_id);
-        $data->owner = Order::getOwnerName($data, $owner);
-        $data->owner_with_star = Order::getOwnerNameWithStar($data, $owner);
+//        $owner = Owner::getData($data->owner_id);
+//        $data->owner = Order::getOwnerName($data, $owner);
+//        $data->owner_with_star = Order::getOwnerNameWithStar($data, $owner);
         $data->hide_owner = $hide_owners[$data->flag_hide_owner];
 
         return $data;
     }
-
+*/
     public static function getOwnerName($data, $owner=NULL){
         if( $data->flag_hide_owner ){
             $name= '*** （非公開）';
@@ -208,8 +317,24 @@ class Order extends Model
         return $name;
     }
 
-    public static function addOrderCargo(&$data, $order_id){
-        $cargo_id = OrderToCargo::getCargoId($order_id);
+    public static function getCarrierName($data, $carrier=NULL){
+        $carrier = $carrier?: Carrier::getData($data->carrier_id);
+        $name= $carrier->company."\n".$carrier->sei.' '.$carrier->mei;
+
+        return $name;
+    }
+
+    public static function getCarrierNameWithStar($data, $carrier=NULL){
+        $carrier = $carrier?: Carrier::getData($data->carrier_id);
+        $star = $carrier->star;
+        $name = '<a href="'.url('').'/mypage/carrier/'.$data->carrier_id.'/detail">'.$carrier->sei.' '.$carrier->mei.'</a>'."\n".
+                                view('include.star', compact('star'))->render();
+
+        return $name;
+    }
+
+    public static function addOrderCargo(&$data){
+        $cargo_id = OrderToCargo::getCargoId($data->order_id);
         $cargo = Cargo::getData($cargo_id);
         $cargo_names = CargoName::getNames();
         $cargo_forms = CargoForm::getNames();
@@ -223,11 +348,11 @@ class Order extends Model
         $data->cargo_form   = isset($cargo_forms[$cargo->form_id])? $cargo_forms[$cargo->form_id]: '';
     }
 
-    public static function addOrderRequest(&$data, $order_id, $option_equipments, $option_other_names ){
-        $data->option_car = OrderRequest::where('order_id', $order_id)->where('type', 'car')->orderBy('id', 'DESC')->value('option_id');
+    public static function addOrderRequest(&$data, $option_equipments, $option_other_names ){
+        $data->option_car = OrderRequest::where('order_id', $data->order_id)->where('type', 'car')->orderBy('id', 'DESC')->value('option_id');
 
         $ary = [];
-        $request_equipments = OrderRequest::where('order_id', $order_id)->where('type', 'equipment')->orderBy('id', 'ASC')->pluck('count', 'option_id')->toArray();
+        $request_equipments = OrderRequest::where('order_id', $data->order_id)->where('type', 'equipment')->orderBy('id', 'ASC')->pluck('count', 'option_id')->toArray();
         foreach($option_equipments as $key => $equipments){
             if($equipments->unit === NULL){
                 $ary[$key] = isset($request_equipments[$key])? $request_equipments[$key]: 0;
@@ -238,7 +363,7 @@ class Order extends Model
         $data->option_equipments = $ary;
 
         $ary = [];
-        $request_others = OrderRequest::where('order_id', $order_id)->where('type', 'other')->orderBy('id', 'ASC')->pluck('count', 'option_id')->toArray();
+        $request_others = OrderRequest::where('order_id', $data->order_id)->where('type', 'other')->orderBy('id', 'ASC')->pluck('count', 'option_id')->toArray();
         foreach($option_other_names as $key => $name){
             $ary[$key] = isset($request_others[$key])? $request_others[$key]: 0;
         }
@@ -299,7 +424,7 @@ class Order extends Model
         $new_data = $old_data->replicate();
         $new_data->name .= '_コピー';
         $new_data->order_id = $new_order_id;
-        $new_data->status_id = 'O-00';
+        $new_data->status_id = 'O-05';
         $new_data->estimate_start_at = NULL;
         $new_data->estimate_close_at = NULL;
 
@@ -340,7 +465,7 @@ class Order extends Model
             'arrive_address' => $request_data->arrive_address,
             'arrive_tel' => \Func::telFormat( $request_data->arrive_tels ),
 
-            'status_id' => 'O-00',
+            'status_id' => 'O-05',
             'notes' => $request_data->notes,
             'amount_hope_min' => $request_data->amount_hope_min?: 0,
             'amount_hope_max' => $request_data->amount_hope_max?: 0,
@@ -384,7 +509,7 @@ class Order extends Model
         $data->arrive_address = $request_data->arrive_address;
         $data->arrive_tel = \Func::telFormat( $request_data->arrive_tels );
 
-        $data->status_id = 'O-00';
+        $data->status_id = 'O-05';
         $data->notes = $request_data->notes;
         $data->amount_hope_min = $request_data->amount_hope_min?: 0;
         $data->amount_hope_max = $request_data->amount_hope_max?: 0;

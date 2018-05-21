@@ -15,7 +15,7 @@
             {!! Form::open(['url' => 'carrier/estimate/confirm', 'class' => 'request__boxes']) !!}
                 <ul class="lists">
                     <li class="list list">
-                        {!! Form::select('order_id', $select_orders_names, $data->order_id, ['class' => 'form-control', 'id' => 'paramQuoteOrder']) !!}
+                        {!! Form::select('order_id', $select_orders_names, $order_data->order_id, ['class' => 'form-control', 'id' => 'paramQuoteOrder']) !!}
                     </li>
                     <li class="list">
                         <button type="button" class="btn btn-default" id="trigQuoteOrder">見積対象を変更する</button>
@@ -24,7 +24,7 @@
 
                 <h4 class="order__box__title trigAccordOrderBox" data-open="0">案件情報</h4>
                 <div class="request__order bulletAccordOrderBox initial-close" id="bulletQuoteOrder">
-                    @include('include.carrier.order_estimate', ['data' => $data])
+                    @include('include.carrier.order_estimate', ['data' => $order_data])
                 </div>
 
                 <div class="estimate">
@@ -48,7 +48,7 @@
                                 </tr>
                                 <tr>
                                     <td class="estimate__table__cell" id="bulletQuoteOrderOwner" colspan="3" rowspan="2">
-                                        {!! \Func::N2BR($data->owner) !!}様
+                                        {!! \Func::N2BR($order_data->owner) !!}様
                                     </td>
                                     <td class="estimate__table__cell align-right">見積番号</td>
                                     <td class="estimate__table__cell align-right" colspan="2">
@@ -63,7 +63,7 @@
                                 </tr>
                                 <tr>
                                     <td class="estimate__table__cell" colspan="3">
-                                        「<span id="bulletQuoteOrderName">{{ $data->name }}</span>」のお見積
+                                        「<span id="bulletQuoteOrderName">{{ $order_data->name }}</span>」のお見積
                                     </td>
                                     <td class="estimate__table__cell align-right">有効期限</td>
                                     <td class="estimate__table__cell align-right" colspan="2">
@@ -84,9 +84,34 @@
 
                             <tbody class="estimate__tbody" id="bulletItems">
 
-                                @php $num = 0; @endphp
-                                @if(!empty( old('code') ))
-                                @foreach( old('code') as $num => $v )
+                                <?php
+                                $num = 0;
+                                if( empty( old('item_code') )){
+                                    $item = new \stdClass();
+                                    $item->code     = '';
+                                    $item->name     = '';
+                                    $item->amount   = '';
+                                    $item->count    = '';
+                                    $item->subtotal = '';
+                                    $item->notes    = '';
+                                    $item_datas[] = $item;
+                                }else{
+                                    $item_datas = [];
+                                    $old = old('item_code');
+                                    foreach($old as $num => $v){
+                                        $item = new \stdClass();
+                                        $item->code     = old('item_code.'.$num);
+                                        $item->name     = old('item_name.'.$num);
+                                        $item->amount   = old('item_amount.'.$num);
+                                        $item->count    = old('item_count.'.$num);
+                                        $item->subtotal = old('item_subtotal.'.$num);
+                                        $item->notes    = old('item_notes.'.$num);
+                                        $item_datas[$num] = $item;
+                                    }
+                                }
+                                ?>
+
+                                @foreach( $item_datas as $num => $v )
                                 <tr class="estimate__table__margin-top bulletRemoveItem" data-num="{{ $num }}">
                                     <td class="estimate__table__cell estimate__table__cell--quote" colspan="3">
                                         {!! \Form::select('item['.$num.']', $items, old('item.'.$num), ['class' => 'form-control form-control--mini form-control--60 form-control--xxsm paramQuoteItem', 'data-num' => $num]) !!}
@@ -125,7 +150,6 @@
                                     <td class="estimate__table__cell estimate__table__cell--line"></td>
                                 </tr>
                                 @endforeach
-                                @endif
 
                             </tbody>
 

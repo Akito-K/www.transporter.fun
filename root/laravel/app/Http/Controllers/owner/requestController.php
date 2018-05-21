@@ -18,7 +18,8 @@ class requestController extends ownerController
     public function create($order_id){
         Log::saveData( __METHOD__ , 'order_id', $order_id, true);
         $pagemeta = Pagemeta::getPagemeta('OW-MRQ-01');
-        $data = Order::getOrderData($order_id);
+        $data = Order::getOrderFromOwnerSide($order_id);
+        Order::addOrderRequests($data);
 
         return view('owner.request.create', compact('data', 'pagemeta'));
     }
@@ -31,7 +32,8 @@ class requestController extends ownerController
 
         $pagemeta = Pagemeta::getPagemeta('OW-MRQ-02');
         $order_id = $request['order_id'];
-        $data = Order::getOrderData($order_id);
+        $data = Order::getOrderFromOwnerSide($order_id);
+        Order::addOrderRequests($data);
 
         return view('owner.request.confirm', compact('data', 'pagemeta'));
     }
@@ -49,7 +51,7 @@ class requestController extends ownerController
             $order = Order::where('order_id', $order_id)->first();
             $order->estimate_start_at = $now_at;
             $order->estimate_close_at = $estimate_close_at;
-            $order->status_id = 'O-01';
+            $order->status_id = 'O-10';
             $order->updated_at = $now_at;
             $order->save();
 
@@ -70,7 +72,7 @@ class requestController extends ownerController
 
         $now_at = new \DatetimeImmutable();
         $data = Order::where('order_id', $order_id)->first();
-        $data->status_id = 'O-00';
+        $data->status_id = 'O-05';
         $data->estimate_start_at = NULL;
         $data->estimate_close_at = NULL;
         $data->updated_at = $now_at;

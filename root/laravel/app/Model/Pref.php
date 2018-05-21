@@ -23,7 +23,10 @@ class Pref extends Model
     }
 
     public static function getNames(){
-        return Pref::pluck('name', 'code')->toArray();
+        $ary = Pref::pluck('name', 'code')->toArray();
+        \Func::array_append($ary, [ 0 => '---' ], true);
+
+        return $ary;
     }
 
 }

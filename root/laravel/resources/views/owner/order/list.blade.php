@@ -1,8 +1,6 @@
 @extends('layouts.owner')
 @section('content')
 
-
-{!! \Func::var_dump( old('name') ) !!}
 <div class="box">
     <div class="box-body">
         <h2 class="page-header">案件情報</h2>

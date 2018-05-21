@@ -122,10 +122,13 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/owner/order/{order_id}/duplicate',        'owner\orderController@duplicate');
 
             // 見積依頼
-            Route::get ('/owner/request/{order_id}',                'owner\requestController@create');
+            Route::get ('/owner/request/{order_id}/create',         'owner\requestController@create');
             Route::post('/owner/request/confirm',                   'owner\requestController@confirm');
             Route::post('/owner/request/execute',                   'owner\requestController@execute');
             Route::get ('/owner/request/{order_id}/cancel',         'owner\requestController@cancel');
+
+            Route::get ('/owner/estimate/{order_id}/list',          'owner\estimateController@showOrderList');
+            Route::get ('/owner/estimate/{estimate_id}/detail',     'owner\estimateController@showDetail');
         });
 
         // CARRIER = = = = = = = = = = = =
@@ -148,6 +151,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/carrier/estimate/{estimate_id}/confirm',  'carrier\estimateController@confirmUpdate');
             Route::post('/carrier/estimate/update',                 'carrier\estimateController@update');
             Route::get ('/carrier/estimate/{estimate_id}/delete',   'carrier\estimateController@delete');
+            Route::get ('/carrier/estimate/{estimate_id}/duplicate','carrier\estimateController@duplicate');
 
             // 見積用商品
             Route::get ('/carrier/item',                            'carrier\itemController@showList');
@@ -158,8 +162,14 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/carrier/item/update',                     'carrier\itemController@update');
             Route::get ('/carrier/item/{item_id}/delete',           'carrier\itemController@delete');
 
+            // ご提案
+            Route::get ('/carrier/suggest/{estimate_id}/create',    'carrier\suggestController@create');
+            Route::post('/carrier/suggest/confirm',                 'carrier\suggestController@confirm');
+            Route::post('/carrier/suggest/execute',                 'carrier\suggestController@execute');
+
             // 案件
             Route::get ('/carrier/work',                            'carrier\workController@showList');
+            Route::get ('/carrier/work/{work_id}/detail',           'carrier\workController@showDetail');
         });
 
         // ADMIN = = = = = = = = = = = =

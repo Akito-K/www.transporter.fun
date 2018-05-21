@@ -166,6 +166,10 @@ class MyFunctions
         return $data;
     }
 
+    public static function numberFormatDecode($formated_number=0){
+        return str_replace(',', '', $formated_number?: 0);
+    }
+
     public static function getWeekDay($datetime){
         $result = "";
         if($datetime instanceof \Datetime){

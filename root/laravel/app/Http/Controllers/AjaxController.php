@@ -104,11 +104,12 @@ class AjaxController extends Controller
 
     public function quoteOrder(Request $request){
         $prefs = Pref::getNames();
-        $data = Order::getOrderData($request['order_id']);
+        //$data = Order::getOrderData($request['order_id']);
+        $data = Order::getOrderFromCarrierSide($request['order_id']);
 
         return  json_encode([
             'view' => view('include.carrier.order_estimate', compact('data', 'prefs') )->render(),
-            'owner' => $data->flag_hide_owner? '*** （非公開） 様': $data->owner->company.'<br />'.$data->user->sei.' '.$data->user->mei.'様',
+            'owner' => $data->owner,
             'name' => $data->name,
             ]);
     }

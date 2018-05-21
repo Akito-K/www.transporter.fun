@@ -9,7 +9,7 @@
             </tr>
             <tr>
                 <th>荷主名</th>
-                <td>{!! $data->owner_with_star !!}</td>
+                <td>{!! $data->owner_name_with_star !!}</td>
             </tr>
             <tr>
                 <th>案件クラス</th>

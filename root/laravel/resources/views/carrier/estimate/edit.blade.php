@@ -5,12 +5,16 @@
 {!! MyHTML::errorMessage($errors) !!}
 {!! MyHTML::flashMessage() !!}
 
+{!! \Form::select('', $items, '', ['class' => 'block-hide', 'id' => 'paramQuoteItem' ]) !!}
+
 <div class="box">
     <div class="box-body">
         <h2 class="page-header">見積編集</h2>
 
         <div class="request__block">
-            {!! Form::open(['url' => 'carrier/estimate/'.$estimate_data->estimate_id.'/confirm', 'class' => 'request__boxes']) !!}
+            {!! Form::open(['url' => 'carrier/estimate/'.$data->estimate_id.'/confirm', 'class' => 'request__boxes']) !!}
+                {!! Form::hidden('estimate_id', $data->estimate_id ) !!}
+
                 <ul class="lists">
                     <li class="list list">
                         {!! Form::select('order_id', $select_orders_names, $data->order_id, ['class' => 'form-control', 'id' => 'paramQuoteOrder']) !!}
@@ -22,7 +26,7 @@
 
                 <h4 class="order__box__title trigAccordOrderBox" data-open="0">案件情報</h4>
                 <div class="request__order bulletAccordOrderBox initial-close" id="bulletQuoteOrder">
-                    @include('include.carrier.order_estimate', ['data' => $data])
+                    @include('include.carrier.order_estimate', ['data' => $order_data])
                 </div>
 
                 <div class="estimate">
@@ -46,26 +50,26 @@
                                 </tr>
                                 <tr>
                                     <td class="estimate__table__cell" id="bulletQuoteOrderOwner" colspan="3" rowspan="2">
-                                        {!! \Func::N2BR($data->owner) !!}様
+                                        {!! \Func::N2BR($order_data->owner_name) !!}様
                                     </td>
                                     <td class="estimate__table__cell align-right">見積番号</td>
                                     <td class="estimate__table__cell align-right" colspan="2">
-                                        {!! Form::text('number', old('number')?: $estimate_data->estimate_number, ['class' => 'form-control form-control--xsm']) !!}
+                                        {!! Form::text('number', old('number')?: $data->estimate_number, ['class' => 'form-control form-control--xsm']) !!}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="estimate__table__cell align-right">見積日</td>
                                     <td class="estimate__table__cell align-right" colspan="2">
-                                        @include('include.date_input', ['date_input_name' => 'estimated', 'placeholder' => '必須', 'req_data' => $estimate_data, 'add_class' => 'form-control--xsm', 'default_input_at' => new \DatetimeImmutable($estimate_data->estimated_at) ])
+                                        @include('include.date_edit', ['date_input_name' => 'estimated', 'placeholder' => '必須', 'req_data' => $data, 'add_class' => 'form-control--xsm', 'default_input_at' => new \DatetimeImmutable($data->estimated_at) ])
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="estimate__table__cell" colspan="3">
-                                        「<span id="bulletQuoteOrderName">{{ $data->name }}</span>」のお見積
+                                        「<span id="bulletQuoteOrderName">{{ $order_data->name }}</span>」のお見積
                                     </td>
                                     <td class="estimate__table__cell align-right">有効期限</td>
                                     <td class="estimate__table__cell align-right" colspan="2">
-                                        @include('include.date_input', ['date_input_name' => 'limit', 'placeholder' => '必須', 'req_data' => $estimate_data, 'add_class' => 'form-control--xsm', 'default_input_at' => new \DatetimeImmutable($estimate_data->limit_at) ])
+                                        @include('include.date_edit', ['date_input_name' => 'limit', 'placeholder' => '必須', 'req_data' => $data, 'add_class' => 'form-control--xsm', 'default_input_at' => new \DatetimeImmutable($data->limit_at) ])
                                     </td>
                                 </tr>
                                 <tr>
@@ -83,26 +87,26 @@
                             <tbody class="estimate__tbody" id="bulletItems">
 
                                 <?php
-                                if( !old('code[0]') ){
-                                    $item_datas = $estimate_data->items;
+                                $num = 0;
+                                if( empty( old('item_code') )){
+                                    $item_datas = $data->items;
                                 }else{
                                     $item_datas = [];
-                                    $old = old('code');
+                                    $old = old('item_code');
                                     foreach($old as $num => $v){
                                         $item = new \stdClass();
-                                        $item->code     = old('code['.$num.']');
-                                        $item->name     = old('name['.$num.']');
-                                        $item->amount   = old('amount['.$num.']');
-                                        $item->count    = old('count['.$num.']');
-                                        $item->subtotal = old('subtotal['.$num.']');
-                                        $item->notes    = old('notes['.$num.']');
+                                        $item->code     = old('item_code.'.$num);
+                                        $item->name     = old('item_name.'.$num);
+                                        $item->amount   = old('item_amount.'.$num);
+                                        $item->count    = old('item_count.'.$num);
+                                        $item->subtotal = old('item_subtotal.'.$num);
+                                        $item->notes    = old('item_notes.'.$num);
                                         $item_datas[$num] = $item;
                                     }
                                 }
                                 ?>
 
                                 @if(!empty($item_datas))
-                                @php $num = 0; @endphp
                                 @foreach( $item_datas as $num => $item )
                                 <tr class="estimate__table__margin-top bulletRemoveItem" data-num="{{ $num }}">
                                     <td class="estimate__table__cell estimate__table__cell--quote" colspan="3">
@@ -117,19 +121,19 @@
                                 </tr>
                                 <tr class="bulletRemoveItem" data-num="{{ $num }}">
                                     <td class="estimate__table__cell">
-                                        {!! Form::text('code['.$num.']', old('code['.$num.']')?: $estimate_data->items[$num]->code, ['class' => 'form-control  form-control--xsm', 'data-num' => $num, 'id' => 'code_0', 'placeholder' => '型番' ]) !!}
+                                        {!! Form::text('item_code['.$num.']', old('item_code.'.$num)?: $data->items[$num]->code, ['class' => 'form-control  form-control--xsm', 'data-num' => $num, 'id' => 'code_'.$num, 'placeholder' => '型番' ]) !!}
                                     </td>
                                     <td class="estimate__table__cell" colspan="2">
-                                        {!! Form::text('name['.$num.']', old('name['.$num.']')?: $estimate_data->items[$num]->name, ['class' => 'form-control  form-control--xsm', 'data-num' => $num, 'id' => 'name_0', 'placeholder' => '名称' ]) !!}
+                                        {!! Form::text('item_name['.$num.']', old('item_name.'.$num)?: $data->items[$num]->name, ['class' => 'form-control  form-control--xsm', 'data-num' => $num, 'id' => 'name_'.$num, 'placeholder' => '名称' ]) !!}
                                     </td>
                                     <td class="estimate__table__cell">
-                                        {!! Form::number('amount['.$num.']', old('amount['.$num.']')?: $estimate_data->items[$num]->amount, ['class' => 'form-control  form-control--xsm trigCalculateSubTotal paramAmount', 'data-num' => $num, 'id' => 'amount_0', 'placeholder' => '単価' ]) !!}
+                                        {!! Form::number('item_amount['.$num.']', old('item_amount.'.$num)?: $data->items[$num]->amount, ['class' => 'form-control  form-control--xsm trigCalculateSubTotal paramAmount', 'data-num' => $num, 'id' => 'amount_'.$num, 'placeholder' => '単価' ]) !!}
                                     </td>
                                     <td class="estimate__table__cell">
-                                        {!! Form::number('count['.$num.']', old('count['.$num.']')?: $estimate_data->items[$num]->count, ['class' => 'form-control  form-control--xsm trigCalculateSubTotal paramCount', 'data-num' => $num, 'placeholder' => '数量' ]) !!}
+                                        {!! Form::number('item_count['.$num.']', old('item_count.'.$num)?: $data->items[$num]->count, ['class' => 'form-control  form-control--xsm trigCalculateSubTotal paramCount', 'data-num' => $num, 'placeholder' => '数量' ]) !!}
                                     </td>
                                     <td class="estimate__table__cell">
-                                        {!! Form::text('subtotal['.$num.']', old('subtotal['.$num.']')?: $estimate_data->items[$num]->subtotal, ['class' => 'form-control  form-control--xsm paramSubtotal bulletSubTotal readonly', 'readonly' => 'readonly', 'data-num' => $num, 'placeholder' => '小計' ]) !!}
+                                        {!! Form::text('item_subtotal['.$num.']', old('item_subtotal.'.$num)?: $data->items[$num]->subtotal, ['class' => 'form-control  form-control--xsm paramSubtotal bulletSubTotal readonly', 'readonly' => 'readonly', 'data-num' => $num, 'placeholder' => '小計' ]) !!}
                                     </td>
                                 </tr>
                                 <tr class="estimate__table__margin-bottom bulletRemoveItem" data-num="{{ $num }}">
@@ -137,7 +141,7 @@
                                         （特記事項）
                                     </td>
                                     <td class="estimate__table__cell estimate__table__cell--notes estimate__table__cell--line" colspan="4">
-                                        {!! Form::textarea('notes['.$num.']', old('notes['.$num.']')?: $estimate_data->items[$num]->notes, ['class' => 'form-control form-control--xsm paramNote bulletNotes', 'data-num' => $num, 'id' => 'notes_0', 'placeholder' => '' ]) !!}
+                                        {!! Form::textarea('item_notes['.$num.']', old('item_notes.'.$num)?: $data->items[$num]->notes, ['class' => 'form-control form-control--xsm paramNote bulletNotes', 'data-num' => $num, 'id' => 'notes_'.$num, 'placeholder' => '' ]) !!}
                                     </td>
                                     <td class="estimate__table__cell estimate__table__cell--line"></td>
                                 </tr>
@@ -157,11 +161,11 @@
                                 <tr>
                                     <td class="estimate__table__cell" colspan="2">
                                         合計金額<br />
-                                        {!! Form::text('total', old('total')?: $estimate_data->total, ['class' => 'form-control  form-control--mini form-control--80 readonly', 'readonly' => 'readonly', 'id' => 'bulletTotal']) !!} 円
+                                        {!! Form::text('total', old('total')?: $data->total, ['class' => 'form-control  form-control--mini form-control--80 readonly', 'readonly' => 'readonly', 'id' => 'bulletTotal']) !!} 円
                                     </td>
                                     <td class="estimate__table__cell" colspan="4">
                                         特記事項<br />
-                                        {!! Form::textarea('notes', old('notes')?: $estimate_data->notes, ['class' => 'form-control']) !!}
+                                        {!! Form::textarea('notes', old('notes')?: $data->notes, ['class' => 'form-control']) !!}
                                     </td>
                                 </tr>
                             </tbody>

@@ -10528,6 +10528,15 @@ var Func = /** @class */ (function () {
         }
         return false;
     };
+    Func.number = function (val) {
+        val = val.replace(/[^0-9]/g, '');
+        if (isNaN(val)) {
+            return 0;
+        }
+        else {
+            return Number(val);
+        }
+    };
     return Func;
 }());
 exports.default = Func;
@@ -10546,6 +10555,7 @@ var calendar_1 = __webpack_require__(3);
 var upload_1 = __webpack_require__(6);
 var quote_1 = __webpack_require__(7);
 var order_1 = __webpack_require__(8);
+var star_1 = __webpack_require__(9);
 //import Board from './board';
 //import Customer from './customer';
 //import Model from './model';
@@ -10561,6 +10571,8 @@ $(function () {
     var QUOTE = new quote_1.default.MyQuote();
     // 案件情報
     var ORDER = new order_1.default.MyOrder();
+    // 評価★
+    var STAR = new star_1.default.MyStar();
     // コンタクトボード
     //    const BOARD = new Board.MyBoard();
     // 顧客
@@ -11141,7 +11153,7 @@ var Quote;
                     return false;
                 }
             });
-            // 選択しから住所情報を引用
+            // 選択肢から住所情報を引用
             $('.trigQuoteAddress').click(function () {
                 if (window.confirm('入力値を消して選択の住所を使用しますか？')) {
                     var type = $(this).data('type');
@@ -11273,6 +11285,43 @@ var Order;
     Order.MyOrder = MyOrder;
 })(Order || (Order = {}));
 exports.default = Order;
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var $ = __webpack_require__(0);
+var Star;
+(function (Star) {
+    var MyStar = /** @class */ (function () {
+        function MyStar(
+        //private ajaxing: boolean = false,
+        ) {
+            //let self = this;
+            if ($('.trigStar').length > 0) {
+                this.viewStars();
+            }
+        }
+        MyStar.prototype.viewStars = function () {
+            for (var i = 0; i < $('.trigStar').length; i++) {
+                var obj = $('.trigStar').eq(i);
+                this.viewStar(obj);
+            }
+        };
+        MyStar.prototype.viewStar = function (obj) {
+            var star = parseFloat(obj.find('.paramStar').html().replace('(', '').replace(')', ''));
+            var val = Math.round(star / 5 * 100);
+            obj.find('.bulletStar').animate({ width: val + '%' }, 2000);
+        };
+        return MyStar;
+    }());
+    Star.MyStar = MyStar;
+})(Star || (Star = {}));
+exports.default = Star;
 
 
 /***/ })

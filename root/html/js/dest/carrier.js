@@ -11374,13 +11374,15 @@ var Estimate;
             });
             // 選択肢から商品情報を引用
             $(document).on('click', '.trigQuoteItem', function () {
-                if (window.confirm('入力値を消して選択の商品を使用しますか？')) {
-                    var num = $(this).data('num');
-                    var itemId = $('.paramQuoteItem[data-num="' + num + '"] :selected').val();
-                    self.ajaxQuoteItem(itemId, num);
-                }
-                else {
-                    return false;
+                var num = $(this).data('num');
+                var itemId = $('.paramQuoteItem[data-num="' + num + '"] :selected').val();
+                if (itemId != '0') {
+                    if (window.confirm('入力値を消して選択の商品を使用しますか？')) {
+                        self.ajaxQuoteItem(itemId, num);
+                    }
+                    else {
+                        return false;
+                    }
                 }
             });
             // 選択肢から見積対象の案件情報を引用
@@ -11395,13 +11397,13 @@ var Estimate;
             $('.bulletSubTotal[data-num="' + num + '"]').val(func_1.default.numberFormat(amount * count));
         };
         MyEstimate.prototype.refreshTotal = function () {
+            var total = 0;
             if ($('.paramSubtotal').length > 0) {
-                var total = 0;
                 for (var i = 0; i < $('.paramSubtotal').length; i++) {
                     total += func_1.default.number($('.paramSubtotal').eq(i).val());
                 }
-                $('#bulletTotal').val(func_1.default.numberFormat(total));
             }
+            $('#bulletTotal').val(func_1.default.numberFormat(total));
         };
         MyEstimate.prototype.ajaxAddItem = function (num) {
             var self = this;

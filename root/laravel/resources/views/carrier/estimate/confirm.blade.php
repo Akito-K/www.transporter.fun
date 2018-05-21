@@ -6,12 +6,18 @@
         <h2 class="page-header">見積作成（確認画面）</h2>
 
         <div class="request__block">
+            @if( $action == 'create' )
             {!! Form::open(['url' => 'carrier/estimate/insert', 'class' => 'request__boxes']) !!}
                 {!! Form::hidden('order_id', old('order_id') ) !!}
+            @elseif( $action == 'edit' )
+            {!! Form::open(['url' => 'carrier/estimate/update', 'class' => 'request__boxes']) !!}
+                {!! Form::hidden('order_id', old('order_id') ) !!}
+                {!! Form::hidden('estimate_id', old('estimate_id') ) !!}
+            @endif
 
                 <h4 class="order__box__title trigAccordOrderBox" data-open="0">案件情報</h4>
                 <div class="request__order bulletAccordOrderBox initial-close" id="bulletQuoteOrder">
-                    @include('include.carrier.order_estimate', ['data' => $data])
+                    @include('include.carrier.order_estimate', ['data' => $order_data])
                 </div>
 
                 <div class="estimate">
@@ -32,7 +38,7 @@
                                 </tr>
                                 <tr>
                                     <td class="estimate__table__cell" id="bulletQuoteOrderOwner" colspan="3" rowspan="2">
-                                        {!! \Func::N2BR($data->owner) !!}様
+                                        {!! \Func::N2BR($order_data->owner_name) !!}様
                                     </td>
                                     <td class="estimate__table__cell align-right">見積番号</td>
                                     <td class="estimate__table__cell" colspan="2">:
@@ -49,7 +55,7 @@
                                 </tr>
                                 <tr>
                                     <td class="estimate__table__cell" colspan="3">
-                                        「<span id="bulletQuoteOrderName">{{ $data->name }}</span>」のお見積
+                                        「<span id="bulletQuoteOrderName">{{ $order_data->name }}</span>」のお見積
                                     </td>
                                     <td class="estimate__table__cell align-right">有効期限</td>
                                     <td class="estimate__table__cell" colspan="2">:
@@ -78,7 +84,7 @@
                                     <td class="estimate__table__cell" colspan="2">{{ old('item_name.'.$num) }}</td>
                                     <td class="estimate__table__cell">{{ old('item_amount.'.$num) }}</td>
                                     <td class="estimate__table__cell">{{ old('item_count.'.$num) }}</td>
-                                    <td class="estimate__table__cell">{!! number_format( str_replace(',', '', old('item_subtotal.'.$num) ) ) !!}</td>
+                                    <td class="estimate__table__cell">{!! number_format( \Func::numberFormatDecode( old('item_subtotal.'.$num) ) ) !!}</td>
                                 </tr>
                                 <tr class="estimate__table__margin-bottom">
                                     <td class="estimate__table__cell estimate__table__cell--sm-title estimate__table__cell--line align-right">
@@ -104,7 +110,7 @@
                                 <tr>
                                     <td class="estimate__table__cell estimate__table__cell--total" colspan="2">
                                         合計金額<br />
-                                        {{ number_format( str_replace(',', '', old('total') ) ) }} 円
+                                        {{ number_format( \Func::numberFormatDecode( old('total') ) ) }} 円
                                     </td>
                                     <td class="estimate__table__cell" colspan="4">
                                         特記事項<br />
@@ -127,13 +133,22 @@
 
                 </div>
 
+                @if( $action == 'create' )
                 {!! Form::submit('この内容で保存する', ['class' => 'btn btn-block btn-warning btn-submit'] ) !!}
+                @elseif( $action == 'edit' )
+                {!! Form::submit('この内容で更新する', ['class' => 'btn btn-block btn-warning btn-submit'] ) !!}
+                @endif
+
             {!! \Form::close() !!}
 
         </div>
 
         <p>
+            @if( $action == 'create' )
             <a href="{{ url('') }}/carrier/estimate/{{ old('order_id') }}/create" class="btn btn-block btn-primary">入力画面に戻る</a>
+            @elseif( $action == 'edit' )
+            <a href="{{ url('') }}/carrier/estimate/{{ old('estimate_id') }}/edit" class="btn btn-block btn-primary">編集画面に戻る</a>
+            @endif
         </p>
 
     </div>

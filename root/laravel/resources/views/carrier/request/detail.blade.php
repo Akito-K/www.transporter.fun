@@ -20,7 +20,7 @@
                     </ul>
                     <ul class="lists">
                         <li class="list list-title">荷主名</li>
-                        <li class="list list-value">{!! $data->owner_with_star !!}</li>
+                        <li class="list list-value">{!! $data->owner_name_with_star !!}</li>
                     </ul>
                     <ul class="lists">
                         <li class="list list-title">発送予定日時</li>

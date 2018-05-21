@@ -3,7 +3,8 @@
 
 <div class="box">
     <div class="box-body">
-        <h2 class="page-header">作成した見積一覧</h2>
+        <h2 class="page-header">「<a href="{{ url('') }}/carrier/request/{{ $datas[0]->order_id }}/detail">{{ $datas[0]->order->name }}</a>」の件で作成した見積一覧</h2>
+        <p class="">依頼者：{!! $datas[0]->order->owner_name_with_star !!}</p>
 
         <div class="orders__block">
 
@@ -12,8 +13,6 @@
                     <tr>
                         <th>見積合計金額</th>
                         <th>更新日時</th>
-                        <th>案件名</th>
-                        <th class="orders__table__owner">依頼者</th>
                         <th>ご提案</th>
                         <th>各種操作</th>
                     </tr>
@@ -23,8 +22,6 @@
                     <tr>
                         <td>￥{{ number_format($data->total) }}</td>
                         <td>{{ \Func::dateFormat($data->updated_at, 'y/n/j H:i' ) }}</td>
-                        <td><a href="{{ url('') }}/carrier/request/{{ $data->order_id }}/detail">{{ $data->order->name }}</a></td>
-                        <td>{!! $data->order->owner_name_with_star !!}</td>
                         <td>
                             @if( $data->suggested_at )
                             {{ \Func::dateFormat($data->suggested_at, 'y/n/j H:i') }}

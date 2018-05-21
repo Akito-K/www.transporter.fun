@@ -32,6 +32,9 @@ class CargoName extends Model
     }
 
     public static function getNames(){
-        return CargoName::pluck('name', 'name_id')->toArray();
+        $ary = CargoName::pluck('name', 'name_id')->toArray();
+        \Func::array_append($ary, [ 0 => '---' ], true);
+
+        return $ary;
     }
 }

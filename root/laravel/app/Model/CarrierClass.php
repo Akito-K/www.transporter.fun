@@ -31,8 +31,11 @@ class CarrierClass extends Model
         return $data;
     }
 
-    public static function getNames(){
-        return CarrierClass::pluck('name', 'class_id')->toArray();
+    public static function getNames($flag_default=false){
+        $ary = CarrierClass::pluck('name', 'class_id')->toArray();
+        \Func::array_append($ary, [ 0 => '---' ], true);
+
+        return $ary;
     }
 
 }

@@ -7,6 +7,7 @@ import Calendar from './calendar';
 import Upload from './upload';
 import Quote from './quote';
 import Order from './order';
+import Star from './star';
 //import Board from './board';
 //import Customer from './customer';
 //import Model from './model';
@@ -24,6 +25,8 @@ $(() => {
     const QUOTE = new Quote.MyQuote();
     // 案件情報
     const ORDER = new Order.MyOrder();
+    // 評価★
+    const STAR = new Star.MyStar();
     // コンタクトボード
 //    const BOARD = new Board.MyBoard();
     // 顧客

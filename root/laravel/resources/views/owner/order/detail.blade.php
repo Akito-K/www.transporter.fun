@@ -19,7 +19,7 @@
                     <ul class="lists">
                         <li class="list list-title">荷主名を公開しない</li>
                         <li class="list list-value">
-                            {{ $data->hide_owner }}
+                            {{ $data->hide_owner_str }}
                         </li>
                     </ul>
                     <ul class="lists">

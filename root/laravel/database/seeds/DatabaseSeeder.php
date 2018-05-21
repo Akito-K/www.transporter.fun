@@ -7,45 +7,50 @@ use App\Model\Address;
 use App\Model\Authority;
 use App\Model\Board;
 use App\Model\Car;
+use App\Model\CarEmpty;
+use App\Model\Cargo;
+use App\Model\CargoForm;
+use App\Model\CargoName;
+use App\Model\CargoValue;
+
 use App\Model\Carrier;
 use App\Model\CarrierClass;
 use App\Model\CarrierEquipment;
 use App\Model\CarrierEquipmentValue;
 use App\Model\CarrierToCar;
 use App\Model\CarrierToClass;
-use App\Model\CarEmpty;
 use App\Model\CarValue;
+
 use App\Model\Estimate;
 use App\Model\EstimateItem;
 use App\Model\EstimateTemp;
 use App\Model\Evaluation;
+use App\Model\EvaluationStar;
+use App\Model\EvaluationItem;
+
 use App\Model\Item;
 use App\Model\Log;
 use App\Model\Message;
 use App\Model\MessageUnopen;
 use App\Model\MyUser;
 use App\Model\News;
+
 use App\Model\Order;
-use App\Model\StatusLog;
-use App\Model\Status;
-//use App\Model\OrderValue;
+use App\Model\OrderToCargo;
+use App\Model\OrderRequest;
+use App\Model\OrderRequestOption;
 use App\Model\Owner;
 use App\Model\Pref;
 use App\Model\Report;
 use App\Model\ReportTemp;
+use App\Model\Status;
+use App\Model\StatusLog;
+
 use App\Model\Upload;
 use App\Model\UserToAddress;
 use App\Model\UserToAuthority;
+use App\Model\Work;
 
-use App\Model\Cargo;
-use App\Model\CargoValue;
-use App\Model\OrderToCargo;
-use App\Model\CargoName;
-use App\Model\CargoForm;
-use App\Model\EvaluationStar;
-use App\Model\EvaluationItem;
-use App\Model\OrderRequest;
-use App\Model\OrderRequestOption;
 
 class DatabaseSeeder extends Seeder
 {
@@ -65,45 +70,53 @@ class DatabaseSeeder extends Seeder
         $this->datas = $this->Excel->getHashedDatas($datas);
 //        \Func::var_dump($this->datas);exit;
 
-        $this->MyUserSeeder();
-        $this->UserToAddressSeeder();
-        $this->UserToAuthoritySeeder();
-        $this->OwnerSeeder();
         $this->AddressSeeder();
         $this->AuthoritySeeder();
+        $this->BoardSeeder();
+        $this->CarSeeder();
+        $this->CarEmptySeeder();
+        $this->CargoSeeder();
+        $this->CargoFormSeeder();
+        $this->CargoNameSeeder();
+        $this->CargoValueSeeder();
+
         $this->CarrierSeeder();
+        $this->CarrierClassSeeder();
         $this->CarrierEquipmentSeeder();
         $this->CarrierEquipmentValueSeeder();
-        $this->CarrierClassSeeder();
-        $this->CarrierToClassSeeder();
-        $this->CarEmptySeeder();
-        $this->CarSeeder();
-        $this->CarValueSeeder();
         $this->CarrierToCarSeeder();
-        $this->OrderSeeder();
-        //$this->OrderValueSeeder();
-        $this->StatusLogSeeder();
-        $this->StatusSeeder();
-        //$this->BoardSeeder();
-        //$this->MessageSeeder();
-        //$this->MessageUnopenSeeder();
-        //$this->NewsSeeder();
-        //$this->EvaluationSeeder();
-        $this->PrefSeeder();
-        //$this->UploadSeeder();
-        //$this->LogSeeder();
-        $this->ItemSeeder();
-        //$this->Seeder();
+        $this->CarrierToClassSeeder();
+        $this->CarValueSeeder();
 
-        $this->CargoSeeder();
-        //$this->CargoValueSeeder();
-        $this->OrderToCargoSeeder();
-        $this->CargoNameSeeder();
-        $this->CargoFormSeeder();
-        //$this->EvaluationStarSeeder();
+        $this->EstimateSeeder();
+        $this->EstimateItemSeeder();
+        $this->EstimateTempSeeder();
+        $this->EvaluationSeeder();
+        $this->EvaluationStarSeeder();
         $this->EvaluationItemSeeder();
+
+        $this->ItemSeeder();
+        $this->LogSeeder();
+        $this->MessageSeeder();
+        $this->MessageUnopenSeeder();
+        $this->MyUserSeeder();
+        $this->NewsSeeder();
+
+        $this->OrderSeeder();
+        $this->OrderToCargoSeeder();
         $this->OrderRequestSeeder();
         $this->OrderRequestOptionSeeder();
+        $this->OwnerSeeder();
+        $this->PrefSeeder();
+        $this->ReportSeeder();
+        $this->ReportTempSeeder();
+        $this->StatusSeeder();
+        $this->StatusLogSeeder();
+
+        $this->UploadSeeder();
+        $this->UserToAddressSeeder();
+        $this->UserToAuthoritySeeder();
+        $this->WorkSeeder();
 
     }
 
@@ -113,66 +126,6 @@ class DatabaseSeeder extends Seeder
         $datas = $this->Excel->getExcelData($filepath);
 
         return $datas;
-    }
-
-    public function MyUserSeeder(){
-        $table_name = 'users';
-
-        DB::table( $table_name )->delete();
-        if( isset( $this->datas[ $table_name ])){
-            $datas = $this->datas[ $table_name ];
-
-            if(!empty($datas)){
-                foreach($datas as $data){
-                    MyUser::create($data);
-                }
-            }
-        }
-    }
-
-    public function UserToAddressSeeder(){
-        $table_name = 'user_to_addresses';
-
-        DB::table( $table_name )->delete();
-        if( isset( $this->datas[ $table_name ])){
-            $datas = $this->datas[ $table_name ];
-
-            if(!empty($datas)){
-                foreach($datas as $data){
-                    UserToAddress::create($data);
-                }
-            }
-        }
-    }
-
-    public function UserToAuthoritySeeder(){
-        $table_name = 'user_to_authorities';
-
-        DB::table( $table_name )->delete();
-        if( isset( $this->datas[ $table_name ])){
-            $datas = $this->datas[ $table_name ];
-
-            if(!empty($datas)){
-                foreach($datas as $data){
-                    UserToAuthority::create($data);
-                }
-            }
-        }
-    }
-
-    public function OwnerSeeder(){
-        $table_name = 'owners';
-
-        DB::table( $table_name )->delete();
-        if( isset( $this->datas[ $table_name ])){
-            $datas = $this->datas[ $table_name ];
-
-            if(!empty($datas)){
-                foreach($datas as $data){
-                    Owner::create($data);
-                }
-            }
-        }
     }
 
     public function AddressSeeder(){
@@ -205,6 +158,111 @@ class DatabaseSeeder extends Seeder
         }
     }
 
+    public function BoardSeeder(){
+        $table_name = 'boards';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    Board::create($data);
+                }
+            }
+        }
+    }
+
+    public function CarSeeder(){
+        $table_name = 'cars';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    Car::create($data);
+                }
+            }
+        }
+    }
+
+    public function CarEmptySeeder(){
+        $table_name = 'car_empties';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    CarEmpty::create($data);
+                }
+            }
+        }
+    }
+
+    public function CargoSeeder(){
+        $table_name = 'cargos';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    Cargo::create($data);
+                }
+            }
+        }
+    }
+
+    public function CargoFormSeeder(){
+        $table_name = 'cargo_forms';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    CargoForm::create($data);
+                }
+            }
+        }
+    }
+
+    public function CargoNameSeeder(){
+        $table_name = 'cargo_names';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    CargoName::create($data);
+                }
+            }
+        }
+    }
+
+    public function CargoValueSeeder(){
+        $table_name = 'cargo_values';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    CargoValue::create($data);
+                }
+            }
+        }
+    }
+
     public function CarrierSeeder(){
         $table_name = 'carriers';
 
@@ -215,6 +273,21 @@ class DatabaseSeeder extends Seeder
             if(!empty($datas)){
                 foreach($datas as $data){
                     Carrier::create($data);
+                }
+            }
+        }
+    }
+
+    public function CarrierClassSeeder(){
+        $table_name = 'carrier_classes';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    CarrierClass::create($data);
                 }
             }
         }
@@ -250,8 +323,8 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-    public function CarrierClassSeeder(){
-        $table_name = 'carrier_classes';
+    public function CarrierToCarSeeder(){
+        $table_name = 'carrier_to_cars';
 
         DB::table( $table_name )->delete();
         if( isset( $this->datas[ $table_name ])){
@@ -259,7 +332,7 @@ class DatabaseSeeder extends Seeder
 
             if(!empty($datas)){
                 foreach($datas as $data){
-                    CarrierClass::create($data);
+                    CarrierToCar::create($data);
                 }
             }
         }
@@ -280,36 +353,6 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-    public function CarEmptySeeder(){
-        $table_name = 'car_empties';
-
-        DB::table( $table_name )->delete();
-        if( isset( $this->datas[ $table_name ])){
-            $datas = $this->datas[ $table_name ];
-
-            if(!empty($datas)){
-                foreach($datas as $data){
-                    CarEmpty::create($data);
-                }
-            }
-        }
-    }
-
-    public function CarSeeder(){
-        $table_name = 'cars';
-
-        DB::table( $table_name )->delete();
-        if( isset( $this->datas[ $table_name ])){
-            $datas = $this->datas[ $table_name ];
-
-            if(!empty($datas)){
-                foreach($datas as $data){
-                    Car::create($data);
-                }
-            }
-        }
-    }
-
     public function CarValueSeeder(){
         $table_name = 'car_values';
 
@@ -325,8 +368,8 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-    public function CarrierToCarSeeder(){
-        $table_name = 'carrier_to_cars';
+    public function EstimateSeeder(){
+        $table_name = 'estimates';
 
         DB::table( $table_name )->delete();
         if( isset( $this->datas[ $table_name ])){
@@ -334,14 +377,14 @@ class DatabaseSeeder extends Seeder
 
             if(!empty($datas)){
                 foreach($datas as $data){
-                    CarrierToCar::create($data);
+                    Estimate::create($data);
                 }
             }
         }
     }
 
-    public function OrderSeeder(){
-        $table_name = 'orders';
+    public function EstimateItemSeeder(){
+        $table_name = 'estimate_items';
 
         DB::table( $table_name )->delete();
         if( isset( $this->datas[ $table_name ])){
@@ -349,14 +392,14 @@ class DatabaseSeeder extends Seeder
 
             if(!empty($datas)){
                 foreach($datas as $data){
-                    Order::create($data);
+                    EstimateItem::create($data);
                 }
             }
         }
     }
 
-    public function StatusLogSeeder(){
-        $table_name = 'status_logs';
+    public function EstimateTempSeeder(){
+        $table_name = 'estimate_temps';
 
         DB::table( $table_name )->delete();
         if( isset( $this->datas[ $table_name ])){
@@ -364,28 +407,14 @@ class DatabaseSeeder extends Seeder
 
             if(!empty($datas)){
                 foreach($datas as $data){
-                    StatusLog::create($data);
-                }
-            }
-        }
-    }
-    public function StatusSeeder(){
-        $table_name = 'statuses';
-
-        DB::table( $table_name )->delete();
-        if( isset( $this->datas[ $table_name ])){
-            $datas = $this->datas[ $table_name ];
-
-            if(!empty($datas)){
-                foreach($datas as $data){
-                    Status::create($data);
+                    EstimateTemp::create($data);
                 }
             }
         }
     }
 
-    public function CargoSeeder(){
-        $table_name = 'cargos';
+    public function EvaluationSeeder(){
+        $table_name = 'evaluations';
 
         DB::table( $table_name )->delete();
         if( isset( $this->datas[ $table_name ])){
@@ -393,14 +422,14 @@ class DatabaseSeeder extends Seeder
 
             if(!empty($datas)){
                 foreach($datas as $data){
-                    Cargo::create($data);
+                    Evaluation::create($data);
                 }
             }
         }
     }
 
-    public function OrderToCargoSeeder(){
-        $table_name = 'order_to_cargos';
+    public function EvaluationItemSeeder(){
+        $table_name = 'evaluation_items';
 
         DB::table( $table_name )->delete();
         if( isset( $this->datas[ $table_name ])){
@@ -408,14 +437,14 @@ class DatabaseSeeder extends Seeder
 
             if(!empty($datas)){
                 foreach($datas as $data){
-                    OrderToCargo::create($data);
+                    EvaluationItem::create($data);
                 }
             }
         }
     }
 
-    public function PrefSeeder(){
-        $table_name = 'prefs';
+    public function EvaluationStarSeeder(){
+        $table_name = 'evaluation_stars';
 
         DB::table( $table_name )->delete();
         if( isset( $this->datas[ $table_name ])){
@@ -423,7 +452,7 @@ class DatabaseSeeder extends Seeder
 
             if(!empty($datas)){
                 foreach($datas as $data){
-                    Pref::create($data);
+                    EvaluationStar::create($data);
                 }
             }
         }
@@ -444,8 +473,8 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-    public function CargoNameSeeder(){
-        $table_name = 'cargo_names';
+    public function LogSeeder(){
+        $table_name = 'logs';
 
         DB::table( $table_name )->delete();
         if( isset( $this->datas[ $table_name ])){
@@ -453,14 +482,14 @@ class DatabaseSeeder extends Seeder
 
             if(!empty($datas)){
                 foreach($datas as $data){
-                    CargoName::create($data);
+                    Log::create($data);
                 }
             }
         }
     }
 
-    public function CargoFormSeeder(){
-        $table_name = 'cargo_forms';
+    public function MessageSeeder(){
+        $table_name = 'messages';
 
         DB::table( $table_name )->delete();
         if( isset( $this->datas[ $table_name ])){
@@ -468,14 +497,14 @@ class DatabaseSeeder extends Seeder
 
             if(!empty($datas)){
                 foreach($datas as $data){
-                    CargoForm::create($data);
+                    Message::create($data);
                 }
             }
         }
     }
 
-    public function EvaluationItemSeeder(){
-        $table_name = 'evaluation_items';
+    public function MessageUnopenSeeder(){
+        $table_name = 'message_unopens';
 
         DB::table( $table_name )->delete();
         if( isset( $this->datas[ $table_name ])){
@@ -483,7 +512,67 @@ class DatabaseSeeder extends Seeder
 
             if(!empty($datas)){
                 foreach($datas as $data){
-                    EvaluationItem::create($data);
+                    MessageUnopen::create($data);
+                }
+            }
+        }
+    }
+
+    public function MyUserSeeder(){
+        $table_name = 'users';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    MyUser::create($data);
+                }
+            }
+        }
+    }
+
+    public function NewsSeeder(){
+        $table_name = 'news';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    News::create($data);
+                }
+            }
+        }
+    }
+
+    public function OrderSeeder(){
+        $table_name = 'orders';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    Order::create($data);
+                }
+            }
+        }
+    }
+
+    public function OrderToCargoSeeder(){
+        $table_name = 'order_to_cargos';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    OrderToCargo::create($data);
                 }
             }
         }
@@ -514,6 +603,156 @@ class DatabaseSeeder extends Seeder
             if(!empty($datas)){
                 foreach($datas as $data){
                     OrderRequestOption::create($data);
+                }
+            }
+        }
+    }
+
+    public function OwnerSeeder(){
+        $table_name = 'owners';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    Owner::create($data);
+                }
+            }
+        }
+    }
+
+    public function PrefSeeder(){
+        $table_name = 'prefs';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    Pref::create($data);
+                }
+            }
+        }
+    }
+
+    public function ReportSeeder(){
+        $table_name = 'reports';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    Report::create($data);
+                }
+            }
+        }
+    }
+
+    public function ReportTempSeeder(){
+        $table_name = 'report_temps';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    ReportTemp::create($data);
+                }
+            }
+        }
+    }
+
+    public function StatusSeeder(){
+        $table_name = 'statuses';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    Status::create($data);
+                }
+            }
+        }
+    }
+
+    public function StatusLogSeeder(){
+        $table_name = 'status_logs';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    StatusLog::create($data);
+                }
+            }
+        }
+    }
+
+    public function UploadSeeder(){
+        $table_name = 'uploads';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    Upload::create($data);
+                }
+            }
+        }
+    }
+
+    public function UserToAddressSeeder(){
+        $table_name = 'user_to_addresses';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    UserToAddress::create($data);
+                }
+            }
+        }
+    }
+
+    public function UserToAuthoritySeeder(){
+        $table_name = 'user_to_authorities';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    UserToAuthority::create($data);
+                }
+            }
+        }
+    }
+
+    public function WorkSeeder(){
+        $table_name = 'works';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    Work::create($data);
                 }
             }
         }

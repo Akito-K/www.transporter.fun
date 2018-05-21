@@ -22,7 +22,7 @@ class estimateController extends carrierController
         Log::saveData( __METHOD__ );
 
         $pagemeta = Pagemeta::getPagemeta('OW-ESM-01');
-        $datas = Estimate::getEstimates();
+        $datas = Estimate::getEstimatesFromCarrierSide(\Auth::user()->carrier_id);
 
         return view('carrier.estimate.list', compact('pagemeta', 'datas'));
     }
@@ -31,32 +31,32 @@ class estimateController extends carrierController
         Log::saveData( __METHOD__ , 'order_id', $order_id, true);
 
         $pagemeta = Pagemeta::getPagemeta('OW-ESM-01');
-        $datas = Estimate::getOrderEstimates($order_id);
+        $datas = Estimate::getEstimatesByOrderIdFromCarrierSide( \Auth::user()->carrier_id, $order_id );
 
-        return view('carrier.estimate.list', compact('pagemeta', 'datas'));
+        return view('carrier.estimate.order_list', compact('pagemeta', 'datas'));
     }
 
     public function showDetail ( $estimate_id ){
         Log::saveData( __METHOD__ , 'estimate_id', $estimate_id, true);
 
         $pagemeta = Pagemeta::getPagemeta('OW-ESM-02');
-        $estimate_data = Estimate::getEstimate($estimate_id);
-        $data = Order::getOrderData($estimate_data->order_id);
+        $data = Estimate::getEstimateFromCarrierSide($estimate_id);
+        $order_data = Order::getOrderFromCarrierSide($data->order_id);
         $carrier = Carrier::getData(\Auth::user()->carrier_id);
 
-        return view('carrier.estimate.detail', compact('data', 'pagemeta', 'estimate_data', 'carrier'));
+        return view('carrier.estimate.detail', compact('order_data', 'pagemeta', 'data', 'carrier'));
     }
 
     public function create( $order_id ){
         Log::saveData( __METHOD__ , 'order_id', $order_id, true);
 
         $pagemeta = Pagemeta::getPagemeta('OW-ESM-03');
-        $data = Order::getOrderData($order_id);
+        $order_data = Order::getOrderFromCarrierSide($order_id);
         $items = Item::getNames(\Auth::user()->carrier_id);
         \Func::array_append($items, [ 0 => '---' ], true);
         $select_orders_names = Order::getEstimatableDatasNames();
 
-        return view('carrier.estimate.create', compact('select_orders_names', 'data', 'pagemeta', 'items'));
+        return view('carrier.estimate.create', compact('select_orders_names', 'order_data', 'pagemeta', 'items'));
     }
 
     public function confirm( MyRequest $request ){
@@ -64,11 +64,12 @@ class estimateController extends carrierController
         Log::saveData( __METHOD__ , 'order_id', $order_id, true);
 
         $pagemeta = Pagemeta::getPagemeta('OW-ESM-04');
-        $data = Order::getOrderData($order_id);
+        $order_data = Order::getOrderFromCarrierSide($order_id);
         $carrier = Carrier::getData(\Auth::user()->carrier_id);
         $request->flash();
+        $action = 'create';
 
-        return view('carrier.estimate.confirm', compact('data', 'pagemeta', 'carrier'));
+        return view('carrier.estimate.confirm', compact('action', 'order_data', 'pagemeta', 'carrier'));
     }
 
     public function insert( Request $request ){
@@ -81,122 +82,67 @@ class estimateController extends carrierController
         EstimateItem::saveData($request_data, $estimate_id);
         Work::saveData($request_data, $estimate_id);
 
-        return redirect('carrier/work');
+        return redirect('carrier/estimate');
     }
 
     public function edit ($estimate_id, Request $request){
         Log::saveData( __METHOD__ , 'estimate_id', $estimate_id, true);
-
-        $me = $request['me'];
         $pagemeta = Pagemeta::getPagemeta('OW-ESM-06');
-        if( $request->session()->has('estimate.create.'.$me->hashed_id) ) {
-            $estimate_data = $request->session()->get('estimate.create.'.$me->hashed_id);
-        }else{
-            $estimate_data = Estimate::getEstimate($estimate_id);
-        }
 
-        $data = Order::getOrderData($estimate_data->order_id);
+        $data = Estimate::getEstimateFromCarrierSide($estimate_id);
+        $order_data = Order::getOrderFromCarrierSide($data->order_id);
+        $me = $request['me'];
         $carrier = Carrier::getData($me->carrier_id);
         $select_orders_names = Order::getEstimatableDatasNames();
         $items = Item::getNames($me->carrier_id);
         \Func::array_append($items, [ 0 => '---' ], true);
 
-        return view('carrier.estimate.edit', compact('select_orders_names', 'data', 'pagemeta', 'estimate_data', 'items', 'carrier', 'me'));
+        return view('carrier.estimate.edit', compact('select_orders_names', 'order_data', 'data', 'pagemeta', 'items', 'carrier'));
     }
 
-    public function confirmUpdate(Request $request){
+    public function confirmUpdate( MyRequest $request ){
+        $estimate_id = $request['estimate_id'];
+        Log::saveData( __METHOD__ , 'estimate_id', $estimate_id, true);
         $order_id = $request['order_id'];
-        Log::saveData( __METHOD__ , 'order_id', $order_id, true);
 
-        // Validation
-        $this->validationUpdate($request);
+        $pagemeta = Pagemeta::getPagemeta('OW-ESM-07');
+        $order_data = Order::getOrderFromCarrierSide($order_id);
+        $carrier = Carrier::getData(\Auth::user()->carrier_id);
 
-        $me = $request['me'];
-        $pagemeta = Pagemeta::getPagemeta('OW-ESM-04');
-        $data = Order::getOrderData($order_id);
-        $carrier = Carrier::getData($me->carrier_id);
+        $request->flash();
+        $action = 'edit';
 
-        $estimate_data = $this->makeData($request);
-        $estimate_data->estimate_id = $request['estimate_id'];
-        $request->session()->forget('estimate.create.'.$me->hashed_id);
-        $request->session()->put('estimate.create.'.$me->hashed_id, $estimate_data);
-
-        return view('carrier.estimate.confirm_update', compact('data', 'pagemeta', 'estimate_data', 'carrier', 'me'));
+        return view('carrier.estimate.confirm', compact('action', 'order_data', 'pagemeta', 'carrier'));
     }
 
+    public function update( Request $request ){
+        $estimate_id = $request['estimate_id'];
+        Log::saveData( __METHOD__ , 'estimate_id', $estimate_id, true);
 
-    public function makeData($request){
-        $data = new \stdClass();;
-        $keys = [
-            'order_id',
-            'number',
-            'estimated_at',
-            'hide_estimated_at',
-            'limit_at',
-            'hide_limit_at',
-            'total',
-            'notes',
-        ];
-        foreach($keys as $key){
-            $data->$key = $request[$key];
-        }
+        $request_data = $request->all();
+        Estimate::updateData($request_data);
+        EstimateItem::where('estimate_id', $estimate_id)->delete();
+        EstimateItem::saveData($request_data, $estimate_id);
+        Work::updateData($request_data);
 
-        $data->items = [];
-        $keys = [
-            'code',
-            'name',
-            'amount',
-            'count',
-            'notes',
-        ];
-        $total = 0;
-        if(!empty($request['code'])){
-            foreach($request['code'] as $num => $val){
-                $item = new \stdClass();
-                foreach($keys as $key){
-                    $item->$key = $request[$key][$num];
-                }
-                $item->subtotal = $item->amount * $item->count;
-                $data->items[$num] = $item;
-                $total += $item->subtotal;
-            }
-        }
-        $data->total = $total;
-
-        return $data;
+        return redirect('carrier/estimate');
     }
 
-    public function makeEmptyData(){
-        $keys = [
-            'number',
-            'estimated_at',
-            'hide_estimated_at',
-            'limit_at',
-            'hide_limit_at',
-            'total',
-            'notes',
-        ];
+    public function delete ($estimate_id ){
+        Log::saveData( __METHOD__ , 'estimate_id', $estimate_id, true);
+        $data = Estimate::getData($estimate_id);
+        $data->delete();
 
-        $data = new \stdClass();
-        foreach($keys as $key){
-            $data->$key = '';
-        }
-
-        $keys = [
-            'code',
-            'name',
-            'amount',
-            'count',
-            'subtotal',
-            'notes',
-        ];
-        $obj = new \stdClass();
-        foreach($keys as $key){
-            $obj->$key = '';
-        }
-        $data->items = [$obj];
-
-        return $data;
+        return redirect('carrier/estimate');
     }
 
+    public function duplicate($old_estimate_id){
+        Log::saveData( __METHOD__ , 'estimate_id', $old_estimate_id, true);
+        $new_estimate_id = Estimate::getNewId();
+        Estimate::duplicateData($old_estimate_id, $new_estimate_id);
+        EstimateItem::duplicateData($old_estimate_id, $new_estimate_id);
+        Work::duplicateData($old_estimate_id, $new_estimate_id);
+
+        return redirect('carrier/estimate');
+    }
 }

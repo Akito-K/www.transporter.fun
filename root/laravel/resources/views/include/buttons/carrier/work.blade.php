@@ -1,17 +1,18 @@
 <?php
 /**
  * 運送会社 -> 案件
- * 'W-01' => '見積提出済',
- * 'W-02' => '荷主検討中',
- * 'W-03' => '受注中',
- * 'W-04' => '進行中',
- * 'W-05' => '入金未確認',
- * 'W-07' => '入金確認済',
- * 'W-99' => '失注',
+ * 'W-05' => '見積提出済',
+ * 'W-10' => '荷主検討中',
+ * 'W-15' => '受注中',
+ * 'W-20' => '進行中',
+ * 'W-25' => '入金未確認',
+ * 'W-30' => '入金確認済',
+ * 'W-00' => '失注',
  */
 ?>
+<a href="{{ url('') }}/carrier/work/{{ $data->work_id }}/detail" class="orders__btn btn btn-primary btn-sm">仕事の詳細</a>
 
-<a href="{{ url('') }}/carrier/request/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">案件詳細</a>
+<?php /*
 
 @if($data->my_estimate)
 <a href="{{ url('') }}/carrier/estimate/{{ $data->order_id }}" class="orders__btn btn btn-success btn-sm">見積一覧</a>
@@ -19,7 +20,6 @@
 <a href="{{ url('') }}/carrier/estimate/{{ $data->order_id }}/create" class="orders__btn btn btn-warning btn-sm">見積作成</a>
 @endif
 
-<?php /*
 @if( in_array($data->status_id, ['ORD-STS-11', 'ORD-STS-16', 'ORD-STS-21', 'ORD-STS-26', 'ORD-STS-31', 'ORD-STS-36', 'ORD-STS-41', 'ORD-STS-46']) )
 <a href="{{ url('') }}/owner/order/estimate/{{ $data->order_id }}/detail" class="orders__btn btn btn-warning btn-sm">進行中の見積詳細</a>
 <a href="{{ url('') }}/owner/order/board/{{ $data->order_id }}" class="orders__btn btn btn-success btn-sm">メッセージボード</a>

@@ -18,17 +18,29 @@ class EstimateItem extends Model
         return $datas;
     }
 
+    public static function duplicateData($old_estimate_id, $new_estimate_id){
+        $date_at = new \Datetime();
+        $old_datas = EstimateItem::where('estimate_id', $old_estimate_id)->get();
+        if($old_datas){
+            foreach($old_datas as $old_data){
+                $new_data = $old_data->replicate();
+                $new_data->estimate_id = $new_estimate_id;
+                $new_data->save();
+            }
+        }
+    }
+
     public static function saveData($request_data, $estimate_id){
         $request_data = (object) $request_data;
-        if(!empty($request_data->items)){
-            foreach($request_data->items as $num => $item){
-                $data = new Estimate;
+        if(!empty($request_data->item_code)){
+            foreach($request_data->item_code as $num => $v){
+                $data = new EstimateItem;
                 $data->estimate_id = $estimate_id;
-                $data->code = $item->item_code;
-                $data->name = $item->item_name?: '';
-                $data->amount = $item->item_amount?: 0;
-                $data->count = $item->item_count?: 0;
-                $data->notes = $item->item_notes;
+                $data->code = $request_data->item_code[$num];
+                $data->name = $request_data->item_name[$num]?: '';
+                $data->amount = $request_data->item_amount[$num]?: 0;
+                $data->count = $request_data->item_count[$num]?: 0;
+                $data->notes = $request_data->item_notes[$num];
                 $data->save();
             }
         }
