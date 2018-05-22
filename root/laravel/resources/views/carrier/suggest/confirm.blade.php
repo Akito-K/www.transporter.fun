@@ -9,10 +9,19 @@
         <h2 class="page-header">ご提案作成（確認）</h2>
 
         <div class="request__block">
-            {!! Form::open(['url' => 'carrier/suggest/execute', 'class' => 'request__boxes']) !!}
+            <div class="request__boxes">
+                <ul class="work__box-lists">
+                    <li class="work__box-list"><a href="#message">メッセージ</a></li>
+                    <li class="work__box-list"><a href="#order">案件内容</a></li>
+                    <li class="work__box-list"><a href="#estimate">見積書</a></li>
+                </ul>
+            </div>
+
+            {!! Form::open(['url' => 'carrier/suggest/execute', 'class' => 'work__boxes']) !!}
                 {!! Form::hidden('estimate_id', $estimate_data->order_id) !!}
 
-                <div class="order__box bulletAccordOrderBox">
+                <h5 class="work__box__title" id="message">メッセージ</h5>
+                <div class="work__box__suggest work__box__suggest--confirm">
                     <ul class="lists">
                         <li class="list list-title">ご提案メッセージ</li>
                         <li class="list list-value">
@@ -28,10 +37,12 @@
 
         <div class="request__block">
             <div class="request__boxes">
-                <h4 class="order__box__title trigAccordOrderBox" data-open="0">案件情報</h4>
-                <div class="request__order bulletAccordOrderBox initial-close" id="bulletQuoteOrder">
+                <h5 class="work__box__title" id="order">案件内容</h5>
+                <div class="request__order">
                     @include('include.carrier.order_estimate', ['data' => $order_data])
                 </div>
+
+                <h5 class="work__box__title" id="estimate">見積書</h5>
                 <div class="estimate">
                     @include('include.carrier.estimate', ['order_data' => $order_data, 'data' => $estimate_data])
                 </div>

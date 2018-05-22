@@ -10551,11 +10551,12 @@ exports.default = Func;
 Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(0);
 //import Holiday from './holiday';
-var calendar_1 = __webpack_require__(3);
-var upload_1 = __webpack_require__(6);
-var quote_1 = __webpack_require__(7);
-var order_1 = __webpack_require__(8);
-var star_1 = __webpack_require__(9);
+var page_1 = __webpack_require__(3);
+var calendar_1 = __webpack_require__(4);
+var upload_1 = __webpack_require__(7);
+var quote_1 = __webpack_require__(8);
+var order_1 = __webpack_require__(9);
+var star_1 = __webpack_require__(10);
 //import Board from './board';
 //import Customer from './customer';
 //import Model from './model';
@@ -10563,6 +10564,8 @@ $(function () {
     //    Func.hoge();
     // 休日カレンダー
     //    const HOLIDAY = new Holiday.calendar();
+    // ページ全般
+    var ATAG = new page_1.default.aTag();
     // カレンダー
     var CALENDAR = new calendar_1.default.MyCalendar();
     // ドラッグでアップロード
@@ -10587,9 +10590,84 @@ $(function () {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var $ = __webpack_require__(0);
+var Page;
+(function (Page) {
+    var Info = /** @class */ (function () {
+        function Info() {
+            this.bodyClass = 'dummy';
+            this.window = { width: 0, height: 0 };
+            this.set();
+        }
+        Info.prototype.set = function () {
+            this.bodyClass = $('body').attr("class");
+            this.window.width = $(window).width();
+            this.window.height = $(window).height();
+        };
+        return Info;
+    }());
+    Page.Info = Info;
+    var aTag = /** @class */ (function () {
+        function aTag() {
+            var _this = this;
+            this.href = '';
+            this.disabled = false;
+            $('a').click(function (e) {
+                _this.set($(e.target));
+                if (_this.disabled) {
+                    return false;
+                }
+                else {
+                    return _this.smoothScroll();
+                }
+            });
+        }
+        aTag.prototype.set = function (el) {
+            this.el = el;
+            this.href = this.el.attr("href");
+            this.disabled = this.el.attr("disabled") == "disabled";
+        };
+        aTag.prototype.smoothScroll = function () {
+            if (this.href != '#') {
+                if (this.href != '#' && this.href.match(/^#/)) {
+                    var target = $(this.href == "#" || this.href == "" ? 'html' : this.href);
+                    var position = target.offset().top;
+                    if (this.el.attr("data-no-anime") == "1") {
+                        var speed = 0;
+                        $("html, body").animate({ scrollTop: position }, speed, "linear");
+                    }
+                    else {
+                        var speed = 500;
+                        $("html, body").animate({ scrollTop: position }, speed, "swing");
+                    }
+                    //console.log("smoothScroll");
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+            else {
+                return false;
+            }
+        };
+        return aTag;
+    }());
+    Page.aTag = aTag;
+})(Page || (Page = {}));
+exports.default = Page;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
 var func_1 = __webpack_require__(1);
 var $ = __webpack_require__(0);
-var calJS = __webpack_require__(4);
+var calJS = __webpack_require__(5);
 var Calendar;
 (function (Calendar) {
     var MyCalendar = /** @class */ (function () {
@@ -10841,21 +10919,21 @@ exports.default = Calendar;
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(5);
+module.exports = __webpack_require__(6);
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function(b,c){ true?module.exports=c():'function'==typeof define&&define.amd?define([],c):'object'==typeof exports?exports.Cal=c():b.Cal=c()})(this,function(){return function(a){function b(e){if(c[e])return c[e].exports;var f=c[e]={i:e,l:!1,exports:{}};return a[e].call(f.exports,f,f.exports,b),f.l=!0,f.exports}var c={};return b.m=a,b.c=c,b.i=function(e){return e},b.d=function(e,f,g){b.o(e,f)||Object.defineProperty(e,f,{configurable:!1,enumerable:!0,get:g})},b.n=function(e){var f=e&&e.__esModule?function(){return e['default']}:function(){return e};return b.d(f,'a',f),f},b.o=function(e,f){return Object.prototype.hasOwnProperty.call(e,f)},b.p='',b(b.s=0)}([function(a,b){'use strict';function c(h,j){if(!(h instanceof j))throw new TypeError('Cannot call a class as a function')}Object.defineProperty(b,'__esModule',{value:!0});var e=function(){function h(j,k){for(var m=0;m<k.length;m++){var n=k[m];n.enumerable=n.enumerable||!1,n.configurable=!0,'value'in n&&(n.writable=!0),Object.defineProperty(j,n.key,n)}}return function(j,k,m){return k&&h(j.prototype,k),m&&h(j,m),j}}(),f={getToday:function(){var j=new Date;return{year:j.getFullYear(),month:j.getMonth()+1,date:j.getDate()}},getWeekMap:function(j,k){var m=j&&7===j.length&&Array.isArray(j),n=m?j:k?['\u6708','\u706B','\u6C34','\u6728','\u91D1','\u571F','\u65E5']:['\u65E5','\u6708','\u706B','\u6C34','\u6728','\u91D1','\u571F'],o=k?1:0;return{DAY_STR:n,GAP:o}},pad2:function(j){return('0'+j).slice(-2)}},g=function(){function h(j){c(this,h),j=j||{};var k=f.getToday();this.year=0|j.year||k.year,this.month=0|j.month||k.month,this.date=0|j.date||k.date,this._weekMap=f.getWeekMap(j.dayStrArr,!!j.fromMonday),this._calArr=this._generateCalArr(),this._dayArr=this._generateDayArr()}return e(h,[{key:'getCalArr',value:function(){return this._calArr.slice()}},{key:'getDayArr',value:function(){return this._dayArr.slice()}},{key:'_generateCalArr',value:function(){for(var k=this._weekMap,m=k.DAY_STR,n=k.GAP,o=new Date(this.year,this.month-1,1),p=new Date(this.year,this.month,0),q=this.year,r=this.month,s=m[o.getDay()],t=p.getDate(),u=function(){var E=m.indexOf(s);return 0===E&&1===n?5:E-1-n}(),v=1===r?q-1:q,w=1===r?12:r-1,x=new Date(v,w,0),y=x.getDate(),z=12===r?q+1:q,A=12===r?1:r+1,B=[],C=0;42>C;C++){var D=C-u;B[C]=1>D?this._getDayObj({y:v,m:w,d:y+D,i:C,isNextMonth:!1,isLastMonth:!0}):t<D?this._getDayObj({y:z,m:A,d:D-t,i:C,isNextMonth:!0,isLastMonth:!1}):this._getDayObj({y:q,m:r,d:D,i:C,isNextMonth:!1,isLastMonth:!1})}return B}},{key:'_generateDayArr',value:function(){for(var k=this._weekMap,m=k.DAY_STR,n=k.GAP,o=[],p=0,q=m.length;p<q;p++)o[p]={str:m[p],no:(p+n)%7};return o}},{key:'_getDayObj',value:function(k){var m=this._weekMap,n=m.DAY_STR,o=m.GAP,p=k.y,q=k.m,r=k.d,s=k.i,t=p+'',u=f.pad2(q),v=f.pad2(r),w=n[s%7],x=(s+o)%7,y=k.isNextMonth,z=k.isLastMonth,A=!z&&!y&&r===this.date;return{YYYYMMDD:t+u+v,YYYY:t,MM:u,DD:v,DAY:w,year:p,month:Math.max(0,q-1),date:r,day:x,isBaseDate:A,isSunday:0==x,isSaturday:6==x,isNextMonth:y,isLastMonth:z}}}]),h}();b.default=g,a.exports=g}])});
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11128,7 +11206,7 @@ exports.default = Upload;
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11242,7 +11320,7 @@ exports.default = Quote;
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11288,7 +11366,7 @@ exports.default = Order;
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

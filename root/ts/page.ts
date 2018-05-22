@@ -25,6 +25,14 @@ namespace Page {
         public disabled: boolean = false;
 
         constructor() {
+            $('a').click( (e) => {
+                this.set( $(e.target) );
+                if(this.disabled){
+                    return false;
+                }else{
+                    return this.smoothScroll();
+                }
+            });
         }
 
         public set(el): void {
@@ -46,7 +54,7 @@ namespace Page {
                         $("html, body").animate({scrollTop:position}, speed, "swing");
                     }
 
-                    console.log("smoothScroll");
+                    //console.log("smoothScroll");
                     return false;
                 }else {
                     return true;

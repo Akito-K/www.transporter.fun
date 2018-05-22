@@ -13,46 +13,21 @@
  */
 ?>
 
-@if( in_array($data->status_id, ['O-05']) )
-<a href="{{ url('') }}/owner/request/{{ $data->order_id }}/create" class="orders__btn btn btn-success btn-md">見積依頼</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/edit" class="orders__btn btn btn-warning btn-sm">編集</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/delete" class="orders__btn btn btn-danger btn-sm">削除</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/duplicate" class="orders__btn btn btn-info btn-sm">複製</a>
+@if( in_array($data->order->status_id, ['O-10', 'O-15']) )
+<a href="{{ url('') }}/owner/place/{{ $data->estimate_id }}/create" class="orders__btn btn btn-success btn-md">この見積もりで発注する</a>
+<a href="{{ url('') }}/owner/estimate/{{ $data->estimate_id }}/detail" class="orders__btn btn btn-primary btn-sm">見積詳細</a>
 
-@elseif( in_array($data->status_id, ['O-10']) )
-<a href="{{ url('') }}/owner/estimate/{{ $data->order_id }}/list" class="orders__btn btn btn-warning btn-md">この案件の見積一覧へ</a>
-<a href="{{ url('') }}/owner/request/{{ $data->order_id }}/cancel" class="orders__btn btn btn-danger btn-sm">見積依頼の取消</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/duplicate" class="orders__btn btn btn-info btn-sm">複製</a>
+@elseif( in_array($data->order->status_id, ['O-30']) )
+<a href="{{ url('') }}/owner/payed/{{ $data->order->order_id }}/create" class="orders__btn btn btn-primary btn-sm">入金通知</a>
+<a href="{{ url('') }}/owner/order/{{ $data->order->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">案件詳細</a>
 
-@elseif( in_array($data->status_id, ['O-15']) )
-<a href="{{ url('') }}/owner/estimate/{{ $data->order_id }}" class="orders__btn btn btn-warning btn-md">この案件の見積一覧へ</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/duplicate" class="orders__btn btn btn-info btn-sm">複製</a>
-
-@elseif( in_array($data->status_id, ['O-20']) )
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/duplicate" class="orders__btn btn btn-info btn-sm">複製</a>
-
-@elseif( in_array($data->status_id, ['O-25']) )
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/duplicate" class="orders__btn btn btn-info btn-sm">複製</a>
-
-@elseif( in_array($data->status_id, ['O-30']) )
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/duplicate" class="orders__btn btn btn-info btn-sm">複製</a>
-
-@elseif( in_array($data->status_id, ['O-35']) )
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/duplicate" class="orders__btn btn btn-info btn-sm">複製</a>
-
-@else
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/duplicate" class="orders__btn btn btn-info btn-sm">複製</a>
+@elseif( in_array($data->order->status_id, ['O-40']) )
+<a href="{{ url('') }}/owner/review/{{ $data->order->order_id }}/create" class="orders__btn btn btn-primary btn-sm">運送会社を評価する</a>
+<a href="{{ url('') }}/owner/order/{{ $data->order->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">案件詳細</a>
 
 @endif
 
-@if( in_array($data->status_id, ['O-15', 'O-20', 'O-25', 'O-30', 'O-35', 'O-40']) )
+
+@if( in_array($data->order->status_id, ['O-15', 'O-20', 'O-25', 'O-30', 'O-35', 'O-40']) )
 <a href="{{ url('') }}/owner/board/{{ $data->order_id }}" class="orders__btn btn btn-success btn-sm">メッセージボード</a>
 @endif

@@ -30,11 +30,11 @@ class estimateController extends ownerController
         Log::saveData( __METHOD__ , 'estimate_id', $estimate_id, true);
 
         $pagemeta = Pagemeta::getPagemeta('OW-ESM-02');
-        $data = Estimate::getEstimate($estimate_id);
-        $order_data = Order::getOrderFromOwnerSide($data->order_id);
+        $data = Estimate::getEstimateFromOwnerSide($estimate_id);
         $owner = Carrier::getData(\Auth::user()->owner_id);
+        $carrier = Carrier::getData( $data->carrier_id );
 
-        return view('owner.estimate.detail', compact('order_data', 'pagemeta', 'data', 'owner'));
+        return view('owner.estimate.detail', compact('pagemeta', 'data', 'owner', 'carrier'));
     }
 
 }

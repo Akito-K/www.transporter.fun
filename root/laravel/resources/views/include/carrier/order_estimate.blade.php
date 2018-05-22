@@ -1,6 +1,6 @@
 <div class="request__order__boxes">
 
-    <div class="request__order__box request__order__box--33">
+    <div class="request__order__box">
         <h4 class="request__order__box__title">基本情報</h4>
         <table>
             <tr>
@@ -32,7 +32,7 @@
         </table>
     </div>
 
-    <div class="request__order__box request__order__box--66">
+    <div class="request__order__box">
         <h4 class="request__order__box__title">配送情報</h4>
         <div class="params request__order__box__panels">
             <div class="param param-50 param-left request__order__box__panel">
@@ -46,11 +46,9 @@
             </div>
         </div>
     </div>
-</div>
 
 
-<div class="request__order__boxes">
-    <div class="request__order__box request__order__box--66">
+    <div class="request__order__box">
         <h4 class="request__order__box__title">運搬物</h4>
         <table>
             <tr>
@@ -82,7 +80,7 @@
         </table>
     </div>
 
-    <div class="request__order__box request__order__box--33">
+    <div class="request__order__box">
         <h4 class="request__order__box__title">希望オプション</h4>
         <table>
             <tr>
@@ -99,10 +97,8 @@
             </tr>
         </table>
     </div>
-</div>
 
-<div class="request__order__boxes">
-    <div class="request__order__box request__order__box--66">
+    <div class="request__order__box">
         <h4 class="request__order__box__title">その他</h4>
         <table>
             <tr>

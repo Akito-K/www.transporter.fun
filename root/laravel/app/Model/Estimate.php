@@ -70,12 +70,28 @@ class Estimate extends Model
             foreach($datas as $data){
                 Estimate::addItemData($data);
                 Estimate::addCarrierData($data);
+                $data->order = Order::getData($data->order_id);
                 $ary[] = $data;
             }
         }
 
         return $ary;
     }
+
+    public static function getEstimateFromOwnerSide( $estimate_id ){
+        $data = Estimate::where('estimate_id', $estimate_id)
+                            ->first();
+        Estimate::addItemData($data);
+        Estimate::addCarrierData($data);
+        $data->order = Order::getData($data->order_id);
+        Order::addOrderRequests($data->order);
+        Order::addCarrierClass($data->order);
+        Order::addHideOwner($data->order);
+        Order::addOwnerData($data->order);
+
+        return $data;
+    }
+
 /*
     public static function getOrderEstimates($order_id){
         $ary = [];

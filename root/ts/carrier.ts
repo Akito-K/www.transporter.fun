@@ -3,6 +3,7 @@ import $ = require("jquery");
 import Func from './func';
 
 //import Holiday from './holiday';
+import Page from './page';
 import Calendar from './calendar';
 import Upload from './upload';
 import Quote from './quote';
@@ -18,6 +19,8 @@ $(() => {
 
     // 休日カレンダー
 //    const HOLIDAY = new Holiday.calendar();
+    // ページ全般
+    const ATAG = new Page.aTag();
     // カレンダー
     const CALENDAR = new Calendar.MyCalendar();
     // ドラッグでアップロード

@@ -1,0 +1,58 @@
+// 共通
+@media all {
+    .work {
+        &__boxes {
+            margin-bottom: 50px;
+        }
+        &__box-lists {
+            @include flexbox();
+            margin-bottom: 30px;
+        }
+        &__box-list {
+            width: 33.3%;
+            text-align: center;
+            border: 1px solid #ccc;
+            a {
+                padding: 10px 0;
+                display: block;
+                text-decoration: none;
+                &:hover {
+                    background-color: #eee;
+                }
+            }
+        }
+        &__box {
+            &__title {
+                margin: 10px;
+                padding: 5px;
+                @include fsize(20);
+                border-left: 10px solid #3c50cc;
+                border-bottom: 1px solid #3c50cc;
+            }
+            &__suggest {
+                margin: 10px;
+                &--confirm {
+                    margin-bottom: 30px;
+                }
+            }
+        }
+    }
+}
+// スマホ
+@media(max-width: 767px) {
+    .work {
+        &__box {
+            &__title {
+            }
+        }
+    }
+}
+// TAB・PC
+@media(min-width: 768px){
+    .work {
+        &__box {
+            &__title {
+            }
+        }
+    }
+}

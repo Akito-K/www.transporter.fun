@@ -48,7 +48,7 @@
                                 </tr>
                                 <tr>
                                     <td class="estimate__table__cell" id="bulletQuoteOrderOwner" colspan="3" rowspan="2">
-                                        {!! \Func::N2BR($order_data->owner) !!}様
+                                        {!! \Func::N2BR($order_data->owner_name) !!}様
                                     </td>
                                     <td class="estimate__table__cell align-right">見積番号</td>
                                     <td class="estimate__table__cell align-right" colspan="2">
