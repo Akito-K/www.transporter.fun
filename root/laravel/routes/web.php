@@ -126,9 +126,27 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/owner/request/confirm',                   'owner\requestController@confirm');
             Route::post('/owner/request/execute',                   'owner\requestController@execute');
             Route::get ('/owner/request/{order_id}/cancel',         'owner\requestController@cancel');
-
+            // 提案のあった見積
             Route::get ('/owner/estimate/{order_id}/list',          'owner\estimateController@showOrderList');
             Route::get ('/owner/estimate/{estimate_id}/detail',     'owner\estimateController@showDetail');
+
+            // 発注
+            Route::get ('/owner/place/{estimate_id}/create',        'owner\placeController@create');
+            Route::post('/owner/place/confirm',                     'owner\placeController@confirm');
+            Route::post('/owner/place/execute',                     'owner\placeController@execute');
+            // お断り
+            Route::get ('/owner/reject/{estimate_id}/create',       'owner\rejectController@create');
+            Route::post('/owner/reject/confirm',                    'owner\rejectController@confirm');
+            Route::post('/owner/reject/execute',                    'owner\rejectController@execute');
+
+            // 入金通知
+            Route::get ('/owner/payed/{order_id}/create',           'owner\payedController@create');
+            Route::post('/owner/payed/confirm',                     'owner\payedController@confirm');
+            Route::post('/owner/payed/execute',                     'owner\payedController@execute');
+            // 運送会社評価
+            Route::get ('/owner/review/{order_id}/create',          'owner\reviewController@create');
+            Route::post('/owner/review/execute',                    'owner\reviewController@execute');
+
         });
 
         // CARRIER = = = = = = = = = = = =

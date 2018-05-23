@@ -107,7 +107,9 @@ class Order extends Model
         $data = Order::getData( $order_id );
         Order::addDeliveryData($data);
         Order::addEstimateCount($data);
-        //Order::addOwnerData($data);
+        Order::addOrderRequests($data);
+        Order::addCarrierClass($data);
+        Order::addOwnerData($data);
         //Order::addCarrierData($data);
 
         return $data;
