@@ -34,7 +34,7 @@
 
                         <td>{{ $data->my_estimate_count }}件</td>
                         <td>
-                            @if( $data->my_estimate_data->suggested_at )
+                            @if( isset($data->my_estimate_data->suggested_at) )
                             {!! \Func::dateFormat($data->my_estimate_data->suggested_at, 'y/n/j H:i') !!}
                             @else
                             -

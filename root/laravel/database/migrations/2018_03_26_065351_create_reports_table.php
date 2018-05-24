@@ -16,6 +16,7 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->increments('id');
             $table->string('report_id', 32)->unique();
+            $table->string('work_id', 32);
             $table->string('order_id', 32);
             $table->string('carrier_id', 32);
 

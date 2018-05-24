@@ -95,7 +95,7 @@ class MyForm
     }
 
     // 時間選択肢
-    public static function selectHour($selected){
+    public static function selectHour($selected=''){
         $body = '';
         for($i=0; $i<=23; $i++){
             $sel = ($i == $selected)? " selected": "";
@@ -106,7 +106,7 @@ class MyForm
     }
 
     // 分選択肢
-    public static function selectMinutes($selected){
+    public static function selectMinutes($selected=''){
         $body = '';
         for($j=0; $j<=3; $j++){
             $i = $j * 15;

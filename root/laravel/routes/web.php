@@ -135,9 +135,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/owner/place/confirm',                     'owner\placeController@confirm');
             Route::post('/owner/place/execute',                     'owner\placeController@execute');
             // お断り
-            Route::get ('/owner/reject/{estimate_id}/create',       'owner\rejectController@create');
-            Route::post('/owner/reject/confirm',                    'owner\rejectController@confirm');
-            Route::post('/owner/reject/execute',                    'owner\rejectController@execute');
+            Route::get ('/owner/reject/{estimate_id}',              'owner\rejectController@execute');
 
             // 入金通知
             Route::get ('/owner/payed/{order_id}/create',           'owner\payedController@create');
@@ -188,6 +186,17 @@ Route::group(['middleware' => ['auth']], function () {
             // 案件
             Route::get ('/carrier/work',                            'carrier\workController@showList');
             Route::get ('/carrier/work/{work_id}/detail',           'carrier\workController@showDetail');
+
+            // 受注
+            Route::get ('/carrier/receive/{work_id}/create',        'carrier\receiveController@create');
+            Route::post('/carrier/receive/confirm',                 'carrier\receiveController@confirm');
+            Route::post('/carrier/receive/execute',                 'carrier\receiveController@execute');
+
+            // 完了報告
+            Route::get ('/carrier/report/{work_id}/create',         'carrier\reportController@create');
+            Route::post('/carrier/report/confirm',                  'carrier\reportController@confirm');
+            Route::post('/carrier/report/execute',                  'carrier\reportController@execute');
+
         });
 
         // ADMIN = = = = = = = = = = = =

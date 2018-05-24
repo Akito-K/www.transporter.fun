@@ -23,11 +23,15 @@ class CreateEstimatesTable extends Migration
 
             $table->text('suggest_message')->nullable();
             $table->text('place_message')->nullable();
+            $table->text('receive_message')->nullable();
             $table->string('estimate_number', 64)->nullable();
 
             $table->datetime('estimated_at');
             $table->datetime('limit_at');
             $table->datetime('suggested_at')->nullable();
+            $table->datetime('placed_at')->nullable();
+            $table->datetime('rejected_at')->nullable();
+            $table->datetime('received_at')->nullable();
             $table->text('notes')->nullable();
 //            $table->string('payment_code', 32);
 

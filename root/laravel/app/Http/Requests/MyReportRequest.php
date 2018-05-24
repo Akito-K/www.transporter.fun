@@ -24,7 +24,10 @@ class MyReportRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'hide_arrived_at' => 'required|date',
+            'hide_completed_at' => 'required|date',
+            'arrived_at_hour' => 'required|numeric|min:0|max:23',
+            'completed_at_hour' => 'required|numeric|min:0|max:23',
         ];
     }
 }

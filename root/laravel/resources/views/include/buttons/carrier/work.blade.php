@@ -10,7 +10,21 @@
  * 'W-00' => '失注',
  */
 ?>
+
+@if($data->status_id == 'W-15')
+<a href="{{ url('') }}/carrier/receive/{{ $data->work_id }}/create" class="orders__btn btn btn-success btn-md">受注する</a>
+
+@elseif($data->status_id == 'W-20')
+<a href="{{ url('') }}/carrier/report/{{ $data->work_id }}/create" class="orders__btn btn btn-success btn-md">完了報告</a>
+
+@endif
+
 <a href="{{ url('') }}/carrier/work/{{ $data->work_id }}/detail" class="orders__btn btn btn-primary btn-sm">仕事の詳細</a>
+
+
+@if($data->status_id == '')
+@elseif($data->status_id == '')
+@endif
 
 <?php /*
 
