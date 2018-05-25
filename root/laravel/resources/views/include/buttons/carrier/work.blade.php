@@ -1,20 +1,22 @@
 <?php
 /**
  * 運送会社 -> 案件
- * 'W-05' => '見積提出済',
+ * 'W-05' => '',
  * 'W-10' => '荷主検討中',
- * 'W-15' => '受注中',
- * 'W-20' => '進行中',
- * 'W-25' => '入金未確認',
- * 'W-30' => '入金確認済',
+ * 'W-15' => '',
+ * 'W-20' => '受注中',
+ * 'W-25' => '進行中',
+ * 'W-30' => '未着金',
+ * 'W-35' => '着金あり（未確認）',
+ * 'W-40' => '取引終了',
  * 'W-00' => '失注',
  */
 ?>
 
-@if($data->status_id == 'W-15')
+@if($data->status_id == 'W-20')
 <a href="{{ url('') }}/carrier/receive/{{ $data->work_id }}/create" class="orders__btn btn btn-success btn-md">受注する</a>
 
-@elseif($data->status_id == 'W-20')
+@elseif($data->status_id == 'W-25')
 <a href="{{ url('') }}/carrier/report/{{ $data->work_id }}/create" class="orders__btn btn btn-success btn-md">完了報告</a>
 
 @endif

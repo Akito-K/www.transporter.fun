@@ -1,11 +1,9 @@
 <?php
-
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Model\UserToAuthority;
-
 
 class MyUser extends Model
 {
@@ -55,6 +53,19 @@ class MyUser extends Model
         return $data;
     }
 
+    public static function addIconFilepathToOwnerData(&$owner_data){
+        $owner_data->icon_filepath = MyUser::where('owner_id', $owner_data->owner_id )->value('icon_filepath');
+    }
+
+    public static function addIconFilepathToCarrierData(&$carrier_data){
+        $carrier_data->icon_filepath = MyUser::where('carrier_id', $carrier_data->carrier_id )->value('icon_filepath');
+    }
+
+/*
+    public static function getDataByOwnerId($owner_id){
+        return MyUser::where('owner_id', $owner_id)->first();
+    }
+*/
     public static function getEdittableDatas(){
         $datas = MyUser::getUsers();
         $ary = [];

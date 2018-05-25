@@ -14728,4 +14728,145 @@ button.close {
   .work__box__suggest--confirm {
     margin-bottom: 30px;
   }
+  .work__box__subtitle {
+    background-color: #eee;
+    padding: 3px 10px;
+    border-bottom: 1px solid #333;
+    border-left: 5px solid #333;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+}
+
+@media all {
+  .estimate-message__list--mine, .estimate-message__list--yours {
+    width: 90%;
+    position: relative;
+    box-sizing: border-box;
+    padding: 12px 16px 12px;
+    min-height: 40px;
+  }
+  .estimate-message__list--mine {
+    margin-left: 25px;
+    border-radius: 12px;
+    background-color: #d7f6ff;
+  }
+  .estimate-message__list--yours {
+    margin-right: 25px;
+    border-radius: 12px;
+    background-color: #ffe0d5;
+  }
+  .estimate-message__list__company {
+    font-size: 64.28571%;
+    margin: 0;
+  }
+  .estimate-message__list__name {
+    font-size: 78.57143%;
+    font-weight: bold;
+    margin: 0;
+    padding-left: 3px;
+  }
+  .estimate-message__list__messaged-at {
+    font-size: 71.42857%;
+    margin: 0;
+    padding-left: 8px;
+  }
+  .estimate-message__list__body {
+    margin: 0;
+    font-size: 100%;
+    min-height: 40px;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+  }
+  .estimate-message__list__button {
+    margin: 3px 0 0;
+    text-align: right;
+  }
+  .estimate-message__list textarea {
+    height: 150px;
+  }
+  .estimate-message__list__fukidashi {
+    position: absolute;
+    width: 15px;
+  }
+  .estimate-message__list__fukidashi--me {
+    top: 10px;
+    left: -15px;
+  }
+  .estimate-message__list__fukidashi--you {
+    top: 10px;
+    right: -15px;
+    transform: scale(-1, 1);
+  }
+  .estimate-message__list__fukidashi svg {
+    width: 100%;
+    height: 100%;
+  }
+  .estimate-message__list__fukidashi--me g {
+    fill: #d7f6ff;
+  }
+  .estimate-message__list__fukidashi--you g {
+    fill: #ffe0d5;
+  }
+}
+
+@media (max-width: 767px) {
+  .estimate-message__list--me, .estimate-message__list--you {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+  .estimate-message__list--you {
+    -webkit-flex-direction: row-reverse;
+    /*--- safari（PC）用 ---*/
+    flex-direction: row-reverse;
+  }
+  .estimate-message__list__img {
+    margin: 5px;
+    width: 20%;
+  }
+}
+
+@media (min-width: 768px) {
+  .estimate-message__lists {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: flex-start;
+    -ms-flex-align: flex-start;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+  }
+  .estimate-message__lists--you {
+    -webkit-flex-direction: row-reverse;
+    /*--- safari（PC）用 ---*/
+    flex-direction: row-reverse;
+  }
+  .estimate-message__list {
+    margin: 5px;
+  }
+  .estimate-message__list--me, .estimate-message__list--you {
+    width: 15%;
+  }
+  .estimate-message__list__img {
+    width: 80%;
+  }
+  .estimate-message__list__company {
+    margin: 6px 0 0;
+  }
+}
+
+@media all {
+  .estimate-message__list--mine {
+    margin-left: 25px;
+  }
+  .estimate-message__list--yours {
+    margin-right: 25px;
+  }
 }

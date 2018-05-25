@@ -320,4 +320,9 @@ class MyHTML
         return $body;
     }
 
+    public static function Thumbnail($url){
+        return '<span class="my-thumbnail">
+                    <span class="my-thumbnail__img" style="background-image: url('.$url.');"></span>
+                </span>';
+    }
 }

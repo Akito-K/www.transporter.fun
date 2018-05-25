@@ -84,7 +84,15 @@ class MyFunctions
 
         return $img;
     }
+/*
+    public static function getFilepathByOwnerId( $owner_id ){
+        return MyUser::where('owner_id', $owner_id )->value('icon_filepath');
+    }
 
+    public static function getFilepathByCarrierId( $carrier_id ){
+        return MyUser::where('carrier_id', $carrier_id )->value('icon_filepath');
+    }
+*/
     // 西暦を元号に
     public static function jpnYear($year){
         $jp = "";

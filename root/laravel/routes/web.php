@@ -111,15 +111,22 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/owner/order',                             'owner\orderController@showList');
             Route::get ('/owner/order/{order_id}/detail',           'owner\orderController@showDetail');
             Route::get ('/owner/order/create',                      'owner\orderController@create');
-            Route::post('/owner/order/create',                      'owner\orderController@create');
+            //Route::post('/owner/order/create',                      'owner\orderController@create');
             Route::post('/owner/order/confirm',                     'owner\orderController@confirm');
             Route::post('/owner/order/insert',                      'owner\orderController@insert');
             Route::get ('/owner/order/{order_id}/edit',             'owner\orderController@edit');
-            Route::post('/owner/order/{order_id}/edit',             'owner\orderController@edit');
+            //Route::post('/owner/order/{order_id}/edit',             'owner\orderController@edit');
             Route::post('/owner/order/{order_id}/confirm',          'owner\orderController@confirmUpdate');
             Route::post('/owner/order/update',                      'owner\orderController@update');
             Route::get ('/owner/order/{order_id}/delete',           'owner\orderController@delete');
             Route::get ('/owner/order/{order_id}/duplicate',        'owner\orderController@duplicate');
+
+            // 進行中の案件
+            Route::get ('/owner/active_order',                      'owner\activeOrderController@showList');
+            Route::get ('/owner/active_order/{order_id}/detail',    'owner\activeOrderController@showDetail');
+            // 終了した案件
+            Route::get ('/owner/closed_order',                      'owner\closedOrderController@showList');
+            Route::get ('/owner/closed_order/{order_id}/detail',    'owner\closedOrderController@showDetail');
 
             // 見積依頼
             Route::get ('/owner/request/{order_id}/create',         'owner\requestController@create');
@@ -138,7 +145,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/owner/reject/{estimate_id}',              'owner\rejectController@execute');
 
             // 入金通知
-            Route::get ('/owner/payed/{order_id}/create',           'owner\payedController@create');
+            Route::get ('/owner/payed/{estimate_id}/create',        'owner\payedController@create');
             Route::post('/owner/payed/confirm',                     'owner\payedController@confirm');
             Route::post('/owner/payed/execute',                     'owner\payedController@execute');
             // 運送会社評価

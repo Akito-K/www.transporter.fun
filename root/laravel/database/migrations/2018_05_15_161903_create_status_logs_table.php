@@ -15,9 +15,11 @@ class CreateStatusLogsTable extends Migration
     {
         Schema::create('status_logs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('order_id', 32)->nullable();
-            $table->string('work_id', 32)->nullable();
-            $table->string('status_id', 32);
+            $table->string('id_name', 32);
+            $table->string('unique_id', 32);
+            $table->string('status_id', 32)->nullable();
+            $table->string('method', 128);
+            $table->string('user_id', 32);
 
             $table->datetime('created_at');
             $table->datetime('updated_at');

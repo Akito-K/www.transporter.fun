@@ -17,4 +17,15 @@ class StatusLog extends Model
 
         return $datas;
     }
+
+    public static function saveData($id_name, $unique_id, $status_id, $method, $user_id=NULL){
+        $user_id = $user_id?: \Auth::user()->user_id;
+        $data = new StatusLog;
+        $data->id_name   = $id_name;
+        $data->unique_id = $unique_id;
+        $data->status_id = $status_id;
+        $data->method    = $method;
+        $data->user_id   = $user_id;
+        $data->save();
+    }
 }

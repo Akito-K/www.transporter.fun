@@ -22,16 +22,18 @@
 
                 <h5 class="work__box__title" id="message">メッセージ</h5>
                 <div class="work__box__suggest work__box__suggest--confirm">
-                    <ul class="lists">
-                        <li class="list list-title">ご提案メッセージ</li>
-                        <li class="list list-value">
-                            {!! \Func::N2BR( old('body') ) !!}
-                            {!! \Form::hidden('body', old('body') ) !!}
-                        </li>
-                    </ul>
+
+                    <h6 class="work__box__subtitle">提案メッセージ</h6>
+                    @include('include.estimate_message_me', [
+                        'data' => $carrier,
+                        'date_at' => $estimate_data->suggested_at,
+                        'body' => \Func::N2BR( old('body') )
+                        ])
+                    {!! \Form::hidden('body', old('body') ) !!}
                 </div>
 
                 {!! Form::submit('この内容でご提案する', ['class' => 'btn btn-block btn-warning btn-submit'] ) !!}
+                <a href="{{ url('') }}/carrier/suggest/{{ old('estimate_id') }}/create" class="btn btn-block btn-primary">入力画面に戻る</a>
             {!! \Form::close() !!}
         </div>
 
@@ -50,7 +52,6 @@
         </div>
 
         <p>
-            <a href="{{ url('') }}/carrier/suggest/{{ old('estimate_id') }}/create" class="btn btn-block btn-primary">入力画面に戻る</a>
         </p>
 
     </div>

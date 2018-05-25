@@ -55,10 +55,7 @@ class requestController extends ownerController
             $order->updated_at = $now_at;
             $order->save();
 
-            $progress = new StatusLog;
-            $progress->order_id = $order_id;
-            $progress->status_id = $order->status_id;
-            $progress->save();
+            StatusLog::saveData( 'order_id', $order_id, 'O-10', __METHOD__ );
 
             // sendMail
             // $data->body;
@@ -72,16 +69,13 @@ class requestController extends ownerController
 
         $now_at = new \DatetimeImmutable();
         $data = Order::where('order_id', $order_id)->first();
-        $data->status_id = 'O-05';
+        $data->status_id = 'O-00';
         $data->estimate_start_at = NULL;
         $data->estimate_close_at = NULL;
         $data->updated_at = $now_at;
         $data->save();
 
-        $progress = new StatusLog;
-        $progress->order_id = $order_id;
-        $progress->status_id = $data->status_id;
-        $progress->save();
+        StatusLog::saveData( 'order_id', $order_id, 'O-00', __METHOD__ );
 
         return redirect('owner/order');
     }

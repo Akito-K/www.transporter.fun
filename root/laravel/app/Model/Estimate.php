@@ -11,7 +11,7 @@ class Estimate extends Model
 {
     use softDeletes;
     protected $table = 'estimates';
-    protected $dates = ['estimated_at', 'limit_at', 'suggested_at', 'deleted_at'];
+    protected $dates = ['estimated_at', 'limit_at', 'suggested_at', 'placed_at', 'rejected_at', 'received_at', 'deleted_at'];
     protected $guarded = ['id'];
 
     public static function getNewId(){
@@ -90,6 +90,25 @@ class Estimate extends Model
         Order::addOwnerData($data->order);
 
         return $data;
+    }
+
+    public static function getReceivedEstimateByOrderIdFromOwnerSide( $order_id ){
+        $data = Estimate::where('order_id', $order_id)
+                            ->whereNotNull('received_at')
+                            ->first();
+        Estimate::addItemData($data);
+        //Estimate::addCarrierData($data);
+        //$data->order = Order::getData($data->order_id);
+        //Order::addOrderRequests($data->order);
+        //Order::addCarrierClass($data->order);
+        //Order::addHideOwner($data->order);
+        //Order::addOwnerData($data->order);
+
+        return $data;
+    }
+
+    public static function addReceivedEstimateByOrderIdFromOwnerSide( &$data ){
+        $data->estimate_data = Estimate::getReceivedEstimateByOrderIdFromOwnerSide($data->order_id);
     }
 
 /*

@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Model\MyUser;
 use App\Model\Owner;
 use App\Model\Carrier;
 use App\Model\Estimate;
@@ -96,6 +97,30 @@ class Order extends Model
                 Order::addEstimateCount($data);
                 //Order::addOwnerData($data);
                 //Order::addCarrierData($data);
+                $ary[] = $data;
+            }
+        }
+
+        return $ary;
+    }
+
+    public static function getActiveOrdersFromOwnerSide( $owner_id ){
+        $ary = [];
+        $datas = Order::where('owner_id', $owner_id)
+                        ->where('status_id', 'O-20')
+                        ->orWhere('status_id', 'O-25')
+                        ->orWhere('status_id', 'O-30')
+                        ->orWhere('status_id', 'O-35')
+                        ->orderBy('status_id', 'ASC')
+                        ->get();
+
+        if(!empty($datas)){
+            foreach($datas as $data){
+                Order::addDeliveryData($data);
+                Estimate::addReceivedEstimateByOrderIdFromOwnerSide( $data );
+                //Order::addEstimateCount($data);
+                //Order::addOwnerData($data);
+                Estimate::addCarrierData($data->estimate_data);
                 $ary[] = $data;
             }
         }
@@ -321,7 +346,7 @@ class Order extends Model
 
     public static function getCarrierName($data, $carrier=NULL){
         $carrier = $carrier?: Carrier::getData($data->carrier_id);
-        $name= $carrier->company."\n".$carrier->sei.' '.$carrier->mei;
+        $name = $carrier->company."\n".$carrier->sei.' '.$carrier->mei;
 
         return $name;
     }

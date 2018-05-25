@@ -22,21 +22,25 @@
 
                 <h5 class="work__box__title" id="message">メッセージ</h5>
                 <div class="work__box__suggest">
-                    <ul class="lists">
-                        <li class="list list-title">発注メッセージ</li>
-                        <li class="list list-value">
-                            {!! \Form::textarea('body', old('body'), ['class' => 'form-control']) !!}
-                        </li>
-                    </ul>
-                    <ul class="lists">
-                        <li class="list list-title">提案メッセージ<br />（{{ $carrier->company }}）</li>
-                        <li class="list list-value">
-                            {!! \Func::N2BR($estimate_data->suggest_message) !!}
-                        </li>
-                    </ul>
+
+                    <h6 class="work__box__subtitle">発注メッセージ</h6>
+                    @include('include.estimate_message_you', [
+                        'data' => $owner_data,
+                        'date_at' => new \Datetime(),
+                        'body' => \Form::textarea('body', old('body'), ['class' => 'form-control'])
+                        ])
+
+                    <h6 class="work__box__subtitle">提案メッセージ</h6>
+                    @include('include.estimate_message_me', [
+                        'data' => $carrier,
+                        'date_at' => $estimate_data->suggested_at,
+                        'body' => \Func::N2BR( $estimate_data->suggest_message )
+                        ])
+
                 </div>
 
                 {!! Form::submit('確認画面へ進む', ['class' => 'btn btn-block btn-warning btn-submit'] ) !!}
+                <a href="{{ url('') }}/owner/estimate/{{ $order_data->order_id }}/list" class="btn btn-block btn-primary">この案件の見積一覧に戻る</a>
             {!! \Form::close() !!}
         </div>
 
@@ -53,10 +57,6 @@
                 </div>
             </div>
         </div>
-
-        <p>
-            <a href="{{ url('') }}/carrier/estimate" class="btn btn-block btn-primary">作成した見積一覧に戻る</a>
-        </p>
 
     </div>
 </div>

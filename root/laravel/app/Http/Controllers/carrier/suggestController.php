@@ -4,6 +4,8 @@ use App\Http\Controllers\carrierController;
 use Illuminate\Http\Request;
 use App\Http\Requests\MySuggestRequest as MyRequest;
 
+use App\Model\MyUser;
+use App\Model\Owner;
 use App\Model\Order;
 use App\Model\Carrier;
 use App\Model\Estimate;
@@ -21,9 +23,12 @@ class suggestController extends carrierController
         $pagemeta = Pagemeta::getPagemeta('OW-SGT-01');
         $estimate_data = Estimate::getEstimateFromCarrierSide($estimate_id);
         $order_data = Order::getOrderFromCarrierSide($estimate_data->order_id);
+        $owner_data = Owner::getData($order_data->owner_id);
+        MyUser::addIconFilepathToOwnerData($owner_data);
         $carrier = Carrier::getData(\Auth::user()->carrier_id);
+        MyUser::addIconFilepathToCarrierData($carrier);
 
-        return view('carrier.suggest.create', compact('pagemeta', 'estimate_data', 'order_data', 'carrier'));
+        return view('carrier.suggest.create', compact('pagemeta', 'estimate_data', 'order_data', 'carrier', 'owner_data'));
     }
 
     public function confirm( Request $request ){
@@ -33,10 +38,14 @@ class suggestController extends carrierController
 
         $estimate_data = Estimate::getEstimateFromCarrierSide($estimate_id);
         $order_data = Order::getOrderFromCarrierSide($estimate_data->order_id);
+        $owner_data = Owner::getData($order_data->owner_id);
+        MyUser::addIconFilepathToOwnerData($owner_data);
         $carrier = Carrier::getData(\Auth::user()->carrier_id);
+        MyUser::addIconFilepathToCarrierData($carrier);
+
         $request->flash();
 
-        return view('carrier.suggest.confirm', compact('pagemeta', 'estimate_data', 'order_data', 'carrier'));
+        return view('carrier.suggest.confirm', compact('pagemeta', 'estimate_data', 'order_data', 'carrier', 'owner_data'));
     }
 
     public function execute( Request $request ){
@@ -55,10 +64,7 @@ class suggestController extends carrierController
         $data->status_id = 'W-10';
         $data->save();
 
-        $progress = new StatusLog;
-        $progress->order_id = $estimate_data->order_id;
-        $progress->status_id = $data->status_id;
-        $progress->save();
+        StatusLog::saveData( 'order_id', $estimate_data->order_id, 'W-10', __METHOD__ );
 
         return redirect('carrier/work');
     }

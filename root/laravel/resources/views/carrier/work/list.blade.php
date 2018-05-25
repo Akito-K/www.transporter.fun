@@ -30,11 +30,11 @@
                         <td><a href="{{ url('') }}/carrier/request/{{ $data->order_id }}/detail">{{ $data->order->name }}</a></td>
                         <td>{!! $data->order->owner_name_with_star !!}</td>
                         <td>
-                            {{ $data->send_timezone_str }}<br />
+                            {{ $data->order->send_timezone_str }}<br />
                             {!! \Func::getAddress($data->order->send, ['pref', 'city']) !!}
                         </td>
                         <td>
-                            {{ $data->arrive_timezone_str }}<br />
+                            {{ $data->order->arrive_timezone_str }}<br />
                             {!! \Func::getAddress($data->order->arrive, ['pref', 'city']) !!}
                         </td>
                         <td>￥{{ number_format($data->estimate->total) }}</td>

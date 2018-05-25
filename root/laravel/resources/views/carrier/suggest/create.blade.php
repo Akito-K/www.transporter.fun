@@ -22,15 +22,18 @@
 
                 <h5 class="work__box__title" id="message">メッセージ</h5>
                 <div class="work__box__suggest">
-                    <ul class="lists">
-                        <li class="list list-title">ご提案メッセージ</li>
-                        <li class="list list-value">
-                            {!! \Form::textarea('body', old('body'), ['class' => 'form-control']) !!}
-                        </li>
-                    </ul>
+
+                    <h6 class="work__box__subtitle">提案メッセージ</h6>
+                    @include('include.estimate_message_me', [
+                        'data' => $carrier,
+                        'date_at' => new \Datetime(),
+                        'body' => \Form::textarea('body', old('body'), ['class' => 'form-control'])
+                        ])
+
                 </div>
 
                 {!! Form::submit('確認画面へ進む', ['class' => 'btn btn-block btn-warning btn-submit'] ) !!}
+                <a href="{{ url('') }}/carrier/estimate" class="btn btn-block btn-primary">作成した見積一覧に戻る</a>
             {!! \Form::close() !!}
         </div>
 
@@ -49,7 +52,6 @@
         </div>
 
         <p>
-            <a href="{{ url('') }}/carrier/estimate" class="btn btn-block btn-primary">作成した見積一覧に戻る</a>
         </p>
 
     </div>

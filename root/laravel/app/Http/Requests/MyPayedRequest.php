@@ -24,7 +24,8 @@ class MyPayedRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'hide_payed_at' => 'required|date',
+            'payed_at_hour' => 'required|numeric|min:0|max:23',
         ];
     }
 }

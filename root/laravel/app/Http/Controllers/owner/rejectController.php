@@ -25,10 +25,7 @@ class rejectController extends ownerController
         $work_data->status_id = 'W-00';
         $work_data->save();
 
-        $progress = new StatusLog;
-        $progress->work_id = $work_data->work_id;
-        $progress->status_id = 'W-00';
-        $progress->save();
+        StatusLog::saveData( 'work_id', $work_data->work_id, 'W-00', __METHOD__ );
 
         // sendMail
 

@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\owner;
 use App\Http\Controllers\ownerController;
 use Illuminate\Http\Request;
-use App\Http\Requests\MyPlaceRequest as MyRequest;
+use App\Http\Requests\MyPayedRequest as MyRequest;
 
 use App\Model\Owner;
 use App\Model\MyUser;
@@ -10,12 +10,14 @@ use App\Model\Order;
 use App\Model\Carrier;
 use App\Model\Estimate;
 use App\Model\Work;
+use App\Model\Report;
 use App\Model\StatusLog;
+use App\Model\Payment;
 
 use App\Model\Pagemeta;
 use App\Model\Log;
 
-class placeController extends ownerController
+class payedController extends ownerController
 {
 
     public function create($estimate_id){
@@ -27,8 +29,10 @@ class placeController extends ownerController
         MyUser::addIconFilepathToOwnerData($owner_data);
         $carrier = Carrier::getData($estimate_data->carrier_id);
         MyUser::addIconFilepathToCarrierData($carrier);
+        $report_data = Report::getData('order_id', $estimate_data->order_id);
+        $payment_types = Payment::getTypes();
 
-        return view('owner.place.create', compact('pagemeta', 'estimate_data', 'order_data', 'carrier', 'owner_data'));
+        return view('owner.payed.create', compact('pagemeta', 'estimate_data', 'order_data', 'carrier', 'owner_data', 'report_data', 'payment_types'));
     }
 
     public function confirm( MyRequest $request ){
@@ -42,10 +46,12 @@ class placeController extends ownerController
         MyUser::addIconFilepathToOwnerData($owner_data);
         $carrier = Carrier::getData($estimate_data->carrier_id);
         MyUser::addIconFilepathToCarrierData($carrier);
+        $report_data = Report::getData('order_id', $estimate_data->order_id);
+        $payment_types = Payment::getTypes();
 
         $request->flash();
 
-        return view('owner.place.confirm', compact('pagemeta', 'estimate_data', 'order_data', 'carrier', 'owner_data'));
+        return view('owner.payed.confirm', compact('pagemeta', 'estimate_data', 'order_data', 'carrier', 'owner_data', 'report_data', 'payment_types'));
     }
 
     public function execute( Request $request ){
@@ -55,6 +61,7 @@ class placeController extends ownerController
         $request_data = $request->all();
 
         $now_at = new \DatetimeImmutable();
+/*
         $estimate_data = Estimate::getData($estimate_id);
         $estimate_data->placed_at = $now_at;
         $estimate_data->place_message = $request_data['body'];
@@ -95,7 +102,7 @@ class placeController extends ownerController
                 ->delete();
 
         // sendMail
-
+*/
         return redirect('owner/order');
     }
 }

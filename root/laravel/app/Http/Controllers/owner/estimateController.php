@@ -3,7 +3,7 @@ namespace App\Http\Controllers\owner;
 use App\Http\Controllers\ownerController;
 use Illuminate\Http\Request;
 
-//use App\Model\MyUser;
+use App\Model\MyUser;
 //use App\Model\Owner;
 use App\Model\Order;
 use App\Model\Carrier;
@@ -33,6 +33,7 @@ class estimateController extends ownerController
         $data = Estimate::getEstimateFromOwnerSide($estimate_id);
         $owner = Carrier::getData(\Auth::user()->owner_id);
         $carrier = Carrier::getData( $data->carrier_id );
+        MyUser::addIconFilepathToCarrierData($carrier);
 
         return view('owner.estimate.detail', compact('pagemeta', 'data', 'owner', 'carrier'));
     }

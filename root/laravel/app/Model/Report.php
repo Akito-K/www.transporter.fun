@@ -9,7 +9,7 @@ class Report extends Model
 {
     use softDeletes;
     protected $table = 'reports';
-    protected $dates = ['deleted_at'];
+    protected $dates = ['arrived_at', 'completed_at', 'deleted_at'];
     protected $guarded = ['id'];
 
     public static function getNewId(){
@@ -25,8 +25,8 @@ class Report extends Model
         return $datas;
     }
 
-    public static function getData($unique_id){
-        $data = Report::where('report_id', $unique_id)->first();
+    public static function getData($id_name, $unique_id){
+        $data = Report::where($id_name, $unique_id)->first();
 
         return $data;
     }

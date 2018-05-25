@@ -4,6 +4,8 @@ use App\Http\Controllers\carrierController;
 use Illuminate\Http\Request;
 use App\Http\Requests\MyReportRequest as MyRequest;
 
+use App\Model\MyUser;
+use App\Model\Owner;
 use App\Model\Order;
 use App\Model\Carrier;
 use App\Model\Estimate;
@@ -23,9 +25,12 @@ class reportController extends carrierController
         $work_data = Work::getData($work_id);
         $estimate_data = Estimate::getEstimateFromCarrierSide($work_data->estimate_id);
         $order_data = Order::getOrderFromCarrierSide($estimate_data->order_id);
+        $owner_data = Owner::getData($order_data->owner_id);
+        MyUser::addIconFilepathToOwnerData($owner_data);
         $carrier = Carrier::getData(\Auth::user()->carrier_id);
+        MyUser::addIconFilepathToCarrierData($carrier);
 
-        return view('carrier.report.create', compact('pagemeta', 'estimate_data', 'order_data', 'carrier', 'work_data'));
+        return view('carrier.report.create', compact('pagemeta', 'estimate_data', 'order_data', 'carrier', 'work_data', 'owner_data'));
     }
 
     public function confirm( MyRequest $request ){
@@ -36,10 +41,14 @@ class reportController extends carrierController
         $work_data = Work::getData($work_id);
         $estimate_data = Estimate::getEstimateFromCarrierSide($work_data->estimate_id);
         $order_data = Order::getOrderFromCarrierSide($estimate_data->order_id);
+        $owner_data = Owner::getData($order_data->owner_id);
+        MyUser::addIconFilepathToOwnerData($owner_data);
         $carrier = Carrier::getData(\Auth::user()->carrier_id);
+        MyUser::addIconFilepathToCarrierData($carrier);
+
         $request->flash();
 
-        return view('carrier.report.confirm', compact('pagemeta', 'estimate_data', 'order_data', 'carrier', 'work_data'));
+        return view('carrier.report.confirm', compact('pagemeta', 'estimate_data', 'order_data', 'carrier', 'work_data', 'owner_data'));
     }
 
     public function execute( Request $request ){
@@ -49,22 +58,16 @@ class reportController extends carrierController
         $request_data = $request->all();
 
         $work_data = Work::getData($work_id);
-        $work_data->status_id = 'W-25';
+        $work_data->status_id = 'W-30';
         $work_data->save();
 
-        $progress = new StatusLog;
-        $progress->work_id = $work_id;
-        $progress->status_id = $work_data->status_id;
-        $progress->save();
+        StatusLog::saveData( 'work_id', $work_id, 'W-30', __METHOD__ );
 
         $order_data = Order::getData($work_data->order_id);
         $order_data->status_id = 'O-30';
         $order_data->save();
 
-        $progress = new StatusLog;
-        $progress->order_id = $work_data->order_id;
-        $progress->status_id = $order_data->status_id;
-        $progress->save();
+        StatusLog::saveData( 'order_id', $work_data->order_id, 'O-30', __METHOD__ );
 
         $data = new Report;
         $data->report_id = Report::getNewId();
