@@ -49,7 +49,7 @@
                     <ul class="lists">
                         <li class="list list-title">金融機関名</li>
                         <li class="list list-value">
-                            {!! Form::text('bank', old('bank'), ['class' => 'form-control']) !!}
+                            {!! Form::text('bank_name', old('bank_name'), ['class' => 'form-control']) !!}
                         </li>
                     </ul>
                     <ul class="lists">

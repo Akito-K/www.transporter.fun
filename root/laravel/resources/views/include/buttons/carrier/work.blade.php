@@ -19,6 +19,9 @@
 @elseif($data->status_id == 'W-25')
 <a href="{{ url('') }}/carrier/report/{{ $data->work_id }}/create" class="orders__btn btn btn-success btn-md">完了報告</a>
 
+@elseif($data->status_id == 'W-35')
+<a href="{{ url('') }}/carrier/confirm_payment/{{ $data->work_id }}" class="orders__btn btn btn-success btn-md">完了報告</a>
+
 @endif
 
 <a href="{{ url('') }}/carrier/work/{{ $data->work_id }}/detail" class="orders__btn btn btn-primary btn-sm">仕事の詳細</a>

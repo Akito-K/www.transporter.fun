@@ -31,7 +31,7 @@ class Work extends Model
 
         if(!empty($datas)){
             foreach($datas as $data){
-                if($data->status_id != 'W-00'){
+                if( $data->status_id != 'W-00' && $data->status_id != 'W-40' ){
                     $data->order = Order::getData( $data->order_id );
                     Order::addDeliveryData($data->order);
                     Order::addOrderRequests($data->order);
@@ -42,6 +42,30 @@ class Work extends Model
                     $data->status = Status::getStatus( $data->status_id );
                     $ary[] = $data;
                 }
+            }
+        }
+
+        return $ary;
+    }
+
+    public static function getClosedDatas($carrier_id){
+        $ary = [];
+        $datas = Work::where('carrier_id', $carrier_id)
+                        ->where('status_id', 'W-40')
+                        ->orderBy('id', 'DESC')
+                        ->get();
+
+        if(!empty($datas)){
+            foreach($datas as $data){
+                $data->order = Order::getData( $data->order_id );
+                Order::addDeliveryData($data->order);
+                Order::addOrderRequests($data->order);
+                Order::addCarrierClass($data->order);
+                Order::addOwnerData($data->order);
+                $data->estimate = Estimate::getData( $data->estimate_id );
+                Estimate::addItemData($data->estimate);
+                $data->status = Status::getStatus( $data->status_id );
+                $ary[] = $data;
             }
         }
 

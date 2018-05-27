@@ -29,7 +29,7 @@ class orderController extends ownerController
     public function showList(){
         Log::saveData( __METHOD__ );
         $pagemeta = Pagemeta::getPagemeta('OW-ORD-01');
-        $datas = Order::getOrdersFromOwnerSide( \Auth::user()->owner_id );
+        $datas = Order::getPreOrdersFromOwnerSide( \Auth::user()->owner_id );
         $status = Status::getNames();
 
         return view('owner.order.list', compact('pagemeta', 'datas', 'status'));

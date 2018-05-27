@@ -3,7 +3,7 @@
 
 <div class="box">
     <div class="box-body">
-        <h2 class="page-header">案件情報</h2>
+        <h2 class="page-header">未発注の案件情報</h2>
 
         <div class="orders__block">
             <p><a href="{{ url('') }}/owner/order/create" class="btn btn-warning btn-block">新しく登録する</a></p>

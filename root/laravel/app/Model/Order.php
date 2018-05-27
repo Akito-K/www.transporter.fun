@@ -88,9 +88,15 @@ class Order extends Model
         return $ary;
     }
 
-    public static function getOrdersFromOwnerSide( $owner_id ){
+    public static function getPreOrdersFromOwnerSide( $owner_id ){
         $ary = [];
-        $datas = Order::getDatas( $owner_id );
+        $datas = Order::where('owner_id', $owner_id)
+                        ->where('status_id', 'O-05')
+                        ->orWhere('status_id', 'O-10')
+                        ->orWhere('status_id', 'O-15')
+                        ->orWhere('status_id', 'O-20')
+                        ->orderBy('status_id', 'ASC')
+                        ->get();
         if(!empty($datas)){
             foreach($datas as $data){
                 Order::addDeliveryData($data);
@@ -107,8 +113,7 @@ class Order extends Model
     public static function getActiveOrdersFromOwnerSide( $owner_id ){
         $ary = [];
         $datas = Order::where('owner_id', $owner_id)
-                        ->where('status_id', 'O-20')
-                        ->orWhere('status_id', 'O-25')
+                        ->where('status_id', 'O-25')
                         ->orWhere('status_id', 'O-30')
                         ->orWhere('status_id', 'O-35')
                         ->orderBy('status_id', 'ASC')
@@ -120,6 +125,24 @@ class Order extends Model
                 Estimate::addReceivedEstimateByOrderIdFromOwnerSide( $data );
                 //Order::addEstimateCount($data);
                 //Order::addOwnerData($data);
+                Estimate::addCarrierData($data->estimate_data);
+                $ary[] = $data;
+            }
+        }
+
+        return $ary;
+    }
+
+    public static function getClosedOrdersFromOwnerSide( $owner_id ){
+        $ary = [];
+        $datas = Order::where('owner_id', $owner_id)
+                        ->where('status_id', 'O-40')
+                        ->get();
+
+        if(!empty($datas)){
+            foreach($datas as $data){
+                Order::addDeliveryData($data);
+                Estimate::addReceivedEstimateByOrderIdFromOwnerSide( $data );
                 Estimate::addCarrierData($data->estimate_data);
                 $ary[] = $data;
             }

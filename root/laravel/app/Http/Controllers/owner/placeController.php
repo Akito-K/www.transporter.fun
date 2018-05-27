@@ -96,6 +96,6 @@ class placeController extends ownerController
 
         // sendMail
 
-        return redirect('owner/order');
+        return redirect('owner/active_order');
     }
 }

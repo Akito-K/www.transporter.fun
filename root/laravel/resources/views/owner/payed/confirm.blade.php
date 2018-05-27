@@ -43,8 +43,8 @@
                     <ul class="lists">
                         <li class="list list-title">金融機関名</li>
                         <li class="list list-value">
-                            {{ old('bank') }}
-                            {!! Form::hidden('bank', old('bank')) !!}
+                            {{ old('bank_name') }}
+                            {!! Form::hidden('bank_name', old('bank_name')) !!}
                         </li>
                     </ul>
                     <ul class="lists">

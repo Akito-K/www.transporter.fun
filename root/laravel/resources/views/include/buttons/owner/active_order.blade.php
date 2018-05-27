@@ -23,11 +23,15 @@
 
 @elseif( in_array($data->status_id, ['O-30']) )
 <a href="{{ url('') }}/owner/payed/{{ $data->estimate_data->estimate_id }}/create" class="orders__btn btn btn-warning btn-md">入金通知</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
+<a href="{{ url('') }}/owner/active_order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
 <a href="{{ url('') }}/owner/order/{{ $data->order_id }}/duplicate" class="orders__btn btn btn-info btn-sm">複製</a>
 
 @elseif( in_array($data->status_id, ['O-35']) )
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
+<a href="{{ url('') }}/owner/active_order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
+<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/duplicate" class="orders__btn btn btn-info btn-sm">複製</a>
+
+@elseif( in_array($data->status_id, ['O-40']) )
+<a href="{{ url('') }}/owner/closed_order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
 <a href="{{ url('') }}/owner/order/{{ $data->order_id }}/duplicate" class="orders__btn btn btn-info btn-sm">複製</a>
 
 @endif

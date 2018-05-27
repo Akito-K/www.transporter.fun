@@ -1,4 +1,4 @@
-@extends('layouts.carrier')
+@extends('layouts.owner')
 @section('content')
 
 <div class="box">
@@ -11,11 +11,7 @@
                     @if($payed_data)
                     <li class="work__box-list"><a href="#payed">入金通知</a></li>
                     @endif
-
-                    @if($report_data)
                     <li class="work__box-list"><a href="#report">完了報告</a></li>
-                    @endif
-
                     <li class="work__box-list"><a href="#message">メッセージ</a></li>
                     <li class="work__box-list"><a href="#order">案件内容</a></li>
                     <li class="work__box-list"><a href="#estimate">見積書</a></li>
@@ -33,12 +29,10 @@
                 </div>
                 @endif
 
-                @if($report_data)
                 <h5 class="work__box__title" id="report">完了報告</h5>
                 <div class="work__boxes">
                     @include('include.carrier.report', ['data' => $report_data])
                 </div>
-                @endif
 
                 <h5 class="work__box__title" id="message">メッセージ</h5>
                 <div class="work__boxes">
@@ -58,9 +52,9 @@
         </div>
 
         @if($target == 'active')
-        <a href="{{ url('') }}/carrier/work" class="btn btn-block btn-primary">進行中の仕事一覧に戻る</a>
+        <a href="{{ url('') }}/owner/active_order" class="btn btn-block btn-primary">進行中の案件一覧に戻る</a>
         @else
-        <a href="{{ url('') }}/carrier/closed_work" class="btn btn-block btn-primary">終了した仕事一覧に戻る</a>
+        <a href="{{ url('') }}/owner/closed_order" class="btn btn-block btn-primary">終了した案件一覧に戻る</a>
         @endif
 
     </div>

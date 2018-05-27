@@ -190,9 +190,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/carrier/suggest/confirm',                 'carrier\suggestController@confirm');
             Route::post('/carrier/suggest/execute',                 'carrier\suggestController@execute');
 
-            // 案件
+            // 進行中の案件
             Route::get ('/carrier/work',                            'carrier\workController@showList');
             Route::get ('/carrier/work/{work_id}/detail',           'carrier\workController@showDetail');
+            // 終了した案件
+            Route::get ('/carrier/closed_work',                     'carrier\closedWorkController@showList');
 
             // 受注
             Route::get ('/carrier/receive/{work_id}/create',        'carrier\receiveController@create');
@@ -203,6 +205,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/carrier/report/{work_id}/create',         'carrier\reportController@create');
             Route::post('/carrier/report/confirm',                  'carrier\reportController@confirm');
             Route::post('/carrier/report/execute',                  'carrier\reportController@execute');
+
+            // 入金確認報告
+            Route::get ('/carrier/confirm_payment/{work_id}',       'carrier\confirmPaymentController@execute');
 
         });
 

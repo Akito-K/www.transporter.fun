@@ -14,6 +14,7 @@
 ?>
 
 @if( in_array($data->order->status_id, ['O-10', 'O-15']) )
+
 @if( !$data->placed_at && !$data->rejected_at )
 <a href="{{ url('') }}/owner/place/{{ $data->estimate_id }}/create" class="orders__btn btn btn-success btn-md">この見積もりで発注する</a>
 <a href="{{ url('') }}/owner/estimate/{{ $data->estimate_id }}/detail" class="orders__btn btn btn-primary btn-sm">見積詳細</a>
@@ -21,14 +22,6 @@
 @else
 <a href="{{ url('') }}/owner/estimate/{{ $data->estimate_id }}/detail" class="orders__btn btn btn-primary btn-sm">見積詳細</a>
 @endif
-
-@elseif( in_array($data->order->status_id, ['O-30']) )
-<a href="{{ url('') }}/owner/payed/{{ $data->order->order_id }}/create" class="orders__btn btn btn-primary btn-sm">入金通知</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">案件詳細</a>
-
-@elseif( in_array($data->order->status_id, ['O-40']) )
-<a href="{{ url('') }}/owner/review/{{ $data->order->order_id }}/create" class="orders__btn btn btn-primary btn-sm">運送会社を評価する</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">案件詳細</a>
 
 @endif
 
