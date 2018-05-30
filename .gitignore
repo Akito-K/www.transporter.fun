@@ -33,9 +33,12 @@
 
 root/node_modules/
 root/sftp-config.json
+root/*sftp-config.json
 
 root/log/
 root/s3/
 root/html/phpMyAdmin/
 root/laravel/composer.lock
 root/laravel/vendor
+root/laravel/*.env
+

@@ -1,7 +1,4 @@
-AddHandler x-httpd-php71 .php
-suPHP_ConfigPath /usr/home/ae170v73lv/config/
-
-AuthUserFile "/usr/home/ae170v73lv/html/htpasswd/.htpasswd"
+AuthUserFile "/var/www/html/htpasswd/.htpasswd"
 AuthName "Development"
 AuthType BASIC
 require valid-user
@@ -12,7 +9,6 @@ require valid-user
         Options -MultiViews -Indexes
     </IfModule>
 
-    Options +SymLinksIfOwnerMatch
     RewriteEngine On
 
     # Handle Authorization Header
