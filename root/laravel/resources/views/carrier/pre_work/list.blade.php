@@ -3,11 +3,7 @@
 
 <div class="box">
     <div class="box-body">
-        @if($target == 'active')
-        <h2 class="page-header">進行中の仕事一覧</h2>
-        @else
-        <h2 class="page-header">終了した仕事一覧</h2>
-        @endif
+        <h2 class="page-header">未受注の仕事一覧</h2>
 
         <div class="orders__block">
 
@@ -23,7 +19,6 @@
                         <th class="orders__table__owner">依頼者</th>
                         <th>発送地</th>
                         <th>到着地</th>
-                        <th>金額</th>
                         <th>状態</th>
                         <th>各種操作</th>
                     </tr>
@@ -41,7 +36,6 @@
                             {{ $data->order->arrive_timezone_str }}<br />
                             {!! \Func::getAddress($data->order->arrive, ['pref', 'city']) !!}
                         </td>
-                        <td>￥{{ number_format($data->estimate->total) }}</td>
                         <td>{{ $data->status }}</td>
                         <td>@include('include.buttons.carrier.work', ['data' => $data])</td>
                     </tr>

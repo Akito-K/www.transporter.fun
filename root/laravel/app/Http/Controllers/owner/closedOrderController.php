@@ -38,7 +38,7 @@ class closedOrderController extends ownerController
         Log::saveData( __METHOD__ , 'order_id', $order_id );
         $pagemeta = Pagemeta::getPagemeta('OW-ORD-02');
 
-        $estimate_data = Estimate::getReceivedEstimateByOrderIdFromOwnerSide($order_id);
+        $estimate_data = Estimate::getPlacedEstimateByOrderIdFromOwnerSide($order_id);
         $order_data = Order::getOrderFromOwnerSide($estimate_data->order_id);
         $owner_data = Owner::getData($order_data->owner_id);
         MyUser::addIconFilepathToOwnerData($owner_data);

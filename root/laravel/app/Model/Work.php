@@ -22,33 +22,63 @@ class Work extends Model
         return $new_id;
     }
 
-    public static function getActiveDatas($carrier_id){
+    public static function getPreWorksByCarrierId( $carrier_id ){
         $ary = [];
         $datas = Work::where('carrier_id', $carrier_id)
-                        ->whereNotNull('status_id')
+                        ->where( function($query){
+                            $query->whereNull('status_id')
+                                  ->orWhere('status_id', 'W-05')
+                                  ->orWhere('status_id', 'W-10')
+                                  ->orWhere('status_id', 'W-15')
+                                  ->orWhere('status_id', 'W-20');
+                        })
                         ->orderBy('id', 'DESC')
                         ->get();
 
         if(!empty($datas)){
             foreach($datas as $data){
-                if( $data->status_id != 'W-00' && $data->status_id != 'W-40' ){
-                    $data->order = Order::getData( $data->order_id );
-                    Order::addDeliveryData($data->order);
-                    Order::addOrderRequests($data->order);
-                    Order::addCarrierClass($data->order);
-                    Order::addOwnerData($data->order);
-                    $data->estimate = Estimate::getData( $data->estimate_id );
-                    Estimate::addItemData($data->estimate);
-                    $data->status = Status::getStatus( $data->status_id );
-                    $ary[] = $data;
-                }
+                $data->order = Order::getData( $data->order_id );
+                Order::addDeliveryData($data->order);
+                Order::addOrderRequests($data->order);
+                Order::addCarrierClass($data->order);
+                Order::addOwnerData($data->order);
+                $data->status = Status::getStatus( $data->status_id );
+                $ary[] = $data;
             }
         }
 
         return $ary;
     }
 
-    public static function getClosedDatas($carrier_id){
+    public static function getActiveWorksByCarrierId( $carrier_id ){
+        $ary = [];
+        $datas = Work::where('carrier_id', $carrier_id)
+                        ->where( function($query){
+                            $query->where('status_id', 'W-25')
+                                  ->orWhere('status_id', 'W-30')
+                                  ->orWhere('status_id', 'W-35');
+                        })
+                        ->orderBy('id', 'DESC')
+                        ->get();
+
+        if(!empty($datas)){
+            foreach($datas as $data){
+                $data->order = Order::getData( $data->order_id );
+                Order::addDeliveryData($data->order);
+                Order::addOrderRequests($data->order);
+                Order::addCarrierClass($data->order);
+                Order::addOwnerData($data->order);
+                $data->estimate = Estimate::getData( $data->estimate_id );
+                Estimate::addItemData($data->estimate);
+                $data->status = Status::getStatus( $data->status_id );
+                $ary[] = $data;
+            }
+        }
+
+        return $ary;
+    }
+
+    public static function getClosedWorksByCarrierId( $carrier_id ){
         $ary = [];
         $datas = Work::where('carrier_id', $carrier_id)
                         ->where('status_id', 'W-40')

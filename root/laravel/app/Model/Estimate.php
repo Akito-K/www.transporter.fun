@@ -92,9 +92,9 @@ class Estimate extends Model
         return $data;
     }
 
-    public static function getReceivedEstimateByOrderIdFromOwnerSide( $order_id ){
+    public static function getPlacedEstimateByOrderIdFromOwnerSide( $order_id ){
         $data = Estimate::where('order_id', $order_id)
-                            ->whereNotNull('received_at')
+                            ->whereNotNull('placed_at')
                             ->first();
         Estimate::addItemData($data);
         //Estimate::addCarrierData($data);
@@ -107,8 +107,8 @@ class Estimate extends Model
         return $data;
     }
 
-    public static function addReceivedEstimateByOrderIdFromOwnerSide( &$data ){
-        $data->estimate_data = Estimate::getReceivedEstimateByOrderIdFromOwnerSide($data->order_id);
+    public static function addPlacedEstimateByOrderIdFromOwnerSide( &$data ){
+        $data->estimate_data = Estimate::getPlacedEstimateByOrderIdFromOwnerSide($data->order_id);
     }
 
 /*

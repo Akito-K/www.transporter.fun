@@ -28,6 +28,6 @@ class confirmPaymentController extends carrierController
 
         // sendMail
 
-        return redirect('carrier/work');
+        return redirect('carrier/closed_work');
     }
 }

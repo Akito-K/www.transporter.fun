@@ -26,26 +26,6 @@ use App\Model\Log;
 class orderController extends ownerController
 {
 
-    public function showList(){
-        Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('OW-ORD-01');
-        $datas = Order::getPreOrdersFromOwnerSide( \Auth::user()->owner_id );
-        $status = Status::getNames();
-
-        return view('owner.order.list', compact('pagemeta', 'datas', 'status'));
-    }
-
-    public function showDetail($order_id){
-        Log::saveData( __METHOD__ , 'order_id', $order_id );
-        $pagemeta = Pagemeta::getPagemeta('OW-ORD-02');
-        $data = Order::getOrderFromOwnerSide($order_id);
-        Order::addOrderRequests($data);
-        Order::addHideOwner($data);
-        Order::addCarrierClass($data);
-
-        return view('owner.order.detail', compact('data', 'pagemeta'));
-    }
-
     public function create(){
         Log::saveData( __METHOD__ );
         $pagemeta = Pagemeta::getPagemeta('OW-ORD-03');

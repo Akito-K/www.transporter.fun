@@ -91,10 +91,11 @@ class Order extends Model
     public static function getPreOrdersFromOwnerSide( $owner_id ){
         $ary = [];
         $datas = Order::where('owner_id', $owner_id)
-                        ->where('status_id', 'O-05')
-                        ->orWhere('status_id', 'O-10')
-                        ->orWhere('status_id', 'O-15')
-                        ->orWhere('status_id', 'O-20')
+                        ->where( function($query){
+                            $query->where('status_id', 'O-05')
+                                  ->orWhere('status_id', 'O-10')
+                                  ->orWhere('status_id', 'O-15');
+                        })
                         ->orderBy('status_id', 'ASC')
                         ->get();
         if(!empty($datas)){
@@ -113,16 +114,19 @@ class Order extends Model
     public static function getActiveOrdersFromOwnerSide( $owner_id ){
         $ary = [];
         $datas = Order::where('owner_id', $owner_id)
-                        ->where('status_id', 'O-25')
-                        ->orWhere('status_id', 'O-30')
-                        ->orWhere('status_id', 'O-35')
+                        ->where( function($query){
+                            $query->where('status_id', 'O-20')
+                                  ->orWhere('status_id', 'O-25')
+                                  ->orWhere('status_id', 'O-30')
+                                  ->orWhere('status_id', 'O-35');
+                        })
                         ->orderBy('status_id', 'ASC')
                         ->get();
 
         if(!empty($datas)){
             foreach($datas as $data){
                 Order::addDeliveryData($data);
-                Estimate::addReceivedEstimateByOrderIdFromOwnerSide( $data );
+                Estimate::addPlacedEstimateByOrderIdFromOwnerSide( $data );
                 //Order::addEstimateCount($data);
                 //Order::addOwnerData($data);
                 Estimate::addCarrierData($data->estimate_data);
@@ -142,7 +146,7 @@ class Order extends Model
         if(!empty($datas)){
             foreach($datas as $data){
                 Order::addDeliveryData($data);
-                Estimate::addReceivedEstimateByOrderIdFromOwnerSide( $data );
+                Estimate::addPlacedEstimateByOrderIdFromOwnerSide( $data );
                 Estimate::addCarrierData($data->estimate_data);
                 $ary[] = $data;
             }

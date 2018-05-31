@@ -108,19 +108,18 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/owner/dashboard',                         'owner\homeController@dashboard');
 
             // 案件
-            Route::get ('/owner/order',                             'owner\orderController@showList');
-            Route::get ('/owner/order/{order_id}/detail',           'owner\orderController@showDetail');
             Route::get ('/owner/order/create',                      'owner\orderController@create');
-            //Route::post('/owner/order/create',                      'owner\orderController@create');
             Route::post('/owner/order/confirm',                     'owner\orderController@confirm');
             Route::post('/owner/order/insert',                      'owner\orderController@insert');
             Route::get ('/owner/order/{order_id}/edit',             'owner\orderController@edit');
-            //Route::post('/owner/order/{order_id}/edit',             'owner\orderController@edit');
             Route::post('/owner/order/{order_id}/confirm',          'owner\orderController@confirmUpdate');
             Route::post('/owner/order/update',                      'owner\orderController@update');
             Route::get ('/owner/order/{order_id}/delete',           'owner\orderController@delete');
             Route::get ('/owner/order/{order_id}/duplicate',        'owner\orderController@duplicate');
 
+            // 未発注の案件
+            Route::get ('/owner/pre_order',                         'owner\preOrderController@showList');
+            Route::get ('/owner/pre_order/{order_id}/detail',       'owner\preOrderController@showDetail');
             // 進行中の案件
             Route::get ('/owner/active_order',                      'owner\activeOrderController@showList');
             Route::get ('/owner/active_order/{order_id}/detail',    'owner\activeOrderController@showDetail');
@@ -190,11 +189,15 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/carrier/suggest/confirm',                 'carrier\suggestController@confirm');
             Route::post('/carrier/suggest/execute',                 'carrier\suggestController@execute');
 
-            // 進行中の案件
-            Route::get ('/carrier/work',                            'carrier\workController@showList');
-            Route::get ('/carrier/work/{work_id}/detail',           'carrier\workController@showDetail');
+            // 未受注の案件
+            Route::get ('/carrier/pre_work',                        'carrier\preWorkController@showList');
+            Route::get ('/carrier/pre_work/{work_id}/detail',       'carrier\preWorkController@showDetail');
+            // 受注進行中の案件
+            Route::get ('/carrier/active_work',                     'carrier\activeWorkController@showList');
             // 終了した案件
             Route::get ('/carrier/closed_work',                     'carrier\closedWorkController@showList');
+            // 案件詳細
+            Route::get ('/carrier/work/{work_id}/detail',           'carrier\workController@showDetail');
 
             // 受注
             Route::get ('/carrier/receive/{work_id}/create',        'carrier\receiveController@create');

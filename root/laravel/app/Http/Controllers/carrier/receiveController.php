@@ -74,6 +74,6 @@ class receiveController extends carrierController
 
         StatusLog::saveData( 'order_id', $work_data->order_id, 'O-25', __METHOD__ );
 
-        return redirect('carrier/work');
+        return redirect('carrier/active_work');
     }
 }

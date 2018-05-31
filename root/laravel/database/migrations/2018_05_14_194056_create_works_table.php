@@ -20,6 +20,7 @@ class CreateWorksTable extends Migration
             $table->string('estimate_id', 32);
             $table->string('carrier_id', 32);
             $table->string('status_id', 32)->nullable();
+            $table->datetime('evaluated_at')->nullable();
 
             $table->datetime('created_at');
             $table->datetime('updated_at');

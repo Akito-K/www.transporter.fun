@@ -82,6 +82,6 @@ class reportController extends carrierController
 
         // 請求
 
-        return redirect('carrier/work');
+        return redirect('carrier/active_work');
     }
 }
