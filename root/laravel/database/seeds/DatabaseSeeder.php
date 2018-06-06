@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\Model\MySpreadsheet;
 
 use App\Model\Address;
+use App\Model\Area;
 use App\Model\Authority;
 use App\Model\Board;
 use App\Model\Car;
@@ -16,8 +17,7 @@ use App\Model\CargoValue;
 use App\Model\Carrier;
 use App\Model\CarrierClass;
 use App\Model\CarrierEquipment;
-use App\Model\CarrierEquipmentValue;
-use App\Model\CarrierToCar;
+use App\Model\CarrierToArea;
 use App\Model\CarrierToClass;
 use App\Model\CarValue;
 
@@ -71,6 +71,7 @@ class DatabaseSeeder extends Seeder
 //        \Func::var_dump($this->datas);exit;
 
         $this->AddressSeeder();
+        $this->AreaSeeder();
         $this->AuthoritySeeder();
         $this->BoardSeeder();
         $this->CarSeeder();
@@ -83,8 +84,7 @@ class DatabaseSeeder extends Seeder
         $this->CarrierSeeder();
         $this->CarrierClassSeeder();
         $this->CarrierEquipmentSeeder();
-        $this->CarrierEquipmentValueSeeder();
-        $this->CarrierToCarSeeder();
+        $this->CarrierToAreaSeeder();
         $this->CarrierToClassSeeder();
         $this->CarValueSeeder();
 
@@ -138,6 +138,21 @@ class DatabaseSeeder extends Seeder
             if(!empty($datas)){
                 foreach($datas as $data){
                     Address::create($data);
+                }
+            }
+        }
+    }
+
+    public function AreaSeeder(){
+        $table_name = 'areas';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    Area::create($data);
                 }
             }
         }
@@ -308,8 +323,8 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-    public function CarrierEquipmentValueSeeder(){
-        $table_name = 'carrier_equipment_values';
+    public function CarrierToAreaSeeder(){
+        $table_name = 'carrier_to_areas';
 
         DB::table( $table_name )->delete();
         if( isset( $this->datas[ $table_name ])){
@@ -317,22 +332,7 @@ class DatabaseSeeder extends Seeder
 
             if(!empty($datas)){
                 foreach($datas as $data){
-                    CarrierEquipmentValue::create($data);
-                }
-            }
-        }
-    }
-
-    public function CarrierToCarSeeder(){
-        $table_name = 'carrier_to_cars';
-
-        DB::table( $table_name )->delete();
-        if( isset( $this->datas[ $table_name ])){
-            $datas = $this->datas[ $table_name ];
-
-            if(!empty($datas)){
-                foreach($datas as $data){
-                    CarrierToCar::create($data);
+                    CarrierToArea::create($data);
                 }
             }
         }

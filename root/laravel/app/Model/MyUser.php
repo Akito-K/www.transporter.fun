@@ -4,6 +4,8 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Model\UserToAuthority;
+use App\Model\Order;
+use App\Model\Estimate;
 
 class MyUser extends Model
 {
@@ -51,6 +53,31 @@ class MyUser extends Model
         }
 
         return $data;
+    }
+
+    public static function getOwnerUserIdByOrderId( $order_id ){
+        $order_data = Order::getOrderFromCarrierSide($order_id);
+
+        return MyUser::where('owner_id', $order_data->owner_id)->value('user_id');
+    }
+
+    public static function getCarrierUserIdByEstimateId( $estimate_id ){
+        $estimate_data = Estimate::getData( $estimate_id );
+
+        return MyUser::where('carrier_id', $estimate_data->carrier_id)->value('user_id');
+    }
+
+    public static function getCarrierUserIdByOrderId( $order_id ){
+        $estimate_data = Estimate::getPlacedEstimateByOrderIdFromOwnerSide( $order_id );
+
+        return MyUser::where('carrier_id', $estimate_data->carrier_id)->value('user_id');
+    }
+
+    public static function getOwnerUserIdByWorkId($work_id){
+        $work_data = Work::getData($work_id);
+        $order_data = Order::getData($work_data->order_id);
+
+        return MyUser::where('owner_id', $order_data->owner_id)->value('user_id');
     }
 
     public static function addIconFilepathToOwnerData(&$owner_data){

@@ -10,8 +10,8 @@ import Quote from './quote';
 import Order from './order';
 import Star from './star';
 import Estimate from './estimate';
-//import Board from './board';
-//import Customer from './customer';
+import Board from './board';
+import EditCarrier from './edit_carrier';
 //import Model from './model';
 
 $(() => {
@@ -34,7 +34,7 @@ $(() => {
     // 見積
     const ESTIMATE = new Estimate.MyEstimate(STAR);
     // コンタクトボード
-//    const BOARD = new Board.MyBoard();
-    // 顧客
-//    const CUSTOMER = new Customer.MyCustomer();
+    const BOARD = new Board.MyBoard();
+    // 運送会社情報
+    const EDIT_CARRIER = new EditCarrier.MyEditCarrier();
 });

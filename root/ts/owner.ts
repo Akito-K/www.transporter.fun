@@ -9,7 +9,7 @@ import Upload from './upload';
 import Quote from './quote';
 import Order from './order';
 import Star from './star';
-//import Board from './board';
+import Board from './board';
 //import Customer from './customer';
 //import Model from './model';
 
@@ -31,7 +31,7 @@ $(() => {
     // 評価★
     const STAR = new Star.MyStar();
     // コンタクトボード
-//    const BOARD = new Board.MyBoard();
+    const BOARD = new Board.MyBoard();
     // 顧客
 //    const CUSTOMER = new Customer.MyCustomer();
 });

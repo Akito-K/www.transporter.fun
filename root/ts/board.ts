@@ -69,7 +69,6 @@ namespace Board {
                     self.ajaxRefreshUnreadCount();
                 }, 3000);
             }
-
         }
 
         public refreshMessages(hashedId): void {
@@ -133,7 +132,7 @@ namespace Board {
 
             $.ajax({
                 headers: {'X-CSRF-TOKEN': token},
-                url: '/mimamori/ajax/get_over10',
+                url: '/ajax/get_over10',
                 type: 'post',
                 data: D,
                 dataType: 'json',
@@ -158,19 +157,22 @@ namespace Board {
         public submitMessage(): void {
             const boardId = $('#over10').attr("data-board_id");
             const body = $('#bulletMessage').val();
-            const memo = $('#flag_memo').prop("checked")? 1: 0;
-            this.ajaxPutMessage(boardId, body, memo);
+            if(body.length > 0){
+                this.ajaxPutMessage(boardId, body);
+            }else{
+                return;
+            }
         }
 
-        public ajaxPutMessage(boardId, body, memo){
+        public ajaxPutMessage(boardId, body){
             let self = this;
             self.ajaxing = true;
             const token: string = $('meta[name="csrf-token"]').attr('content');
-            const D = {board_id: boardId, body: body, memo: memo};
+            const D = {board_id: boardId, body: body};
 
             $.ajax({
                 headers: {'X-CSRF-TOKEN': token},
-                url: '/mimamori/ajax/put_message',
+                url: '/ajax/put_message',
                 type: 'post',
                 data: D,
                 dataType: 'json',
@@ -219,7 +221,7 @@ namespace Board {
 
             $.ajax({
                 headers: {'X-CSRF-TOKEN': token},
-                url: '/mimamori/ajax/refresh_messages',
+                url: '/ajax/refresh_messages',
                 type: 'post',
                 data: D,
                 dataType: 'json',
@@ -237,7 +239,7 @@ namespace Board {
 
             $.ajax({
                 headers: {'X-CSRF-TOKEN': token},
-                url: '/mimamori/ajax/get_unread_count',
+                url: '/ajax/get_unread_count',
                 type: 'post',
                 success: function( data ){
                     //console.log(data);

@@ -10557,7 +10557,7 @@ var upload_1 = __webpack_require__(7);
 var quote_1 = __webpack_require__(8);
 var order_1 = __webpack_require__(9);
 var star_1 = __webpack_require__(10);
-//import Board from './board';
+var board_1 = __webpack_require__(11);
 //import Customer from './customer';
 //import Model from './model';
 $(function () {
@@ -10577,7 +10577,7 @@ $(function () {
     // 評価★
     var STAR = new star_1.default.MyStar();
     // コンタクトボード
-    //    const BOARD = new Board.MyBoard();
+    var BOARD = new board_1.default.MyBoard();
     // 顧客
     //    const CUSTOMER = new Customer.MyCustomer();
 });
@@ -10624,13 +10624,14 @@ var Page;
         }
         aTag.prototype.set = function (el) {
             this.el = el;
-            this.href = this.el.attr("href");
-            this.disabled = this.el.attr("disabled") == "disabled";
+            this.href = el.attr("href");
+            this.disabled = el.attr("disabled") == "disabled";
         };
         aTag.prototype.smoothScroll = function () {
-            if (this.href != '#') {
-                if (this.href != '#' && this.href.match(/^#/)) {
-                    var target = $(this.href == "#" || this.href == "" ? 'html' : this.href);
+            var href = this.href ? this.href : '';
+            if (href != '#') {
+                if (href.match(/^#/)) {
+                    var target = $(href == "" ? 'html' : href);
                     var position = target.offset().top;
                     if (this.el.attr("data-no-anime") == "1") {
                         var speed = 0;
@@ -11005,49 +11006,41 @@ var Upload;
                 // false を返してデフォルトの処理を実行しないようにする
                 return false;
             });
-            // ドラッグドロップからの入力
-            $('#ajaxing-drag-enter').bind("drop", function (event) {
-                $('#ajaxing-drag-enter').hide();
-                // ドラッグされたファイル情報を取得
-                var dragEvent = event.originalEvent, dataTransfer = dragEvent.dataTransfer, files = dataTransfer.files;
-                var type = $('#bulletFakeInput').data("type");
-                var target = $('#bulletFakeInput').data("target");
-                var checked = self.checkUploadFile(files, type);
-                if (checked.result) {
-                    //                    if( target == "image"){
-                    self.uploadFile(files[0], type, target);
-                    /*
-                                        }else{
-                                            if(self.confirmFileInfo(files[0])){
-                                                self.uploadFile(files[0], target);
-                                            }else{
-                                                return false;
-                                            }
-                                        }
-                    */
-                }
-                else {
-                    alert(checked.errorMessage);
-                }
-                // false を返してデフォルトの処理を実行しないようにする
-                return false;
-            })
-                .bind("dragenter", function () {
-                // false を返してデフォルトの処理を実行しないようにする
-                return false;
-            })
-                .bind("dragover", function () {
-                // false を返してデフォルトの処理を実行しないようにする
-                return false;
-            })
-                .bind("dragleave", function () {
-                $(this).hide();
-                // false を返してデフォルトの処理を実行しないようにする
-                return false;
-            });
-            $('#ajaxing-drag-enter').bind("mouseleave click", function () {
-                $('#ajaxing-drag-enter').hide();
-            });
+            if ($('#flagMultipleUpload').length == 0) {
+                // ドラッグドロップからの入力
+                $('#ajaxing-drag-enter').bind("drop", function (event) {
+                    $('#ajaxing-drag-enter').hide();
+                    // ドラッグされたファイル情報を取得
+                    var dragEvent = event.originalEvent, dataTransfer = dragEvent.dataTransfer, files = dataTransfer.files;
+                    var type = $('#bulletFakeInput').data("type");
+                    var target = $('#bulletFakeInput').data("target");
+                    var checked = self.checkUploadFile(files, type);
+                    if (checked.result) {
+                        self.uploadFile(files[0], type, target);
+                    }
+                    else {
+                        alert(checked.errorMessage);
+                    }
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                    .bind("dragenter", function () {
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                    .bind("dragover", function () {
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                    .bind("dragleave", function () {
+                    $(this).hide();
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                });
+                $('#ajaxing-drag-enter').bind("mouseleave click", function () {
+                    $('#ajaxing-drag-enter').hide();
+                });
+            }
             /*
                         // SUBMIT ボタン押した時に処理中画面表示
                         $('.trigGoNext').click( () => {
@@ -11167,14 +11160,12 @@ var Upload;
             self.ajaxing = true;
             var token = $('meta[name="csrf-token"]').attr('content');
             var boardId = $('#over10').attr("data-board_id");
-            var memo = $('#flag_memo').prop("checked") ? 1 : 0;
             var body = $('#bulletMessage').val();
             fd.append('board_id', boardId);
-            fd.append('memo', memo);
             fd.append('body', body);
             $.ajax({
                 headers: { 'X-CSRF-TOKEN': token },
-                url: '/mimamori/ajax/upload_file_and_put_board_file',
+                url: '/ajax/upload_file_and_put_board_file',
                 type: 'post',
                 data: fd,
                 dataType: 'json',
@@ -11373,17 +11364,56 @@ exports.default = Order;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(0);
+var func_1 = __webpack_require__(1);
 var Star;
 (function (Star) {
     var MyStar = /** @class */ (function () {
         function MyStar(
-        //private ajaxing: boolean = false,
-        ) {
-            //let self = this;
+        //private evaluating: boolean = false,
+        boxWidth) {
+            if (boxWidth === void 0) { boxWidth = 0; }
+            this.boxWidth = boxWidth;
+            var self = this;
             if ($('.trigStar').length > 0) {
                 this.viewStars();
             }
+            if ($('.trigEvaluate').length > 0) {
+                this.viewEvaluates();
+                this.boxWidth = Number($('.trigEvaluateStar').eq(0).width());
+            }
+            $('.trigEvaluateStar').mousemove(function (e) {
+                var num = func_1.default.number($(this).attr("data-num"));
+                var itemId = $(this).parent('ul').attr("data-id");
+                var position = e.offsetX;
+                var percent = self.getPercent(num, position);
+                //                console.log( num, itemId, position, percent );
+                self.setEvaluateStar(itemId, percent);
+            });
         }
+        MyStar.prototype.getPercent = function (num, position) {
+            var positions = this.boxWidth * num + position;
+            var boxesWidth = this.boxWidth * 5;
+            var percent = Math.round(positions / boxesWidth * 1000) / 10;
+            return percent;
+        };
+        MyStar.prototype.setEvaluateStar = function (itemId, percent) {
+            var star = Math.round(percent / 2) / 10;
+            //console.log(star);
+            $('.paramEvaluateStar[data-id="' + itemId + '"]').html("(" + star.toFixed(1) + ")");
+            $('#bulletEvaluateStarValue-' + itemId).val(star.toFixed(1));
+            document.getElementById('bulletEvaluateStar-' + itemId).style.width = percent + '%';
+        };
+        MyStar.prototype.viewEvaluates = function () {
+            for (var i = 0; i < $('.trigEvaluate').length; i++) {
+                var obj = $('.trigEvaluate').eq(i);
+                this.viewEvaluate(obj);
+            }
+        };
+        MyStar.prototype.viewEvaluate = function (obj) {
+            var star = parseFloat(obj.find('.paramEvaluate').html().replace('(', '').replace(')', ''));
+            var val = Math.round(star / 5 * 100);
+            obj.find('.bulletEvaluate').animate({ width: val + '%' }, 1000);
+        };
         MyStar.prototype.viewStars = function () {
             for (var i = 0; i < $('.trigStar').length; i++) {
                 var obj = $('.trigStar').eq(i);
@@ -11400,6 +11430,240 @@ var Star;
     Star.MyStar = MyStar;
 })(Star || (Star = {}));
 exports.default = Star;
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var $ = __webpack_require__(0);
+var func_1 = __webpack_require__(1);
+var Board;
+(function (Board) {
+    var MyBoard = /** @class */ (function () {
+        function MyBoard(ajaxing) {
+            if (ajaxing === void 0) { ajaxing = false; }
+            var _this = this;
+            this.ajaxing = ajaxing;
+            this.defaultTextareaHeight = 30;
+            this.defaultTextareaLineHeight = 20;
+            var self = this;
+            if ($('#board-input').length > 0) {
+                // メッセージの入力欄までスクロール
+                func_1.default.smoothScroll(this.getBottom(), true);
+                // テキストエリアの高さ自動調整
+                this.resizeTextareaInitialize('#bulletMessage');
+                $('#bulletMessage').on("input", function (evt) {
+                    self.resizeTextarea(evt);
+                });
+            }
+            // 以前のメッセージ読み込み
+            $('#trigGetOver10').click(function () {
+                var boardId = $('#over10').attr("data-board_id");
+                _this.ajaxGetOver10(boardId);
+            });
+            $('.trigSubmitMessage').click(function () {
+                _this.submitMessage();
+            });
+            /**
+             *   38 ↑
+             * 37 ←   → 39
+             *   40 ↓
+             * 32: space
+             * 27: ESC
+             */
+            $(window).keydown(function (e) {
+                if ($('#bulletMessage').is(':focus')) {
+                    if ((e.ctrlKey || e.altKey) && e.keyCode == 13) {
+                        _this.submitMessage();
+                    }
+                    if (e.ctrlKey && e.keyCode == 77) {
+                        _this.changeFlagMemo();
+                    }
+                }
+            });
+            // ボードを常に更新
+            if ($('#paramHashedId').length > 0) {
+                var hashedId_1 = $('#paramHashedId').val();
+                setInterval(function () {
+                    self.refreshMessages(hashedId_1);
+                }, 3000);
+            }
+            // 未読アイコンを常に更新
+            if ($('.bulletUnreadCount').length > 0) {
+                setInterval(function () {
+                    self.ajaxRefreshUnreadCount();
+                }, 3000);
+            }
+        }
+        MyBoard.prototype.refreshMessages = function (hashedId) {
+            // 表示されている最新の message_id を取得 ->latest [JS]
+            var messageId;
+            for (var i = 0; i < $('.paramMessageIds').length; i++) {
+                messageId = $('.paramMessageIds').eq(i).val();
+            }
+            this.ajaxRefreshMessages(hashedId, messageId);
+            // 新しい順に message_id を取得 -> news [PHP]
+            // news を評価して latest にあたれば終了
+            // あたるまでの message_id を view に突っ込む
+            // append [JS]
+        };
+        MyBoard.prototype.getViewMessageIds = function () {
+            var IDs = [];
+            for (var i = 0; i < $('.paramMessageIds').length; i++) {
+                IDs.push($('.paramMessageIds').eq(i).val());
+            }
+            return IDs;
+        };
+        MyBoard.prototype.getBottom = function () {
+            var y = 0;
+            var contentTop = Number($('#board-content').offset().top);
+            var contentHeight = Number($('#board-content').height());
+            var contentBotttom = contentTop + contentHeight;
+            var inputHeight = Number($('#board-input').outerHeight()) | 0;
+            y = contentBotttom - $(window).height() + inputHeight;
+            return y;
+        };
+        MyBoard.prototype.resizeTextareaInitialize = function (id) {
+            $(id).height(this.defaultTextareaHeight); //init
+            $(id).css("lineHeight", this.defaultTextareaLineHeight + 'px'); //init
+        };
+        MyBoard.prototype.resizeTextarea = function (evt) {
+            var target = evt.target;
+            var lineHeight = Number($(target).css("lineHeight").split("px")[0]);
+            while (true) {
+                $(target).height($(target).height() - lineHeight);
+                if (target.scrollHeight > 400) {
+                    $(target).height(400);
+                }
+                else if (target.scrollHeight > target.offsetHeight) {
+                    $(target).height(target.scrollHeight);
+                }
+                break;
+            }
+        };
+        MyBoard.prototype.ajaxGetOver10 = function (boardId) {
+            var self = this;
+            self.ajaxing = true;
+            var token = $('meta[name="csrf-token"]').attr('content');
+            var D = { board_id: boardId };
+            $.ajax({
+                headers: { 'X-CSRF-TOKEN': token },
+                url: '/ajax/get_over10',
+                type: 'post',
+                data: D,
+                dataType: 'json',
+                beforeSend: function () {
+                    // 実行中画面
+                    $('#ajaxing-waiting').show();
+                },
+                success: function (data) {
+                    $('#over10').prepend(data.view);
+                    if (Number(data.remain) === 0) {
+                        $('#bulletGetOver10Btn').remove();
+                    }
+                },
+                complete: function () {
+                    // 実行中画面を消す
+                    $('#ajaxing-waiting').hide();
+                    self.ajaxing = false;
+                }
+            });
+        };
+        MyBoard.prototype.submitMessage = function () {
+            var boardId = $('#over10').attr("data-board_id");
+            var body = $('#bulletMessage').val();
+            if (body.length > 0) {
+                this.ajaxPutMessage(boardId, body);
+            }
+            else {
+                return;
+            }
+        };
+        MyBoard.prototype.ajaxPutMessage = function (boardId, body) {
+            var self = this;
+            self.ajaxing = true;
+            var token = $('meta[name="csrf-token"]').attr('content');
+            var D = { board_id: boardId, body: body };
+            $.ajax({
+                headers: { 'X-CSRF-TOKEN': token },
+                url: '/ajax/put_message',
+                type: 'post',
+                data: D,
+                dataType: 'json',
+                beforeSend: function () {
+                    // 実行中画面
+                    $('#ajaxing-waiting').show();
+                },
+                success: function (data) {
+                    //                    console.log(data);
+                    if (data.result) {
+                        self.appendMessages(data.views);
+                        $('#bulletMessage').val("").height(self.defaultTextareaHeight);
+                    }
+                },
+                complete: function () {
+                    // 実行中画面を消す
+                    $('#ajaxing-waiting').hide();
+                    self.ajaxing = false;
+                }
+            });
+        };
+        MyBoard.prototype.appendMessages = function (views) {
+            var viewIDs = this.getViewMessageIds();
+            $.each(views, function (id, body) {
+                if (!func_1.default.inArray(id, viewIDs)) {
+                    $('#latest10').append(body);
+                }
+            });
+        };
+        MyBoard.prototype.changeFlagMemo = function () {
+            var flag = $('#flag_memo').prop("checked") ? false : true;
+            $('#flag_memo').prop("checked", flag);
+        };
+        MyBoard.prototype.ajaxRefreshMessages = function (hashedId, messageId) {
+            // 新しい順に message_id を取得 -> news [PHP]
+            // news を評価して latest にあたれば終了
+            // あたるまでの message_id を view に突っ込む
+            // append [JS]
+            var self = this;
+            self.ajaxing = true;
+            var token = $('meta[name="csrf-token"]').attr('content');
+            var D = { hashed_id: hashedId, message_id: messageId };
+            $.ajax({
+                headers: { 'X-CSRF-TOKEN': token },
+                url: '/ajax/refresh_messages',
+                type: 'post',
+                data: D,
+                dataType: 'json',
+                success: function (data) {
+                    self.appendMessages(data.views);
+                    $('.bulletUnreadCount').html(data.unread_count);
+                }
+            });
+        };
+        MyBoard.prototype.ajaxRefreshUnreadCount = function () {
+            var self = this;
+            self.ajaxing = true;
+            var token = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                headers: { 'X-CSRF-TOKEN': token },
+                url: '/ajax/get_unread_count',
+                type: 'post',
+                success: function (data) {
+                    //console.log(data);
+                    $('.bulletUnreadCount').html(data);
+                }
+            });
+        };
+        return MyBoard;
+    }());
+    Board.MyBoard = MyBoard;
+})(Board || (Board = {}));
+exports.default = Board;
 
 
 /***/ })

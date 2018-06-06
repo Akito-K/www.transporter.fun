@@ -32,10 +32,10 @@ class estimateController extends ownerController
         $pagemeta = Pagemeta::getPagemeta('OW-ESM-02');
         $data = Estimate::getEstimateFromOwnerSide($estimate_id);
         $owner = Carrier::getData(\Auth::user()->owner_id);
-        $carrier = Carrier::getData( $data->carrier_id );
-        MyUser::addIconFilepathToCarrierData($carrier);
+        $carrier_data = Carrier::getData( $data->carrier_id );
+        MyUser::addIconFilepathToCarrierData($carrier_data);
 
-        return view('owner.estimate.detail', compact('pagemeta', 'data', 'owner', 'carrier'));
+        return view('owner.estimate.detail', compact('pagemeta', 'data', 'owner', 'carrier_data'));
     }
 
 }

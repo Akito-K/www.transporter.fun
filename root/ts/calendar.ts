@@ -33,7 +33,7 @@ namespace Calendar {
 
             let self = this;
             // 日付枠クリックでカレンダーを開く
-            $('.trigShowCalendar').click( function(e){
+            $(document).on('click', '.trigShowCalendar', function(e){
                 self.el = $(this);
                 self.showCalendar(e);
             });

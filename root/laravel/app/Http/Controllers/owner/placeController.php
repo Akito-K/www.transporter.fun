@@ -25,10 +25,10 @@ class placeController extends ownerController
         $order_data = Order::getOrderFromOwnerSide($estimate_data->order_id);
         $owner_data = Owner::getData($order_data->owner_id);
         MyUser::addIconFilepathToOwnerData($owner_data);
-        $carrier = Carrier::getData($estimate_data->carrier_id);
-        MyUser::addIconFilepathToCarrierData($carrier);
+        $carrier_data = Carrier::getData($estimate_data->carrier_id);
+        MyUser::addIconFilepathToCarrierData($carrier_data);
 
-        return view('owner.place.create', compact('pagemeta', 'estimate_data', 'order_data', 'carrier', 'owner_data'));
+        return view('owner.place.create', compact('pagemeta', 'estimate_data', 'order_data', 'carrier_data', 'owner_data'));
     }
 
     public function confirm( MyRequest $request ){
@@ -40,12 +40,12 @@ class placeController extends ownerController
         $order_data = Order::getOrderFromOwnerSide($estimate_data->order_id);
         $owner_data = Owner::getData($order_data->owner_id);
         MyUser::addIconFilepathToOwnerData($owner_data);
-        $carrier = Carrier::getData($estimate_data->carrier_id);
-        MyUser::addIconFilepathToCarrierData($carrier);
+        $carrier_data = Carrier::getData($estimate_data->carrier_id);
+        MyUser::addIconFilepathToCarrierData($carrier_data);
 
         $request->flash();
 
-        return view('owner.place.confirm', compact('pagemeta', 'estimate_data', 'order_data', 'carrier', 'owner_data'));
+        return view('owner.place.confirm', compact('pagemeta', 'estimate_data', 'order_data', 'carrier_data', 'owner_data'));
     }
 
     public function execute( Request $request ){

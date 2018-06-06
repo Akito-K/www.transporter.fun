@@ -108,6 +108,12 @@ class Work extends Model
         return $data;
     }
 
+    public static function getDataByOrderId($order_id){
+        $data = Work::where('order_id', $order_id)->first();
+
+        return $data;
+    }
+
     public static function getDataByEstimateId($estimate_id){
         $data = Work::where('estimate_id', $estimate_id)->first();
 

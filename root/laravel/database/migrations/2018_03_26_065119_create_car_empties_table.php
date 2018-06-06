@@ -18,7 +18,7 @@ class CreateCarEmptiesTable extends Migration
             $table->string('carrier_id', 32);
             $table->string('name', 64)->nullable();
             $table->string('car_id', 32)->nullable();
-            $table->string('area', 64)->nullable();
+            $table->string('area_id', 32)->nullable();
 
             $table->datetime('start_at')->nullable();
             $table->datetime('end_at')->nullable();

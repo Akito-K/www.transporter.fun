@@ -147,10 +147,15 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/owner/payed/{estimate_id}/create',        'owner\payedController@create');
             Route::post('/owner/payed/confirm',                     'owner\payedController@confirm');
             Route::post('/owner/payed/execute',                     'owner\payedController@execute');
-            // 運送会社評価
-            Route::get ('/owner/review/{order_id}/create',          'owner\reviewController@create');
-            Route::post('/owner/review/execute',                    'owner\reviewController@execute');
 
+            // 運送会社評価
+            Route::get ('/owner/review/{order_id}/create',          'owner\ownerReviewController@create');
+            Route::post('/owner/review/confirm',                    'owner\ownerReviewController@confirm');
+            Route::post('/owner/review/execute',                    'owner\ownerReviewController@execute');
+
+            // コンタクトボード
+            Route::get ('/owner/board/order/{order_id}',            'owner\boardController@detailByOrder');
+            Route::get ('/owner/board/estimate/{estimate_id}',      'owner\boardController@detailByEstimate');
         });
 
         // CARRIER = = = = = = = = = = = =
@@ -212,6 +217,20 @@ Route::group(['middleware' => ['auth']], function () {
             // 入金確認報告
             Route::get ('/carrier/confirm_payment/{work_id}',       'carrier\confirmPaymentController@execute');
 
+            // 運送会社評価
+            Route::get ('/carrier/review/{work_id}/create',         'carrier\carrierReviewController@create');
+            Route::post('/carrier/review/confirm',                  'carrier\carrierReviewController@confirm');
+            Route::post('/carrier/review/execute',                  'carrier\carrierReviewController@execute');
+
+            // コンタクトボード
+            Route::get ('/carrier/board/{work_id}',                 'carrier\boardController@detail');
+
+            // 運送会社情報
+            Route::get ('/carrier/account/',                        'carrier\accountController@showDetail');
+            Route::get ('/carrier/account/car/edit',                'carrier\accountController@editCars');
+            Route::post('/carrier/account/car/update',              'carrier\accountController@updateCars');
+            Route::get ('/carrier/account/empty/edit',              'carrier\accountController@editEmpties');
+            Route::post('/carrier/account/empty/update',            'carrier\accountController@updateEmpties');
         });
 
         // ADMIN = = = = = = = = = = = =
@@ -332,21 +351,24 @@ Route::group(['middleware' => ['auth']], function () {
         });
     });
 
-
-
-
-
-
-
-
 });
 
 Route::post('/ajax/upload_file',                            'AjaxController@uploadFile');
+Route::post('/ajax/upload_some_file',                       'AjaxController@uploadSomeFile');
 Route::post('/ajax/quote_user_account',                     'AjaxController@quoteUserAccount');
 Route::post('/ajax/quote_address',                          'AjaxController@quoteAddress');
 Route::post('/ajax/add_estimate_item',                      'AjaxController@addEstimateItem');
 Route::post('/ajax/quote_item',                             'AjaxController@quoteItem');
 Route::post('/ajax/quote_order',                            'AjaxController@quoteOrder');
+
+Route::post('/ajax/get_over10',                             'AjaxController@getOver10');
+Route::post('/ajax/put_message',                            'AjaxController@putMessage');
+Route::post('/ajax/upload_file_and_put_board_file',         'AjaxController@uploadFileAndPutBoardFile');
+Route::post('/ajax/refresh_messages',                       'AjaxController@refreshMessages');
+Route::post('/ajax/get_unread_count',                       'AjaxController@getUnreadCount');
+
+Route::post('/ajax/add_edit_car',                           'AjaxController@addEditCar');
+Route::post('/ajax/add_edit_empty',                         'AjaxController@addEditEmpty');
 //Route::post('/ajax/add_estimate_item',                      'AjaxController@addEstimateItem');
 
 //Route::get ('/cron/run', 'cronController@logWeather');

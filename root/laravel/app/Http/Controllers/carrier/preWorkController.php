@@ -35,10 +35,10 @@ class preWorkController extends carrierController
         $order_data = Order::getOrderFromCarrierSide($work_data->order_id);
         $owner_data = Owner::getData($order_data->owner_id);
         MyUser::addIconFilepathToOwnerData($owner_data);
-        $carrier = Carrier::getData(\Auth::user()->carrier_id);
-        MyUser::addIconFilepathToCarrierData($carrier);
+        $carrier_data = Carrier::getData(\Auth::user()->carrier_id);
+        MyUser::addIconFilepathToCarrierData($carrier_data);
 
-        return view('carrier.pre_work.detail', compact( 'pagemeta', 'estimate_data', 'order_data', 'carrier', 'owner_data', 'work_data'));
+        return view('carrier.pre_work.detail', compact( 'pagemeta', 'estimate_data', 'order_data', 'carrier_data', 'owner_data', 'work_data'));
     }
 
 }

@@ -30,6 +30,9 @@ class CreateCarriersTable extends Migration
             $table->string('address', 150)->nullable();
             $table->string('tel', 20)->nullable();
 
+            $table->text('message')->nullable();
+            $table->string('site_url', 64)->nullable();
+
             $table->datetime('created_at');
             $table->datetime('updated_at');
             $table->datetime('deleted_at')->nullable();

@@ -1,0 +1,36 @@
+// 共通
+@media all {
+    .review {
+        &__box {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            border: 1px solid #999;
+            box-shadow: 3px 4px 10px 2px rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
+            &__list {
+                padding-top: 25px;
+                padding-bottom: 25px;
+            }
+            &__param {
+                &--name {
+                    font-size: 8px;
+                }
+            }
+        }
+    }
+}
+// スマホ
+@media(max-width: 767px) {
+    .review {
+        &__box {
+        }
+    }
+}
+// TAB・PC
+@media(min-width: 768px){
+    .review {
+        &__box {
+        }
+    }
+}

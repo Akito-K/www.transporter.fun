@@ -16,8 +16,10 @@ class CreateCarsTable extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->increments('id');
             $table->string('car_id', 32)->unique();
+            $table->string('carrier_id', 32);
             $table->string('name', 64)->nullable();
-            $table->float('ton', 8, 1)->nullable();
+            $table->string('filepath')->nullable();
+            $table->integer('count')->unsigned()->default(0);
 
             $table->datetime('created_at');
             $table->datetime('updated_at');

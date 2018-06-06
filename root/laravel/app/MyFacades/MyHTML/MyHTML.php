@@ -225,7 +225,7 @@ class MyHTML
         $ext = \Func::getExtension($message->filepath);
 
         if(in_array($ext, ['jpg', 'jpeg', 'png', 'gif'])){
-            $body = '<a class="" href="'.str_replace('_sm', '_lg', env('IMG').$message->filepath).'" target="_blank"><img src="'.env('IMG').$message->filepath.'" alt="ファイル"></a>';
+            $body = '<a class="" href="'.str_replace(['_sm', '_md'], '_lg', env('IMG').$message->filepath).'" target="_blank"><img src="'.env('IMG').$message->filepath.'" alt="ファイル"></a>';
 
         }else{
             $name = $message->body?: 'アップロードされたファイル';
@@ -325,4 +325,32 @@ class MyHTML
                     <span class="my-thumbnail__img" style="background-image: url('.$url.');"></span>
                 </span>';
     }
+
+    public static function ThumbnailSquare($url, $options=[] ){
+        $class = 'my-thumbnail__img my-thumbnail__img--square';
+        $option = '';
+        foreach($options as $k => $v){
+            if($k == 'class'){
+                $class .= ' '.$options['class'];
+            }else{
+                $option .= ' '.$k.'="'.$v.'"';
+            }
+        }
+
+        return '<span class="my-thumbnail">
+                    <span class="'.$class.'" style="background-image: url('.$url.');" '.$option.'></span>
+                </span>';
+    }
+
+    public static function boardMessage($message){
+        if($message->filepath){
+            $body = \MyHTML::boardFile($message);
+        }else{
+            $body = \Func::N2BR( \Func::stringToAnchor( $message->body) );
+        }
+
+        return $body;
+    }
+
+
 }

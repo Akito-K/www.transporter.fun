@@ -20,7 +20,7 @@
                 <div class="work__box__suggest">
                     <h6 class="work__box__subtitle">提案メッセージ</h6>
                     @include('include.estimate_message_me', [
-                        'data' => $carrier,
+                        'data' => $carrier_data,
                         'date_at' => $data->suggested_at,
                         'body' => \Func::N2BR( $data->suggest_message )
                         ])

@@ -1,0 +1,82 @@
+// CMN
+@media all {
+    .account {
+        &__box {
+            margin-bottom: 30px;
+            &__title {
+                margin: 10px 0;
+                padding: 5px;
+                @include fsize(20);
+                border-left: 10px solid #3c50cc;
+                border-bottom: 1px solid #3c50cc;
+            }
+            &__btn {
+                margin-top: 10px;
+            }
+        }
+        &__car {
+            &__table {
+                margin-bottom: 0;
+            }
+        }
+        &__cars {
+            &__box {
+                padding-bottom: 10px;
+                border-bottom: 10px;
+                border-bottom: 1px solid #ddd;
+                &:last-child {
+                    border-bottom: none;
+                }
+                &__btns {
+                    align-self: flex-end;
+                }
+                &__btn {
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    line-height: 20px;
+                    text-align: center;
+                    color: #fff;
+                    font-size: 12px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    &--minus {
+                        background-color: #30dd30;
+                        &:hover {
+                            background-color: #31c331;
+                        }
+                    }
+                    &--plus {
+                        background-color: #dd3030;
+                        &:hover {
+                            background-color: #c33131;
+                        }
+                    }
+                }
+            }
+            &__btns-plus {
+                @include flexbox();
+                @include flexJustify(flex-end);
+                margin-bottom: 30px;
+                > div {
+                    width: 10%;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+// SP
+@media(max-width: 767px) {
+    .account {
+        &__box {
+        }
+    }
+}
+// TAB PC
+@media(min-width: 768px){
+    .account {
+        &__box {
+        }
+    }
+}

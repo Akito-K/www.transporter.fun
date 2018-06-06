@@ -24,6 +24,7 @@ namespace Upload {
 
         constructor(
             private ajaxing: boolean = false,
+            private multipleNumber: number = 0,
             ){
 
             let self = this;
@@ -60,71 +61,131 @@ namespace Upload {
                 }
             });
 
-            // ドラッグドロップからの入力
-            $(window).bind("drop", function (e) {
-                // false を返してデフォルトの処理を実行しないようにする
-                return false;
-            })
-            .bind("dragenter", function () {
-                $('#ajaxing-drag-enter').show();
-                // false を返してデフォルトの処理を実行しないようにする
-                return false;
-            })
-            .bind("dragover", function () {
-                // false を返してデフォルトの処理を実行しないようにする
-                return false;
-            })
-            .bind("dragleave", function () {
-                // false を返してデフォルトの処理を実行しないようにする
-                return false;
-            });
+            // 複数アップロード無効
+            if( $('#flagMultipleUpload').length == 0 ){
 
-            // ドラッグドロップからの入力
-            $('#ajaxing-drag-enter').bind("drop", function (event: JQueryEventObject) {
-                $('#ajaxing-drag-enter').hide();
-                // ドラッグされたファイル情報を取得
-                const dragEvent = <DragEvent>event.originalEvent,
-                    dataTransfer = dragEvent.dataTransfer,
-                    files = dataTransfer.files;
-                const type = $('#bulletFakeInput').data("type");
-                const target = $('#bulletFakeInput').data("target");
-                const checked = self.checkUploadFile(files, type);
+                // ドラッグドロップからの入力
+                $(window).bind("drop", function (e) {
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                .bind("dragenter", function () {
+                    $('#ajaxing-drag-enter').show();
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                .bind("dragover", function () {
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                .bind("dragleave", function () {
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                });
 
-                if(checked.result){
-//                    if( target == "image"){
+                // ドラッグドロップからの入力
+                $('#ajaxing-drag-enter').bind("drop", function (event: JQueryEventObject) {
+                    $('#ajaxing-drag-enter').hide();
+                    // ドラッグされたファイル情報を取得
+                    const dragEvent = <DragEvent>event.originalEvent,
+                        dataTransfer = dragEvent.dataTransfer,
+                        files = dataTransfer.files;
+                    const type = $('#bulletFakeInput').data("type");
+                    const target = $('#bulletFakeInput').data("target");
+                    const checked = self.checkUploadFile(files, type);
+
+                    if(checked.result){
                         self.uploadFile(files[0], type, target);
-/*
                     }else{
-                        if(self.confirmFileInfo(files[0])){
-                            self.uploadFile(files[0], target);
-                        }else{
-                            return false;
-                        }
+                        alert(checked.errorMessage);
                     }
-*/
-                }else{
-                    alert(checked.errorMessage);
-                }
-                // false を返してデフォルトの処理を実行しないようにする
-                return false;
-            })
-            .bind("dragenter", function () {
-                // false を返してデフォルトの処理を実行しないようにする
-                return false;
-            })
-            .bind("dragover", function () {
-                // false を返してデフォルトの処理を実行しないようにする
-                return false;
-            })
-            .bind("dragleave", function () {
-                $(this).hide();
-                // false を返してデフォルトの処理を実行しないようにする
-                return false;
-            });
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                .bind("dragenter", function () {
+                    $('#ajaxing-drag-enter').show();
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                .bind("dragover", function () {
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                .bind("dragleave", function () {
+                    $(this).hide();
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                });
 
-            $('#ajaxing-drag-enter').bind("mouseleave click", () => {
-                $('#ajaxing-drag-enter').hide();
-            });
+                $('#ajaxing-drag-enter').bind("mouseleave click", () => {
+                    $('#ajaxing-drag-enter').hide();
+                });
+
+            }else{
+            // 複数アップロード有効
+
+                // ドラッグドロップからの入力
+                $('.trigAjaxingUploadingArea').bind("drop", function (e) {
+                    //$('.bulletAjaxingDragEnters').hide();
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                .bind("dragenter", function () {
+                    self.multipleNumber = Func.number( $(this).attr('data-num') );
+                    $('.bulletAjaxingDragEnters[data-num="'+ self.multipleNumber +'"]').show();
+                    console.log( self.multipleNumber );
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                .bind("dragover", function () {
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                .bind("dragleave", function () {
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                });
+
+                // ドラッグドロップからの入力
+                $('.bulletAjaxingDragEnters').bind("drop", function (event: JQueryEventObject) {
+                    $('.bulletAjaxingDragEnters').hide();
+                    // ドラッグされたファイル情報を取得
+                    const dragEvent = <DragEvent>event.originalEvent,
+                        dataTransfer = dragEvent.dataTransfer,
+                        files = dataTransfer.files;
+                    const type = $('.bulletFakeInput[data-num="'+ self.multipleNumber +'"]').attr("data-type");
+                    const target = $('.bulletFakeInput[data-num="'+ self.multipleNumber +'"]').attr("data-target");
+                    const checked = self.checkUploadFile(files, type);
+                    console.log(files, type, target, checked);
+
+                    if(checked.result){
+                        self.uploadFile(files[0], type, target);
+                    }else{
+                        alert(checked.errorMessage);
+                    }
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                .bind("dragenter", function () {
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                .bind("dragover", function () {
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                .bind("dragleave", function () {
+                    $(this).hide();
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                });
+/*
+                $('#ajaxing-drag-enter').bind("mouseleave click", () => {
+                    $('#ajaxing-drag-enter').hide();
+                });
+*/
+            }
+
 /*
             // SUBMIT ボタン押した時に処理中画面表示
             $('.trigGoNext').click( () => {
@@ -193,11 +254,46 @@ namespace Upload {
 
             if(target === "board-file"){
                 this.ajaxUploadFileAndPutBoardFile(fd, target, files.name);
+            }else if(target === "cars"){
+                this.ajaxUploadSomeFile(fd, files.name);
             }else{
                 this.ajaxUploadFile(fd, target, files.name);
             }
         }
 
+
+        public ajaxUploadSomeFile(fd, filename): void{
+            let self = this;
+            self.ajaxing = true;
+            const token: string = $('meta[name="csrf-token"]').attr('content');
+            //fd.append('multiple_number', self.multipleNumber);
+
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': token},
+                url: '/ajax/upload_some_file',
+                type: 'post',
+                data: fd,
+                dataType: 'json',
+                cache: false,
+                processData: false,
+                contentType: false,
+                beforeSend: function(){
+                    // 実行中画面
+                    $('#ajaxing-uploading').show();
+                },
+                success: function( data ){
+                    console.log(data);
+                    $('.bulletUploadedImage[data-num="'+ self.multipleNumber +'"]').css('background-image', 'url(' + data.path + '/' + data.filename +')');
+                    $('.bulletUploadId[data-num="'+ self.multipleNumber +'"]').val( data.upload_id );
+                    $('.bulletUploadedFilepath[data-num="'+ self.multipleNumber +'"]').val( data.path + '/' + data.filename );
+                },
+                complete: function(){
+                    // 実行中画面を消す
+                    $('#ajaxing-uploading').hide();
+                    self.ajaxing = false;
+                }
+            });
+        }
 
         public ajaxUploadFile(fd, target, filename): void{
             let self = this;
@@ -252,15 +348,13 @@ namespace Upload {
             const token: string = $('meta[name="csrf-token"]').attr('content');
 
             const boardId = $('#over10').attr("data-board_id");
-            const memo = $('#flag_memo').prop("checked")? 1: 0;
             const body = $('#bulletMessage').val();
             fd.append('board_id', boardId);
-            fd.append('memo', memo);
             fd.append('body', body);
 
             $.ajax({
                 headers: {'X-CSRF-TOKEN': token},
-                url: '/mimamori/ajax/upload_file_and_put_board_file',
+                url: '/ajax/upload_file_and_put_board_file',
                 type: 'post',
                 data: fd,
                 dataType: 'json',

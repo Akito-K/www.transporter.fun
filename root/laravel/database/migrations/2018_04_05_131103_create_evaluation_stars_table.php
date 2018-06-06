@@ -17,7 +17,7 @@ class CreateEvaluationStarsTable extends Migration
             $table->increments('id');
             $table->string('evaluation_id', 32);
             $table->string('name', 32);
-            $table->integer('star')->unsigned()->default(0);
+            $table->float('star', 8, 2)->nullable();
 
             $table->datetime('created_at');
             $table->datetime('updated_at');

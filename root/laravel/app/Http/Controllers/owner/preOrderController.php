@@ -30,7 +30,7 @@ class preOrderController extends ownerController
         Order::addHideOwner($data);
         Order::addCarrierClass($data);
 
-        return view('owner.order.detail', compact('data', 'pagemeta'));
+        return view('owner.pre_order.detail', compact('data', 'pagemeta'));
     }
 
 }

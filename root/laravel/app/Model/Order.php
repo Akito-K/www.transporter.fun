@@ -248,10 +248,10 @@ class Order extends Model
         $data->owner_name_with_star = Order::getOwnerNameWithStar($data, $owner);
     }
 /*
-    public static function addCarrierData(&$data, $carrier = NULL){
-        $carrier = $carrier?: Carrier::getData($data->carrier_id);
-        $data->carrier_name = Order::getCarrierName($data, $carrier);
-        $data->carrier_name_with_star = Order::getCarrierNameWithStar($data, $carrier);
+    public static function addCarrierData(&$data, $carrier_data = NULL){
+        $carrier_data = $carrier_data?: Carrier::getData($data->carrier_id);
+        $data->carrier_name = Order::getCarrierName($data, $carrier_data);
+        $data->carrier_name_with_star = Order::getCarrierNameWithStar($data, $carrier_data);
     }
 */
     public static function addEstimateCount(&$data){
@@ -371,17 +371,17 @@ class Order extends Model
         return $name;
     }
 
-    public static function getCarrierName($data, $carrier=NULL){
-        $carrier = $carrier?: Carrier::getData($data->carrier_id);
-        $name = $carrier->company."\n".$carrier->sei.' '.$carrier->mei;
+    public static function getCarrierName($data, $carrier_data=NULL){
+        $carrier_data = $carrier_data?: Carrier::getData($data->carrier_id);
+        $name = $carrier_data->company."\n".$carrier_data->sei.' '.$carrier_data->mei;
 
         return $name;
     }
 
-    public static function getCarrierNameWithStar($data, $carrier=NULL){
-        $carrier = $carrier?: Carrier::getData($data->carrier_id);
-        $star = $carrier->star;
-        $name = '<a href="'.url('').'/mypage/carrier/'.$data->carrier_id.'/detail">'.$carrier->sei.' '.$carrier->mei.'</a>'."\n".
+    public static function getCarrierNameWithStar($data, $carrier_data=NULL){
+        $carrier_data = $carrier_data?: Carrier::getData($data->carrier_id);
+        $star = $carrier_data->star;
+        $name = '<a href="'.url('').'/mypage/carrier/'.$data->carrier_id.'/detail">'.$carrier_data->sei.' '.$carrier_data->mei.'</a>'."\n".
                                 view('include.star', compact('star'))->render();
 
         return $name;

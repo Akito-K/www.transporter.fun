@@ -7,13 +7,60 @@ namespace Star {
     export class MyStar {
 
         constructor(
-            //private ajaxing: boolean = false,
+            //private evaluating: boolean = false,
+            private boxWidth: number = 0,
             ){
-            //let self = this;
+            let self = this;
 
             if( $('.trigStar').length > 0 ){
                 this.viewStars();
             }
+
+            if( $('.trigEvaluate').length > 0 ){
+                this.viewEvaluates();
+                this.boxWidth = Number( $('.trigEvaluateStar').eq(0).width() );
+            }
+
+            $('.trigEvaluateStar').mousemove( function( e ){
+                const num: number = Func.number( $(this).attr("data-num") );
+                const itemId: string = $(this).parent('ul').attr("data-id");
+                const position: number = e.offsetX;
+                const percent = self.getPercent(num, position);
+//                console.log( num, itemId, position, percent );
+                self.setEvaluateStar(itemId, percent);
+            });
+        }
+
+        public getPercent( num, position ): number {
+            const positions: number = this.boxWidth * num + position;
+            const boxesWidth: number = this.boxWidth * 5;
+            const percent: number = Math.round( positions / boxesWidth * 1000 ) / 10;
+
+            return percent;
+        }
+
+        public setEvaluateStar( itemId, percent ){
+            const star: number = Math.round( percent / 2 ) / 10;
+            //console.log(star);
+            $('.paramEvaluateStar[data-id="'+itemId+'"]').html( "("+star.toFixed(1)+")" );
+            $('#bulletEvaluateStarValue-'+itemId).val(star.toFixed(1));
+            document.getElementById('bulletEvaluateStar-'+itemId).style.width = percent +'%';
+        }
+
+        public viewEvaluates(){
+            for( let i: number = 0; i < $('.trigEvaluate').length; i++){
+                const obj = $('.trigEvaluate').eq(i);
+                this.viewEvaluate(obj);
+            }
+        }
+
+        public viewEvaluate(obj){
+            const star: number = parseFloat( obj.find('.paramEvaluate').html().replace('(', '').replace(')', '') );
+            const val = Math.round( star / 5 * 100 );
+            obj.find('.bulletEvaluate').animate(
+                {width: val+'%'},
+                1000
+                );
         }
 
         public viewStars(){

@@ -61,6 +61,9 @@
             width: 100%;
             height: 100%;
             @include bgCover();
+            &--square {
+                border-radius: 0;
+            }
         }
     }
 
@@ -81,6 +84,9 @@
     .params {
         @include flexbox();
         @include flexAlign(center);
+        &-top {
+            @include flexAlign(flex-start);
+        }
         &-left {
             padding: 5px;
             border-bottom: 1px dotted #ccc;
@@ -94,6 +100,9 @@
         &-left {
             text-align: left;
         }
+        &-right {
+            text-align: right;
+        }
         &-10  { width: 10%;}
         &-20  { width: 20%;}
         &-30  { width: 30%;}
@@ -104,6 +113,29 @@
         &-80  { width: 80%;}
         &-90  { width: 90%;}
         &-100 { width: 100%;}
+
+        &-mr {
+            &-sm {
+                margin-right: 5px;
+            }
+            &-md {
+                margin-right: 10px;
+            }
+            &-lg {
+                margin-right: 15px;
+            }
+        }
+        &-ml {
+            &-sm {
+                margin-left: 5px;
+            }
+            &-md {
+                margin-left: 10px;
+            }
+            &-lg {
+                margin-left: 15px;
+            }
+        }
     }
 
     .stars-wrap {
@@ -143,7 +175,48 @@
             height: 100%;
             z-index: 11;
         }
-        &__child {
+    }
+
+    .evaluates-wrap {
+    }
+    .evaluates {
+        display: inline-block;
+        position: relative;
+        padding: 0;
+        margin: 0;
+        width: 186px;
+        height: 42px;
+        &--val {
+            font-size: 14px;
+            &--hide {
+                display: none;
+            }
+        }
+    }
+    .evaluate {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        color: #000;
+        z-index: 10;
+        text-shadow: 0px 0px 0.1px #000;
+        font-size: 37px;
+        &--editable {
+            cursor: e-resize;
+        }
+        &__lists {
+            width: 186px;
+            @include flexbox();
+            @include flexJustify(space-between);
+        }
+        &--after {
+            color: #ff0;
+            overflow: hidden;
+            width: 0%;
+            height: 100%;
+            z-index: 11;
         }
     }
 
@@ -179,12 +252,24 @@
     }
     .list {
         box-sizing: border-box;
+        text-align: left;
         &-title {
             padding: 4px 4px;
             background-color: #f3f3f3;
         }
         &-value {
             padding: 4px 8px;
+        }
+        &-mb {
+            &-sm {
+                margin-bottom: 5px;
+            }
+            &-md {
+                margin-bottom: 10px;
+            }
+            &-lg {
+                margin-bottom: 15px;
+            }
         }
     }
 }
@@ -195,6 +280,9 @@
         @include flexAlign(stretch);
         border-bottom: 1px dotted #999;
         margin-bottom: 0;
+        &-top {
+            @include flexAlign(flex-start);
+        }
     }
     .list {
         box-sizing: border-box;
@@ -205,6 +293,48 @@
         }
         &-value {
             width: 70%;
+        }
+        &-left {
+            text-align: left;
+        }
+        &-center {
+            text-align: center;
+        }
+        &-right {
+            text-align: right;
+        }
+        &-10  { width: 10%;}
+        &-20  { width: 20%;}
+        &-30  { width: 30%;}
+        &-40  { width: 40%;}
+        &-50  { width: 50%;}
+        &-60  { width: 60%;}
+        &-70  { width: 70%;}
+        &-80  { width: 80%;}
+        &-90  { width: 90%;}
+        &-100 { width: 100%;}
+
+        &-mr {
+            &-sm {
+                margin-right: 5px;
+            }
+            &-md {
+                margin-right: 10px;
+            }
+            &-lg {
+                margin-right: 15px;
+            }
+        }
+        &-ml {
+            &-sm {
+                margin-left: 5px;
+            }
+            &-md {
+                margin-left: 10px;
+            }
+            &-lg {
+                margin-left: 15px;
+            }
         }
     }
 }

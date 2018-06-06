@@ -31,28 +31,4 @@
 <a href="{{ url('') }}/owner/pre_order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
 <a href="{{ url('') }}/owner/order/{{ $data->order_id }}/duplicate" class="orders__btn btn btn-info btn-sm">複製</a>
 
-@elseif( in_array($data->status_id, ['O-20']) )
-<a href="{{ url('') }}/owner/active_order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/duplicate" class="orders__btn btn btn-info btn-sm">複製</a>
-
-@elseif( in_array($data->status_id, ['O-25']) )
-<a href="{{ url('') }}/owner/active_order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/duplicate" class="orders__btn btn btn-info btn-sm">複製</a>
-
-@elseif( in_array($data->status_id, ['O-30']) )
-<a href="{{ url('') }}/owner/active_order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/duplicate" class="orders__btn btn btn-info btn-sm">複製</a>
-
-@elseif( in_array($data->status_id, ['O-35']) )
-<a href="{{ url('') }}/owner/active_order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/duplicate" class="orders__btn btn btn-info btn-sm">複製</a>
-
-@elseif( in_array($data->status_id, ['O-40']) )
-<a href="{{ url('') }}/owner/active_order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
-<a href="{{ url('') }}/owner/order/{{ $data->order_id }}/duplicate" class="orders__btn btn btn-info btn-sm">複製</a>
-
-@endif
-
-@if( in_array($data->status_id, ['O-15', 'O-20', 'O-25', 'O-30', 'O-35', 'O-40']) )
-<a href="{{ url('') }}/owner/board/{{ $data->order_id }}" class="orders__btn btn btn-success btn-sm">メッセージボード</a>
 @endif

@@ -54,7 +54,11 @@ class Upload extends Model
      * from_url は使わない（負債）
      */
     public static function Resize($data){
+//        $content = \Func::var_var_dump($data['from_fullpath']);
+//        \Func::myFilePutContents($content, NULL, false);
+
         $image = \Image::make($data->from_fullpath);
+
         $image->resize($data->width, null, function($constraint){
             $constraint->aspectRatio();
         });
@@ -85,10 +89,25 @@ class Upload extends Model
         $root = \Func::getRootPath();
         $from_fullpath = $root.$original_filepath;
         $new_filename = $file->upload_id.'_original.'.$file->extension;
+
         $new_keyname = 'img/photo/'.date('Y').'/'.date('m').'/'.$new_filename;
         $s3->Put($new_keyname, $from_fullpath);
         // tmp の方を削除
         unlink($from_fullpath);
+    }
+
+    public static function RenameNotImageFile($file, $s3){
+        $original_filepath = $file->dirpath.'/'.$file->upload_id.'.'.$file->extension;
+        $root = \Func::getRootPath();
+        $from_fullpath = $root.$original_filepath;
+        $new_filename = sha1( $file->upload_id ).'.'.$file->extension;
+
+        $new_keyname = 'files/'.date('Y').'/'.date('m').'/'.$new_filename;
+        $s3->Put($new_keyname, $from_fullpath);
+        // tmp の方を削除
+        unlink($from_fullpath);
+
+        return $new_keyname;
     }
 
     /**

@@ -26,10 +26,10 @@ class receiveController extends carrierController
         $order_data = Order::getOrderFromCarrierSide($estimate_data->order_id);
         $owner_data = Owner::getData($order_data->owner_id);
         MyUser::addIconFilepathToOwnerData($owner_data);
-        $carrier = Carrier::getData(\Auth::user()->carrier_id);
-        MyUser::addIconFilepathToCarrierData($carrier);
+        $carrier_data = Carrier::getData(\Auth::user()->carrier_id);
+        MyUser::addIconFilepathToCarrierData($carrier_data);
 
-        return view('carrier.receive.create', compact('pagemeta', 'estimate_data', 'order_data', 'carrier', 'work_data', 'owner_data'));
+        return view('carrier.receive.create', compact('pagemeta', 'estimate_data', 'order_data', 'carrier_data', 'work_data', 'owner_data'));
     }
 
     public function confirm( MyRequest $request ){
@@ -42,12 +42,12 @@ class receiveController extends carrierController
         $order_data = Order::getOrderFromCarrierSide($estimate_data->order_id);
         $owner_data = Owner::getData($order_data->owner_id);
         MyUser::addIconFilepathToOwnerData($owner_data);
-        $carrier = Carrier::getData(\Auth::user()->carrier_id);
-        MyUser::addIconFilepathToCarrierData($carrier);
+        $carrier_data = Carrier::getData(\Auth::user()->carrier_id);
+        MyUser::addIconFilepathToCarrierData($carrier_data);
 
         $request->flash();
 
-        return view('carrier.receive.confirm', compact('pagemeta', 'estimate_data', 'order_data', 'carrier', 'work_data', 'owner_data'));
+        return view('carrier.receive.confirm', compact('pagemeta', 'estimate_data', 'order_data', 'carrier_data', 'work_data', 'owner_data'));
     }
 
     public function execute( Request $request ){

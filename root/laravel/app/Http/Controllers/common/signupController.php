@@ -211,7 +211,7 @@ class signupController extends Controller
         }
 
         if($data['carrier_id']){
-            $carrier = [
+            $carrier_data = [
                 'carrier_id' => $data['carrier_id'],
                 'sei' => $data['sei'],
                 'mei' => $data['mei'],
@@ -224,7 +224,7 @@ class signupController extends Controller
                 'created_at' => $date_at,
                 'updated_at' => $date_at,
             ];
-            Carrier::insert($carrier);
+            Carrier::insert($carrier_data);
         }
 
 /*

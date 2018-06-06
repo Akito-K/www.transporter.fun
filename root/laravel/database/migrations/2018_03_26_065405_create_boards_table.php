@@ -16,9 +16,8 @@ class CreateBoardsTable extends Migration
         Schema::create('boards', function (Blueprint $table) {
             $table->increments('id');
             $table->string('board_id', 32)->unique();
-            $table->string('order_id', 32);
-            $table->string('owner_user_id', 32);
-            $table->string('carrier_user_id', 32);
+            $table->string('user_id_1', 32);
+            $table->string('user_id_2', 32);
 
             $table->datetime('created_at');
             $table->datetime('updated_at');

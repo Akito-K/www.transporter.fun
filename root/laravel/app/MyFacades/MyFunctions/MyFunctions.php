@@ -515,7 +515,15 @@ class MyFunctions
 
 
     public static function myFilePutContents($content, $fullpath=NULL, $flag_add=true){
-        $fullpath = $fullpath?: '/usr/home/ae159j6q55/html/mylogs/log';
+        if(!$fullpath){
+            $root = \Func::getRootPath();
+            $fullpath = $root.'/html/mylogs';
+            if(!file_exists($fullpath)){
+                mkdir($fullpath);
+            }
+            $fullpath .= '/log';
+        }
+
         $content = date('Y-m-d H:i:s')."\n".$content."\n";
         if($flag_add){
             if(file_exists($fullpath)){

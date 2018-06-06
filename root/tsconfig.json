@@ -20,7 +20,7 @@
         "ts/upload.ts",
         "ts/board.ts",
         "ts/customer.ts",
-        "ts/note.ts",
+        "ts/edit_carrier.ts",
 
         "typings/index.d.ts"
     ]

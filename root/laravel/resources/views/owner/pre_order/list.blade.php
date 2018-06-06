@@ -38,7 +38,7 @@
                         <td>{{ $status[$data->status_id] }}</td>
                         <td>{{ $data->estimate_count }} 件</td>
                         <td>
-                            @include('include.buttons.owner.order', ['data' => $data])
+                            @include('include.buttons.owner.pre_order', ['data' => $data])
                         </td>
                     </tr>
                     @endforeach

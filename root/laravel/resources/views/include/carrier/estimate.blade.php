@@ -88,7 +88,7 @@
             <tr>
                 <td class="estimate__table__cell" colspan="4">
                 <td class="estimate__table__cell estimate__table__cell--carrier align-right" colspan="2">
-                    作成者・・・{{ $carrier->company }}<br />（担当：{{ $carrier->sei }}{{ $carrier->mei }}）
+                    作成者・・・{{ $carrier_data->company }}<br />（担当：{{ $carrier_data->sei }}{{ $carrier_data->mei }}）
                 </td>
             </tr>
         </tbody>

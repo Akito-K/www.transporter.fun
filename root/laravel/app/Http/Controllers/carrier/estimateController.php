@@ -42,9 +42,9 @@ class estimateController extends carrierController
         $pagemeta = Pagemeta::getPagemeta('OW-ESM-02');
         $data = Estimate::getEstimateFromCarrierSide($estimate_id);
         $order_data = Order::getOrderFromCarrierSide($data->order_id);
-        $carrier = Carrier::getData(\Auth::user()->carrier_id);
+        $carrier_data = Carrier::getData(\Auth::user()->carrier_id);
 
-        return view('carrier.estimate.detail', compact('order_data', 'pagemeta', 'data', 'carrier'));
+        return view('carrier.estimate.detail', compact('order_data', 'pagemeta', 'data', 'carrier_data'));
     }
 
     public function create( $order_id ){
@@ -65,11 +65,11 @@ class estimateController extends carrierController
 
         $pagemeta = Pagemeta::getPagemeta('OW-ESM-04');
         $order_data = Order::getOrderFromCarrierSide($order_id);
-        $carrier = Carrier::getData(\Auth::user()->carrier_id);
+        $carrier_data = Carrier::getData(\Auth::user()->carrier_id);
         $request->flash();
         $action = 'create';
 
-        return view('carrier.estimate.confirm', compact('action', 'order_data', 'pagemeta', 'carrier'));
+        return view('carrier.estimate.confirm', compact('action', 'order_data', 'pagemeta', 'carrier_data'));
     }
 
     public function insert( Request $request ){
@@ -92,12 +92,12 @@ class estimateController extends carrierController
         $data = Estimate::getEstimateFromCarrierSide($estimate_id);
         $order_data = Order::getOrderFromCarrierSide($data->order_id);
         $me = $request['me'];
-        $carrier = Carrier::getData($me->carrier_id);
+        $carrier_data = Carrier::getData($me->carrier_id);
         $select_orders_names = Order::getEstimatableDatasNames();
         $items = Item::getNames($me->carrier_id);
         \Func::array_append($items, [ 0 => '---' ], true);
 
-        return view('carrier.estimate.edit', compact('select_orders_names', 'order_data', 'data', 'pagemeta', 'items', 'carrier'));
+        return view('carrier.estimate.edit', compact('select_orders_names', 'order_data', 'data', 'pagemeta', 'items', 'carrier_data'));
     }
 
     public function confirmUpdate( MyRequest $request ){
@@ -107,12 +107,12 @@ class estimateController extends carrierController
 
         $pagemeta = Pagemeta::getPagemeta('OW-ESM-07');
         $order_data = Order::getOrderFromCarrierSide($order_id);
-        $carrier = Carrier::getData(\Auth::user()->carrier_id);
+        $carrier_data = Carrier::getData(\Auth::user()->carrier_id);
 
         $request->flash();
         $action = 'edit';
 
-        return view('carrier.estimate.confirm', compact('action', 'order_data', 'pagemeta', 'carrier'));
+        return view('carrier.estimate.confirm', compact('action', 'order_data', 'pagemeta', 'carrier_data'));
     }
 
     public function update( Request $request ){

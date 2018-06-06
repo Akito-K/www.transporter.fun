@@ -27,12 +27,12 @@ class payedController extends ownerController
         $order_data = Order::getOrderFromOwnerSide($estimate_data->order_id);
         $owner_data = Owner::getData($order_data->owner_id);
         MyUser::addIconFilepathToOwnerData($owner_data);
-        $carrier = Carrier::getData($estimate_data->carrier_id);
-        MyUser::addIconFilepathToCarrierData($carrier);
+        $carrier_data = Carrier::getData($estimate_data->carrier_id);
+        MyUser::addIconFilepathToCarrierData($carrier_data);
         $report_data = Report::getData('order_id', $estimate_data->order_id);
         $payment_types = Payment::getTypes();
 
-        return view('owner.payed.create', compact('pagemeta', 'estimate_data', 'order_data', 'carrier', 'owner_data', 'report_data', 'payment_types'));
+        return view('owner.payed.create', compact('pagemeta', 'estimate_data', 'order_data', 'carrier_data', 'owner_data', 'report_data', 'payment_types'));
     }
 
     public function confirm( MyRequest $request ){
@@ -44,14 +44,14 @@ class payedController extends ownerController
         $order_data = Order::getOrderFromOwnerSide($estimate_data->order_id);
         $owner_data = Owner::getData($order_data->owner_id);
         MyUser::addIconFilepathToOwnerData($owner_data);
-        $carrier = Carrier::getData($estimate_data->carrier_id);
-        MyUser::addIconFilepathToCarrierData($carrier);
+        $carrier_data = Carrier::getData($estimate_data->carrier_id);
+        MyUser::addIconFilepathToCarrierData($carrier_data);
         $report_data = Report::getData('order_id', $estimate_data->order_id);
         $payment_types = Payment::getTypes();
 
         $request->flash();
 
-        return view('owner.payed.confirm', compact('pagemeta', 'estimate_data', 'order_data', 'carrier', 'owner_data', 'report_data', 'payment_types'));
+        return view('owner.payed.confirm', compact('pagemeta', 'estimate_data', 'order_data', 'carrier_data', 'owner_data', 'report_data', 'payment_types'));
     }
 
     public function execute( Request $request ){

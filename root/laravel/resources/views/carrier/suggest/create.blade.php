@@ -25,7 +25,7 @@
 
                     <h6 class="work__box__subtitle">提案メッセージ</h6>
                     @include('include.estimate_message_me', [
-                        'data' => $carrier,
+                        'data' => $carrier_data,
                         'date_at' => new \Datetime(),
                         'body' => \Form::textarea('body', old('body'), ['class' => 'form-control'])
                         ])

@@ -198,10 +198,10 @@ class Estimate extends Model
         $data->carrier = Carrier::getData($data->carrier_id);
     }
 */
-    public static function addCarrierData(&$data, $carrier = NULL){
-        $carrier = $carrier?: Carrier::getData($data->carrier_id);
-        $data->carrier_name = Order::getCarrierName($data, $carrier);
-        $data->carrier_name_with_star = Order::getCarrierNameWithStar($data, $carrier);
+    public static function addCarrierData(&$data, $carrier_data = NULL){
+        $carrier_data = $carrier_data?: Carrier::getData($data->carrier_id);
+        $data->carrier_name = Order::getCarrierName($data, $carrier_data);
+        $data->carrier_name_with_star = Order::getCarrierNameWithStar($data, $carrier_data);
     }
 
 

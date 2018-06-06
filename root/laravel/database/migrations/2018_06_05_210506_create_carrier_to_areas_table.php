@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCarrierToCarsTable extends Migration
+class CreateCarrierToAreasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateCarrierToCarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('carrier_to_cars', function (Blueprint $table) {
+        Schema::create('carrier_to_areas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('carrier_id', 32);
-            $table->string('car_id', 32)->nullable();
-            $table->integer('count')->unsigned()->default(0);
-
+            $table->string('area_id', 32);
             $table->datetime('created_at');
-            $table->datetime('updated_at');
-            $table->datetime('deleted_at')->nullable();
         });
     }
 
@@ -32,6 +28,6 @@ class CreateCarrierToCarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carrier_to_cars');
+        Schema::dropIfExists('carrier_to_areas');
     }
 }

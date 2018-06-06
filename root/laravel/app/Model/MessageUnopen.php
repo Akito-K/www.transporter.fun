@@ -23,7 +23,7 @@ class MessageUnopen extends Model
         return $count;
     }
 
-    public static function openMessage($messages){
+    public static function openMessages($messages){
         $user_id = \Auth::user()->user_id;
         if(!empty($messages)){
             foreach($messages as $message){
@@ -33,11 +33,11 @@ class MessageUnopen extends Model
     }
 
     // 未読に追加
-    public static function putMessage($message_id, $board_id, $receiver_user_id){
+    public static function putMessage($message_id, $receiver_user_id){
         MessageUnopen::insert([
             'message_id' => $message_id,
-            'board_id' => $board_id,
             'receiver_user_id' => $receiver_user_id,
+            'created_at' => new \Datetime(),
         ]);
     }
 

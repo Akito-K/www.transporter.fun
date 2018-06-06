@@ -51,11 +51,7 @@
             </div>
         </div>
 
-        @if($target == 'active')
         <a href="{{ url('') }}/owner/active_order" class="btn btn-block btn-primary">進行中の案件一覧に戻る</a>
-        @else
-        <a href="{{ url('') }}/owner/closed_order" class="btn btn-block btn-primary">終了した案件一覧に戻る</a>
-        @endif
 
     </div>
 </div>

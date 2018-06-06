@@ -3,11 +3,7 @@
 
 <div class="box">
     <div class="box-body">
-        @if($target == 'active')
         <h2 class="page-header">進行中の案件情報</h2>
-        @else
-        <h2 class="page-header">終了した案件情報</h2>
-        @endif
 
         <div class="orders__block">
             <p><a href="{{ url('') }}/owner/order/create" class="btn btn-warning btn-block">新しく登録する</a></p>

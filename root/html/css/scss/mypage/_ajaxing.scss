@@ -1,0 +1,119 @@
+// 共通
+@media all {
+    .ajaxing {
+        display: none;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 1000;
+        text-align: center;
+        &__block {
+            display: table;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        &__box {
+            display: table-cell;
+            width: 100%;
+            vertical-align: middle;
+            &__body {
+                padding: 10px;
+                color: #fff;
+                text-align: center;
+                @include fsize(30);
+            }
+            &__icon {
+                @include fsize(80);
+                .fa {
+                    color: #fff;
+                }
+            }
+        }
+        &__cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1100;
+        }
+
+        &__upload-box {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            &__drag-area {
+                border: 4px dashed #ccc;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                position: relative;
+            }
+            &__btn-input {
+            }
+            &__fake-input {
+                display: none !important;
+            }
+
+            &__drag-enter {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                color: #fff;
+                border-radius: 10px;
+                background-color: rgba(0, 0, 0, 0.7);
+                display: none;
+            }
+            &__drag-cover {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+                background-color: rgba(0, 0, 0, 0.1);
+                z-index: 11;
+                display: none;
+            }
+
+            &__body {
+                color: #fff;
+                text-align: center;
+                @include fsize(16);
+            }
+            &__icon {
+                @include fsize(20);
+                .fa {
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+
+// スマホ
+@media(max-width: 767px) {
+    .ajaxing {
+        &__upload-box {
+            &__drag-area,
+            &__drag-enter {
+                padding: 40px 0;
+            }
+        }
+    }
+}
+// TAB・PC
+@media(min-width: 768px){
+    .ajaxing {
+        &__upload-box {
+            &__drag-area {
+                line-height: 100px;
+            }
+        }
+    }
+}

@@ -37,14 +37,15 @@ namespace Page {
 
         public set(el): void {
             this.el = el;
-            this.href = this.el.attr("href");
-            this.disabled = this.el.attr("disabled") == "disabled";
+            this.href = el.attr("href");
+            this.disabled = el.attr("disabled") == "disabled";
         }
 
         public smoothScroll(): boolean {
-            if(this.href != '#'){
-                if(this.href != '#' && this.href.match(/^#/)){
-                    var target = $(this.href == "#" || this.href == "" ? 'html' : this.href);
+            const href = this.href? this.href: '';
+            if(href != '#'){
+                if(href.match(/^#/)){
+                    var target = $( href == "" ? 'html' : href );
                     var position = target.offset().top;
                     if( this.el.attr("data-no-anime") == "1"){
                         var speed = 0;

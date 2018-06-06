@@ -12,6 +12,7 @@
 
 @import "admin/navi";
 @import "mypage/common";
+@import "mypage/ajaxing";
 //@import "owner/dashboard";
 //@import "owner/account";
 @import "owner/orders";
@@ -19,6 +20,8 @@
 @import "owner/request_order";
 @import "carrier/estimate";
 @import "carrier/work";
+@import "carrier/review";
 
+@import "mypage/board";
 @import "mypage/estimate_message";
 

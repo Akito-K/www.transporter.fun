@@ -39,4 +39,16 @@ class EvaluationItem extends Model
 
         return $data;
     }
+
+    public static function getActiveNames($target){
+        $now_at = new \Datetime();
+        $datas = EvaluationItem::where('target', $target)
+                               ->whereNotNull('published_at')
+                               ->where('validated_at', '<=', $now_at)
+                               ->where('period_at', '>=', $now_at)
+                               ->pluck('name', 'item_id');
+
+        return $datas->toArray();
+    }
+
 }

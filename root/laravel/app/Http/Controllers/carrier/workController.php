@@ -28,14 +28,14 @@ class workController extends carrierController
         $order_data = Order::getOrderFromCarrierSide($estimate_data->order_id);
         $owner_data = Owner::getData($order_data->owner_id);
         MyUser::addIconFilepathToOwnerData($owner_data);
-        $carrier = Carrier::getData(\Auth::user()->carrier_id);
-        MyUser::addIconFilepathToCarrierData($carrier);
+        $carrier_data = Carrier::getData(\Auth::user()->carrier_id);
+        MyUser::addIconFilepathToCarrierData($carrier_data);
 
         $report_data = Report::getData('order_id', $estimate_data->order_id);
         $payed_data = Payment::getPayedData($estimate_data->order_id);
         $target = $work_data->status_id == 'W-40'? 'closed': 'active';
 
-        return view('carrier.work.detail', compact( 'pagemeta', 'estimate_data', 'order_data', 'carrier', 'owner_data', 'report_data', 'payed_data', 'target'));
+        return view('carrier.work.detail', compact( 'pagemeta', 'estimate_data', 'order_data', 'carrier_data', 'owner_data', 'report_data', 'payed_data', 'target'));
     }
 
 }

@@ -8,7 +8,7 @@ $add_class = $add_class?: '';
 
 $default_input_date_at = '';
 $default_input_hide_at = '';
-if( isset($default_input_at) && $default_input_at instanceof \DatetimeImmutable ){
+if( isset($default_input_at) && ( $default_input_at instanceof \DatetimeImmutable || $default_input_at instanceof \Datetime ) ){
     $default_input_date_at = \Func::dateFormat($default_input_at, 'Y/n/j(wday)');
     $default_input_hide_at = \Func::dateFormat($default_input_at, 'Y/n/j');
 }
