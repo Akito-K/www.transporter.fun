@@ -29,6 +29,10 @@ class MyUser extends Model
         return $data;
     }
 
+    public static function getUserIdByCarrierId($carrier_id){
+        return MyUser::where('carrier_id', $carrier_id)->value('user_id');
+    }
+
     public static function getUsers(){
         $datas = MyUser::get();
         $ary = [];
@@ -137,7 +141,7 @@ class MyUser extends Model
 /*
             'zip1' => $request['zip1'],
             'zip2' => $request['zip2'],
-            'pref_code' => $request['pref_code'],
+            'pref_id' => $request['pref_id'],
             'city' => $request['city'],
             'address' => $request['address'],
 */
@@ -168,7 +172,7 @@ class MyUser extends Model
 
             'zip1' => $request['zip1'],
             'zip2' => $request['zip2'],
-            'pref_code' => $request['pref_code'],
+            'pref_id' => $request['pref_id'],
             'city' => $request['city'],
             'address' => $request['address'],
 

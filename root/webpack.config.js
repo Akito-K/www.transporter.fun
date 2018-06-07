@@ -6,9 +6,9 @@ let config = {
     entry: {
 //        script :'./ts/script.ts'
 //        admin  :'./ts/admin.ts'
-//        mypage :'./ts/mypage.ts'
+        mypage :'./ts/mypage.ts'
 //        'owner' :'./ts/owner.ts'
-        'carrier' :'./ts/carrier.ts'
+//        'carrier' :'./ts/carrier.ts'
     },
     output: {
         filename: '[name].js'

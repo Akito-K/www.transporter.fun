@@ -36,7 +36,7 @@
             </ul>
             <ul class="lists">
                 <li class="list list-title">都道府県</li>
-                <li class="list list-value">{{ $prefs[ $carrier_data->pref_code ] }}</li>
+                <li class="list list-value">{{ $prefs[ $carrier_data->pref_id ] }}</li>
             </ul>
             <ul class="lists">
                 <li class="list list-title">市区町村</li>
@@ -52,7 +52,7 @@
             </ul>
             <ul class="lists">
                 <li class="list list-title">サイトURL</li>
-                <li class="list list-value">{{ $carrier_data->site_url }}</li>
+                <li class="list list-value">{!! \Func::stringToAnchor( $carrier_data->site_url ) !!}</li>
             </ul>
             <ul class="lists">
                 <li class="list list-title">メッセージ</li>

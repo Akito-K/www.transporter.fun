@@ -31,13 +31,13 @@
                             <li class="list list-title">郵便番号</li>
                             <li class="list list-value">
                                 〒 {!! \Form::number('zip1', old('zip1'), ['class' => 'form-control form-control--mini form-control--30']) !!}
-                                - {!! \Form::number('zip2', old('zip2'), ['class' => 'form-control form-control--mini form-control--40', 'onKeyUp' => 'AjaxZip3.zip2addr(\'zip1\', \'zip2\', \'pref_code\',\'city\', \'address\');']) !!}
+                                - {!! \Form::number('zip2', old('zip2'), ['class' => 'form-control form-control--mini form-control--40', 'onKeyUp' => 'AjaxZip3.zip2addr(\'zip1\', \'zip2\', \'pref_id\',\'city\', \'address\');']) !!}
                             </li>
                         </ul>
                         <ul class="lists">
                             <li class="list list-title">都道府県</li>
                             <li class="list list-value">
-                                {!! \Form::select('pref_code', $prefs, old('pref_code'), ['class' => 'form-control']) !!}
+                                {!! \Form::select('pref_id', $prefs, old('pref_id'), ['class' => 'form-control']) !!}
                             </li>
                         </ul>
                         <ul class="lists">

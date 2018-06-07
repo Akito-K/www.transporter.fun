@@ -24,7 +24,7 @@ class CreateOrdersTable extends Migration
             $table->string('send_mei', 6)->nullable();
             $table->string('send_zip1', 3)->nullable();
             $table->string('send_zip2', 4)->nullable();
-            $table->string('send_pref_code', 2)->nullable();
+            $table->string('send_pref_id', 4)->nullable();
             $table->string('send_city')->nullable();
             $table->string('send_address')->nullable();
             $table->string('send_tel', 20)->nullable();
@@ -34,7 +34,7 @@ class CreateOrdersTable extends Migration
             $table->string('arrive_name', 32)->nullable();
             $table->string('arrive_zip1', 3)->nullable();
             $table->string('arrive_zip2', 4)->nullable();
-            $table->string('arrive_pref_code', 2)->nullable();
+            $table->string('arrive_pref_id', 4)->nullable();
             $table->string('arrive_city')->nullable();
             $table->string('arrive_address')->nullable();
             $table->string('arrive_tel', 20)->nullable();

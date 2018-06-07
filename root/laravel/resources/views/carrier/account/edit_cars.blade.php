@@ -13,15 +13,15 @@
                 <div class="account__cars__boxes" id="bulletEditCars">
                     @php $num = 0; @endphp
 
-                    @if(!empty($car_datas))
-                    @foreach($car_datas as $k => $car_data)
-                    @php $num++; @endphp
-                    @include('include.carrier.edit_car', ['number' => $num, 'target' => 'cars', 'data' => $car_data ])
-                    @endforeach
+                    @if(!empty($car_datas->toArray()))
+                        @foreach($car_datas as $k => $car_data)
+                        @php $num++; @endphp
+                        @include('include.carrier.edit_car', ['number' => $num, 'target' => 'cars', 'data' => $car_data ])
+                        @endforeach
 
                     @else
-                    @php $num++; @endphp
-                    @include('include.carrier.edit_car', ['number' => $num, 'target' => 'cars'])
+                        @php $num++; @endphp
+                        @include('include.carrier.edit_car', ['number' => $num, 'target' => 'cars'])
 
                     @endif
 

@@ -105,7 +105,7 @@ class userController extends adminController
         }
 
         // ユーザー情報更新
-        MyUser::updateData($request, ['zip1', 'zip2', 'pref_code', 'city', 'address']);
+        MyUser::updateData($request, ['zip1', 'zip2', 'pref_id', 'city', 'address']);
         // 権限更新
         UserToAuthority::updateDatas($request, $user->user_id);
 

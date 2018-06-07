@@ -42,7 +42,7 @@ class signupController extends Controller
         ];
         Signup::insert($data);
 
-        // code を mailbody に渡して認証メール送信
+        // key を mailbody に渡して認証メール送信
         Mail::to( $request['email'] )
             ->send(new MailSignup($key));
 
@@ -108,7 +108,7 @@ class signupController extends Controller
         $validates = [
             'zip1' => 'required|size:3',
             'zip2' => 'required|size:4',
-            'pref_code' => 'required|size:2',
+            'pref_id' => 'required',
             'city' => 'required',
             'address' => 'required',
             'sei' => 'required|max:20',
@@ -127,7 +127,7 @@ class signupController extends Controller
 
         $data->zip1 = $request['zip1'];
         $data->zip2 = $request['zip2'];
-        $data->pref_code = $request['pref_code'];
+        $data->pref_id = $request['pref_id'];
         $data->city = $request['city'];
         $data->address = $request['address'];
 
@@ -139,25 +139,8 @@ class signupController extends Controller
         $data->updated_at = $date_at;
         unset($data->mobiles);
         unset($data->tels);
-
         $data->save();
-/*
-        $data = [
-            'address_id' => $address_id,
-            'name' => '登録住所',
-            'sei' => $request['sei'],
-            'mei' => $request['mei'],
-            'zip1' => $request['zip1'],
-            'zip2' => $request['zip2'],
-            'pref_code' => $request['pref_code'],
-            'city' => $request['city'],
-            'address' => $request['address'],
-            'tel' => \Func::telFormat( $request['tels'] ),
-            'created_at' => $date_at,
-            'updated_at' => $date_at,
-        ];
-        Address::insert($data);
-*/
+
         return redirect('/signup/'.$request['signup_key'].'/accept');
     }
 
@@ -200,7 +183,7 @@ class signupController extends Controller
                 'mei' => $data['mei'],
                 'zip1' => $signup->zip1,
                 'zip2' => $signup->zip2,
-                'pref_code' => $signup->pref_code,
+                'pref_id' => $signup->pref_id,
                 'city' => $signup->city,
                 'address' => $signup->address,
                 'tel' => $signup->tel,
@@ -217,7 +200,7 @@ class signupController extends Controller
                 'mei' => $data['mei'],
                 'zip1' => $signup->zip1,
                 'zip2' => $signup->zip2,
-                'pref_code' => $signup->pref_code,
+                'pref_id' => $signup->pref_id,
                 'city' => $signup->city,
                 'address' => $signup->address,
                 'tel' => $signup->tel,
@@ -270,7 +253,7 @@ class signupController extends Controller
 
             'zip1' => $signup->zip1,
             'zip2' => $signup->zip2,
-            'pref_code' => $signup->pref_code,
+            'pref_id' => $signup->pref_id,
             'city' => $signup->city,
             'address' => $signup->address,
 

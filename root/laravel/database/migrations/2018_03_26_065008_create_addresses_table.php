@@ -22,7 +22,7 @@ class CreateAddressesTable extends Migration
 
             $table->string('zip1', 3)->nullable();
             $table->string('zip2', 4)->nullable();
-            $table->string('pref_code', 2)->nullable();
+            $table->string('pref_id', 4)->nullable();
             $table->string('city', 64)->nullable();
             $table->string('address', 150)->nullable();
             $table->string('tel', 20)->nullable();

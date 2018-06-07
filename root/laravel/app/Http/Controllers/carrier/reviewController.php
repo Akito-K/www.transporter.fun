@@ -18,7 +18,7 @@ use App\Model\Evaluation;
 use App\Model\Pagemeta;
 use App\Model\Log;
 
-class carrierReviewController extends carrierController
+class reviewController extends carrierController
 {
 
     public function create( $work_id ){

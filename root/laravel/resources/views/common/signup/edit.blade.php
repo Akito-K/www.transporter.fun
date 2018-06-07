@@ -50,14 +50,14 @@
                             <div class="col-md-6">
                                 <input id="zip1" type="text" class="form-control form-control--mini form-control--20" name="zip1" value="{!! old('zip1')?: $data->zip1 !!}" required autofocus>
                                 -
-                                <input id="zip2" type="text" class="form-control form-control--mini form-control--30" name="zip2" value="{!! old('zip2')?: $data->zip2 !!}" required onKeyUp="AjaxZip3.zip2addr('zip1', 'zip2', 'pref_code','city', 'address');">
+                                <input id="zip2" type="text" class="form-control form-control--mini form-control--30" name="zip2" value="{!! old('zip2')?: $data->zip2 !!}" required onKeyUp="AjaxZip3.zip2addr('zip1', 'zip2', 'pref_id','city', 'address');">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="pref_code" class="col-md-4 control-label">都道府県</label>
+                            <label for="pref_id" class="col-md-4 control-label">都道府県</label>
                             <div class="col-md-6">
-                                {!! \Form::select('pref_code', $prefs, old('pref_code')?: $data->pref_code, ['class' => 'form-control']) !!}
+                                {!! \Form::select('pref_id', $prefs, old('pref_id')?: $data->pref_id, ['class' => 'form-control']) !!}
                             </div>
                         </div>
 

@@ -49,4 +49,16 @@ class Car extends Model
         return $data;
     }
 
+    public static function getTotalCount($carrier_id){
+        $datas = Car::getDatas($carrier_id);
+        $count = 0;
+        if(!empty($datas)){
+            foreach($datas as $data){
+                $count += $data->count;
+            }
+        }
+
+        return $count;
+    }
+
 }

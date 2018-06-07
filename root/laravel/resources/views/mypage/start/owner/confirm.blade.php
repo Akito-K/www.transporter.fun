@@ -31,7 +31,7 @@
                     </ul>
                     <ul class="lists">
                         <li class="list list-title">都道府県</li>
-                        <li class="list list-value">{{ $prefs[ $data['pref_code'] ] }}</li>
+                        <li class="list list-value">{{ $prefs[ $data['pref_id'] ] }}</li>
                     </ul>
                     <ul class="lists">
                         <li class="list list-title">市区町</li>

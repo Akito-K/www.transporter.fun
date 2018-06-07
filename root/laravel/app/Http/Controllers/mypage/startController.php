@@ -89,7 +89,7 @@ class startController extends mypageController
             'mei' => $user->mei,
             'zip1' => $request['zip1'],
             'zip2' => $request['zip2'],
-            'pref_code' => $request['pref_code'],
+            'pref_id' => $request['pref_id'],
             'city' => $request['city'],
             'address' => $request['address'],
             'tel' => \Func::telFormat( $request['tels'] ),
@@ -110,7 +110,7 @@ class startController extends mypageController
             'mei' => '',
             'zip1' => '',
             'zip2' => '',
-            'pref_code' => '',
+            'pref_id' => '',
             'city' => '',
             'address' => '',
             'tel' => '',
@@ -126,7 +126,7 @@ class startController extends mypageController
         $validates = [
             'zip1' => 'required|digits:3',
             'zip2' => 'required|digits:4',
-            'zip_code' => 'requires|numeric',
+            'pref_id' => 'required',
             'city' => 'required',
             'address' => 'required',
             'tels.*' => 'required',
@@ -196,42 +196,4 @@ class startController extends mypageController
 
         return redirect('carrier');
     }
-
-
-/*
-    public function email(Request $request){
-        $me = $request['me'];
-
-        $pagemeta = Pagemeta::getPagemeta('MY-USR-04');
-        $data = MyUser::getUser($me->hashed_id);
-        Log::saveData( 'mypage\accountController@email', 'user_id', $data->user_id, true);
-
-        return view('mypage.account.email', compact('pagemeta', 'data', 'me'));
-    }
-
-    public function sendAuthorizationMail(Request $request){
-        $date_at = new \DatetimeImmutable();
-        $me = $request['me'];
-
-        // Authorization に登録
-        $code = Authorization::getNewCode();
-        $data = [
-            'user_id' => $me->user_id,
-            'code' => $code,
-            'new_email' => $request['email'],
-            'limit_at' => $date_at->modify('+'.env('AUTHORIZATION_LIMIT_HOURS', 24).' hours'),
-            'created_at' => $date_at,
-            'updated_at' => $date_at,
-        ];
-        Authorization::insert($data);
-
-        // code を mailbody に渡して認証メール送信
-        Mail::to( $request['email'] )
-            ->send(new MailAuthorization($code));
-
-        $pagemeta = Pagemeta::getPagemeta('MY-USR-04');
-
-        return view('mypage.account.sent_email', compact('pagemeta'));
-    }
-*/
 }

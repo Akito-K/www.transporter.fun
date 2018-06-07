@@ -41,13 +41,13 @@
                             <li class="list list-title">郵便番号</li>
                             <li class="list list-value">
                                 〒 {!! \Form::number('zip1', old('zip1')?: $data['zip1'], ['class' => 'form-control form-control--mini form-control--30', 'id' => 'zip1']) !!}
-                                - {!! \Form::number('zip2', old('zip2')?: $data['zip2'], ['class' => 'form-control form-control--mini form-control--40', 'id' => 'zip2', 'onKeyUp' => 'AjaxZip3.zip2addr(\'zip1\', \'zip2\', \'pref_code\',\'city\', \'address\');']) !!}
+                                - {!! \Form::number('zip2', old('zip2')?: $data['zip2'], ['class' => 'form-control form-control--mini form-control--40', 'id' => 'zip2', 'onKeyUp' => 'AjaxZip3.zip2addr(\'zip1\', \'zip2\', \'pref_id\',\'city\', \'address\');']) !!}
                             </li>
                         </ul>
                         <ul class="lists">
                             <li class="list list-title">都道府県</li>
                             <li class="list list-value">
-                                {!! \Form::select('pref_code', $prefs, old('pref_code')?: $data['pref_code'], ['class' => 'form-control', 'id' => 'pref_code']) !!}
+                                {!! \Form::select('pref_id', $prefs, old('pref_id')?: $data['pref_id'], ['class' => 'form-control', 'id' => 'pref_id']) !!}
                             </li>
                         </ul>
                         <ul class="lists">

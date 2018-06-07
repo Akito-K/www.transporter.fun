@@ -180,7 +180,13 @@ class Estimate extends Model
     }
 */
     public static function addItemData(&$data){
-        $items = EstimateItem::getDatas($data->estimate_id);
+        $item_data = Estimate::getItemData( $data->estimate_id );
+        $data->items = $item_data->items;
+        $data->total = $item_data->total;
+    }
+
+    public static function getItemData($estimate_id){
+        $items = EstimateItem::getDatas($estimate_id);
         $ary = [];
         $total = 0;
         if(!empty($items)){
@@ -190,19 +196,40 @@ class Estimate extends Model
                 $total += $item->subtotal;
             }
         }
+
+        $data = new \stdClass();
         $data->items = $ary;
         $data->total = $total;
+
+        return $data;
     }
-/*
-    public static function addCarrierData(&$data){
-        $data->carrier = Carrier::getData($data->carrier_id);
-    }
-*/
+
     public static function addCarrierData(&$data, $carrier_data = NULL){
         $carrier_data = $carrier_data?: Carrier::getData($data->carrier_id);
         $data->carrier_name = Order::getCarrierName($data, $carrier_data);
         $data->carrier_name_with_star = Order::getCarrierNameWithStar($data, $carrier_data);
     }
+
+
+    public static function getTotalTransactionAmount($work_datas){
+        $total = 0;
+        if(!empty($work_datas)){
+            foreach($work_datas as $work_data){
+                if( in_array($work_data->status_id, ['W-20', 'W-25', 'W-30', 'W-35', 'W-40']) ){
+                    $item_data = Estimate::getItemData( $work_data->estimate_id );
+                    $count += $item_data->total;
+                }
+            }
+        }
+
+        return $total;
+    }
+
+
+
+
+
+
 
 
     public static function duplicateData($old_estimate_id, $new_estimate_id){

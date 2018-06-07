@@ -13744,6 +13744,10 @@ button.close {
   }
   .my-thumbnail__img--square {
     border-radius: 0;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: none;
   }
   .must {
     position: relative;

@@ -61,7 +61,7 @@ class requestController extends ownerController
             // $data->body;
         }
 
-        return redirect('owner/order');
+        return redirect('owner/active_order');
     }
 
     public function cancel($order_id, Request $request){
@@ -77,7 +77,7 @@ class requestController extends ownerController
 
         StatusLog::saveData( 'order_id', $order_id, 'O-00', __METHOD__ );
 
-        return redirect('owner/order');
+        return redirect('owner/active_order');
     }
 
 }

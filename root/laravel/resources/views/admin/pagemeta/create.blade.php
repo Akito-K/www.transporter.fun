@@ -8,7 +8,7 @@
         <div class="box-body">
             <h2 class="page-header">一覧</h2>
 
-            {!! Form::open(['url' => 'admin/pagemeta/create']) !!}
+            {!! Form::open(['url' => 'admin/pagemeta/confirm']) !!}
                 {!! Form::hidden('filepath', '', ['id' => 'filepath']) !!}
 
                 <div class="staff__edit__icon">

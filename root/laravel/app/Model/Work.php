@@ -1,4 +1,16 @@
 <?php
+/**
+ * 運送会社 -> 案件
+ * 'W-05' => '',
+ * 'W-10' => '荷主検討中',
+ * 'W-15' => '',
+ * 'W-20' => '受注中',
+ * 'W-25' => '進行中',
+ * 'W-30' => '未着金',
+ * 'W-35' => '着金あり（未確認）',
+ * 'W-40' => '取引終了',
+ * 'W-00' => '失注',
+ */
 
 namespace App\Model;
 
@@ -120,6 +132,10 @@ class Work extends Model
         return $data;
     }
 
+    public static function getDataByCarrierId( $carrier_id ){
+        return Work::where('carrier_id', $carrier_id)->get();
+    }
+
     public static function getWork($work_id){
         $data = Work::getData($work_id);
         $data->order = Order::getData( $data->order_id );
@@ -133,6 +149,37 @@ class Work extends Model
 
         return $data;
     }
+
+    public static function getSuggestedOrderCount($work_datas){
+        $count = 0;
+        $ary = [];
+        if(!empty($work_datas)){
+            foreach($work_datas as $work_data){
+                if( in_array($work_data->status_id, ['W-10', 'W-15', 'W-20', 'W-25', 'W-30', 'W-35', 'W-40']) ){
+                    $ary[] = $work_data->order_id;
+                }
+            }
+        }
+
+        return count( array_unique($ary) );
+    }
+
+    public static function getReceivedOrderCount($work_datas){
+        $count = 0;
+        $ary = [];
+        if(!empty($work_datas)){
+            foreach($work_datas as $work_data){
+                if( in_array($work_data->status_id, ['W-25', 'W-30', 'W-35', 'W-40']) ){
+                    $ary[] = $work_data->order_id;
+                }
+            }
+        }
+
+        return count( array_unique($ary) );
+    }
+
+
+
 /*
     public static function addMoreData(&$data){
         $data->order = Order::getOrderData($data->order_id);

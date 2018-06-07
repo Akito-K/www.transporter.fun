@@ -190,6 +190,17 @@ class MyFunctions
         return \Func::$wdays[$result];
     }
 
+    public static function digitFormat($number, $digit=1000){
+        if($number < $digit){
+            return $number;
+        }else{
+            return floor( $number / $digit * 10 ) / 10;
+        }
+    }
+
+
+
+
     /**
      * 指定された文字列で指定された長さの乱数を返す
      *
@@ -630,8 +641,8 @@ class MyFunctions
             }
         }
         if( in_array('pref', $views) ){
-            if( isset($data->pref_code) ){
-                $pref = Pref::getData( $data->pref_code );
+            if( isset($data->pref_id) ){
+                $pref = Pref::getData( $data->pref_id );
                 $bodies[] = $pref->name;
             }
         }

@@ -16,14 +16,14 @@ class Pref extends Model
         return $datas;
     }
 
-    public static function getData($code){
-        $data = Pref::where('code', $code)->first();
+    public static function getData($pref_id){
+        $data = Pref::where('pref_id', $pref_id)->first();
 
         return $data;
     }
 
     public static function getNames(){
-        $ary = Pref::pluck('name', 'code')->toArray();
+        $ary = Pref::pluck('name', 'pref_id')->toArray();
         \Func::array_append($ary, [ 0 => '---' ], true);
 
         return $ary;

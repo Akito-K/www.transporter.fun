@@ -14,16 +14,15 @@ use App\Model\Log;
 class addressController extends mypageController
 {
 
-    public function showList(Request $request){
-        $me = $request['me'];
+    public function showList(){
         $pagemeta = Pagemeta::getPagemeta('MY-ADR-01');
-        $datas = Address::getDatas($me->user_id);
+        $datas = Address::getDatas(\Auth::user()->user_id);
         Log::saveData( __METHOD__ );
 
         return view('mypage.address.list', compact('pagemeta', 'datas'));
     }
 
-    public function showDetail($address_id, Request $request){
+    public function showDetail($address_id){
         $pagemeta = Pagemeta::getPagemeta('MY-ADR-02');
         $data = Address::getData($address_id);
         $prefs = pref::getNames();
@@ -54,7 +53,7 @@ class addressController extends mypageController
         return redirect('mypage/address');
     }
 
-    public function edit($address_id, Request $request){
+    public function edit($address_id){
         $pagemeta = Pagemeta::getPagemeta('MY-ADR-06');
         $data = Address::getData($address_id);
         $prefs = pref::getNames();
@@ -75,13 +74,13 @@ class addressController extends mypageController
         return redirect('mypage/address');
     }
 
-    public function delete($address_id, Request $request){
+    public function delete($address_id){
         Log::saveData( __METHOD__ , 'address_id', $address_id, true);
 
-        Address::where('address_id', $request['address_id'])
+        Address::where('address_id', $address_id)
                 ->delete();
-        UserToAddress::where('address_id', $request['address_id'] )
-                        ->where('user_id', $request['me']->user_id )
+        UserToAddress::where('address_id', $address_id )
+                        ->where('user_id', \Auth::user()->user_id )
                         ->delete();
 
         return redirect('mypage/address');
@@ -96,7 +95,7 @@ class addressController extends mypageController
             'mei' => 'required|max:6',
             'zip1' => 'required|digits:3',
             'zip2' => 'required|digits:4',
-            'zip_code' => 'requires|numeric',
+            'pref_id' => 'required',
             'city' => 'required',
             'address' => 'required',
         ];
@@ -111,7 +110,7 @@ class addressController extends mypageController
             'mei' => 'required|max:6',
             'zip1' => 'required|digits:3',
             'zip2' => 'required|digits:4',
-            'zip_code' => 'requires|numeric',
+            'pref_id' => 'required',
             'city' => 'required',
             'address' => 'required',
         ];
@@ -129,7 +128,7 @@ class addressController extends mypageController
             'mei' => $request['mei'],
             'zip1' => $request['zip1'],
             'zip2' => $request['zip2'],
-            'pref_code' => $request['pref_code'],
+            'pref_id' => $request['pref_id'],
             'city' => $request['city'],
             'address' => $request['address'],
             'tel' => \Func::telFormat( $request['tels'] ),
@@ -154,7 +153,7 @@ class addressController extends mypageController
             'mei' => $request['mei'],
             'zip1' => $request['zip1'],
             'zip2' => $request['zip2'],
-            'pref_code' => $request['pref_code'],
+            'pref_id' => $request['pref_id'],
             'city' => $request['city'],
             'address' => $request['address'],
             'tel' => \Func::telFormat( $request['tels'] ),

@@ -30,13 +30,13 @@ class MyOrderRequest extends FormRequest
 
             'send_zip1' => 'required|digits:3',
             'send_zip2' => 'required|digits:4',
-            'send_zip_code' => 'requires|numeric',
+            'send_pref_id' => 'required',
             'send_city' => 'required',
             'send_address' => 'required',
 
             'arrive_zip1' => 'required|digits:3',
             'arrive_zip2' => 'required|digits:4',
-            'arrive_zip_code' => 'requires|numeric',
+            'arrive_pref_id' => 'required',
             'arrive_city' => 'required',
             'arrive_address' => 'required',
         ];

@@ -6,7 +6,7 @@ $prefix_sei = $prefix.'sei';
 $prefix_mei = $prefix.'mei';
 $prefix_zip1 = $prefix.'zip1';
 $prefix_zip2 = $prefix.'zip2';
-$prefix_pref_code = $prefix.'pref_code';
+$prefix_pref_id = $prefix.'pref_id';
 $prefix_city = $prefix.'city';
 $prefix_address = $prefix.'address';
 $prefix_tels = $prefix.'tels';
@@ -22,13 +22,13 @@ $prefix_tels = $prefix.'tels';
     <li class="list list-title must">郵便番号</li>
     <li class="list list-value">
         〒 {!! \Form::number($prefix_zip1, old($prefix_zip1, $data->$prefix_zip1), ['class' => 'form-control form-control--mini form-control--30', 'id' => $prefix_zip1]) !!}
-        - {!! \Form::number($prefix_zip2, old($prefix_zip2, $data->$prefix_zip2), ['class' => 'form-control form-control--mini form-control--40', 'id' => $prefix_zip2, 'onKeyUp' => 'AjaxZip3.zip2addr(\''.$prefix.'zip1\', \''.$prefix.'zip2\', \''.$prefix.'pref_code\',\''.$prefix.'city\', \''.$prefix.'address\');']) !!}
+        - {!! \Form::number($prefix_zip2, old($prefix_zip2, $data->$prefix_zip2), ['class' => 'form-control form-control--mini form-control--40', 'id' => $prefix_zip2, 'onKeyUp' => 'AjaxZip3.zip2addr(\''.$prefix.'zip1\', \''.$prefix.'zip2\', \''.$prefix.'pref_id\',\''.$prefix.'city\', \''.$prefix.'address\');']) !!}
     </li>
 </ul>
 <ul class="lists">
     <li class="list list-title must">都道府県</li>
     <li class="list list-value">
-        {!! \Form::select($prefix_pref_code, $prefs, old($prefix_pref_code, $data->$prefix_pref_code), ['class' => 'form-control', 'id' => $prefix_pref_code]) !!}
+        {!! \Form::select($prefix_pref_id, $prefs, old($prefix_pref_id, $data->$prefix_pref_id), ['class' => 'form-control', 'id' => $prefix_pref_id]) !!}
     </li>
 </ul>
 <ul class="lists">

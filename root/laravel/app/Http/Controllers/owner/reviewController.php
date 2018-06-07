@@ -18,7 +18,7 @@ use App\Model\Evaluation;
 use App\Model\Pagemeta;
 use App\Model\Log;
 
-class ownerReviewController extends ownerController
+class reviewController extends ownerController
 {
 
     public function create( $order_id ){

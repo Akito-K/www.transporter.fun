@@ -13744,6 +13744,10 @@ button.close {
   }
   .my-thumbnail__img--square {
     border-radius: 0;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: none;
   }
   .must {
     position: relative;
@@ -15545,5 +15549,73 @@ button.close {
   }
   .estimate-message__list--yours {
     margin-right: 25px;
+  }
+}
+
+@media all {
+  .account__box {
+    margin-bottom: 30px;
+  }
+  .account__box__title {
+    margin: 10px 0;
+    padding: 5px;
+    font-size: 142.85714%;
+    border-left: 10px solid #3c50cc;
+    border-bottom: 1px solid #3c50cc;
+  }
+  .account__box__btn {
+    margin-top: 10px;
+  }
+  .account__car__table {
+    margin-bottom: 0;
+  }
+  .account__cars__box {
+    padding-bottom: 10px;
+    border-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  .account__cars__box:last-child {
+    border-bottom: none;
+  }
+  .account__cars__box__btns {
+    align-self: flex-end;
+  }
+  .account__cars__box__btn {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .account__cars__box__btn--minus {
+    background-color: #30dd30;
+  }
+  .account__cars__box__btn--minus:hover {
+    background-color: #31c331;
+  }
+  .account__cars__box__btn--plus {
+    background-color: #dd3030;
+  }
+  .account__cars__box__btn--plus:hover {
+    background-color: #c33131;
+  }
+  .account__cars__btns-plus {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: flex-end;
+    -ms-flex-pack: flex-end;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+  }
+  .account__cars__btns-plus > div {
+    width: 10%;
+    text-align: center;
   }
 }

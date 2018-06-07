@@ -12,7 +12,7 @@ if( !isset($data) ){
     <ul class="params account__cars__box">
         <li class="param param-100">
             <ul class="lists lists-top">
-                <li class="list list-40 list-mr-sm list-mb-sm">
+                <li class="list list-40 list-mr-sm list-mb-sm list-left">
                     <p>{!! Form::text('names['.$number.']', $data->name, ['class' => 'form-control', 'placeholder' => '車両名称' ]) !!}</p>
                     <p>{!! Form::selectRange('counts['.$number.']', 1, 20, $data->count, ['class' => 'form-control form-control--mini form-control--50', 'placeholder' => '0' ]) !!} 台</p>
                 </li>

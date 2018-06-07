@@ -56,7 +56,7 @@ class Address extends Model
             $data->name = NULL;
             $data->sei = NULL;
             $data->mei = NULL;
-            $data->pref_code = NULL;
+            $data->pref_id = NULL;
             $data->city = NULL;
             $data->address = NULL;
             $data->zip1 = NULL;

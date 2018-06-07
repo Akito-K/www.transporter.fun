@@ -30,7 +30,7 @@
 
 <ul class="signup__conf__lists">
     <li class="signup__conf__list signup__conf__list--title">ご住所</li>
-    <li class="signup__conf__list signup__conf__list--value">{{ $prefs[ $data->pref_code ] }}<br />{{ $data->city }}<br />{{ $data->address }}</li>
+    <li class="signup__conf__list signup__conf__list--value">{{ $prefs[ $data->pref_id ] }}<br />{{ $data->city }}<br />{{ $data->address }}</li>
 </ul>
 
 <ul class="signup__conf__lists">

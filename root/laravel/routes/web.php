@@ -99,6 +99,13 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/mypage/start/carrier',                    'mypage\startController@createCarrier');
             Route::post('/mypage/start/carrier/confirm',            'mypage\startController@confirmCarrier');
             Route::post('/mypage/start/carrier/execute',            'mypage\startController@executeCarrier');
+
+            // 運送会社情報
+            Route::get ('/mypage/carrier',                          'mypage\carrierController@showList');
+            Route::get ('/mypage/carrier/{carrier_id}',             'mypage\carrierController@showDetail');
+
+            // コンタクトボード
+            Route::get ('/mypage/board/carrier/{carrier_id}',       'mypage\boardController@detailByCarrier');
         });
 
 
@@ -132,6 +139,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/owner/request/confirm',                   'owner\requestController@confirm');
             Route::post('/owner/request/execute',                   'owner\requestController@execute');
             Route::get ('/owner/request/{order_id}/cancel',         'owner\requestController@cancel');
+
             // 提案のあった見積
             Route::get ('/owner/estimate/{order_id}/list',          'owner\estimateController@showOrderList');
             Route::get ('/owner/estimate/{estimate_id}/detail',     'owner\estimateController@showDetail');
@@ -149,13 +157,18 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/owner/payed/execute',                     'owner\payedController@execute');
 
             // 運送会社評価
-            Route::get ('/owner/review/{order_id}/create',          'owner\ownerReviewController@create');
-            Route::post('/owner/review/confirm',                    'owner\ownerReviewController@confirm');
-            Route::post('/owner/review/execute',                    'owner\ownerReviewController@execute');
+            Route::get ('/owner/review/{order_id}/create',          'owner\reviewController@create');
+            Route::post('/owner/review/confirm',                    'owner\reviewController@confirm');
+            Route::post('/owner/review/execute',                    'owner\reviewController@execute');
 
             // コンタクトボード
             Route::get ('/owner/board/order/{order_id}',            'owner\boardController@detailByOrder');
             Route::get ('/owner/board/estimate/{estimate_id}',      'owner\boardController@detailByEstimate');
+
+            // 荷主情報
+            Route::get ('/owner/account/',                          'owner\accountController@showDetail');
+            Route::get ('/owner/account/base/edit',                 'owner\accountController@editBase');
+            Route::post('/owner/account/base/update',               'owner\accountController@updateBase');
         });
 
         // CARRIER = = = = = = = = = = = =
@@ -218,15 +231,17 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/carrier/confirm_payment/{work_id}',       'carrier\confirmPaymentController@execute');
 
             // 運送会社評価
-            Route::get ('/carrier/review/{work_id}/create',         'carrier\carrierReviewController@create');
-            Route::post('/carrier/review/confirm',                  'carrier\carrierReviewController@confirm');
-            Route::post('/carrier/review/execute',                  'carrier\carrierReviewController@execute');
+            Route::get ('/carrier/review/{work_id}/create',         'carrier\reviewController@create');
+            Route::post('/carrier/review/confirm',                  'carrier\reviewController@confirm');
+            Route::post('/carrier/review/execute',                  'carrier\reviewController@execute');
 
             // コンタクトボード
             Route::get ('/carrier/board/{work_id}',                 'carrier\boardController@detail');
 
             // 運送会社情報
             Route::get ('/carrier/account/',                        'carrier\accountController@showDetail');
+            Route::get ('/carrier/account/base/edit',               'carrier\accountController@editBase');
+            Route::post('/carrier/account/base/update',             'carrier\accountController@updateBase');
             Route::get ('/carrier/account/car/edit',                'carrier\accountController@editCars');
             Route::post('/carrier/account/car/update',              'carrier\accountController@updateCars');
             Route::get ('/carrier/account/empty/edit',              'carrier\accountController@editEmpties');
@@ -262,12 +277,11 @@ Route::group(['middleware' => ['auth']], function () {
             // ページメタ
             Route::get ('/admin/pagemeta',                          'admin\pagemetaController@showList');
             Route::get ('/admin/pagemeta/create',                   'admin\pagemetaController@create');
-            Route::post('/admin/pagemeta/create',                   'admin\pagemetaController@confirm');
+            Route::post('/admin/pagemeta/confirm',                  'admin\pagemetaController@confirm');
             Route::post('/admin/pagemeta/update',                   'admin\pagemetaController@update');
 
             // マスタ：Authority
             Route::get ('/admin/authority',                                 'admin\authorityController@showList');
-            Route::get ('/admin/authority/{authority_id}/detail',           'admin\authorityController@showDetail');
             Route::get ('/admin/authority/create',                          'admin\authorityController@create');
             Route::post('/admin/authority/insert',                          'admin\authorityController@insert');
             Route::get ('/admin/authority/{authority_id}/edit',             'admin\authorityController@edit');
@@ -275,7 +289,6 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/admin/authority/{authority_id}/delete',           'admin\authorityController@delete');
             // マスタ：CarrierClass
             Route::get ('/admin/carrier_class',                             'admin\carrierClassController@showList');
-            Route::get ('/admin/carrier_class/{class_id}/detail',           'admin\carrierClassController@showDetail');
             Route::get ('/admin/carrier_class/create',                      'admin\carrierClassController@create');
             Route::post('/admin/carrier_class/insert',                      'admin\carrierClassController@insert');
             Route::get ('/admin/carrier_class/{class_id}/edit',             'admin\carrierClassController@edit');
@@ -283,17 +296,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/admin/carrier_class/{class_id}/delete',           'admin\carrierClassController@delete');
             // マスタ：Status
             Route::get ('/admin/status',                                    'admin\statusController@showList');
-/*
-            Route::get ('/admin/status/{status_id}/detail',                 'admin\statusController@showDetail');
-            Route::get ('/admin/status/create',                             'admin\statusController@create');
-            Route::post('/admin/status/insert',                             'admin\statusController@insert');
-            Route::get ('/admin/status/{status_id}/edit',                   'admin\statusController@edit');
-            Route::post('/admin/status/update',                             'admin\statusController@update');
-            Route::get ('/admin/status/{status_id}/delete',                 'admin\statusController@delete');
-*/
             // マスタ：CargoName
             Route::get ('/admin/cargo_name',                                'admin\cargoNameController@showList');
-            Route::get ('/admin/cargo_name/{name_id}/detail',               'admin\cargoNameController@showDetail');
             Route::get ('/admin/cargo_name/create',                         'admin\cargoNameController@create');
             Route::post('/admin/cargo_name/insert',                         'admin\cargoNameController@insert');
             Route::get ('/admin/cargo_name/{name_id}/edit',                 'admin\cargoNameController@edit');
@@ -301,7 +305,6 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/admin/cargo_name/{name_id}/delete',               'admin\cargoNameController@delete');
             // マスタ：CargoForm
             Route::get ('/admin/cargo_form',                                'admin\cargoFormController@showList');
-            Route::get ('/admin/cargo_form/{form_id}/detail',               'admin\cargoFormController@showDetail');
             Route::get ('/admin/cargo_form/create',                         'admin\cargoFormController@create');
             Route::post('/admin/cargo_form/insert',                         'admin\cargoFormController@insert');
             Route::get ('/admin/cargo_form/{form_id}/edit',                 'admin\cargoFormController@edit');
@@ -309,7 +312,6 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/admin/cargo_form/{form_id}/delete',               'admin\cargoFormController@delete');
             // マスタ：EvaluationItem
             Route::get ('/admin/evaluation_item',                           'admin\evaluationItemController@showList');
-            Route::get ('/admin/evaluation_item/{item_id}/detail',          'admin\evaluationItemController@showDetail');
             Route::get ('/admin/evaluation_item/create',                    'admin\evaluationItemController@create');
             Route::post('/admin/evaluation_item/insert',                    'admin\evaluationItemController@insert');
             Route::get ('/admin/evaluation_item/{item_id}/edit',            'admin\evaluationItemController@edit');
@@ -317,13 +319,6 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/admin/evaluation_item/{item_id}/delete',          'admin\evaluationItemController@delete');
             // マスタ：Pref
             Route::get ('/admin/pref',                                      'admin\prefController@showList');
-            Route::get ('/admin/pref/{pref_code}/detail',                   'admin\prefController@showDetail');
-            Route::get ('/admin/pref/create',                               'admin\prefController@create');
-            Route::post('/admin/pref/insert',                               'admin\prefController@insert');
-            Route::get ('/admin/pref/{pref_code}/edit',                     'admin\prefController@edit');
-            Route::post('/admin/pref/update',                               'admin\prefController@update');
-            Route::get ('/admin/pref/{pref_code}/delete',                   'admin\prefController@delete');
-
             // 案件登録オプション：希望車種
             Route::get ('/admin/order_request_option/car',                              'admin\orderRequestOptionController@showCarList');
             Route::get ('/admin/order_request_option/car/create',                       'admin\orderRequestOptionController@createCar');
@@ -347,7 +342,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/admin/order_request_option/other/{option_id}/delete',         'admin\orderRequestOptionController@deleteOther');
 
             // ログ
-            Route::get ('/admin/log/{page?}',                       'admin\logController@showList');
+            //Route::get ('/admin/log/{page?}',                       'admin\logController@showList');
         });
     });
 

@@ -10950,7 +10950,7 @@ var Upload;
     var MyUpload = /** @class */ (function () {
         function MyUpload(ajaxing, multipleNumber) {
             if (ajaxing === void 0) { ajaxing = false; }
-            if (multipleNumber === void 0) { multipleNumber = 0; }
+            if (multipleNumber === void 0) { multipleNumber = "0"; }
             this.ajaxing = ajaxing;
             this.multipleNumber = multipleNumber;
             this.uploadSizeLimitImage = 15000000;
@@ -11051,28 +11051,33 @@ var Upload;
             else {
                 // 複数アップロード有効
                 // ドラッグドロップからの入力
-                $('.trigAjaxingUploadingArea').bind("drop", function (e) {
+                //                $('.trigAjaxingUploadingArea').bind("drop", function (e) {
+                $(document).on('drop', '.trigAjaxingUploadingArea', function (e) {
                     //$('.bulletAjaxingDragEnters').hide();
                     // false を返してデフォルトの処理を実行しないようにする
                     return false;
                 })
-                    .bind("dragenter", function () {
-                    self.multipleNumber = func_1.default.number($(this).attr('data-num'));
+                    //                .bind("dragenter", function () {
+                    .on("dragenter", '.trigAjaxingUploadingArea', function () {
+                    self.multipleNumber = $(this).attr('data-num');
                     $('.bulletAjaxingDragEnters[data-num="' + self.multipleNumber + '"]').show();
                     console.log(self.multipleNumber);
                     // false を返してデフォルトの処理を実行しないようにする
                     return false;
                 })
-                    .bind("dragover", function () {
+                    //                .bind("dragover", function () {
+                    .on("dragover", '.trigAjaxingUploadingArea', function () {
                     // false を返してデフォルトの処理を実行しないようにする
                     return false;
                 })
-                    .bind("dragleave", function () {
+                    //                .bind("dragleave", function () {
+                    .on("dragleave", '.trigAjaxingUploadingArea', function () {
                     // false を返してデフォルトの処理を実行しないようにする
                     return false;
                 });
                 // ドラッグドロップからの入力
-                $('.bulletAjaxingDragEnters').bind("drop", function (event) {
+                //                $('.bulletAjaxingDragEnters').bind("drop", function (event: JQueryEventObject) {
+                $(document).on('drop', '.bulletAjaxingDragEnters', function (event) {
                     $('.bulletAjaxingDragEnters').hide();
                     // ドラッグされたファイル情報を取得
                     var dragEvent = event.originalEvent, dataTransfer = dragEvent.dataTransfer, files = dataTransfer.files;
@@ -11089,15 +11094,18 @@ var Upload;
                     // false を返してデフォルトの処理を実行しないようにする
                     return false;
                 })
-                    .bind("dragenter", function () {
+                    //                .bind("dragenter", function () {
+                    .on("dragenter", '.bulletAjaxingDragEnters', function () {
                     // false を返してデフォルトの処理を実行しないようにする
                     return false;
                 })
-                    .bind("dragover", function () {
+                    //                .bind("dragover", function () {
+                    .on("dragover", '.bulletAjaxingDragEnters', function () {
                     // false を返してデフォルトの処理を実行しないようにする
                     return false;
                 })
-                    .bind("dragleave", function () {
+                    //                .bind("dragleave", function () {
+                    .on("dragleave", '.bulletAjaxingDragEnters', function () {
                     $(this).hide();
                     // false を返してデフォルトの処理を実行しないようにする
                     return false;

@@ -49,7 +49,11 @@ class pagemetaController extends adminController
         $datas = Pagemeta::format($datas);
         $csv = Pagemeta::toCSV($datas);
 
-        $fullpath = $root.'/pagemeta/pagemeta.csv';
+        $fullpath = $root.'/pagemeta';
+        if(!file_exists($fullpath)){
+            mkdir($fullpath);
+        }
+        $fullpath .= '/pagemeta.csv';
         // ファイルポインタをオープン
         $handle = fopen($fullpath, "w");
         // ファイルへ書き込み

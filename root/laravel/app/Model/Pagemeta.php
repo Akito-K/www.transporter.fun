@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pagemeta extends Model
 {
+    public static function getNewId(){
+        $new_id = 'PAG-'.\Func::getRandStr("Aa0", 21);
+
+        return $new_id;
+    }
+
     public static function getPagemeta($page_id){
         $filepath = \Func::getRootPath().'/pagemeta/pagemeta.csv';
         $flag_no_data = false;
@@ -56,10 +62,11 @@ class Pagemeta extends Model
             if( preg_match('/,/', $line) ){
                 $data = explode(',', $line);
                 $datas[ $data[0] ] = (object) [
-                    'page_id' => $data[0],
-                    'title' => $data[1],
-                    'description' => $data[2],
-                    'body_class' => $data[3],
+                    'id' => $data[0],
+                    'page_id' => $data[1],
+                    'title' => $data[2],
+                    'description' => $data[3],
+                    'body_class' => $data[4],
                 ];
             }
         }
@@ -75,12 +82,13 @@ class Pagemeta extends Model
         $ary = [];
         if(!empty($datas)){
             foreach($datas as $data){
-                if( !isset($data['ページID']) || !isset($data['名前1']) ){
+                if( !isset($data['No']) ){
                     continue;
                 }
                 $page = new \stdClass();
-                $page->page_id = $data['ページID'];
-                $page->title = $data['名前1'];
+                $page->id = Pagemeta::getNewId();
+                $page->page_id = (isset($data['ページID1']) && isset($data['ページID2']) && isset($data['ページID3']))? $data['ページID1'].'-'.$data['ページID2'].'-'.$data['ページID3']: \Func::getRandStr("A0", 12);
+                $page->title = isset($data['名前1'])? $data['名前1']: '';
                 if( isset($data['名前2']) ){
                     $page->title .= ' '.$data['名前2'];
                 }
@@ -95,7 +103,7 @@ class Pagemeta extends Model
                 if( isset($data['階層2']) ){
                     $page->body_class .= ' '.$data['階層2'];
                 }
-                $ary[$data['ページID']] = $page;
+                $ary[ $page->page_id ] = $page;
             }
         }
 
@@ -106,6 +114,7 @@ class Pagemeta extends Model
         $body = "";
         if(!empty($datas)){
             foreach($datas as $data){
+                $body .= $data->id.",";
                 $body .= $data->page_id.",";
                 $body .= $data->title.",";
                 $body .= $data->description.",";

@@ -32,5 +32,28 @@ class Owner extends Model
         return $data;
     }
 
+    public static function getOwner($owner_id){
+        $data = Owner::getData($owner_id);
+        if($data){
+            $data->tels = \Func::telFormatDecode($data->tel);
+        }
+
+        return $data;
+    }
+
+    public static function updateData($owner_id, $request_data){
+        $data = Owner::getData($owner_id);
+        $data->sei = $request_data['sei'];
+        $data->mei = $request_data['mei'];
+        $data->zip1 = $request_data['zip1'];
+        $data->zip2 = $request_data['zip2'];
+        $data->pref_id = $request_data['pref_id'];
+        $data->city = $request_data['city'];
+        $data->address = $request_data['address'];
+        $data->tel = \Func::telFormat( $request_data['tels'] );
+        $data->site_url = $request_data['site_url'];
+        $data->message = $request_data['message'];
+        $data->save();
+    }
 
 }

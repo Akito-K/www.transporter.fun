@@ -6,7 +6,7 @@ $prefix_sei = $prefix.'sei';
 $prefix_mei = $prefix.'mei';
 $prefix_zip1 = $prefix.'zip1';
 $prefix_zip2 = $prefix.'zip2';
-$prefix_pref_code = $prefix.'pref_code';
+$prefix_pref_id = $prefix.'pref_id';
 $prefix_city = $prefix.'city';
 $prefix_address = $prefix.'address';
 $prefix_tels = $prefix.'tels';
@@ -24,7 +24,7 @@ if(!isset($prefs)){
     <li class="list list-title must">住所</li>
     <li class="list list-value">
         〒 {{ old($prefix_zip1) }} - {{ old($prefix_zip2) }}<br />
-        {{ $prefs[ old($prefix_pref_code) ] }} {{ old($prefix_city) }}<br />
+        {{ $prefs[ old($prefix_pref_id) ] }} {{ old($prefix_city) }}<br />
         {{ old($prefix_address) }}
     </li>
 </ul>
@@ -37,7 +37,7 @@ if(!isset($prefs)){
 {!! Form::hidden( $prefix_mei , old( $prefix_mei )) !!}
 {!! Form::hidden( $prefix_zip1 , old( $prefix_zip1 )) !!}
 {!! Form::hidden( $prefix_zip2 , old( $prefix_zip2 )) !!}
-{!! Form::hidden( $prefix_pref_code , old( $prefix_pref_code )) !!}
+{!! Form::hidden( $prefix_pref_id , old( $prefix_pref_id )) !!}
 {!! Form::hidden( $prefix_city , old( $prefix_city )) !!}
 {!! Form::hidden( $prefix_address , old( $prefix_address )) !!}
 {!! Form::hidden( $prefix_tels.'[1]' , old( $prefix_tels.'.1' )) !!}

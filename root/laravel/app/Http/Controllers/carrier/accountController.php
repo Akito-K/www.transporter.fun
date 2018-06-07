@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\carrier;
 use App\Http\Controllers\carrierController;
 use Illuminate\Http\Request;
+use App\Http\Requests\MyCarrierRequest as MyRequest;
 
 use App\Model\Carrier;
 use App\Model\Pref;
@@ -28,6 +29,24 @@ class accountController extends carrierController
         $area_names = Area::getNames();
 
         return view('carrier.account.detail', compact('pagemeta', 'carrier_data', 'prefs', 'car_datas', 'empty_datas', 'area_names'));
+    }
+
+    public function editBase(){
+        Log::saveData( __METHOD__ );
+        $pagemeta = Pagemeta::getPagemeta('CR-USR-02');
+        $carrier_id = \Auth::user()->carrier_id;
+        $carrier_data = Carrier::getCarrier($carrier_id);
+        $prefs = Pref::getNames();
+
+        return view('carrier.account.edit_base', compact('pagemeta', 'carrier_data', 'prefs'));
+    }
+
+    public function updateBase( MyRequest $request ){
+        $request_data = $request->all();
+        $carrier_id = \Auth::user()->carrier_id;
+        Carrier::updateData($carrier_id, $request_data);
+
+        return redirect('carrier/account');
     }
 
     public function editCars(){

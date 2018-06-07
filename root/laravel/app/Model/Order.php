@@ -1,4 +1,16 @@
 <?php
+/**
+ * 荷主 -> 案件
+ * 'O-00' => '取消',
+ * 'O-05' => '下書き',
+ * 'O-10' => '見積受付中',
+ * 'O-15' => '見積受付終了',
+ * 'O-20' => '発注中',
+ * 'O-25' => '進行中',
+ * 'O-30' => '未入金',
+ * 'O-35' => '入金済',
+ * 'O-40' => '入金確認済',
+ */
 
 namespace App\Model;
 
@@ -291,7 +303,7 @@ class Order extends Model
             'mei' => $data->send_mei,
             'zip1' => $data->send_zip1,
             'zip2' => $data->send_zip2,
-            'pref_code' => $data->send_pref_code,
+            'pref_id' => $data->send_pref_id,
             'city' => $data->send_city,
             'address' => $data->send_address,
             'tel' => $data->send_tel,
@@ -306,7 +318,7 @@ class Order extends Model
             'mei' => $data->arrive_mei,
             'zip1' => $data->arrive_zip1,
             'zip2' => $data->arrive_zip2,
-            'pref_code' => $data->arrive_pref_code,
+            'pref_id' => $data->arrive_pref_id,
             'city' => $data->arrive_city,
             'address' => $data->arrive_address,
             'tel' => $data->arrive_tel,
@@ -505,7 +517,7 @@ class Order extends Model
             'send_mei' => $request_data->send_mei,
             'send_zip1' => $request_data->send_zip1,
             'send_zip2' => $request_data->send_zip2,
-            'send_pref_code' => $request_data->send_pref_code,
+            'send_pref_id' => $request_data->send_pref_id,
             'send_city' => $request_data->send_city,
             'send_address' => $request_data->send_address,
             'send_tel' => \Func::telFormat( $request_data->send_tels ),
@@ -514,7 +526,7 @@ class Order extends Model
             'arrive_mei' => $request_data->arrive_mei,
             'arrive_zip1' => $request_data->arrive_zip1,
             'arrive_zip2' => $request_data->arrive_zip2,
-            'arrive_pref_code' => $request_data->arrive_pref_code,
+            'arrive_pref_id' => $request_data->arrive_pref_id,
             'arrive_city' => $request_data->arrive_city,
             'arrive_address' => $request_data->arrive_address,
             'arrive_tel' => \Func::telFormat( $request_data->arrive_tels ),
@@ -549,7 +561,7 @@ class Order extends Model
         $data->send_mei = $request_data->send_mei;
         $data->send_zip1 = $request_data->send_zip1;
         $data->send_zip2 = $request_data->send_zip2;
-        $data->send_pref_code = $request_data->send_pref_code;
+        $data->send_pref_id = $request_data->send_pref_id;
         $data->send_city = $request_data->send_city;
         $data->send_address = $request_data->send_address;
         $data->send_tel = \Func::telFormat( $request_data->send_tels );
@@ -558,7 +570,7 @@ class Order extends Model
         $data->arrive_mei = $request_data->arrive_mei;
         $data->arrive_zip1 = $request_data->arrive_zip1;
         $data->arrive_zip2 = $request_data->arrive_zip2;
-        $data->arrive_pref_code = $request_data->arrive_pref_code;
+        $data->arrive_pref_id = $request_data->arrive_pref_id;
         $data->arrive_city = $request_data->arrive_city;
         $data->arrive_address = $request_data->arrive_address;
         $data->arrive_tel = \Func::telFormat( $request_data->arrive_tels );
