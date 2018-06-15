@@ -342,7 +342,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/admin/order_request_option/other/{option_id}/delete',         'admin\orderRequestOptionController@deleteOther');
 
             // ログ
-            //Route::get ('/admin/log/{page?}',                       'admin\logController@showList');
+            Route::get ('/admin/log/{page?}',                       'admin\logController@showList');
         });
     });
 

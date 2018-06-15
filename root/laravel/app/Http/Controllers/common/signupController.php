@@ -20,16 +20,17 @@ use App\Http\Requests\SignupEmailRequest;
 
 class signupController extends Controller
 {
-    public function email(Request $request){
-        $pagemeta = Pagemeta::getPagemeta('CM-SU-');
-        //Log::saveData( 'common\signupController@email', NULL, NULL, true);
+    public function email(){
+        Log::saveData( __METHOD__ );
+        $pagemeta = Pagemeta::getPagemeta('CM-SU-000');
 
         return view('common.signup.email', compact('pagemeta'));
     }
 
     public function sendSignupMail(SignupEmailRequest $request){
-        // validated by SignupEmailRequest
-        $pagemeta = Pagemeta::getPagemeta('CM-SU-');
+        Log::saveData( __METHOD__ , 'email', $request['email'], true);
+        $pagemeta = Pagemeta::getPagemeta('CM-SU-010');
+
         $date_at = new \DatetimeImmutable();
         // Signup に登録
         $key = Signup::getNewKey();
@@ -50,30 +51,35 @@ class signupController extends Controller
     }
 
     public function create($signup_key){
+        Log::saveData( __METHOD__ , 'signup_key', $signup_key, true);
+
         $signup = Signup::getData($signup_key);
         if( $signup ){
             if( !\Func::isOver($signup->limit_at) ){
                 $email = $signup->email;
                 if( MyUser::where('email', $signup->email)->count() ){
-                    $pagemeta = Pagemeta::getPagemeta('CM-SU-');
+                    $pagemeta = Pagemeta::getPagemeta('CM-SU-021');
                     return view('common.signup.already_exists', compact('pagemeta'));
                 }else{
-                    $pagemeta = Pagemeta::getPagemeta('CM-SU-');
+                    $pagemeta = Pagemeta::getPagemeta('CM-SU-020');
                     $data = Signup::getData($signup_key);
                     return view('common.signup.create', compact('signup_key', 'email', 'pagemeta', 'data'));
                 }
             }else{
                 $signup->delete();
-                $pagemeta = Pagemeta::getPagemeta('CM-SU-');
+                $pagemeta = Pagemeta::getPagemeta('CM-SU-022');
                 return view('mypage.account.limit_over', compact('pagemeta'));
             }
         }else{
-            $pagemeta = Pagemeta::getPagemeta('CM-SU-');
+            $pagemeta = Pagemeta::getPagemeta('CM-SU-022');
             return view('mypage.account.limit_over', compact('pagemeta'));
         }
     }
 
     public function insert(Request $request){
+        $signup_key = $request['signup_key'];
+        Log::saveData( __METHOD__ , 'signup_key', $signup_key, true);
+
         $validates = [
             'name' => 'required|max:20',
             'login_id' => 'required|min:4|max:32|unique:users',
@@ -81,7 +87,6 @@ class signupController extends Controller
             ];
         $this->validate($request, $validates);
 
-        $signup_key = $request['signup_key'];
         $data = Signup::getData($signup_key);
         $date_at = new \DatetimeImmutable();
         $data->name        = $request['name'];
@@ -96,7 +101,9 @@ class signupController extends Controller
     }
 
     public function edit($signup_key, Request $request){
-        $pagemeta = Pagemeta::getPagemeta('CM-SU-');
+        Log::saveData( __METHOD__ , 'signup_key', $signup_key, true);
+        $pagemeta = Pagemeta::getPagemeta('CM-SU-040');
+
         $prefs = Pref::getNames();
         \Func::array_append($prefs, [ 0 => '---' ], true);
         $data = Signup::getData($signup_key);
@@ -105,6 +112,7 @@ class signupController extends Controller
     }
 
     public function update(Request $request){
+        Log::saveData( __METHOD__ , 'signup_key', $request['signup_key'], true);
         $validates = [
             'zip1' => 'required|size:3',
             'zip2' => 'required|size:4',
@@ -146,9 +154,10 @@ class signupController extends Controller
 
     // 同意と Epsilon 関連
     public function accept( $signup_key, Request $request ){
-        $pagemeta = Pagemeta::getPagemeta('CM-SU-');
+        Log::saveData( __METHOD__ , 'signup_key', $signup_key, true);
+        $pagemeta = Pagemeta::getPagemeta('CM-SU-060');
+
         $data = Signup::getData($signup_key);
-//        $address = Address::getData($data->address_id);
         $prefs = Pref::getNames();
 
         return view('common.signup.accept', compact('pagemeta', 'signup_key', 'data', 'prefs'));
@@ -156,9 +165,10 @@ class signupController extends Controller
 
     // 同意後 運送会社登録ありならエプシロンへのリンク / 無しなら完了へリダイレクト
     public function accepted( $signup_key, Request $request ){
-        $pagemeta = Pagemeta::getPagemeta('CM-SU-');
-        $data = Signup::getData($signup_key);
+        Log::saveData( __METHOD__ , 'signup_key', $signup_key, true);
+        $pagemeta = Pagemeta::getPagemeta('CM-SU-070');
 
+        $data = Signup::getData($signup_key);
         if($data->flag_carrier){
             // エプシロン与信登録開始ページへ
             return view('common.signup.to_epsilon', compact('pagemeta', 'signup_key', 'data'));
@@ -169,8 +179,10 @@ class signupController extends Controller
     }
 
     public function completeOwner( $signup_key, Request $request ){
-        $signup = Signup::getData($signup_key);
+        Log::saveData( __METHOD__ , 'signup_key', $signup_key, true);
+        $pagemeta = Pagemeta::getPagemeta('CM-SU-080');
 
+        $signup = Signup::getData($signup_key);
         $user_id = MyUser::getNewId();
         $data = $this->makeUserData($user_id, $signup);
         MyUser::insert($data);
@@ -223,7 +235,6 @@ class signupController extends Controller
         $user = MyUser::getData( sha1($user_id) );
         \Auth::loginUsingId($user->id);
 
-        $pagemeta = Pagemeta::getPagemeta('CM-SU-');
         return view('common.signup.complete', compact('pagemeta'));
 /*
         if($signup->flag_owner && $signup->flag_carrier){

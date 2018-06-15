@@ -3,14 +3,13 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Log extends Model
 {
-    use softDeletes;
     protected $table = 'logs';
-    protected $dates = ['deleted_at'];
+    protected $dates = ['created_at'];
     protected $guarded = ['id'];
+    public $timestamps = false;
 
     public static function saveData ( $controller, $target=NULL, $value=NULL, $result=true ){
         $user_id = \Auth::user()->user_id;

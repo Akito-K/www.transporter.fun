@@ -11354,10 +11354,10 @@ var Quote;
                     $('#ajaxing-waiting').show();
                 },
                 success: function (data) {
-                    //console.log(data);
+                    console.log(data);
                     $('#zip1').val(data.zip1);
                     $('#zip2').val(data.zip2);
-                    $('#pref_code').val(data.pref_code);
+                    $('#pref_id').val(data.pref_id);
                     $('#city').val(data.city);
                     $('#address').val(data.address);
                     $('#tels-1').val(data.tels[1]);

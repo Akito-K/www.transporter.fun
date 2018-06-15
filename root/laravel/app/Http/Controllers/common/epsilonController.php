@@ -5,30 +5,28 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Model\Pagemeta;
-use App\Model\Signup;
-use App\Model\MyUser;
-use App\Model\Address;
-use App\Model\UserToAddress;
 use App\Model\Log;
-use App\Model\Pref;
-use App\Model\Carrier;
-use App\Model\Owner;
 
-use App\Mail\MailSignup;
-use Illuminate\Support\Facades\Mail;
-use App\Http\Requests\SignupEmailRequest;
+//use App\Mail\MailSignup;
+//use Illuminate\Support\Facades\Mail;
 
 class epsilonController extends Controller
 {
     public function entry (Request $request){
+        Log::saveData( __METHOD__ );
+        $pagemeta = Pagemeta::getPagemeta('CM-EP-010');
 
     }
 
     public function error (Request $request){
+        Log::saveData( __METHOD__ );
+        $pagemeta = Pagemeta::getPagemeta('CM-EP-020');
 
     }
 
     public function result (Request $request){
+        Log::saveData( __METHOD__ );
+        $pagemeta = Pagemeta::getPagemeta('CM-EP-030');
 
     }
 

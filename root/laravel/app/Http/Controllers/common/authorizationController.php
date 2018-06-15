@@ -17,8 +17,9 @@ class authorizationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function authorization($authorization_code)
-    {
+    public function authorization($authorization_code){
+        Log::saveData( __METHOD__ , 'authorization_code', $authorization_code, true);
+
         $authorization = Authorization::getData($authorization_code);
         if( $authorization ){
             if( !\Func::isOver($authorization->limit_at) ){
@@ -28,11 +29,13 @@ class authorizationController extends Controller
                 $user->save();
                 $authorization->delete();
 
-                return view('mypage.account.changed_email');
+                $pagemeta = Pagemeta::getPagemeta('CM-AT-000');
+                return view('mypage.account.changed_email', compact('pagemeta'));
             }else{
                 $authorization->delete();
 
-                return view('mypage.account.limit_over');
+                $pagemeta = Pagemeta::getPagemeta('CM-AT-001');
+                return view('mypage.account.limit_over', compact('pagemeta'));
             }
         }else{
 

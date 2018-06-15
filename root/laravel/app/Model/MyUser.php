@@ -29,6 +29,16 @@ class MyUser extends Model
         return $data;
     }
 
+    public static function getMe(){
+        $data = \Auth::user();
+        // 権限
+        $data->authorities = UserToAuthority::getAuthorityIds($data->user_id);
+        $data->mobiles = \Func::telFormatDecode($data->mobile);
+        $data->tels = \Func::telFormatDecode($data->tel);
+
+        return $data;
+    }
+
     public static function getUserIdByCarrierId($carrier_id){
         return MyUser::where('carrier_id', $carrier_id)->value('user_id');
     }
@@ -42,6 +52,21 @@ class MyUser extends Model
                 $data->mobiles = \Func::telFormatDecode($data->mobile);
                 $data->tels = \Func::telFormatDecode($data->tel);
                 $ary[] = $data;
+            }
+        }
+
+        return $ary;
+    }
+
+    public static function getUsersAsUserId(){
+        $datas = MyUser::get();
+        $ary = [];
+        if(!empty($datas)){
+            foreach($datas as $k => $data){
+                $data->authorities = UserToAuthority::getAuthorityIds($data->user_id);
+                $data->mobiles = \Func::telFormatDecode($data->mobile);
+                $data->tels = \Func::telFormatDecode($data->tel);
+                $ary[ $data->user_id ] = $data;
             }
         }
 
@@ -138,13 +163,13 @@ class MyUser extends Model
             'sei_kana' => $request['sei_kana'],
             'mei_kana' => $request['mei_kana'],
             'email' => $request['email'],
-/*
+
             'zip1' => $request['zip1'],
             'zip2' => $request['zip2'],
             'pref_id' => $request['pref_id'],
             'city' => $request['city'],
             'address' => $request['address'],
-*/
+
             'mobile' => \Func::telFormat( $request['mobiles'] ),
             'tel' => \Func::telFormat( $request['tels'] ),
             'icon_filepath' => $request['icon_filepath'],

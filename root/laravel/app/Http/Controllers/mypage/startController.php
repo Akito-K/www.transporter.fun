@@ -19,9 +19,9 @@ class startController extends mypageController
 {
 
     public function createOwner(Request $request){
-        $me = $request['me'];
+        $me = MyUser::getMe();
         $pagemeta = Pagemeta::getPagemeta('MY-STO-01');
-        $prefs = pref::getNames();
+        $prefs = Pref::getNames();
         \Func::array_append($prefs, [ 0 => '---' ], true);
         if( $request->session()->has('start.'.$me->hashed_id) ) {
             $data = $request->session()->get('start.'.$me->hashed_id);
@@ -37,11 +37,11 @@ class startController extends mypageController
         // Validation
         $this->validateInsert($request);
 
-        $me = $request['me'];
+        $me = MyUser::getMe();
         $pagemeta = Pagemeta::getPagemeta('MY-STO-02');
 
         $user = MyUser::getUser($me->hashed_id);
-        $prefs = pref::getNames();
+        $prefs = Pref::getNames();
 
         $data = $this->makeData( $request, $user );
         $request->session()->forget('start.'.$me->hashed_id);
@@ -53,7 +53,7 @@ class startController extends mypageController
     }
 
     public function executeOwner(Request $request){
-        $me = $request['me'];
+        $me = MyUser::getMe();
         $user = MyUser::getData($me->hashed_id);
 
         $data = $request->session()->get('start.'.$me->hashed_id);
@@ -137,9 +137,9 @@ class startController extends mypageController
 
 
     public function createCarrier(Request $request){
-        $me = $request['me'];
+        $me = MyUser::getMe();
         $pagemeta = Pagemeta::getPagemeta('MY-STC-01');
-        $prefs = pref::getNames();
+        $prefs = Pref::getNames();
         \Func::array_append($prefs, [ 0 => '---' ], true);
         if( $request->session()->has('start.'.$me->hashed_id) ) {
             $data = $request->session()->get('start.'.$me->hashed_id);
@@ -155,11 +155,11 @@ class startController extends mypageController
         // Validation
         $this->validateInsert($request);
 
-        $me = $request['me'];
+        $me = MyUser::getMe();
         $pagemeta = Pagemeta::getPagemeta('MY-STC-02');
 
         $user = MyUser::getUser($me->hashed_id);
-        $prefs = pref::getNames();
+        $prefs = Pref::getNames();
 
         $data = $this->makeData( $request, $user );
         $request->session()->forget('start.'.$me->hashed_id);
@@ -171,7 +171,7 @@ class startController extends mypageController
     }
 
     public function executeCarrier(Request $request){
-        $me = $request['me'];
+        $me = MyUser::getMe();
         $user = MyUser::getData($me->hashed_id);
 
         $data = $request->session()->get('start.'.$me->hashed_id);

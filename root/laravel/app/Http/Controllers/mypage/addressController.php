@@ -15,61 +15,56 @@ class addressController extends mypageController
 {
 
     public function showList(){
+        Log::saveData( __METHOD__ );
         $pagemeta = Pagemeta::getPagemeta('MY-ADR-01');
         $datas = Address::getDatas(\Auth::user()->user_id);
-        Log::saveData( __METHOD__ );
 
         return view('mypage.address.list', compact('pagemeta', 'datas'));
     }
 
     public function showDetail($address_id){
-        $pagemeta = Pagemeta::getPagemeta('MY-ADR-02');
-        $data = Address::getData($address_id);
-        $prefs = pref::getNames();
-        \Func::array_append($prefs, [ 0 => '---' ], true);
-
         Log::saveData( __METHOD__ , 'address_id', $address_id, true);
+        $pagemeta = Pagemeta::getPagemeta('MY-ADR-02');
+
+        $data = Address::getData($address_id);
+        $prefs = Pref::getNames();
 
         return view('mypage.address.detail', compact('pagemeta', 'data', 'prefs'));
     }
 
     public function create(){
-        $pagemeta = Pagemeta::getPagemeta('MY-ADR-03');
-        $prefs = pref::getNames();
-        \Func::array_append($prefs, [ 0 => '---' ], true);
-
         Log::saveData( __METHOD__ );
+        $pagemeta = Pagemeta::getPagemeta('MY-ADR-03');
+
+        $prefs = Pref::getNames();
 
         return view('mypage.address.create', compact('pagemeta', 'prefs'));
     }
 
     public function insert(Request $request){
+        Log::saveData( __METHOD__ );
         // Validation
         $this->validationInsert($request);
         $this->insertData($request);
-
-        Log::saveData( __METHOD__ );
 
         return redirect('mypage/address');
     }
 
     public function edit($address_id){
-        $pagemeta = Pagemeta::getPagemeta('MY-ADR-06');
-        $data = Address::getData($address_id);
-        $prefs = pref::getNames();
-        \Func::array_append($prefs, [ 0 => '---' ], true);
-
         Log::saveData( __METHOD__ , 'address_id', $address_id, true);
+        $pagemeta = Pagemeta::getPagemeta('MY-ADR-06');
+
+        $data = Address::getData($address_id);
+        $prefs = Pref::getNames();
 
         return view('mypage.address.edit', compact('pagemeta', 'data', 'prefs'));
     }
 
     public function update(Request $request){
+        Log::saveData( __METHOD__ );
         // Validation
         $this->validationUpdate($request);
         $this->updateData($request);
-
-        Log::saveData( __METHOD__ );
 
         return redirect('mypage/address');
     }

@@ -22,33 +22,31 @@ class accountController extends mypageController
 {
 
     public function showDetail(Request $request){
-        $me = $request['me'];
-        $pagemeta = Pagemeta::getPagemeta('MY-USR-01');
-        $data = MyUser::getUser($me->hashed_id);
-        $prefs = pref::getNames();
+        $data = MyUser::getMe();
         Log::saveData( __METHOD__ , 'user_id', $data->user_id, true );
 
-        return view('mypage.account.detail', compact('pagemeta', 'data', 'me', 'prefs'));
+        $pagemeta = Pagemeta::getPagemeta('MY-AC-010');
+        $prefs = Pref::getNames();
+
+        return view('mypage.account.detail', compact('pagemeta', 'data', 'prefs'));
     }
 
     public function edit(Request $request){
-        $me = $request['me'];
-
-        $pagemeta = Pagemeta::getPagemeta('MY-USR-02');
-        $data = MyUser::getUser($me->hashed_id);
-        $prefs = pref::getNames();
-        \Func::array_append($prefs, [ 0 => '---' ], true);
+        $data = MyUser::getMe();
         Log::saveData( __METHOD__ , 'user_id', $data->user_id, true);
 
-        return view('mypage.account.edit', compact('pagemeta', 'data', 'me', 'prefs'));
+        $pagemeta = Pagemeta::getPagemeta('MY-AC-020');
+        $prefs = Pref::getNames();
+
+        return view('mypage.account.edit', compact('pagemeta', 'data', 'prefs'));
     }
 
     public function update(Request $request){
-        $me = $request['me'];
-        $user = MyUser::getData($me->hashed_id);
+        $me = MyUser::getMe();
+        Log::saveData( __METHOD__ , 'user_id', $me->user_id, true );
 
         // Validation
-        $this->validateUpdate($request, $user);
+        $this->validateUpdate($request, $me->login_id);
 
         // 画像保存
         if($request['upload_id']){
@@ -63,22 +61,19 @@ class accountController extends mypageController
         // ユーザー情報更新
         MyUser::updateData($request, ['email']);
 
-        Log::saveData( __METHOD__ , 'user_id', $user->user_id, true );
 
         return redirect('mypage/account');
     }
 
     public function email(Request $request){
-        $me = $request['me'];
-
-        $pagemeta = Pagemeta::getPagemeta('MY-USR-04');
-        $data = MyUser::getUser($me->hashed_id);
+        $data = MyUser::getMe();
         Log::saveData( __METHOD__ , 'user_id', $data->user_id, true);
+        $pagemeta = Pagemeta::getPagemeta('MY-AC-050');
 
-        return view('mypage.account.email', compact('pagemeta', 'data', 'me'));
+        return view('mypage.account.email', compact('pagemeta', 'data'));
     }
 
-    public function validateUpdate($request, $user){
+    public function validateUpdate($request, $login_id){
         $validates = [
             'name' => 'required|max:20',
             'sei' => 'required|max:20',
@@ -87,7 +82,7 @@ class accountController extends mypageController
             'mei_kana' => 'required|max:20',
             ];
 
-        if($request['login_id'] != $user->login_id){
+        if($request['login_id'] != $login_id){
             $validates['login_id'] = 'required|min:4|max:32|unique:users';
         }
         if($request['password']){
@@ -98,9 +93,11 @@ class accountController extends mypageController
     }
 
     public function sendAuthorizationMail(Request $request){
-        $date_at = new \DatetimeImmutable();
-        $me = $request['me'];
+        $me = MyUser::getMe();
+        Log::saveData( __METHOD__ , 'user_id', $me->user_id, true);
+        $pagemeta = Pagemeta::getPagemeta('MY-AC-060');
 
+        $date_at = new \DatetimeImmutable();
         // Authorization に登録
         $code = Authorization::getNewCode();
         $data = [
@@ -116,8 +113,6 @@ class accountController extends mypageController
         // code を mailbody に渡して認証メール送信
         Mail::to( $request['email'] )
             ->send(new MailAuthorization($code));
-
-        $pagemeta = Pagemeta::getPagemeta('MY-USR-04');
 
         return view('mypage.account.sent_email', compact('pagemeta'));
     }

@@ -3,6 +3,7 @@
 
 <li class="navi__list navi__list--parent"><span class="navi__list__parent"><i class="fa fa-users"></i> ユーザー</span></li>
 <li class="navi__list navi__list--child"><a href="{{ url('') }}/admin/user"><i class="fa fa-user"></i> <span>一覧</span></a></li>
+<li class="navi__list navi__list--child"><a href="{{ url('') }}/admin/user/create"><i class="fa fa-user"></i> <span>新規</span></a></li>
 
 <li class="navi__list navi__list--parent"><span class="navi__list__parent"><i class="fa fa-gear"></i> マスタ</span></li>
 <li class="navi__list navi__list--child"><a href="{{ url('') }}/admin/authority"><span>権限</span></a></li>
@@ -21,6 +22,6 @@
 
 
 <li class="navi__list navi__list--parent"><span class="navi__list__parent"><i class="fa fa-comments-o"></i> その他</span></li>
-<li class="navi__list navi__list--child"><a href="{{ url('') }}/admin/weather">お天気ログ</a></li>
+<li class="navi__list navi__list--child"><a href="{{ url('') }}/admin/log">ログ参照</a></li>
 
 <li class="navi__list navi__list--logout">{!! \MyHTML::logout('<i class="fa fa-sign-out"></i> ログアウト') !!}</li>

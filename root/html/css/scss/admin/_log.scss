@@ -1,0 +1,38 @@
+// 共通
+@media all {
+    .log {
+        &__block {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        &__cell {
+            font-size: 88%;
+            &--icon {
+                width: 50px;
+                height: 50px;
+                padding: 4px;
+            }
+            &__img {
+                width: 100%;
+                padding-top: 100%;
+            }
+        }
+    }
+}
+// スマホ
+@media(max-width: 767px) {
+    .log {
+        &__block {
+        }
+    }
+}
+// TAB・PC
+@media(min-width: 768px){
+    .log {
+        &__block {
+        }
+    }
+}
+

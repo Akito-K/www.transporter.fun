@@ -6,6 +6,7 @@ use App\Http\Controllers\carrierController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Item;
+use App\Model\MyUser;
 use App\Model\Pagemeta;
 use App\Model\Log;
 
@@ -13,7 +14,7 @@ class itemController extends carrierController
 {
 
     public function showList(Request $request){
-        $me = $request['me'];
+        $me = MyUser::getMe();
         Log::saveData( __METHOD__ );
         $pagemeta = Pagemeta::getPagemeta('CR-ITM-01');
         $datas = Item::getDatas($me->carrier_id);

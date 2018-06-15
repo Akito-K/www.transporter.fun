@@ -120,6 +120,9 @@ class AjaxController extends Controller
 
     public function quoteUserAccount(Request $request){
         $data = MyUser::getUser($request['hashed_id']);
+        if(!$data->tel){
+            $data->tels = $data->mobiles;
+        }
 
         return json_encode( $data );
     }

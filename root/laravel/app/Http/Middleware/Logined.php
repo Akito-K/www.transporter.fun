@@ -19,12 +19,12 @@ class Logined
      */
     public function handle($request, Closure $next)
     {
-        $me = \Auth::user();
         // ログイン記録
-        MyUser::where('hashed_id', $me->hashed_id)->update([
+        MyUser::where('hashed_id', \Auth::user()->hashed_id)->update([
             'last_logined_at' => new \Datetime(),
             ]);
-
+/*
+        $me = \Auth::user();
         // 権限
         $me->authorities = UserToAuthority::getAuthorityIds($me->user_id);
 
@@ -32,6 +32,7 @@ class Logined
         $request->merge([
             'me' => $me,
         ]);
+*/
 /*
         // 未読メッセージを取得
         $unreads = MessageUnopened::getUnreads($user->user_id);

@@ -4,7 +4,7 @@ use App\Http\Controllers\carrierController;
 use Illuminate\Http\Request;
 use App\Http\Requests\MyEstimateRequest as MyRequest;
 
-//use App\Model\MyUser;
+use App\Model\MyUser;
 //use App\Model\Owner;
 use App\Model\Order;
 use App\Model\Carrier;
@@ -91,7 +91,7 @@ class estimateController extends carrierController
 
         $data = Estimate::getEstimateFromCarrierSide($estimate_id);
         $order_data = Order::getOrderFromCarrierSide($data->order_id);
-        $me = $request['me'];
+        $me = MyUser::getMe();
         $carrier_data = Carrier::getData($me->carrier_id);
         $select_orders_names = Order::getEstimatableDatasNames();
         $items = Item::getNames($me->carrier_id);

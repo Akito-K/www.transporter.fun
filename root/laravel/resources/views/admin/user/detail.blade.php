@@ -5,71 +5,87 @@
         <div class="box-body">
             <h2 class="page-header">詳細</h2>
 
-            <table class="user__table">
-                <tr>
-                    <th class="user__cell">ログインID</th>
-                    <td class="user__cell">{{ $data->login_id }}</td>
-                </tr>
-                <tr>
-                    <th class="user__cell">ログインパスワード</th>
-                    <td class="user__cell">***</td>
-                </tr>
-                <tr>
-                    <th>画像</th>
-                    <td class="user__cell">
+            <div>
+                <ul class="lists">
+                    <li class="list list-title">ログインID</li>
+                    <li class="list list-value">{{ $data->login_id }}</li>
+                </ul>
+                <ul class="lists">
+                    <li class="list list-title">ログインパスワード</li>
+                    <li class="list list-value">***</li>
+                </ul>
+                <ul class="lists">
+                    <li class="list list-title">画像</li>
+                    <li class="list list-value">
                         <span class="user__cell__img">
                             <span class="my-thumbnail">
                                 <span class="my-thumbnail__img" style="background-image: url({!! \Func::getImage($data->icon_filepath) !!});"></span>
                             </span>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="user__cell">表示名</th>
-                    <td class="user__cell">{{ $data->name }}</td>
-                </tr>
+                    </li>
+                </ul>
+                <ul class="lists">
+                    <li class="list list-title">表示名</li>
+                    <li class="list list-value">{{ $data->name }}</li>
+                </ul>
 
-                <tr>
-                    <th class="user__cell">しめい</th>
-                    <td class="user__cell">{{ $data->sei_kana }} {{ $data->mei_kana }}</td>
-                </tr>
-                <tr>
-                    <th class="user__cell">氏名</th>
-                    <td class="user__cell">{{ $data->sei }} {{ $data->mei }}</td>
-                </tr>
+                <ul class="lists">
+                    <li class="list list-title">氏名</li>
+                    <li class="list list-value">{{ $data->sei }} {{ $data->mei }}</li>
+                </ul>
+                <ul class="lists">
+                    <li class="list list-title">しめい</li>
+                    <li class="list list-value">{{ $data->sei_kana }} {{ $data->mei_kana }}</li>
+                </ul>
 
-                <tr>
-                    <th class="user__cell">荷主ID</th>
-                    <td class="user__cell">{{ $data->owner_id }}</td>
-                </tr>
-                <tr>
-                    <th class="user__cell">運送会社ID</th>
-                    <td class="user__cell">{{ $data->carrier_id }}</td>
-                </tr>
+                <ul class="lists">
+                    <li class="list list-title">荷主ID</li>
+                    <li class="list list-value">{{ $data->owner_id }}</li>
+                </ul>
+                <ul class="lists">
+                    <li class="list list-title">運送会社ID</li>
+                    <li class="list list-value">{{ $data->carrier_id }}</li>
+                </ul>
 
-                <tr>
-                    <th class="user__cell">メールアドレス</th>
-                    <td class="user__cell">{{ $data->email }}</td>
-                </tr>
-                <tr>
-                    <th class="user__cell">携帯番号</th>
-                    <td class="user__cell">{{ $data->mobile }}</td>
-                </tr>
-                <tr>
-                    <th class="user__cell">電話番号</th>
-                    <td class="user__cell">{{ $data->tel }}</td>
-                </tr>
+                <ul class="lists">
+                    <li class="list list-title">メールアドレス</li>
+                    <li class="list list-value">{{ $data->email }}</li>
+                </ul>
+                <ul class="lists">
+                    <li class="list list-title">携帯番号</li>
+                    <li class="list list-value">{{ $data->mobile }}</li>
+                </ul>
+                <ul class="lists">
+                    <li class="list list-title">電話番号</li>
+                    <li class="list list-value">{{ $data->tel }}</li>
+                </ul>
 
-                <tr>
-                    <th class="user__cell">最終ログイン日時</th>
-                    <td class="user__cell">{{ \Func::dateFormat($data->last_logined_at, 'Y/n/j(wday)') }} {{ \Func::dateFormat($data->last_logined_at, 'H:i:s') }}</td>
-                </tr>
-                <tr>
-                    <th class="user__cell">BAN</th>
-                    <td class="user__cell">{{ $data->banned_at }}</td>
-                </tr>
+                <ul class="lists">
+                    <li class="list list-title">郵便番号</li>
+                    <li class="list list-value">〒 {{ $data->zip1 }} - {{ $data->zip2 }}</li>
+                </ul>
+                <ul class="lists">
+                    <li class="list list-title">都道府県</li>
+                    <li class="list list-value">{{ $prefs[ $data->pref_id ] }}</li>
+                </ul>
+                <ul class="lists">
+                    <li class="list list-title">市区町</li>
+                    <li class="list list-value">{{ $data->city }}</li>
+                </ul>
+                <ul class="lists">
+                    <li class="list list-title">以降の住所</li>
+                    <li class="list list-value">{{ $data->address }}</li>
+                </ul>
+                <ul class="lists">
+                    <li class="list list-title">最終ログイン日時</li>
+                    <li class="list list-value">{{ \Func::dateFormat($data->last_logined_at, 'Y/n/j(wday)') }} {{ \Func::dateFormat($data->last_logined_at, 'H:i:s') }}</li>
+                </ul>
+                <ul class="lists">
+                    <li class="list list-title">BAN</li>
+                    <li class="list list-value">{{ $data->banned_at }}</li>
+                </ul>
 
-            </table>
+            </div>
 
         </div>
     </div>

@@ -12,49 +12,48 @@ use App\Model\Pagemeta;
 use App\Model\Log;
 use App\Model\Upload;
 use App\Model\S3;
+use App\Model\Pref;
 
 class userController extends adminController
 {
 
-    Public function showList(Request $request){
-        $me = $request['me'];
+    Public function showList(){
+        Log::saveData( __METHOD__ );
         $pagemeta = Pagemeta::getPagemeta('AD-USR-01');
         $users = MyUser::getUsers();
         $authorities = Authority::getNames();
-        Log::saveData( __METHOD__ );
 
-        return view('admin.user.list', compact('pagemeta', 'users', 'authorities', 'me'));
+        return view('admin.user.list', compact('pagemeta', 'users', 'authorities'));
     }
 
-    public function showDetail($hashed_id, Request $request){
-        $me = $request['me'];
-        $pagemeta = Pagemeta::getPagemeta('AD-USR-02');
+    public function showDetail($hashed_id){
         $data = MyUser::getUser($hashed_id);
-        $authorities = Authority::getNames();
         Log::saveData( __METHOD__ , 'user_id', $data->user_id, true );
+        $pagemeta = Pagemeta::getPagemeta('AD-USR-02');
+        $authorities = Authority::getNames();
+        $prefs = Pref::getNames();
 
-        return view('admin.user.detail', compact('pagemeta', 'data', 'authorities', 'me'));
+        return view('admin.user.detail', compact('pagemeta', 'data', 'authorities', 'prefs'));
     }
 
-    public function create(Request $request){
-        $me = $request['me'];
+    public function create(){
+        Log::saveData( __METHOD__ );
 
         $pagemeta = Pagemeta::getPagemeta('AD-USR-03');
         $authorities = Authority::getNames();
-        Log::saveData( __METHOD__ );
+        $prefs = Pref::getNames();
 
-        return view('admin.user.create', compact('pagemeta', 'authorities', 'me'));
+        return view('admin.user.create', compact('pagemeta', 'authorities', 'prefs'));
     }
 
-    public function edit($hashed_id, Request $request){
-        $me = $request['me'];
-
-        $pagemeta = Pagemeta::getPagemeta('AD-USR-06');
+    public function edit($hashed_id){
         $data = MyUser::getUser($hashed_id);
-        $authorities = Authority::getNames();
         Log::saveData( __METHOD__ , 'user_id', $data->user_id, true);
+        $pagemeta = Pagemeta::getPagemeta('AD-USR-06');
+        $authorities = Authority::getNames();
+        $prefs = Pref::getNames();
 
-        return view('admin.user.edit', compact('pagemeta', 'data', 'authorities', 'me'));
+        return view('admin.user.edit', compact('pagemeta', 'data', 'authorities', 'prefs'));
     }
 
 
@@ -116,17 +115,17 @@ class userController extends adminController
 
     public function delete($hashed_id){
         $user = MyUser::getData($hashed_id);
+        Log::saveData( __METHOD__ , 'user_id', $user->user_id, true );
         MyUser::deleteData($hashed_id);
         UserToAuthority::deleteData($user->user_id);
-        Log::saveData( __METHOD__ , 'user_id', $user->user_id, true );
 
         return redirect('admin/user');
     }
 
     public function ban($hashed_id){
         $user = MyUser::getData($hashed_id);
-        MyUser::ban($hashed_id);
         Log::saveData( __METHOD__ , 'user_id', $user->user_id, true );
+        MyUser::ban($hashed_id);
 
         return redirect('admin/user');
     }
