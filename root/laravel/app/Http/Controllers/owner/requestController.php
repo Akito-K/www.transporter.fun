@@ -17,7 +17,7 @@ class requestController extends ownerController
 
     public function create($order_id){
         Log::saveData( __METHOD__ , 'order_id', $order_id, true);
-        $pagemeta = Pagemeta::getPagemeta('OW-MRQ-01');
+        $pagemeta = Pagemeta::getPagemeta('OW-RQ-020');
         $data = Order::getOrderFromOwnerSide($order_id);
         Order::addOrderRequests($data);
 
@@ -30,7 +30,7 @@ class requestController extends ownerController
         $request->flash();
         $action = 'create';
 
-        $pagemeta = Pagemeta::getPagemeta('OW-MRQ-02');
+        $pagemeta = Pagemeta::getPagemeta('OW-RQ-030');
         $order_id = $request['order_id'];
         $data = Order::getOrderFromOwnerSide($order_id);
         Order::addOrderRequests($data);

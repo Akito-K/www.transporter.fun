@@ -21,7 +21,7 @@ class workController extends carrierController
 
     public function showDetail( $work_id ){
         Log::saveData( __METHOD__ , 'work_id', $work_id, true);
-        $pagemeta = Pagemeta::getPagemeta('CR-WRK-02');
+        $pagemeta = Pagemeta::getPagemeta('CR-WK-011');
 
         $work_data = Work::getData($work_id);
         $estimate_data = Estimate::getEstimateFromCarrierSide($work_data->estimate_id);

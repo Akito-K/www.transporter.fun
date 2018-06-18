@@ -19,7 +19,7 @@ class userController extends adminController
 
     Public function showList(){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('AD-USR-01');
+        $pagemeta = Pagemeta::getPagemeta('AD-US-000');
         $users = MyUser::getUsers();
         $authorities = Authority::getNames();
 
@@ -29,7 +29,7 @@ class userController extends adminController
     public function showDetail($hashed_id){
         $data = MyUser::getUser($hashed_id);
         Log::saveData( __METHOD__ , 'user_id', $data->user_id, true );
-        $pagemeta = Pagemeta::getPagemeta('AD-USR-02');
+        $pagemeta = Pagemeta::getPagemeta('AD-US-010');
         $authorities = Authority::getNames();
         $prefs = Pref::getNames();
 
@@ -39,7 +39,7 @@ class userController extends adminController
     public function create(){
         Log::saveData( __METHOD__ );
 
-        $pagemeta = Pagemeta::getPagemeta('AD-USR-03');
+        $pagemeta = Pagemeta::getPagemeta('AD-US-020');
         $authorities = Authority::getNames();
         $prefs = Pref::getNames();
 
@@ -49,7 +49,7 @@ class userController extends adminController
     public function edit($hashed_id){
         $data = MyUser::getUser($hashed_id);
         Log::saveData( __METHOD__ , 'user_id', $data->user_id, true);
-        $pagemeta = Pagemeta::getPagemeta('AD-USR-06');
+        $pagemeta = Pagemeta::getPagemeta('AD-US-050');
         $authorities = Authority::getNames();
         $prefs = Pref::getNames();
 

@@ -20,7 +20,7 @@ class activeWorkController extends carrierController
 {
     public function showList(){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('CR-WRK-01');
+        $pagemeta = Pagemeta::getPagemeta('CR-WK-001');
         $datas = Work::getActiveWorksByCarrierId( \Auth::user()->carrier_id );
         $target = 'active';
 

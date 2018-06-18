@@ -20,7 +20,7 @@ class suggestController extends carrierController
 
     public function create($estimate_id){
         Log::saveData( __METHOD__ , 'estimate_id', $estimate_id, true);
-        $pagemeta = Pagemeta::getPagemeta('OW-SGT-01');
+        $pagemeta = Pagemeta::getPagemeta('CR-SG-020');
         $estimate_data = Estimate::getEstimateFromCarrierSide($estimate_id);
         $order_data = Order::getOrderFromCarrierSide($estimate_data->order_id);
         $owner_data = Owner::getData($order_data->owner_id);
@@ -34,7 +34,7 @@ class suggestController extends carrierController
     public function confirm( Request $request ){
         $estimate_id = $request['estimate_id'];
         Log::saveData( __METHOD__ , 'estimate_id', $estimate_id, true );
-        $pagemeta = Pagemeta::getPagemeta('OW-SGT-02');
+        $pagemeta = Pagemeta::getPagemeta('CR-SG-030');
 
         $estimate_data = Estimate::getEstimateFromCarrierSide($estimate_id);
         $order_data = Order::getOrderFromCarrierSide($estimate_data->order_id);

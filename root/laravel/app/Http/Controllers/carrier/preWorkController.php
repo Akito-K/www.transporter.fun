@@ -20,7 +20,7 @@ class preWorkController extends carrierController
 {
     public function showList(){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('CR-WRK-01');
+        $pagemeta = Pagemeta::getPagemeta('CR-WK-000');
         $datas = Work::getPreWorksByCarrierId( \Auth::user()->carrier_id );
 
         return view('carrier.pre_work.list', compact('pagemeta', 'datas'));
@@ -28,7 +28,7 @@ class preWorkController extends carrierController
 
     public function showDetail( $work_id ){
         Log::saveData( __METHOD__ , 'work_id', $work_id, true);
-        $pagemeta = Pagemeta::getPagemeta('CR-WRK-02');
+        $pagemeta = Pagemeta::getPagemeta('CR-WK-010');
 
         $work_data = Work::getData($work_id);
         $estimate_data = Estimate::getEstimateFromCarrierSide($work_data->estimate_id);

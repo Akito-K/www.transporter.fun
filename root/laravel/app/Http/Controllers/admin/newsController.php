@@ -12,14 +12,14 @@ class newsController extends adminController
 {
 
     public function showList(){
-        $pagemeta = Pagemeta::getPagemeta('AD-NS-01');
+        $pagemeta = Pagemeta::getPagemeta('AD-NS-000');
         $datas = News::getDatas();
 
         return view('admin.news.list', compact('pagemeta', 'datas'));
     }
 
     public function create(){
-        $pagemeta = Pagemeta::getPagemeta('AD-NS-03');
+        $pagemeta = Pagemeta::getPagemeta('AD-NS-020');
 
         return view('admin.news.create', compact('pagemeta'));
     }
@@ -33,7 +33,7 @@ class newsController extends adminController
     }
 
     public function edit($news_id){
-        $pagemeta = Pagemeta::getPagemeta('AD-NS-06');
+        $pagemeta = Pagemeta::getPagemeta('AD-NS-050');
         $data = News::getData($news_id);
 
         return view('admin.news.edit', compact('pagemeta', 'data'));
@@ -79,7 +79,7 @@ class newsController extends adminController
         $this->validate($request, $validates);
     }
 
-    public function insertData(Request $request){
+    public function insertData($request){
         $now_at = new \Datetime();
         $date_at = new \Datetime($request['hide_date_at']);
         $publish_start_at = ($request['hide_publish_start_at'])? new \Datetime($request['hide_publish_start_at']): null;
@@ -97,7 +97,7 @@ class newsController extends adminController
         ]);
     }
 
-    public function updateData(Request $request){
+    public function updateData($request){
         $now_at = new \Datetime();
         $date_at = new \Datetime($request['hide_date_at']);
         $publish_start_at = ($request['hide_publish_start_at'])? new \Datetime($request['hide_publish_start_at']): null;

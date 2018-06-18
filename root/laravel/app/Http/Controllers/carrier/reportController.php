@@ -21,7 +21,7 @@ class reportController extends carrierController
 
     public function create($work_id){
         Log::saveData( __METHOD__ , 'work_id', $work_id, true);
-        $pagemeta = Pagemeta::getPagemeta('OW-RCV-01');
+        $pagemeta = Pagemeta::getPagemeta('CR-RP-020');
         $work_data = Work::getData($work_id);
         $estimate_data = Estimate::getEstimateFromCarrierSide($work_data->estimate_id);
         $order_data = Order::getOrderFromCarrierSide($estimate_data->order_id);
@@ -36,7 +36,7 @@ class reportController extends carrierController
     public function confirm( MyRequest $request ){
         $work_id = $request['work_id'];
         Log::saveData( __METHOD__ , 'work_id', $work_id, true );
-        $pagemeta = Pagemeta::getPagemeta('OW-RCV-02');
+        $pagemeta = Pagemeta::getPagemeta('CR-RP-030');
 
         $work_data = Work::getData($work_id);
         $estimate_data = Estimate::getEstimateFromCarrierSide($work_data->estimate_id);

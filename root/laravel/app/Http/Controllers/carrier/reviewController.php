@@ -23,7 +23,7 @@ class reviewController extends carrierController
 
     public function create( $work_id ){
         Log::saveData( __METHOD__ , 'work_id', $work_id, true);
-        $pagemeta = Pagemeta::getPagemeta('CR-RVW-01');
+        $pagemeta = Pagemeta::getPagemeta('CR-RV-020');
 
         $work_data = Work::getData($work_id);
         $estimate_data = Estimate::getEstimateFromCarrierSide($work_data->estimate_id);
@@ -43,7 +43,7 @@ class reviewController extends carrierController
     public function confirm( MyRequest $request ){
         $work_id = $request['work_id'];
         Log::saveData( __METHOD__ , 'work_id', $work_id, true );
-        $pagemeta = Pagemeta::getPagemeta('OW-RCV-02');
+        $pagemeta = Pagemeta::getPagemeta('OW-RV-030');
 
         $work_data = Work::getData($work_id);
         $estimate_data = Estimate::getEstimateFromCarrierSide($work_data->estimate_id);

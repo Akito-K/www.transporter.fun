@@ -14,7 +14,7 @@ class logController extends adminController
     protected $per_page = 50;
 
     public function showList($page=1){
-        $pagemeta = Pagemeta::getPagemeta('AD-LG-01');
+        $pagemeta = Pagemeta::getPagemeta('AD-LG-000');
 
         $pages = $this->getPages($page);
         $offset = ($pages['current']-1) * $this->per_page;

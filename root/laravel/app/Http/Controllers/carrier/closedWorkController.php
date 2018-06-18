@@ -12,7 +12,7 @@ class closedWorkController extends carrierController
 {
     public function showList(){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('CR-WRK-01');
+        $pagemeta = Pagemeta::getPagemeta('CR-WK-002');
         //$datas = Work::getActiveDatas(\Auth::user()->carrier_id);
         $datas = Work::getClosedWorksByCarrierId( \Auth::user()->carrier_id );
         $target = 'closed';

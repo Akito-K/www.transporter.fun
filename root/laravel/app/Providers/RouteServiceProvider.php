@@ -39,6 +39,13 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapWebSignupRoutes();
+        $this->mapWebAdminRoutes();
+        $this->mapWebMypageRoutes();
+        $this->mapWebOwnerRoutes();
+        $this->mapWebCarrierRoutes();
+        $this->mapWebAjaxRoutes();
+
         //
     }
 
@@ -55,6 +62,50 @@ class RouteServiceProvider extends ServiceProvider
              ->namespace($this->namespace)
              ->group(base_path('routes/web.php'));
     }
+
+
+    protected function mapWebSignupRoutes()
+    {
+        Route::middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/web_signup.php'));
+    }
+
+    protected function mapWebAdminRoutes()
+    {
+        Route::middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/web_admin.php'));
+    }
+
+    protected function mapWebMypageRoutes()
+    {
+        Route::middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/web_mypage.php'));
+    }
+
+    protected function mapWebOwnerRoutes()
+    {
+        Route::middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/web_owner.php'));
+    }
+
+    protected function mapWebCarrierRoutes()
+    {
+        Route::middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/web_carrier.php'));
+    }
+
+    protected function mapWebAjaxRoutes()
+    {
+        Route::middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/web_ajax.php'));
+    }
+
 
     /**
      * Define the "api" routes for the application.

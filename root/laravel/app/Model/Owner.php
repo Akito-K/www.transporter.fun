@@ -26,6 +26,12 @@ class Owner extends Model
         return $data;
     }
 
+    public static function getDataFromUserId($user_id){
+        $data = MyUser::where('user_id', $user_id)->first();
+
+        return Owner::getData($data->owner_id);
+    }
+
     public static function getUser($owner_id){
         $data = MyUser::where('owner_id', $owner_id)->first();
 

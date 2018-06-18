@@ -6,13 +6,14 @@ use App\Http\Controllers\adminController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Pagemeta;
-use App\Model\News;
+use App\Model\Log;
 
 class homeController extends adminController
 {
 
     public function dashboard(){
-        $pagemeta = Pagemeta::getDefault();
+        Log::saveData( __METHOD__ );
+        $pagemeta = Pagemeta::getPagemeta('AD-HM-000');
 
         return view('admin.home.dashboard', compact('pagemeta'));
     }

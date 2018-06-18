@@ -13,26 +13,26 @@ use App\Model\Log;
 class itemController extends carrierController
 {
 
-    public function showList(Request $request){
+    public function showList(){
         $me = MyUser::getMe();
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('CR-ITM-01');
+        $pagemeta = Pagemeta::getPagemeta('CR-IM-000');
         $datas = Item::getDatas($me->carrier_id);
 
         return view('carrier.item.list', compact('pagemeta', 'datas'));
     }
 
-    public function showDetail($item_id, Request $request){
+    public function showDetail($item_id){
         Log::saveData( __METHOD__ , 'item_id', $item_id, true);
-        $pagemeta = Pagemeta::getPagemeta('CR-ITM-02');
+        $pagemeta = Pagemeta::getPagemeta('CR-IM-010');
         $data = Item::getData($item_id);
 
         return view('carrier.item.detail', compact('pagemeta', 'data'));
     }
 
-    public function create(Request $request){
+    public function create(){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('CR-ITM-03');
+        $pagemeta = Pagemeta::getPagemeta('CR-IM-020');
 
         return view('carrier.item.create', compact('pagemeta'));
     }
@@ -41,13 +41,15 @@ class itemController extends carrierController
         Log::saveData( __METHOD__ );
         // Validation
         $this->validation($request);
-        $this->insertData($request);
+
+        $me = MyUser::getMe();
+        $this->insertData($request, $me);
 
         return redirect('carrier/item');
     }
 
-    public function edit($item_id, Request $request){
-        $pagemeta = Pagemeta::getPagemeta('CR-ITM-06');
+    public function edit($item_id){
+        $pagemeta = Pagemeta::getPagemeta('CR-IM-050');
         $data = Item::getData($item_id);
         Log::saveData( __METHOD__ , 'item_id', $item_id, true);
 
@@ -64,7 +66,7 @@ class itemController extends carrierController
         return redirect('carrier/item');
     }
 
-    public function delete($item_id, Request $request){
+    public function delete($item_id){
         Log::saveData( __METHOD__ , 'item_id', $item_id, true);
         Item::where('item_id', $item_id)->delete();
 
@@ -80,12 +82,12 @@ class itemController extends carrierController
         $this->validate($request, $validates);
     }
 
-    public function insertData(Request $request){
+    public function insertData($request, $me){
         $now_at = new \Datetime();
         $item_id = Item::getNewId();
         Item::create([
             'item_id' => $item_id,
-            'carrier_id' => $request['me']->carrier_id,
+            'carrier_id' => $me->carrier_id,
             'code' => $request['code'],
             'name' => $request['name'],
             'amount' => $request['amount'],
@@ -95,7 +97,7 @@ class itemController extends carrierController
         ]);
     }
 
-    public function updateData(Request $request){
+    public function updateData($request){
         $now_at = new \Datetime();
         Item::where('item_id', $request['item_id'])->update([
             'code' => $request['code'],

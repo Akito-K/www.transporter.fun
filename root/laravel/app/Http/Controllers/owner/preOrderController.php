@@ -15,7 +15,7 @@ class preOrderController extends ownerController
 
     public function showList(){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('OW-ORD-01');
+        $pagemeta = Pagemeta::getPagemeta('OW-OD-000');
         $datas = Order::getPreOrdersFromOwnerSide( \Auth::user()->owner_id );
         $status = Status::getNames();
 
@@ -24,7 +24,7 @@ class preOrderController extends ownerController
 
     public function showDetail($order_id){
         Log::saveData( __METHOD__ , 'order_id', $order_id );
-        $pagemeta = Pagemeta::getPagemeta('OW-ORD-02');
+        $pagemeta = Pagemeta::getPagemeta('OW-ORD-010');
         $data = Order::getOrderFromOwnerSide($order_id);
         Order::addOrderRequests($data);
         Order::addHideOwner($data);

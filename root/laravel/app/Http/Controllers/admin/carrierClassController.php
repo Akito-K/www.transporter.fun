@@ -12,14 +12,14 @@ class carrierClassController extends adminController
 {
 
     public function showList(){
-        $pagemeta = Pagemeta::getPagemeta('AD-CCL-01');
+        $pagemeta = Pagemeta::getPagemeta('AD-CC-000');
         $datas = CarrierClass::getDatas();
 
         return view('admin.carrier_class.list', compact('pagemeta', 'datas'));
     }
 
     public function create(){
-        $pagemeta = Pagemeta::getPagemeta('AD-CCL-03');
+        $pagemeta = Pagemeta::getPagemeta('AD-CC-020');
 
         return view('admin.carrier_class.create', compact('pagemeta'));
     }
@@ -33,7 +33,7 @@ class carrierClassController extends adminController
     }
 
     public function edit($class_id){
-        $pagemeta = Pagemeta::getPagemeta('AD-CCL-06');
+        $pagemeta = Pagemeta::getPagemeta('AD-CC-050');
         $data = CarrierClass::getData($class_id);
 
         return view('admin.carrier_class.edit', compact('pagemeta', 'data'));
@@ -62,7 +62,7 @@ class carrierClassController extends adminController
         $this->validate($request, $validates);
     }
 
-    public function insertData(Request $request){
+    public function insertData($request){
         $now_at = new \Datetime();
         $class_id = CarrierClass::getNewId();
         CarrierClass::create([
@@ -74,7 +74,7 @@ class carrierClassController extends adminController
         ]);
     }
 
-    public function updateData(Request $request){
+    public function updateData($request){
         $now_at = new \Datetime();
         CarrierClass::where('class_id', $request['class_id'])->update([
             'name' => $request['name'],

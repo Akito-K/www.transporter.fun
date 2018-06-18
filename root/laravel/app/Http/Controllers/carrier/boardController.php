@@ -23,7 +23,7 @@ class boardController extends carrierController
 {
     public function detail( $work_id, Request $request ){
         Log::saveData( __METHOD__ , 'work_id', $work_id, true);
-        $pagemeta = Pagemeta::getPagemeta('CR-BRD-02');
+        $pagemeta = Pagemeta::getPagemeta('CR-BD-010');
 
         $my_user_id = \Auth::user()->user_id;
         $your_user_id = MyUser::getOwnerUserIdByWorkId($work_id);

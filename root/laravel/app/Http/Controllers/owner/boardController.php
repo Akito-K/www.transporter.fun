@@ -23,7 +23,7 @@ class boardController extends ownerController
 {
     public function detailByOrder( $order_id, Request $request ){
         Log::saveData( __METHOD__ , 'order_id', $order_id, true);
-        $pagemeta = Pagemeta::getPagemeta('OW-BRD-02');
+        $pagemeta = Pagemeta::getPagemeta('OW-BD-010');
 
         $my_user_id = \Auth::user()->user_id;
         $your_user_id = MyUser::getCarrierUserIdByOrderId($order_id);
@@ -53,7 +53,7 @@ class boardController extends ownerController
 
     public function detailByEstimate( $estimate_id, Request $request ){
         Log::saveData( __METHOD__ , 'estimate_id', $estimate_id, true);
-        $pagemeta = Pagemeta::getPagemeta('OW-BRD-02');
+        $pagemeta = Pagemeta::getPagemeta('OW-BD-011');
 
         $my_user_id = \Auth::user()->user_id;
         $your_user_id = MyUser::getCarrierUserIdByEstimateId($estimate_id);

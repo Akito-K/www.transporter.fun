@@ -13,7 +13,7 @@ class accountController extends ownerController
 {
     public function showDetail(){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('OW-USR-01');
+        $pagemeta = Pagemeta::getPagemeta('OW-AC-020');
         $owner_id = \Auth::user()->owner_id;
         $owner_data = Owner::getData($owner_id);
         $owner_data->star = view('include.star', ['star' => $owner_data->star])->render();
@@ -24,7 +24,7 @@ class accountController extends ownerController
 
     public function editBase(){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('OW-USR-02');
+        $pagemeta = Pagemeta::getPagemeta('OW-AC-030');
         $owner_id = \Auth::user()->owner_id;
         $owner_data = Owner::getOwner($owner_id);
         $prefs = Pref::getNames();

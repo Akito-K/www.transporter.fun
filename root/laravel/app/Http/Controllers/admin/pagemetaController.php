@@ -13,19 +13,19 @@ class pagemetaController extends adminController
 {
     public function showList(){
         $datas = Pagemeta::getPagemetas();
-        $pagemeta = Pagemeta::getPagemeta('AD-PM-01');
+        $pagemeta = Pagemeta::getPagemeta('AD-PM-000');
 
         return view('admin.pagemeta.list', compact('pagemeta', 'datas'));
     }
 
     public function create(){
-        $pagemeta = Pagemeta::getPagemeta('AD-PM-02');
+        $pagemeta = Pagemeta::getPagemeta('AD-PM-020');
 
         return view('admin.pagemeta.create', compact('pagemeta'));
     }
 
     public function confirm(Request $request){
-        $pagemeta = Pagemeta::getPagemeta('AD-PM-03');
+        $pagemeta = Pagemeta::getPagemeta('AD-PM-030');
 
         $upload_id = $request['upload_id'];
         $file = Upload::getData($upload_id);

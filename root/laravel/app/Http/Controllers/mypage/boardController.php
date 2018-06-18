@@ -16,7 +16,7 @@ class boardController extends mypageController
 
     public function detailByCarrier( $carrier_id, Request $request ){
         Log::saveData( __METHOD__ , 'carrier_id', $carrier_id, true);
-        $pagemeta = Pagemeta::getPagemeta('MY-BRD-02');
+        $pagemeta = Pagemeta::getPagemeta('MY-BD-010');
 
         $my_user_id = \Auth::user()->user_id;
         $your_user_id = MyUser::getUserIdByCarrierId($carrier_id);

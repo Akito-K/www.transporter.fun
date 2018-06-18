@@ -12,14 +12,14 @@ class authorityController extends adminController
 {
 
     public function showList(){
-        $pagemeta = Pagemeta::getPagemeta('AD-AUT-01');
+        $pagemeta = Pagemeta::getPagemeta('AD-AT-000');
         $datas = Authority::getAuthorities();
 
         return view('admin.authority.list', compact('pagemeta', 'datas'));
     }
 
     public function create(){
-        $pagemeta = Pagemeta::getPagemeta('AD-AUT-03');
+        $pagemeta = Pagemeta::getPagemeta('AD-AT-020');
 
         return view('admin.authority.create', compact('pagemeta'));
     }
@@ -33,7 +33,7 @@ class authorityController extends adminController
     }
 
     public function edit($authority_id){
-        $pagemeta = Pagemeta::getPagemeta('AD-AUT-06');
+        $pagemeta = Pagemeta::getPagemeta('AD-AT-050');
         $data = Authority::getData($authority_id);
 
         return view('admin.authority.edit', compact('pagemeta', 'data'));
@@ -62,7 +62,7 @@ class authorityController extends adminController
         $this->validate($request, $validates);
     }
 
-    public function insertData(Request $request){
+    public function insertData($request){
         $now_at = new \Datetime();
         Authority::create([
             'authority_id' => $request['authority_id'],
@@ -72,7 +72,7 @@ class authorityController extends adminController
         ]);
     }
 
-    public function updateData(Request $request){
+    public function updateData($request){
         $now_at = new \Datetime();
         Authority::where('id', $request['id'])->update([
             'authority_id' => $request['authority_id'],

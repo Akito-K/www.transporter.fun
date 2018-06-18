@@ -18,7 +18,7 @@ class accountController extends carrierController
 {
     public function showDetail(){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('CR-USR-01');
+        $pagemeta = Pagemeta::getPagemeta('CR-AC-010');
         $carrier_id = \Auth::user()->carrier_id;
         $carrier_data = Carrier::getData($carrier_id);
         $carrier_data->star = view('include.star', ['star' => $carrier_data->star])->render();
@@ -33,7 +33,7 @@ class accountController extends carrierController
 
     public function editBase(){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('CR-USR-02');
+        $pagemeta = Pagemeta::getPagemeta('CR-AC-011');
         $carrier_id = \Auth::user()->carrier_id;
         $carrier_data = Carrier::getCarrier($carrier_id);
         $prefs = Pref::getNames();
@@ -51,7 +51,7 @@ class accountController extends carrierController
 
     public function editCars(){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('CR-USR-02');
+        $pagemeta = Pagemeta::getPagemeta('CR-AC-012');
         $carrier_id = \Auth::user()->carrier_id;
         $car_datas = Car::getDatas($carrier_id);
 
@@ -94,7 +94,7 @@ class accountController extends carrierController
 
     public function editEmpties(){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('CR-USR-03');
+        $pagemeta = Pagemeta::getPagemeta('CR-AC-013');
         $carrier_id = \Auth::user()->carrier_id;
         $car_datas = Car::getDatas($carrier_id);
         $car_names = Car::getNames($carrier_id);

@@ -178,6 +178,15 @@ class MyFunctions
         return str_replace(',', '', $formated_number?: 0);
     }
 
+    public static function getAverage($vals){
+        $ave = 0;
+        if( count($vals) > 0){
+            $ave = array_sum($vals) / count($vals);
+        }
+
+        return $ave;
+    }
+
     public static function getWeekDay($datetime){
         $result = "";
         if($datetime instanceof \Datetime){

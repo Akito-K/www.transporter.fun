@@ -13,14 +13,14 @@ class orderRequestOptionController extends adminController
 
     // 希望車種
     public function showCarList(){
-        $pagemeta = Pagemeta::getPagemeta('AD-ORC-01');
+        $pagemeta = Pagemeta::getPagemeta('AD-RO-000');
         $datas = OrderRequestOption::getTypeDatas('car');
 
         return view('admin.order_request_option.car.list', compact('pagemeta', 'datas'));
     }
 
     public function createCar(){
-        $pagemeta = Pagemeta::getPagemeta('AD-ORC-03');
+        $pagemeta = Pagemeta::getPagemeta('AD-RO-020');
 
         return view('admin.order_request_option.car.create', compact('pagemeta'));
     }
@@ -44,7 +44,7 @@ class orderRequestOptionController extends adminController
     }
 
     public function editCar($option_id){
-        $pagemeta = Pagemeta::getPagemeta('AD-ORC-06');
+        $pagemeta = Pagemeta::getPagemeta('AD-RO-050');
         $data = OrderRequestOption::getData($option_id);
 
         return view('admin.order_request_option.car.edit', compact('pagemeta', 'data'));
@@ -84,14 +84,14 @@ class orderRequestOptionController extends adminController
 
     // 希望車種
     public function showEquipmentList(){
-        $pagemeta = Pagemeta::getPagemeta('AD-ORE-01');
+        $pagemeta = Pagemeta::getPagemeta('AD-RO-001');
         $datas = OrderRequestOption::getTypeDatas('equipment');
 
         return view('admin.order_request_option.equipment.list', compact('pagemeta', 'datas'));
     }
 
     public function createEquipment(){
-        $pagemeta = Pagemeta::getPagemeta('AD-ORE-03');
+        $pagemeta = Pagemeta::getPagemeta('AD-RO-021');
 
         return view('admin.order_request_option.equipment.create', compact('pagemeta'));
     }
@@ -115,7 +115,7 @@ class orderRequestOptionController extends adminController
     }
 
     public function editEquipment($option_id){
-        $pagemeta = Pagemeta::getPagemeta('AD-ORE-06');
+        $pagemeta = Pagemeta::getPagemeta('AD-OR-051');
         $data = OrderRequestOption::getData($option_id);
 
         return view('admin.order_request_option.equipment.edit', compact('pagemeta', 'data'));
@@ -154,14 +154,14 @@ class orderRequestOptionController extends adminController
 
     // 希望車種
     public function showOtherList(){
-        $pagemeta = Pagemeta::getPagemeta('AD-ORO-01');
+        $pagemeta = Pagemeta::getPagemeta('AD-RO-002');
         $datas = OrderRequestOption::getTypeDatas('other');
 
         return view('admin.order_request_option.other.list', compact('pagemeta', 'datas'));
     }
 
     public function createOther(){
-        $pagemeta = Pagemeta::getPagemeta('AD-ORO-03');
+        $pagemeta = Pagemeta::getPagemeta('AD-RO-022');
 
         return view('admin.order_request_option.other.create', compact('pagemeta'));
     }
@@ -184,7 +184,7 @@ class orderRequestOptionController extends adminController
     }
 
     public function editOther($option_id){
-        $pagemeta = Pagemeta::getPagemeta('AD-ORO-06');
+        $pagemeta = Pagemeta::getPagemeta('AD-RO-052');
         $data = OrderRequestOption::getData($option_id);
 
         return view('admin.order_request_option.other.edit', compact('pagemeta', 'data'));

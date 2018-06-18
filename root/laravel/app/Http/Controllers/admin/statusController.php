@@ -11,7 +11,7 @@ use App\Model\Pagemeta;
 class statusController extends adminController
 {
     public function showList(){
-        $pagemeta = Pagemeta::getPagemeta('AD-STU-01');
+        $pagemeta = Pagemeta::getPagemeta('AD-ST-000');
         $datas = Status::getDatas();
 
         return view('admin.status.list', compact('pagemeta', 'datas'));

@@ -19,7 +19,7 @@ class estimateController extends ownerController
     public function showOrderList ( $order_id ){
         Log::saveData( __METHOD__ , 'order_id', $order_id, true);
 
-        $pagemeta = Pagemeta::getPagemeta('OW-ESM-01');
+        $pagemeta = Pagemeta::getPagemeta('OW-EM-000');
         $order_data = Order::getOrderFromOwnerSide($order_id);
         $datas = Estimate::getEstimatesByOrderIdFromOwnerSide($order_id);
 
@@ -29,7 +29,7 @@ class estimateController extends ownerController
     public function showDetail ( $estimate_id ){
         Log::saveData( __METHOD__ , 'estimate_id', $estimate_id, true);
 
-        $pagemeta = Pagemeta::getPagemeta('OW-ESM-02');
+        $pagemeta = Pagemeta::getPagemeta('OW-EM-010');
         $data = Estimate::getEstimateFromOwnerSide($estimate_id);
         $owner = Carrier::getData(\Auth::user()->owner_id);
         $carrier_data = Carrier::getData( $data->carrier_id );

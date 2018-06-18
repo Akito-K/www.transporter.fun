@@ -20,6 +20,7 @@ class CreateEvaluationsTable extends Migration
             $table->string('user_id', 32);
             $table->string('evaluated_by', 32);
             $table->string('order_id', 32);
+            $table->float('star', 8, 2)->nullable();
 
             $table->datetime('created_at');
             $table->datetime('updated_at');

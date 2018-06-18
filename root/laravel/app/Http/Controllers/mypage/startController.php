@@ -20,7 +20,7 @@ class startController extends mypageController
 
     public function createOwner(Request $request){
         $me = MyUser::getMe();
-        $pagemeta = Pagemeta::getPagemeta('MY-STO-01');
+        $pagemeta = Pagemeta::getPagemeta('MY-SO-010');
         $prefs = Pref::getNames();
         \Func::array_append($prefs, [ 0 => '---' ], true);
         if( $request->session()->has('start.'.$me->hashed_id) ) {
@@ -38,7 +38,7 @@ class startController extends mypageController
         $this->validateInsert($request);
 
         $me = MyUser::getMe();
-        $pagemeta = Pagemeta::getPagemeta('MY-STO-02');
+        $pagemeta = Pagemeta::getPagemeta('MY-SO-020');
 
         $user = MyUser::getUser($me->hashed_id);
         $prefs = Pref::getNames();
@@ -63,6 +63,7 @@ class startController extends mypageController
 
         // 荷主情報登録
         $data['owner_id'] = Owner::getNewId();
+        $data['star'] = 3.00;
         $data['created_at'] = $date_at;
         $data['updated_at'] = $date_at;
         Owner::insert($data);
@@ -138,7 +139,7 @@ class startController extends mypageController
 
     public function createCarrier(Request $request){
         $me = MyUser::getMe();
-        $pagemeta = Pagemeta::getPagemeta('MY-STC-01');
+        $pagemeta = Pagemeta::getPagemeta('MY-SC-010');
         $prefs = Pref::getNames();
         \Func::array_append($prefs, [ 0 => '---' ], true);
         if( $request->session()->has('start.'.$me->hashed_id) ) {
@@ -156,7 +157,7 @@ class startController extends mypageController
         $this->validateInsert($request);
 
         $me = MyUser::getMe();
-        $pagemeta = Pagemeta::getPagemeta('MY-STC-02');
+        $pagemeta = Pagemeta::getPagemeta('MY-SC-020');
 
         $user = MyUser::getUser($me->hashed_id);
         $prefs = Pref::getNames();

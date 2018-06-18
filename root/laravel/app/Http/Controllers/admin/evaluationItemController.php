@@ -12,7 +12,7 @@ class evaluationItemController extends adminController
 {
 
     public function showList(){
-        $pagemeta = Pagemeta::getPagemeta('AD-EVI-01');
+        $pagemeta = Pagemeta::getPagemeta('AD-EI-000');
         $datas = EvaluationItem::getDatas();
         $targets = EvaluationItem::getTargets();
 
@@ -20,7 +20,7 @@ class evaluationItemController extends adminController
     }
 
     public function create(){
-        $pagemeta = Pagemeta::getPagemeta('AD-EVI-03');
+        $pagemeta = Pagemeta::getPagemeta('AD-EI-020');
         $targets = EvaluationItem::getTargets();
 
         return view('admin.evaluation_item.create', compact('pagemeta', 'targets'));
@@ -35,7 +35,7 @@ class evaluationItemController extends adminController
     }
 
     public function edit($item_id){
-        $pagemeta = Pagemeta::getPagemeta('AD-EVI-06');
+        $pagemeta = Pagemeta::getPagemeta('AD-EI-050');
         $data = EvaluationItem::getData($item_id);
         $targets = EvaluationItem::getTargets();
 
@@ -66,7 +66,7 @@ class evaluationItemController extends adminController
         $this->validate($request, $validates);
     }
 
-    public function insertData(Request $request){
+    public function insertData($request){
         $now_at = new \Datetime();
         $item_id = EvaluationItem::getNewId();
         $validated_at = ($request['hide_validated_at'])? new \Datetime($request['hide_validated_at']): null;
@@ -84,7 +84,7 @@ class evaluationItemController extends adminController
         ]);
     }
 
-    public function updateData(Request $request){
+    public function updateData($request){
         $now_at = new \Datetime();
         $validated_at = ($request['hide_validated_at'])? new \Datetime($request['hide_validated_at']): null;
         $period_at = ($request['hide_period_at'])? new \Datetime($request['hide_period_at']): null;

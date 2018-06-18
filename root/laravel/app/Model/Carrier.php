@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Model\MyUser;
 use App\Model\Car;
 use App\Model\Area;
 use App\Model\CarEmpty;
@@ -22,6 +23,12 @@ class Carrier extends Model
         $new_id = 'CRR-'.$date_at->format('ymd-His-').\Func::getRandStr("Aa0", 5);
 
         return $new_id;
+    }
+
+    public static function getDataFromUserId($user_id){
+        $data = MyUser::where('user_id', $user_id)->first();
+
+        return Carrier::getData($data->carrier_id);
     }
 
     public static function getDatas(){

@@ -22,7 +22,7 @@ class activeOrderController extends ownerController
 
     public function showList(){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('OW-ORD-01');
+        $pagemeta = Pagemeta::getPagemeta('OW-OD-001');
         $datas = Order::getActiveOrdersFromOwnerSide( \Auth::user()->owner_id );
         $status = Status::getNames();
 
@@ -31,7 +31,7 @@ class activeOrderController extends ownerController
 
     public function showDetail($order_id){
         Log::saveData( __METHOD__ , 'order_id', $order_id );
-        $pagemeta = Pagemeta::getPagemeta('OW-ORD-02');
+        $pagemeta = Pagemeta::getPagemeta('OW-OD-011');
 
         $estimate_data = Estimate::getPlacedEstimateByOrderIdFromOwnerSide($order_id);
         $order_data = Order::getOrderFromOwnerSide($estimate_data->order_id);

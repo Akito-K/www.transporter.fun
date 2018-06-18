@@ -40,6 +40,7 @@ use App\Model\OrderToCargo;
 use App\Model\OrderRequest;
 use App\Model\OrderRequestOption;
 use App\Model\Owner;
+use App\Model\Payment;
 use App\Model\Pref;
 use App\Model\Report;
 use App\Model\ReportTemp;
@@ -107,6 +108,7 @@ class DatabaseSeeder extends Seeder
         $this->OrderRequestSeeder();
         $this->OrderRequestOptionSeeder();
         $this->OwnerSeeder();
+        $this->PaymentSeeder();
         $this->PrefSeeder();
         $this->ReportSeeder();
         $this->ReportTempSeeder();
@@ -633,6 +635,21 @@ class DatabaseSeeder extends Seeder
             if(!empty($datas)){
                 foreach($datas as $data){
                     Pref::create($data);
+                }
+            }
+        }
+    }
+
+    public function PaymentSeeder(){
+        $table_name = 'payments';
+
+        DB::table( $table_name )->delete();
+        if( isset( $this->datas[ $table_name ])){
+            $datas = $this->datas[ $table_name ];
+
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    Payment::create($data);
                 }
             }
         }

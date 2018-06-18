@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Mail;
 class accountController extends mypageController
 {
 
-    public function showDetail(Request $request){
+    public function showDetail(){
         $data = MyUser::getMe();
         Log::saveData( __METHOD__ , 'user_id', $data->user_id, true );
 
@@ -31,7 +31,7 @@ class accountController extends mypageController
         return view('mypage.account.detail', compact('pagemeta', 'data', 'prefs'));
     }
 
-    public function edit(Request $request){
+    public function edit(){
         $data = MyUser::getMe();
         Log::saveData( __METHOD__ , 'user_id', $data->user_id, true);
 
@@ -65,7 +65,7 @@ class accountController extends mypageController
         return redirect('mypage/account');
     }
 
-    public function email(Request $request){
+    public function email(){
         $data = MyUser::getMe();
         Log::saveData( __METHOD__ , 'user_id', $data->user_id, true);
         $pagemeta = Pagemeta::getPagemeta('MY-AC-050');

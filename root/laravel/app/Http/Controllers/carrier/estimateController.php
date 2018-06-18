@@ -21,7 +21,7 @@ class estimateController extends carrierController
     public function showList (){
         Log::saveData( __METHOD__ );
 
-        $pagemeta = Pagemeta::getPagemeta('OW-ESM-01');
+        $pagemeta = Pagemeta::getPagemeta('CR-EM-000');
         $datas = Estimate::getEstimatesFromCarrierSide(\Auth::user()->carrier_id);
 
         return view('carrier.estimate.list', compact('pagemeta', 'datas'));
@@ -30,7 +30,7 @@ class estimateController extends carrierController
     public function showOrderList ( $order_id ){
         Log::saveData( __METHOD__ , 'order_id', $order_id, true);
 
-        $pagemeta = Pagemeta::getPagemeta('OW-ESM-01');
+        $pagemeta = Pagemeta::getPagemeta('CR-EM-001');
         $datas = Estimate::getEstimatesByOrderIdFromCarrierSide( \Auth::user()->carrier_id, $order_id );
 
         return view('carrier.estimate.order_list', compact('pagemeta', 'datas'));
@@ -39,7 +39,7 @@ class estimateController extends carrierController
     public function showDetail ( $estimate_id ){
         Log::saveData( __METHOD__ , 'estimate_id', $estimate_id, true);
 
-        $pagemeta = Pagemeta::getPagemeta('OW-ESM-02');
+        $pagemeta = Pagemeta::getPagemeta('CR-EM-010');
         $data = Estimate::getEstimateFromCarrierSide($estimate_id);
         $order_data = Order::getOrderFromCarrierSide($data->order_id);
         $carrier_data = Carrier::getData(\Auth::user()->carrier_id);
@@ -50,7 +50,7 @@ class estimateController extends carrierController
     public function create( $order_id ){
         Log::saveData( __METHOD__ , 'order_id', $order_id, true);
 
-        $pagemeta = Pagemeta::getPagemeta('OW-ESM-03');
+        $pagemeta = Pagemeta::getPagemeta('CR-EM-020');
         $order_data = Order::getOrderFromCarrierSide($order_id);
         $items = Item::getNames(\Auth::user()->carrier_id);
         \Func::array_append($items, [ 0 => '---' ], true);
@@ -63,7 +63,7 @@ class estimateController extends carrierController
         $order_id = $request['order_id'];
         Log::saveData( __METHOD__ , 'order_id', $order_id, true);
 
-        $pagemeta = Pagemeta::getPagemeta('OW-ESM-04');
+        $pagemeta = Pagemeta::getPagemeta('CR-EM-030');
         $order_data = Order::getOrderFromCarrierSide($order_id);
         $carrier_data = Carrier::getData(\Auth::user()->carrier_id);
         $request->flash();
@@ -85,9 +85,9 @@ class estimateController extends carrierController
         return redirect('carrier/estimate');
     }
 
-    public function edit ($estimate_id, Request $request){
+    public function edit ($estimate_id){
         Log::saveData( __METHOD__ , 'estimate_id', $estimate_id, true);
-        $pagemeta = Pagemeta::getPagemeta('OW-ESM-06');
+        $pagemeta = Pagemeta::getPagemeta('CR-EM-050');
 
         $data = Estimate::getEstimateFromCarrierSide($estimate_id);
         $order_data = Order::getOrderFromCarrierSide($data->order_id);
@@ -105,7 +105,7 @@ class estimateController extends carrierController
         Log::saveData( __METHOD__ , 'estimate_id', $estimate_id, true);
         $order_id = $request['order_id'];
 
-        $pagemeta = Pagemeta::getPagemeta('OW-ESM-07');
+        $pagemeta = Pagemeta::getPagemeta('CR-EM-060');
         $order_data = Order::getOrderFromCarrierSide($order_id);
         $carrier_data = Carrier::getData(\Auth::user()->carrier_id);
 
@@ -128,7 +128,7 @@ class estimateController extends carrierController
         return redirect('carrier/estimate');
     }
 
-    public function delete ($estimate_id ){
+    public function delete ($estimate_id){
         Log::saveData( __METHOD__ , 'estimate_id', $estimate_id, true);
         $data = Estimate::getData($estimate_id);
         $data->delete();

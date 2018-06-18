@@ -1,202 +1,208 @@
-PAG-Ib2qfcwDvvAzyFLiDvZVU,CM-SU-000,ユーザー登録 メールアドレス入力,表示,page-signup
-PAG-QyjxU16qAA49usJZ7I3Oz,CM-SU-010,ユーザー登録,実行,page-signup
-PAG-LQAQ7n7E8TlOCsSg4rDUY,CM-SU-020,ユーザー登録 ログイン情報,入力,page-signup {signup_key}
-PAG-UmpRHVuGaBfov3Nwxifv7,CM-SU-021,,,
-PAG-OxskQpQUU7hkp8EDtVExn,CM-SU-022,,,
-PAG-AeVxdIj2YrPRH1kgnFLcx,NP6ZOIBRS6C3,ユーザー登録,書き込み,page-signup insert
-PAG-ETZwfaPIy95GYDjPIvuNo,CM-SU-040,ユーザー登録 住所氏名・種別選択,入力,page-signup {signup_key}
-PAG-Tncev39sVHp3BijLreh1c,E6R9EGQ3550A,ユーザー登録,書き込み,page-signup update
-PAG-ZyZ8PrqKoHA8GRyxL1z75,CM-SU-060,ユーザー登録 同意事項,表示,page-signup {signup_key}
-PAG-UDBHPIrUASsDCJ5R6Rzj6,CM-SU-070,ユーザー登録 決済リンク,表示,page-signup {signup_key}
-PAG-NVkfIxJEjdoxUlf2LiQOS,CM-SU-071,,,
-PAG-DkQdWPl0VoGdoe2DTPUMu,CM-EP-010,イプシロン 取引情報送信処理,,
-PAG-SA5LYuf72ZQqoBQTeEL9b,CM-EP-020,イプシロン 取引登録エラー,,
-PAG-S5BEOIJalxWZ84dZnJ1OA,CM-EP-030,イプシロン 取引結果受信処理,,
-PAG-CwSNG6Lj0xr1KczeQrAFj,CM-SU-080,ユーザー登録 完了,表示,page-signup {signup_key}
-PAG-PpHr5PcWImLprfsDQGTlT,CM-HM-000,サイトトップページ,,page- 
-PAG-OGsTHibRI0n5IxKkr6NPj,CM-AT-000,ユーザー情報 メアド変更,認証,page-authorization {authorization_code}
-PAG-K6HlDrd4ivO7w8bbqgbty,CM-AT-001,,,
-PAG-A9X0uZ9UTVfejRRLsQ1xO,MY-HM-000,ダッシュボード,表示,page-mypage dashboard
-PAG-I5ogT9s8NxQ1hU4GyX3kw,MY-ST-000,登録状況,表示,page-mypage status
-PAG-XJOKFX2XPSPhwyjffBSv4,MY-AC-010,アカウント情報,表示,page-mypage account
-PAG-Gn9jgxF6oePi1fHDa5872,MY-AC-020,アカウント情報,編集,page-mypage account
-PAG-KsRpbJwySCItnZkLfiAmk,CUX2E6BC74I9,アカウント情報,更新,page-mypage account
-PAG-HIg72067onZN7Xpdn0VBw,MY-AC-050,アカウント情報,メアド変更用,page-mypage account
-PAG-MxANxlyOafx8p5FzFnJXr,MY-AC-060,アカウント情報,メアド変更用,page-mypage account
-PAG-Rcqnda2qkqqpdSDyz5F0i,MY-AD-000,住所情報 一覧,表示,page-mypage address
-PAG-HCOSCnZohHbTAQ1nXGyUS,MY-AD-010,住所情報 詳細,表示,page-mypage address
-PAG-XbWg29tk5SUm7yn8AVAIK,MY-AD-020,住所情報,新規,page-mypage address
-PAG-WdVFyd0gbm9GG6GxLscs5,U6A76BPKMFYQ,住所情報,挿入,page-mypage address
-PAG-HGtQKYUdntYpv9UKcQmuy,MY-AD-050,住所情報,編集,page-mypage address
-PAG-RvddwKLEE6Lg8okHasEBK,FHPRNZTJTX81,住所情報,更新,page-mypage address
-PAG-JX4CXJdx5TZyq3rdvbUCX,MY-AD-080,住所情報,削除,page-mypage address
-PAG-VQu39Ac4Qi9sSr8ih8K08,MY-SO-010,利用開始 荷主として,入力,page-mypage start
-PAG-G1fJmSDohvxNSvKtK77ZC,MY-SO-020,利用開始 荷主として,確認,page-mypage start
-PAG-RxlkKtfKdk0SOr2RgRP0J,MSC3A2WEEWQ5,利用開始 荷主として,実行,page-mypage start
-PAG-OqF2epiptq1gRm6tAt7uD,MY-SC-040,利用開始 運送会社として,入力,page-mypage start
-PAG-S7KgUbOskys3oB6hQW3my,MY-SC-050,利用開始 運送会社として,確認,page-mypage start
-PAG-SGlJfIYpHUodsGiyNhqZ2,HPJU25PGNBB5,利用開始 運送会社として,実行,page-mypage start
-PAG-SEAJbvV1bPiRn8LEZX04F,MY-CR-000,運送業者情報 一覧,表示,page-mypage carrier
-PAG-OdLzRr2AkZfuO0311XBHo,MY-CR-010,運送業者情報 詳細,表示,page-mypage carrier
-PAG-XxNRcD9EG2knNmlNzJxVK,MY-BD-010,コンタクトボード,表示,page-mypage board
-PAG-U1NHFwtBJhxijRBAgUK2Y,OW-HM-000,ダッシュボード,表示,page-owner dashboard
-PAG-PLN5GJEXlFm3kM1lIcf28,OW-OD-020,案件,新規,page-owner order
-PAG-Ik0WkTfOHgh5Bh935mi9A,OW-OD-030,案件,確認,page-owner order
-PAG-ReM1FducjiGQ5Lc3JDmFd,O5LDQZ77G9X2,案件,挿入,page-owner order
-PAG-KJcYvqTyLCbKAudWwz1pZ,OW-OD-050,案件,編集,page-owner order
-PAG-EQ1lyRvvYdz2RJY1dqR4X,OW-OD-060,案件,確認,page-owner order
-PAG-RN6sFCpWxAMqEApDDkJD7,NL5L982QTDR8,案件,更新,page-owner order
-PAG-J3Hm0NUHnSha88DCtd0dQ,VJM0LOVJMDES,案件,削除,page-owner order
-PAG-QRIjeRdSMYhrtu5L0A40I,JZNOOKY25UIP,案件,複製,page-owner order
-PAG-Qe7jHRnD4RwvNnidtEMbW,OW-OD-000,未発注の案件 一覧,表示,page-owner pre_order
-PAG-Cc5KWWCrTtZiLYHHCGbaC,OW-OD-010,未発注の案件 詳細,表示,page-owner pre_order
-PAG-RfUJxsVJFyabkxI7aqy3d,OW-OD-001,進行中の案件 一覧,表示,page-owner active_order
-PAG-Up9M7WTvboNNdeImdAaLv,OW-OD-011,進行中の案件 詳細,表示,page-owner active_order
-PAG-QczP2HKlMT0q3WycYh40W,OW-OD-002,終了した案件 一覧,表示,page-owner closed_order
-PAG-VoxUXkITcBad6sAb9Qn4k,OW-OD-012,終了した案件 詳細,表示,page-owner closed_order
-PAG-E5r3iSAqdJsgxAMOyOe69,OW-RQ-020,案件 見積り依頼,入力,page-owner request
-PAG-HdpO7UNYAwvFhsnytg8Du,OW-RQ-030,案件 見積り依頼,確認,page-owner request
-PAG-Wpl0FlcMu6rsoP0fhd8te,RFK7F4IAFDHX,案件 見積り依頼,実行,page-owner request
-PAG-TIQNcJPG4wqIEUrPT3uVq,KWKHE2HR2VPE,案件 見積り依頼,取消,page-owner request
-PAG-Iy5ySzwsbLSFxkJ2TNWrR,OW-EM-000,提案のあった見積 一覧,表示,page-owner estimate
-PAG-IFJJLDko36rF8amIRfrs7,OW-EM-010,提案のあった見積 詳細,表示,page-owner estimate
-PAG-YaeJtmUFeIyRzKPHoe8KP,OW-PL-020,発注,入力,page-owner place
-PAG-Ptre7RUzVOQ8EK0gHGlf6,OW-PL-030,発注,確認,page-owner place
-PAG-Y0cQyJa3AttTPXosHLQQj,CH6OBGECHER9,発注,実行,page-owner place
-PAG-S6UJkUaipnxWUEDSVSYnJ,OJA85SVEPKGP,お断り,入力,page-owner reject
-PAG-VMM0gXe1mNyFrDHtjfoop,OW-PY-020,入金通知,入力,page-owner payed
-PAG-FezfTnhX7nwsavRKcwwyd,OW-PY-030,入金通知,確認,page-owner payed
-PAG-VNSCmty19wLxHNdi8BguL,IM9FKNMPBEAU,入金通知,実行,page-owner payed
-PAG-J03m5KblHxaNAqIELURK7,OW-RV-020,評価,入力,page-owner review
-PAG-TAzT9ywBTczTU4H5vpbUZ,OW-RV-030,評価,入力,page-owner review
-PAG-D83bsMAvCWt1HhpIJNMDU,EDL2H6TQBN9I,評価,実行,page-owner review
-PAG-TFQ9hRiioxdZPYlZAx5KI,OW-BD-010,コンタクトボード,表示,page-owner board
-PAG-BHNmtNx38Vr6qiXOMEgMZ,OW-BD-011,コンタクトボード,表示,page-owner board
-PAG-NLkue8Wm0aTLIOtmQ1clG,OW-AC-020,荷主情報 詳細,表示,page-owner account
-PAG-FJJt7XFfpRkbViuXpNMyF,OW-AC-030,荷主情報,編集,page-owner account
-PAG-H05horQ1cOO1r4prqfqDb,PA32JXA3BE59,荷主情報,更新,page-owner account
-PAG-DNejbVTHlST0qPrtvpvFF,CR-HM-000,ダッシュボード,表示,page-carrier dashboard
-PAG-Wy9w1mbbLWYntaCQkj4FJ,CR-RQ-000,見積依頼 一覧,表示,page-carrier request
-PAG-MCDEw2BX8tEun99GSNmdV,CR-RQ-010,見積依頼 詳細,表示,page-carrier request
-PAG-BFPUXOvYJYVrQE0JPBONJ,CR-EM-000,見積り 作成した,一覧,page-carrier estimate
-PAG-CGFXu3qAYrJYprl3AwnZQ,CR-EM-001,見積り 案件ごとの,一覧,page-carrier estimate
-PAG-FwElvRucY72WaZFAiDPKd,CR-EM-010,見積り 詳細,表示,page-carrier estimate
-PAG-PR1RKXTFsbOnEIMzedoUj,CR-EM-020,見積り,新規,page-carrier estimate
-PAG-FZ39utrop5Wg99CzPXgRy,CR-EM-030,見積り,確認,page-carrier estimate
-PAG-OfjMclT05DbIeSRa5dsEb,EGYKWHEE9KNP,見積り,挿入,page-carrier estimate
-PAG-ZadbOZqMLN7aZRSYfiUsV,CR-EM-050,見積り,編集,page-carrier estimate
-PAG-XowmMs4Rsr4RB5TBEYS0b,CR-EM-060,見積り,確認（更新）,page-carrier estimate
-PAG-YvsdDsC0fQvE9Y6vrj6Dr,BMN0IVG5VE5E,見積り,更新,page-carrier estimate
-PAG-DdaM4zw7N6jVngACGFt6f,ZT3SDDOFNDPO,見積り,削除,page-carrier estimate
-PAG-Sr5gGlEFypeRN9J3QUcmJ,Z8ZB4DF98IC6,見積り,複製,page-carrier estimate
-PAG-B8FhNaH1yvMumnCrTNMw5,CR-IM-000,商品リスト 一覧,表示,page-carrier item
-PAG-GYYkP1kM3tlmYl2lp3dAv,CR-IM-010,商品リスト 詳細,表示,page-carrier item
-PAG-GL7OUKbwlv4cYNly0dhrD,CR-IM-020,商品リスト,新規,page-carrier item
-PAG-VJJt9YLfMAnUe0O10SwVV,FJTRXM4S2MOK,商品リスト,挿入,page-carrier item
-PAG-TpIv7xRJRt3Js0A9qPenh,CR-IM-050,商品リスト,編集,page-carrier item
-PAG-QrwhFTeaQuJOBsbheVLoA,R8CLNGNF0RHM,商品リスト,更新,page-carrier item
-PAG-YPUhznKSvd8Z5BMw4kILC,FF5KPDO24UYZ,商品リスト,削除,page-carrier item
-PAG-Uq9RwIAqklwtkZnR2Nd9U,CR-SG-020,見積提出,作成,page-carrier suggest
-PAG-DFjntHsPYMAsow3J5IqdP,CR-SG-030,見積提出,確認,page-carrier suggest
-PAG-Drb3CbhMgYfB6NTxp1JQa,ZJJYEWRXHBJN,見積提出,実行,page-carrier suggest
-PAG-AQH8dCVjhUQf0gFSYeRP2,CR-WK-000,未受注の仕事 一覧,表示,page-carrier pre_work
-PAG-RYXPvjP0iNVfpgLIL4N0n,CR-WK-010,未受注の仕事 詳細,表示,page-carrier pre_work
-PAG-S0Q37LdqgvRkhVnZ013J1,CR-WK-001,進行中の仕事 一覧,表示,page-carrier active_work
-PAG-F1S5KKdIYIYxGxqMfEACW,CR-WK-002,終了した仕事 一覧,表示,page-carrier closed_work
-PAG-EOkzmGxulTaPTFrNNlrFM,CR-WK-011,仕事 詳細,表示,page-carrier work
-PAG-H88a4zOZEzGE53CzLYqGk,CR-RC-020,受注,入力,page-carrier receive
-PAG-Q4ucdBxyzC516ZgPPPr8M,CR-RC-030,受注,確認,page-carrier receive
-PAG-MkNlXaxXkrr4w3ZNTZsnp,X3DYQUJJ1D61,受注,実行,page-carrier receive
-PAG-BYxvO2lPHpK8vOwpA1Xwt,CR-RP-020,完了報告,入力,page-carrier report
-PAG-Wjsf32Z3GP42gvk8244Lf,CR-RP-030,完了報告,確認,page-carrier report
-PAG-BSoGjV0iGKk0TmYX70aaU,IMKW8E4LRZVS,完了報告,実行,page-carrier report
-PAG-TMRVa4lWZbI1zanFxezpX,RM7VUXIEQLUN,入金確認,実行,page-carrier confirm_payment
-PAG-FdG0TRCGLL8WDmiiShTKf,CR-RV-020,評価,入力,page-carrier review
-PAG-JTX00ZcNhNZz6pcORXBa6,CR-RV-030,評価,確認,page-carrier review
-PAG-UcxFKhAdlPOJBcDsZowmx,DIGFCEI9HDGE,評価,実行,page-carrier review
-PAG-FO2lYKCG7cbbwCdt1VtC3,CR-BD-010,コンタクトボード,表示,page-carrier board
-PAG-JqPDJM6fqRlxBw0cXHMiG,CR-AC-010,運送会社情報 詳細,表示,page-carrier account
-PAG-QoPgIIortNqhotuFMaszR,CR-AC-011,運送会社情報 基本情報,編集,page-carrier account
-PAG-SmnjTwlGaEEZFbXQKwud2,VS5HF89K5OTU,運送会社情報,更新,page-carrier account
-PAG-HHXxuOAztihIUPP7jAYB3,CR-AC-012,運送会社情報 車両情報,編集,page-carrier account
-PAG-RAIf7R294bFQbXe6pPHr1,G9IG07VY1GQ1,運送会社情報,更新,page-carrier account
-PAG-XXziY0BsLUY53uAf66t4g,CR-AC-013,運送会社情報 空車情報,編集,page-carrier account
-PAG-Z6mZwNq2oFhQHg60Rc57u,DFDYOU25X0BZ,運送会社情報,更新,page-carrier account
-PAG-NYkjTTIDLyXV43ubPmT40,AD-HM-000,ダッシュボード,,page-admin dashboard
-PAG-EUbeitaRIfWBia2PMADaI,AD-NS-010,更新情報 一覧,表示,page-admin news
-PAG-J5xtmBtQX6aBK2AsAxRSF,AD-NS-020,更新情報,新規入力,page-admin news
-PAG-PhGQOwOQ5HTM9Cf3Imv3m,SHH4W0HT391W,更新情報,挿入,page-admin news
-PAG-WU4qcVwd96ve7Ws9rEUiI,AD-NS-050,更新情報,編集,page-admin news
-PAG-TvtW2H2Lo66IdjsnxKLsl,QX9ZOVBIC2BM,更新情報,更新,page-admin news
-PAG-Ho0e3E56lOWHyegpPUl2X,FW3ZVWYUXV3A,更新情報,削除,page-admin news
-PAG-WeNJe5OlTrTKyYBhyMOS5,FNKVOZNT14PG,更新情報,公開,page-admin news
-PAG-IBKIL23od1mWfSNcSdhJj,AD-US-000,ユーザー 一覧,表示,page-admin user
-PAG-BtYrX1yjkciYXh6D3qIe4,AD-US-010,ユーザー 詳細,表示,page-admin user
-PAG-Jl0Iu6wZCYTaL7BcnLduq,AD-US-020,ユーザー,新規入力,page-admin user
-PAG-CQYAh67J9madZn05Bwzzm,Y19YFZZW40A6,ユーザー,挿入,page-admin user
-PAG-YVJnWBnCC2Cd6Z3d3Zq2o,AD-US-050,ユーザー,編集,page-admin user
-PAG-CCq2KCc9mwK63VI2EXTK6,K05UBPKU4XL5,ユーザー,更新,page-admin user
-PAG-GPCpVCrqRIrGwl9MrbI6b,H3917KAV5R5G,ユーザー,削除,page-admin user
-PAG-FUzN0jsRsXoppKsSfaNEh,WNPSSXQVRXEG,ユーザー,BAN,page-admin user
-PAG-OT6qvpCpzEtdz3Mi4CieL,AD-PM-000,ページメタ,一覧,page-admin pagemeta
-PAG-RBEniyjyIB1aYZDhxySJd,AD-PM-010,ページメタ,新規,page-admin pagemeta
-PAG-FeGcMbzdvrh9a9gh6TFtO,AD-PM-020,ページメタ,確認,page-admin pagemeta
-PAG-BtPVyllMwhPldSkgToogo,YSGE41C73LHQ,ページメタ,更新,page-admin pagemeta
-PAG-PAgW31oJngbviWgyPKHyP,AD-AT-000,マスタ 権限,一覧,page-admin authority
-PAG-KV6oVInvm3xEWOh8IoCpT,AD-AT-020,マスタ 権限,新規入力,page-admin authority
-PAG-IqPmjd2zYggVJXAZN4KSp,KRHP5IMYJCNY,マスタ 権限,挿入,page-admin authority
-PAG-IC9JPALoRagFB4VHtA3Ah,AD-AT-050,マスタ 権限,編集,page-admin authority
-PAG-WCUCwgisfqqmtZjM6bbtg,ZROV589G8HJ0,マスタ 権限,更新,page-admin authority
-PAG-UHgXtQCMoUdkc2b1T8CZo,JYPHUH7G2BON,マスタ 権限,削除,page-admin authority
-PAG-YjalrGVRmBBafLRVLUbD1,AD-CC-000,マスタ 運送会社クラス,一覧,page-admin carrier_class
-PAG-SzHC67F84kfWcS4LJ3CKs,AD-CC-020,マスタ 運送会社クラス,新規入力,page-admin carrier_class
-PAG-IBKvDh6lYhhco79VSPigl,Z0M34EKECOMP,マスタ 運送会社クラス,挿入,page-admin carrier_class
-PAG-PwfV0t0DZxUn0krhrnJwT,AD-CC-050,マスタ 運送会社クラス,編集,page-admin carrier_class
-PAG-NdtbhdBI0y5OdCkAvfL1F,Q0WSFSG3M10R,マスタ 運送会社クラス,更新,page-admin carrier_class
-PAG-WaQoA7mlMJhKSFSX8VLKd,FE60NL9KJUKR,マスタ 運送会社クラス,削除,page-admin carrier_class
-PAG-BiYQQhqMP4UFK3DYMOYT1,FS1NTHEB6CK7,マスタ ステータス,一覧,page-admin carrier_class
-PAG-HDVIW6Ag50FOsBC2gYH5Y,AD-CN-000,マスタ 荷物名,一覧,page-admin cargo_name
-PAG-M6h8BYJqhtTvYHyH4slgv,AD-CN-020,マスタ 荷物名,新規入力,page-admin
-PAG-XpB0YmO9uvWYphhmTGwUU,MBVHB7KAW1Y8,マスタ 荷物名,挿入,page-admin
-PAG-CmG8mNnPHRIdlV4h3Nped,AD-CN-050,マスタ 荷物名,編集,page-admin
-PAG-ZUceKzL6Gj2TCL3cecbej,G5RR6G705OPC,マスタ 荷物名,更新,page-admin
-PAG-AN6v3ql7xxJdrqaWxd01z,U935O113G5QC,マスタ 荷物名,削除,page-admin
-PAG-QNCbYqGRdBc9axow9bHZX,AD-CF-000,マスタ 荷姿,一覧,page-admin cargo_form
-PAG-LJPVKLfDO2cLE6mcLQZOH,AD-CF-020,マスタ 荷姿,新規入力,page-admin
-PAG-Ogp55jsFVpf7GQyRNzzGv,J207Y5UR9TA1,マスタ 荷姿,挿入,page-admin
-PAG-DWGlfSSYEtLPWjqb1ZNSJ,AD-CF-050,マスタ 荷姿,編集,page-admin
-PAG-UbYtHiE4KPAFMD8IqTXPb,KZ2JON060HWF,マスタ 荷姿,更新,page-admin
-PAG-CY1Lz2OgdKJtEfCw0kzw9,C89VYIEE6WK8,マスタ 荷姿,削除,page-admin
-PAG-GwLfWhlOXBoLWOlXHBK80,AD-EI-000,マスタ 評価項目,一覧,page-admin evaluation_item
-PAG-TlKiImJWKqbC5smHxzsfY,AD-EI-020,マスタ 評価項目,新規入力,page-admin
-PAG-KaR3DHGcc4tJXddKqbRoH,QW7W1TXPKKYW,マスタ 評価項目,挿入,page-admin
-PAG-O2P5YQQcPTAsPsOYSLoWc,AD-EI-050,マスタ 評価項目,編集,page-admin
-PAG-Ph4O4ZB9GreekFvIka5MJ,FAJZGH6DQLEV,マスタ 評価項目,更新,page-admin
-PAG-QCsywUevPCLUDizLJEYwD,R5K7IAQSY50J,マスタ 評価項目,削除,page-admin
-PAG-U9cfNSk7nuW8SXEZW9j2K,TILPDTZUVZ8Q,マスタ 都道府県,一覧,page-admin pref
-PAG-X0x4kCblv3Dy22HdCNvmP,AD-RO-000,マスタ 希望装備,一覧,page-admin order_request_option
-PAG-Eb5y5fMRn37IB7OjYMbYI,AD-RO-020,マスタ 希望装備,新規入力,page-admin order_request_option
-PAG-DYsePzQQboKm87hQSVgXi,IETI58YUOWBR,マスタ 希望車種,挿入,page-admin order_request_option
-PAG-GOVjUQKB1nMvBAn3ee7L0,AD-RO-050,マスタ 希望装備,編集,page-admin order_request_option
-PAG-TT2a1K26qoTtmmjtKPBzP,AUM8N8YNGOF5,マスタ 希望車種,更新,page-admin order_request_option
-PAG-UgWGvBsEPuvuHHfwV2Qj6,LPZSGQU7G8J5,マスタ 希望車種,削除,page-admin order_request_option
-PAG-Z2fZV8pAJ7q3kip5uRqJy,IL51KMCQOQKK,マスタ 希望設備,挿入,page-admin order_request_option
-PAG-QnchaeWMMQMOURRcbzWgF,OWWGTEKBIGET,マスタ 希望設備,更新,page-admin order_request_option
-PAG-HJmpwQ7gQiTKJyfgFZ92T,GQ5G62DC50SQ,マスタ 希望設備,削除,page-admin order_request_option
-PAG-LapzDmzpDHcAlFHkjK2mx,E4AYYRL8TDOG,マスタ 希望装備,挿入,page-admin order_request_option
-PAG-HzISTu785fefE7QeeeCTF,MVN4DUT4710D,マスタ 希望装備,更新,page-admin order_request_option
-PAG-Ck9F6QZ8jPmxdcCFx1eyo,X5WGKQNSFEC4,マスタ 希望装備,削除,page-admin order_request_option
-PAG-CLUjhrxyxf8bdlVhyLL6S,AJ-AX-001,非同期通信 ファイルをアップ,単,page-ajax upload_file
-PAG-RRiZSLqak4Codv3HcKdl0,AJ-AX-002,非同期通信 ファイルをアップ,複,page-ajax upload_some_file
-PAG-CDO10WpfhNJtVAErhcsab,AJ-AX-003,非同期通信 アカウント情報を代入,,page-ajax quote_user_account
-PAG-Q5VlAW7K73kWXuGhAFLlv,AJ-AX-004,非同期通信 住所情報を代入,,page-ajax quote_address
-PAG-WswqiIPakUKcEAXFvvtzV,AJ-AX-005,非同期通信 見積項目枠を追加,,page-ajax add_estimate_item
-PAG-HBlwtwUKg87vPwXBuXAnN,AJ-AX-006,非同期通信 見積項目情報を代入,,page-ajax quote_item
-PAG-Jbv8YpYXrzrRhSuVewvbO,AJ-AX-007,非同期通信 案件情報を代入,,page-ajax quote_order
-PAG-MZ8fLPt0T87Yhqj1WmBMk,AJ-AX-008,非同期通信 コンタクトボード,10件取得,page-ajax get_over10
-PAG-ZE6eGHvXPBXNVc7fm7icx,AJ-AX-009,非同期通信 コンタクトボード,送信,page-ajax put_message
-PAG-DzMFObEprf1HJXMveReS5,AJ-AX-010,非同期通信 コンタクトボード,ファイル送信,page-ajax upload_file_and_put_board_file
-PAG-TOsUEdyPfCcSnj8zPVctv,AJ-AX-011,非同期通信 コンタクトボード,メッセージ更新,page-ajax refresh_messages
-PAG-Gwa9nmCeNN5btuYTSbnqm,AJ-AX-012,非同期通信 コンタクトボード,未読数取得,page-ajax get_unread_count
-PAG-Y15dzBwgIiAuB2qJ3JPvj,AJ-AX-013,非同期通信 車両枠を追加,,page-ajax add_edit_car
-PAG-SEE9Nbbiv1hmC5ZVDfiNn,AJ-AX-014,非同期通信 空車枠を追加,,page-ajax add_edit_empty
+PAG-OtPc8hVwbXaMyRuocshrq,CM-SU-000,ユーザー登録 メールアドレス入力,表示,page-signup
+PAG-YM6rboAgsMZsgqgtDVyKU,CM-SU-010,ユーザー登録,実行,page-signup
+PAG-CPEF2YjJ2stvELRgrKlyM,CM-SU-020,ユーザー登録 ログイン情報,入力,page-signup {signup_key}
+PAG-Cwo04tE8yWG0qI34mS49s,CM-SU-021,,,
+PAG-OzqpiEuXXu5bgSis2GeUt,CM-SU-022,,,
+PAG-CqQmCk1rVXyiGUHFvxBAv,YCU23SMU791N,ユーザー登録,書き込み,page-signup insert
+PAG-VjEdSRLsszVQXYVhYnHuR,CM-SU-040,ユーザー登録 住所氏名・種別選択,入力,page-signup {signup_key}
+PAG-WywQVCjiQKlUus0VcSBq4,SZ9POZSA6LN8,ユーザー登録,書き込み,page-signup update
+PAG-ZU8iq6vISDNzWcBvrcxbJ,CM-SU-060,ユーザー登録 同意事項,表示,page-signup {signup_key}
+PAG-KwKmh6Iw8e3JsBNcAWQXt,CM-SU-070,ユーザー登録 決済リンク,表示,page-signup {signup_key}
+PAG-HBxTvqZ8ZKBc8Qhq8v4jY,OBHNMG3AXS8G,,,
+PAG-Ak7SS5Q2bpg19LqOEmES2,CM-EP-010,イプシロン 取引情報送信処理,,
+PAG-A8UvUnHjVOpO7HTZ8znVE,CM-EP-020,イプシロン 取引登録エラー,,
+PAG-XiHHVqvwrW83lwy1VNapT,CM-EP-030,イプシロン 取引結果受信処理,,
+PAG-Wm5ptDAtYcYqkMVOk4Ubf,CM-SU-080,ユーザー登録 完了,表示,page-signup {signup_key}
+PAG-ZBX5g8DI1QUwEoh72w5vc,CM-HM-000,サイトトップページ,,page- 
+PAG-LjqFpngIiSUEc8FTR3VvI,CM-AT-000,ユーザー情報 メアド変更,認証,page-authorization {authorization_code}
+PAG-XSc5iIVNIO6YX48yHqE97,CM-AT-001,,,
+PAG-YlMKTh4oGmlrv8viOVwRq,MY-HM-000,ダッシュボード,表示,page-mypage dashboard
+PAG-RW3pApuXhRJdO6ajCLzHO,MY-ST-000,登録状況,表示,page-mypage status
+PAG-CcdaSm9shOPQXfCELZjWA,MY-AC-010,アカウント情報,表示,page-mypage account
+PAG-SBAleA9eccBWpqJjqUAS2,MY-AC-020,アカウント情報,編集,page-mypage account
+PAG-FrbG6i6RnwFUWGI1jTsfp,WY2CZZP6M0GS,アカウント情報,更新,page-mypage account
+PAG-LZHw4hExtdaM9zNgaYZok,MY-AC-050,アカウント情報,メアド変更用,page-mypage account
+PAG-Y9i7yNje4oHZa1Wx5ru4V,MY-AC-060,アカウント情報,メアド変更用,page-mypage account
+PAG-TqzRqkD0Di62aQgZZqe0z,MY-AD-000,住所情報 一覧,表示,page-mypage address
+PAG-NA9iQypy6ylpJQFEpNA1g,MY-AD-010,住所情報 詳細,表示,page-mypage address
+PAG-RVPHEdqVuL4vusyp1i59Q,MY-AD-020,住所情報,新規,page-mypage address
+PAG-KpbMuSbzzbCWQULtDIEsV,XFGYSR4XHSHN,住所情報,挿入,page-mypage address
+PAG-OXpEfN1GDCK1g18Mlv06N,MY-AD-050,住所情報,編集,page-mypage address
+PAG-OrnYTyJzXF8bpUZ5foiXN,DEPRAJVV98X3,住所情報,更新,page-mypage address
+PAG-WTOA60UEGvK7dth6cK3Oz,F5I6A9V9I0HQ,住所情報,削除,page-mypage address
+PAG-P61m3lvDnpHTcZXmf7H74,MY-SO-010,利用開始 荷主として,入力,page-mypage start
+PAG-YVCxCK5NHprinUa7QYcc0,MY-SO-020,利用開始 荷主として,確認,page-mypage start
+PAG-Wkk2Bok8jzXqzgo4GdElW,RZJ3TD2WC5EZ,利用開始 荷主として,実行,page-mypage start
+PAG-S1vhzeSsK0DbUANDdoX07,MY-SC-010,利用開始 運送会社として,入力,page-mypage start
+PAG-JI5inrLmOMKOLomjlLpU2,MY-SC-020,利用開始 運送会社として,確認,page-mypage start
+PAG-IPi9uRaLR90QW2pN9H0vn,QFCMCF8DO0IS,利用開始 運送会社として,実行,page-mypage start
+PAG-MslaqI4mgXmgkMUrQODWz,MY-CR-000,運送業者情報 一覧,表示,page-mypage carrier
+PAG-UqzZ9psAufSJGxtzoW34c,MY-CR-010,運送業者情報 詳細,表示,page-mypage carrier
+PAG-S6rJyMphtvS9REmyhnFR0,MY-BD-010,コンタクトボード,表示,page-mypage board
+PAG-R1A3ahOut3A15b7iiX3a7,OW-HM-000,ダッシュボード,表示,page-owner dashboard
+PAG-UMhSgsCCGyC8ndxjzGYMO,OW-OD-020,案件,新規,page-owner order
+PAG-N6U9fMxjYBAqmvQZQ7fuN,OW-OD-030,案件,確認,page-owner order
+PAG-NG0cSPVuWTjpRWQC0aQ0I,NBAMDW6HMV69,案件,挿入,page-owner order
+PAG-RMVprjkPOtWn3ZN6BYwqH,OW-OD-050,案件,編集,page-owner order
+PAG-RSaC3tZavbHDIfxUzIuLl,OW-OD-060,案件,確認,page-owner order
+PAG-JwzfW8CPPt1kpZ0Udwvnw,JC9YIOP0T0OR,案件,更新,page-owner order
+PAG-YQAchKHdP19yCC5DVRxvN,DLO1EHFY5IIV,案件,削除,page-owner order
+PAG-M2eojvRySR5JJJKQ6UFVn,GE7464M4ASFN,案件,複製,page-owner order
+PAG-K3XQNnoH5G4DdK6yczG0j,OW-OD-000,未発注の案件 一覧,表示,page-owner pre_order
+PAG-FBDaqwrNMSP4FYqpag3tq,OW-OD-010,未発注の案件 詳細,表示,page-owner pre_order
+PAG-VaVEq4WznoJhO2C6Mn6dt,OW-OD-001,進行中の案件 一覧,表示,page-owner active_order
+PAG-Y4o8g3SaPdf2hF9xLt41q,OW-OD-011,進行中の案件 詳細,表示,page-owner active_order
+PAG-RZ8GKABSXMAcvuq2thlwZ,OW-OD-002,終了した案件 一覧,表示,page-owner closed_order
+PAG-TAZAyW19cDklzSRCze5JW,OW-OD-012,終了した案件 詳細,表示,page-owner closed_order
+PAG-Cwyj60MHlv5ncdv9PmfTs,OW-RQ-020,案件 見積り依頼,入力,page-owner request
+PAG-N689xC6HV0ssHHm0ir71s,OW-RQ-030,案件 見積り依頼,確認,page-owner request
+PAG-JUu7vPPDBwWD4344nEgFH,NVEB4T4O6NBG,案件 見積り依頼,実行,page-owner request
+PAG-TMTfMvCPKK7fwUvXtcciU,PREGR8X9ARPA,案件 見積り依頼,取消,page-owner request
+PAG-HctJavDCdNt6eg4BtQOcr,OW-EM-000,提案のあった見積 一覧,表示,page-owner estimate
+PAG-VMLL7Pu2WpiDwwcwp4ogf,OW-EM-010,提案のあった見積 詳細,表示,page-owner estimate
+PAG-AQbf8NoQ9ahcZq6yXIK9O,OW-PL-020,発注,入力,page-owner place
+PAG-S3TWajfHBE8sWkjek4NTI,OW-PL-030,発注,確認,page-owner place
+PAG-JLyKj7pVAb8xPxNy1P526,LTJDPVE58T8A,発注,実行,page-owner place
+PAG-G6ABB5ZQffKYVAlIb7kCD,E2A2JPY06A7F,お断り,入力,page-owner reject
+PAG-HKUTo9hms08IftrwCoJeQ,OW-PY-020,入金通知,入力,page-owner payed
+PAG-Z8Isqayt9WdWYcSG2Pk25,OW-PY-030,入金通知,確認,page-owner payed
+PAG-M9ZdP98iAIjYMr6BUdXlr,JB3KJ5XVY2HG,入金通知,実行,page-owner payed
+PAG-SmzxEOz5i48ecqmscecRt,OW-RV-020,評価,入力,page-owner review
+PAG-CzNBnjdO0TXpEmwmkEAcu,OW-RV-030,評価,入力,page-owner review
+PAG-XcmCKjmVv8As3Wr64XUGX,EH51QINDS3UK,評価,実行,page-owner review
+PAG-KQO8ukMyqNHBqFUYpH9J5,OW-BD-010,コンタクトボード,表示,page-owner board
+PAG-X7a0618Cmkm31rYdy1x17,OW-BD-011,コンタクトボード,表示,page-owner board
+PAG-K2FSkabQtdoQ01Xh7d7AI,OW-AC-020,荷主情報 詳細,表示,page-owner account
+PAG-TSbA3gN9FLWAlzYm9DcHW,OW-AC-030,荷主情報,編集,page-owner account
+PAG-XuZEfzdHRwf7LEB9USi6F,PFOVJFBVIBR9,荷主情報,更新,page-owner account
+PAG-NsOaUc0pu3yxo4jGQg1Eh,CR-HM-000,ダッシュボード,表示,page-carrier dashboard
+PAG-BadrRP9zZQ88kMImGp14h,CR-RQ-000,見積依頼 一覧,表示,page-carrier request
+PAG-LHNCoDF7qjF3KKVkYHx5P,CR-RQ-010,見積依頼 詳細,表示,page-carrier request
+PAG-CE4NnPRRUaqBINTpw1JYX,CR-EM-000,見積り 作成した,一覧,page-carrier estimate
+PAG-DyvQgc2JYkBQCvyQX4iuu,CR-EM-001,見積り 案件ごとの,一覧,page-carrier estimate
+PAG-YOrFZrETg65pI7EXM8PRE,CR-EM-010,見積り 詳細,表示,page-carrier estimate
+PAG-FeaZULDtZIv99YiDymvuX,CR-EM-020,見積り,新規,page-carrier estimate
+PAG-YxVbbqPOMal9yBrW52zr3,CR-EM-030,見積り,確認,page-carrier estimate
+PAG-Y86yuFmFgyfRl49caCmVa,TH2TLB7A0TFC,見積り,挿入,page-carrier estimate
+PAG-Qp2bAT7waoFvYm7xcAYYk,CR-EM-050,見積り,編集,page-carrier estimate
+PAG-PphSOYYdwLE0rQzinCEcw,CR-EM-060,見積り,確認（更新）,page-carrier estimate
+PAG-NwRqufI3LMxHKrDCWSQ6e,FLVI1Z98HD2W,見積り,更新,page-carrier estimate
+PAG-GuIAgzmNm3WyBeZ4E1mcE,TN18F82EMO6Z,見積り,削除,page-carrier estimate
+PAG-GmSixSyjGua1XYuS74LfU,OAP5IGXNGYH4,見積り,複製,page-carrier estimate
+PAG-MloLPyOs1OzRI4jJW0apz,CR-IM-000,商品リスト 一覧,表示,page-carrier item
+PAG-EGk7qkyVFb2HmiIzqaOhg,CR-IM-010,商品リスト 詳細,表示,page-carrier item
+PAG-NLcbbEcrpp7AYCl4WD7w2,CR-IM-020,商品リスト,新規,page-carrier item
+PAG-PkJZWDelwXqmZe7gxNrsq,PE4XCCVZL74H,商品リスト,挿入,page-carrier item
+PAG-Y4GRmG9houuY6ozgZtFkp,CR-IM-050,商品リスト,編集,page-carrier item
+PAG-KDTq8pyRhH1Bw4BSzhamW,NLH4FU5TL7MC,商品リスト,更新,page-carrier item
+PAG-CO1bFptUS4BxUzuZ1vqD2,LOXF2GSIDLH6,商品リスト,削除,page-carrier item
+PAG-MUQsmbiHDZDbb43nhMaXm,CR-SG-020,見積提出,作成,page-carrier suggest
+PAG-I2sjaSJ3yoN1cco96hPbL,CR-SG-030,見積提出,確認,page-carrier suggest
+PAG-WJSPyCiNHCl33breWuntd,N5T4BZI9700V,見積提出,実行,page-carrier suggest
+PAG-ZqzDAtzJXnW4SeDGM0ljG,CR-WK-000,未受注の仕事 一覧,表示,page-carrier pre_work
+PAG-L46DeTbSbbSai8wO0z55d,CR-WK-010,未受注の仕事 詳細,表示,page-carrier pre_work
+PAG-PeM1bjxlu5M6UGYS6wCcW,CR-WK-001,進行中の仕事 一覧,表示,page-carrier active_work
+PAG-DQjMeZRDvgCEw8AeAyRAv,CR-WK-002,終了した仕事 一覧,表示,page-carrier closed_work
+PAG-DKysqwG8mLoacYjWLsfPj,CR-WK-011,仕事 詳細,表示,page-carrier work
+PAG-E1nRRGCkB71ghpwi3yoqI,CR-RC-020,受注,入力,page-carrier receive
+PAG-RaPCgQsqWd4P8anCvIQlM,CR-RC-030,受注,確認,page-carrier receive
+PAG-EamucYGFrFlk8ByOPquzH,ZCZCLTP9K1Q5,受注,実行,page-carrier receive
+PAG-GJ9cqqhAajoPSm4AHNEAe,CR-RP-020,完了報告,入力,page-carrier report
+PAG-YRizxh76jS9bILY8yhuXo,CR-RP-030,完了報告,確認,page-carrier report
+PAG-DRd9tcOMuinAnT5vZqU0r,HEX8YF5LTOLU,完了報告,実行,page-carrier report
+PAG-GKkvDCKkbghPHfDGCOWBE,EQ2IJ1SL8ZI8,入金確認,実行,page-carrier confirm_payment
+PAG-O7Q1dJo4epkO81zubelAm,CR-RV-020,評価,入力,page-carrier review
+PAG-LEnVYcOwJr5pksgchYroA,CR-RV-030,評価,確認,page-carrier review
+PAG-RTPLUwPq49zLEElBloIve,KOYKFKHGW258,評価,実行,page-carrier review
+PAG-Bjr9HkJAHOkfOZqrfrgRc,CR-BD-010,コンタクトボード,表示,page-carrier board
+PAG-Jrf6TugFXKkE20sWd1jXe,CR-AC-010,運送会社情報 詳細,表示,page-carrier account
+PAG-ParL5sqNN18TCg2LY1FQt,CR-AC-011,運送会社情報 基本情報,編集,page-carrier account
+PAG-RDvqgsXMOnR8b7r7D6syx,N4UNJOSKYGY5,運送会社情報,更新,page-carrier account
+PAG-XMMXIOGqSBOW53WtlouvE,CR-AC-012,運送会社情報 車両情報,編集,page-carrier account
+PAG-YeijCWivmuRZlSVxePPS5,EH3GITHSIP80,運送会社情報,更新,page-carrier account
+PAG-Ar4KPcMkiMuSSnqXm8U0i,CR-AC-013,運送会社情報 空車情報,編集,page-carrier account
+PAG-ZrDkZyOkrI3k6lLnd6ATO,N3VX52DRPCQ1,運送会社情報,更新,page-carrier account
+PAG-Cmli3FdF4KGgVuxmyAUdc,AD-HM-000,ダッシュボード,,page-admin dashboard
+PAG-KMUXUshWRmBW1cE3RolY9,AD-NS-000,更新情報 一覧,表示,page-admin news
+PAG-TNdF2jjkbClSOCIlMUiVO,AD-NS-020,更新情報,新規入力,page-admin news
+PAG-A0omimd784uWbw33i4z9O,WMTD4MNYPML2,更新情報,挿入,page-admin news
+PAG-Vhyowe37QB5w6HOMg6fzU,AD-NS-050,更新情報,編集,page-admin news
+PAG-CmekIHHtGJd0Vwz6C0PR6,DUQOIAX0R2LN,更新情報,更新,page-admin news
+PAG-TkZobThyuCtj3wztfH1am,BHVZHSP70N78,更新情報,削除,page-admin news
+PAG-LHPUILKim6AfFb3J6niw2,F83BYMAR1R1O,更新情報,公開,page-admin news
+PAG-EymvWYN0AiabajL3EyCRg,AD-US-000,ユーザー 一覧,表示,page-admin user
+PAG-Wjw5rHKeO5FhwNDPktJij,AD-US-010,ユーザー 詳細,表示,page-admin user
+PAG-RhKOcTXiDHLC7xbx2q8Jp,AD-US-020,ユーザー,新規入力,page-admin user
+PAG-COCGHa45Gy0GKR7svVl4l,HERI3ZT7PQ9M,ユーザー,挿入,page-admin user
+PAG-Zc4ZZmI9eM5jSyAPzsK7C,AD-US-050,ユーザー,編集,page-admin user
+PAG-DIBru3GkWAKaAWJZX12Ld,U9LS551NDJ0S,ユーザー,更新,page-admin user
+PAG-NKUCQaXE9HGYDhvBcBqeg,VUYXKKHMEAID,ユーザー,削除,page-admin user
+PAG-MMFnQMNOR6aU5Fle3KfJc,HB46H5P381QW,ユーザー,BAN,page-admin user
+PAG-BgvduxDkrDqeKhbbHRNC8,AD-PM-000,ページメタ,一覧,page-admin pagemeta
+PAG-Y5Zff7zv6xKcniyBIBG6z,AD-PM-020,ページメタ,新規,page-admin pagemeta
+PAG-QJzl44mpi9PKGC8i7nmv3,AD-PM-030,ページメタ,確認,page-admin pagemeta
+PAG-Td1FTyDV9xiJcNL12Qphv,FB35FX3NOTW8,ページメタ,更新,page-admin pagemeta
+PAG-DNSpUn2VuRZHOLASAB67B,AD-AT-000,マスタ 権限,一覧,page-admin authority
+PAG-UI4ZYKDqxlVtn38SNzb0O,AD-AT-020,マスタ 権限,新規入力,page-admin authority
+PAG-UvmB5xBxXNSKiKkq679kL,I7FIGCI2SWXB,マスタ 権限,挿入,page-admin authority
+PAG-PteTdQK7lT7Usw2jVwvnL,AD-AT-050,マスタ 権限,編集,page-admin authority
+PAG-TJTzx1q9hnLGgF0cIHZm3,KNKZKMN3SFRD,マスタ 権限,更新,page-admin authority
+PAG-PZLhsoZNKEtCahSxIK9hg,S4ZML3XCAOSM,マスタ 権限,削除,page-admin authority
+PAG-JX67Cv8aj9rZBv202jV0a,AD-CC-000,マスタ 運送会社クラス,一覧,page-admin carrier_class
+PAG-F7bLv4KgKbfIACz24XgbU,AD-CC-020,マスタ 運送会社クラス,新規入力,page-admin carrier_class
+PAG-OhGFLD4GFaFk6S0PVZ0MJ,WI5F9LFVMXKV,マスタ 運送会社クラス,挿入,page-admin carrier_class
+PAG-QpF6kSdPwhOj8AhaBfIqg,AD-CC-050,マスタ 運送会社クラス,編集,page-admin carrier_class
+PAG-ZQrtL9FFsnj3jjnFnB7vK,ODXIVV4IWMTL,マスタ 運送会社クラス,更新,page-admin carrier_class
+PAG-RjwJM6dEZhR8sdVV8pVf8,PE6PCMAOE89H,マスタ 運送会社クラス,削除,page-admin carrier_class
+PAG-T3e80cbgnO51YTc7g9GFV,AD-ST-000,マスタ ステータス,一覧,page-admin status
+PAG-THd3j85obwCXQb2RoYw7q,AD-CN-000,マスタ 荷物名,一覧,page-admin cargo_name
+PAG-G98d9dHUO3LrULLFfC82m,AD-CN-020,マスタ 荷物名,新規入力,page-admin
+PAG-XY9oDUaBhJe3bv278jC68,BV0KSBHPVD93,マスタ 荷物名,挿入,page-admin
+PAG-Le2AObRs2Fe9WzMOBVM2E,AD-CN-050,マスタ 荷物名,編集,page-admin
+PAG-UYM56B6D0se0KimjeOwl1,IXC59SQOW9KT,マスタ 荷物名,更新,page-admin
+PAG-RYLkXSgI8vbpPKSMbPzBi,TV96OG0HMQ99,マスタ 荷物名,削除,page-admin
+PAG-OWcuN2wg30xRFiTu29To6,AD-CF-000,マスタ 荷姿,一覧,page-admin cargo_form
+PAG-XSed7xNmzgNzGsyBU67LE,AD-CF-020,マスタ 荷姿,新規入力,page-admin
+PAG-Axlz8jNZZ2dEywyeJVOzy,K837NY7L9PEN,マスタ 荷姿,挿入,page-admin
+PAG-QJkHJZXP6NDHM1QTCaJM0,AD-CF-050,マスタ 荷姿,編集,page-admin
+PAG-JT13fJB8oCfnscH1tHgxt,DHFPVAXJ0C04,マスタ 荷姿,更新,page-admin
+PAG-ZbaKaMHSZsZPJVELgjg88,LS75O10F1EJD,マスタ 荷姿,削除,page-admin
+PAG-TIOEh0TDm2B4ZrtcNVfz6,AD-EI-000,マスタ 評価項目,一覧,page-admin evaluation_item
+PAG-WKLkQgm8yxWwmealSpaKt,AD-EI-020,マスタ 評価項目,新規入力,page-admin
+PAG-J35NbkLUknfCIVxNwT9hr,ACWLM60XFJPV,マスタ 評価項目,挿入,page-admin
+PAG-K0RMxPYNZSnnsugt6sndB,AD-EI-050,マスタ 評価項目,編集,page-admin
+PAG-KP6Funm5PFjErS8V9rrft,N1Z2AKEDBUTM,マスタ 評価項目,更新,page-admin
+PAG-JMGTrGxjSKMGPbAPJx9r6,T34TYQBOL61D,マスタ 評価項目,削除,page-admin
+PAG-GlaRJs5IEb1lFwdhw7OGf,AD-PF-000,マスタ 都道府県,一覧,page-admin pref
+PAG-Lu7fuI7rcsNCN4yiq6hMK,AD-RO-000,マスタ 希望車種,一覧,page-admin order_request_option
+PAG-SGGB1KQYxkBHRfR89IiCY,AD-RO-020,マスタ 希望車種,新規入力,page-admin order_request_option
+PAG-QIGUlAvPtY5B5Z4oeIfC7,PKO2BXMK0RHZ,マスタ 希望車種,挿入,page-admin order_request_option
+PAG-NPejy60MnqNm2iBCP37u6,AD-RO-050,マスタ 希望車種,編集,page-admin order_request_option
+PAG-ODe4Nx8SsSCdREmv44WbY,ZJZC1V0RNOUV,マスタ 希望車種,更新,page-admin order_request_option
+PAG-FaYVPppFoYq4wzv0uXIfX,T6X4CB1F70IO,マスタ 希望車種,削除,page-admin order_request_option
+PAG-YEdnXR4gMp9XoxAvIcBeU,AD-RO-001,マスタ 希望設備,一覧,page-admin order_request_option
+PAG-KnZcgUmJNklQ7K8AkDvat,AD-RO-021,マスタ 希望設備,新規入力,page-admin order_request_option
+PAG-CeFJl1I4uIGUKzcHnRvil,GJPSRXVN3QAI,マスタ 希望設備,挿入,page-admin order_request_option
+PAG-Q0xqLIUQi0RMHNCitQJTU,AD-RO-051,マスタ 希望設備,編集,page-admin order_request_option
+PAG-Vc6jJ1HjFunXHiyfpaLPa,VNHIHXAZL2MG,マスタ 希望設備,更新,page-admin order_request_option
+PAG-VFFt1MfMA0Cr6UNkvQfAX,GTYLWLFPZCJE,マスタ 希望設備,削除,page-admin order_request_option
+PAG-Z0JrvDEQq2qBBgFKWESeJ,AD-RO-002,マスタ 希望装備,一覧,page-admin order_request_option
+PAG-VMvrVFGrLLBGRan99knUv,AD-RO-022,マスタ 希望装備,新規入力,page-admin order_request_option
+PAG-Tjhk3jylse7KJrpTe8lvj,D2RHKR6U7XQZ,マスタ 希望装備,挿入,page-admin order_request_option
+PAG-AgxDuWROsGjasyN3rrDQl,AD-RO-052,マスタ 希望装備,編集,page-admin order_request_option
+PAG-RkEe2EO9N8BNyS98KdU45,R13NINR9RGGQ,マスタ 希望装備,更新,page-admin order_request_option
+PAG-G2xTtDSuFmEyZq8apvDjF,THW9KSA8PW1H,マスタ 希望装備,削除,page-admin order_request_option
+PAG-U7BPw5xtrmHACy2VZbC88,AJ-AX-001,非同期通信 ファイルをアップ,単,page-ajax upload_file
+PAG-GAXSmfTVKtaC59sxYuNSE,AJ-AX-002,非同期通信 ファイルをアップ,複,page-ajax upload_some_file
+PAG-SBROTwc8uQ1MvK8nzaYsq,AJ-AX-003,非同期通信 アカウント情報を代入,,page-ajax quote_user_account
+PAG-ZePZJav2MTI6o6GmAsw8y,AJ-AX-004,非同期通信 住所情報を代入,,page-ajax quote_address
+PAG-MgWpWvpkbALt8VWWzUo8K,AJ-AX-005,非同期通信 見積項目枠を追加,,page-ajax add_estimate_item
+PAG-UvprPFZDgKrddkokjy53u,AJ-AX-006,非同期通信 見積項目情報を代入,,page-ajax quote_item
+PAG-F6OFVi4UejWz5kEbRWuD2,AJ-AX-007,非同期通信 案件情報を代入,,page-ajax quote_order
+PAG-Zl9wHMMQNwEVm5Ut8nvmb,AJ-AX-008,非同期通信 コンタクトボード,10件取得,page-ajax get_over10
+PAG-Zn3i8X4APpppSV8vC7TqM,AJ-AX-009,非同期通信 コンタクトボード,送信,page-ajax put_message
+PAG-RnI1WgpY1JHfsCjKrTvbn,AJ-AX-010,非同期通信 コンタクトボード,ファイル送信,page-ajax upload_file_and_put_board_file
+PAG-XoOivoklB4hkhmsEEYYLm,AJ-AX-011,非同期通信 コンタクトボード,メッセージ更新,page-ajax refresh_messages
+PAG-K3whZSqVUJvEOO69eYjAb,AJ-AX-012,非同期通信 コンタクトボード,未読数取得,page-ajax get_unread_count
+PAG-QDwU5reem4SjGiYIjc4iW,AJ-AX-013,非同期通信 車両枠を追加,,page-ajax add_edit_car
+PAG-Wj8vagfcsF3Nd9qgp1kWj,AJ-AX-014,非同期通信 空車枠を追加,,page-ajax add_edit_empty

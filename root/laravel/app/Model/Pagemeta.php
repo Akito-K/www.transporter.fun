@@ -61,7 +61,7 @@ class Pagemeta extends Model
         while ($line = fgets($handle)) {
             if( preg_match('/,/', $line) ){
                 $data = explode(',', $line);
-                $datas[ $data[0] ] = (object) [
+                $datas[ $data[1] ] = (object) [
                     'id' => $data[0],
                     'page_id' => $data[1],
                     'title' => $data[2],

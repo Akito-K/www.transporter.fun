@@ -16,7 +16,7 @@ class addressController extends mypageController
 
     public function showList(){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('MY-ADR-01');
+        $pagemeta = Pagemeta::getPagemeta('MY-AD-000');
         $datas = Address::getDatas(\Auth::user()->user_id);
 
         return view('mypage.address.list', compact('pagemeta', 'datas'));
@@ -24,7 +24,7 @@ class addressController extends mypageController
 
     public function showDetail($address_id){
         Log::saveData( __METHOD__ , 'address_id', $address_id, true);
-        $pagemeta = Pagemeta::getPagemeta('MY-ADR-02');
+        $pagemeta = Pagemeta::getPagemeta('MY-AD-010');
 
         $data = Address::getData($address_id);
         $prefs = Pref::getNames();
@@ -34,7 +34,7 @@ class addressController extends mypageController
 
     public function create(){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('MY-ADR-03');
+        $pagemeta = Pagemeta::getPagemeta('MY-AD-020');
 
         $prefs = Pref::getNames();
 
@@ -45,14 +45,16 @@ class addressController extends mypageController
         Log::saveData( __METHOD__ );
         // Validation
         $this->validationInsert($request);
-        $this->insertData($request);
+
+        $me = MyUser::getMe();
+        $this->insertData($request, $me);
 
         return redirect('mypage/address');
     }
 
     public function edit($address_id){
         Log::saveData( __METHOD__ , 'address_id', $address_id, true);
-        $pagemeta = Pagemeta::getPagemeta('MY-ADR-06');
+        $pagemeta = Pagemeta::getPagemeta('MY-AD-050');
 
         $data = Address::getData($address_id);
         $prefs = Pref::getNames();
@@ -112,7 +114,7 @@ class addressController extends mypageController
 
         $this->validate($request, $validates);
     }
-    public function insertData(Request $request){
+    public function insertData($request, $me){
         $now_at = new \Datetime();
         $address_id = Address::getNewId();
 
@@ -133,7 +135,7 @@ class addressController extends mypageController
         Address::create($data);
 
         $data = [
-            'user_id' => $request['me']->user_id,
+            'user_id' => $me->user_id,
             'address_id' => $address_id,
             'created_at' => $now_at,
             'updated_at' => $now_at,
@@ -141,7 +143,7 @@ class addressController extends mypageController
         UserToAddress::create($data);
     }
 
-    public function updateData(Request $request){
+    public function updateData($request){
         $now_at = new \Datetime();
         $data = [
             'sei' => $request['sei'],

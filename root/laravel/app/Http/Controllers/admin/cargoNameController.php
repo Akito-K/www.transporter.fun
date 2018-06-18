@@ -12,14 +12,14 @@ class cargoNameController extends adminController
 {
 
     public function showList(){
-        $pagemeta = Pagemeta::getPagemeta('AD-CGN-01');
+        $pagemeta = Pagemeta::getPagemeta('AD-CN-000');
         $datas = CargoName::getDatas();
 
         return view('admin.cargo_name.list', compact('pagemeta', 'datas'));
     }
 
     public function create(){
-        $pagemeta = Pagemeta::getPagemeta('AD-CGN-03');
+        $pagemeta = Pagemeta::getPagemeta('AD-CN-020');
 
         return view('admin.cargo_name.create', compact('pagemeta'));
     }
@@ -33,7 +33,7 @@ class cargoNameController extends adminController
     }
 
     public function edit($name_id){
-        $pagemeta = Pagemeta::getPagemeta('AD-CGN-06');
+        $pagemeta = Pagemeta::getPagemeta('AD-CN-050');
         $data = CargoName::getData($name_id);
 
         return view('admin.cargo_name.edit', compact('pagemeta', 'data'));
@@ -61,7 +61,7 @@ class cargoNameController extends adminController
         $this->validate($request, $validates);
     }
 
-    public function insertData(Request $request){
+    public function insertData($request){
         $now_at = new \Datetime();
         $name_id = CargoName::getNewId();
         CargoName::create([
@@ -72,7 +72,7 @@ class cargoNameController extends adminController
         ]);
     }
 
-    public function updateData(Request $request){
+    public function updateData($request){
         $now_at = new \Datetime();
         CargoName::where('name_id', $request['name_id'])->update([
             'name' => $request['name'],

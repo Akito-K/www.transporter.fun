@@ -12,7 +12,7 @@ class prefController extends adminController
 {
 
     public function showList(){
-        $pagemeta = Pagemeta::getPagemeta('AD-PRF-01');
+        $pagemeta = Pagemeta::getPagemeta('AD-PF-000');
         $datas = Pref::getDatas();
 
         return view('admin.pref.list', compact('pagemeta', 'datas'));

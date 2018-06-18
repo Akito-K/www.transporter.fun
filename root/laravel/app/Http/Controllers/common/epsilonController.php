@@ -12,19 +12,19 @@ use App\Model\Log;
 
 class epsilonController extends Controller
 {
-    public function entry (Request $request){
+    public function entry (){
         Log::saveData( __METHOD__ );
         $pagemeta = Pagemeta::getPagemeta('CM-EP-010');
 
     }
 
-    public function error (Request $request){
+    public function error (){
         Log::saveData( __METHOD__ );
         $pagemeta = Pagemeta::getPagemeta('CM-EP-020');
 
     }
 
-    public function result (Request $request){
+    public function result (){
         Log::saveData( __METHOD__ );
         $pagemeta = Pagemeta::getPagemeta('CM-EP-030');
 

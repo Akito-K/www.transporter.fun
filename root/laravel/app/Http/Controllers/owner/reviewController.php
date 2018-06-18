@@ -23,7 +23,7 @@ class reviewController extends ownerController
 
     public function create( $order_id ){
         Log::saveData( __METHOD__ , 'order_id', $order_id, true);
-        $pagemeta = Pagemeta::getPagemeta('OW-RVW-01');
+        $pagemeta = Pagemeta::getPagemeta('OW-RV-020');
 
         $order_data = Order::getOrderFromOwnerSide($order_id);
         $estimate_data = Estimate::getPlacedEstimateByOrderIdFromOwnerSide( $order_id );
@@ -42,7 +42,7 @@ class reviewController extends ownerController
     public function confirm( MyRequest $request ){
         $order_id = $request['order_id'];
         Log::saveData( __METHOD__ , 'order_id', $order_id, true );
-        $pagemeta = Pagemeta::getPagemeta('OW-RCV-02');
+        $pagemeta = Pagemeta::getPagemeta('OW-RV-030');
 
         $order_data = Order::getOrderFromOwnerSide($order_id);
         $estimate_data = Estimate::getPlacedEstimateByOrderIdFromOwnerSide( $order_id );

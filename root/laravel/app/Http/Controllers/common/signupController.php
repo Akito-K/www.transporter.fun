@@ -153,7 +153,7 @@ class signupController extends Controller
     }
 
     // 同意と Epsilon 関連
-    public function accept( $signup_key, Request $request ){
+    public function accept( $signup_key ){
         Log::saveData( __METHOD__ , 'signup_key', $signup_key, true);
         $pagemeta = Pagemeta::getPagemeta('CM-SU-060');
 
@@ -164,7 +164,7 @@ class signupController extends Controller
     }
 
     // 同意後 運送会社登録ありならエプシロンへのリンク / 無しなら完了へリダイレクト
-    public function accepted( $signup_key, Request $request ){
+    public function accepted( $signup_key ){
         Log::saveData( __METHOD__ , 'signup_key', $signup_key, true);
         $pagemeta = Pagemeta::getPagemeta('CM-SU-070');
 
@@ -178,7 +178,7 @@ class signupController extends Controller
         }
     }
 
-    public function completeOwner( $signup_key, Request $request ){
+    public function completeOwner( $signup_key ){
         Log::saveData( __METHOD__ , 'signup_key', $signup_key, true);
         $pagemeta = Pagemeta::getPagemeta('CM-SU-080');
 

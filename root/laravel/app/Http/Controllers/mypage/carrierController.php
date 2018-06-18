@@ -16,7 +16,7 @@ class carrierController extends mypageController
 {
     public function showList(){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('MY-VCR-01');
+        $pagemeta = Pagemeta::getPagemeta('MY-CR-000');
         $carrier_datas = Carrier::getCarriers();
 
         return view('mypage.carrier.list', compact('pagemeta', 'carrier_datas', 'prefs'));
@@ -24,7 +24,7 @@ class carrierController extends mypageController
 
     public function showDetail($carrier_id){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('MY-VCR-01');
+        $pagemeta = Pagemeta::getPagemeta('MY-CR-010');
         $carrier_data = Carrier::getData($carrier_id);
         $carrier_data->star = view('include.star', ['star' => $carrier_data->star])->render();
         $prefs = Pref::getNames();

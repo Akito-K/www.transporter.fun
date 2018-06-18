@@ -28,7 +28,7 @@ class orderController extends ownerController
 
     public function create(){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('OW-ORD-03');
+        $pagemeta = Pagemeta::getPagemeta('OW-OD-020');
 
         $carrier_classes = CarrierClass::getNames(true);
         $addresses = Address::getNames( \Auth::user()->user_id );
@@ -48,7 +48,7 @@ class orderController extends ownerController
 
     public function confirm(MyRequest $request){
         Log::saveData( __METHOD__ );
-        $pagemeta = Pagemeta::getPagemeta('OW-ORD-04');
+        $pagemeta = Pagemeta::getPagemeta('OW-OD-030');
 
         $carrier_classes = CarrierClass::getNames(true);
         $timezones = Order::getTimezones();
@@ -82,7 +82,7 @@ class orderController extends ownerController
 
     public function edit( $order_id ){
         Log::saveData( __METHOD__ , 'order_id', $order_id, true);
-        $pagemeta = Pagemeta::getPagemeta('OW-ORD-06');
+        $pagemeta = Pagemeta::getPagemeta('OW-OD-050');
 
         $carrier_classes = CarrierClass::getNames(true);
         $addresses = Address::getNames(\Auth::user()->user_id);
@@ -112,7 +112,7 @@ class orderController extends ownerController
         Log::saveData( __METHOD__ );
 
         $order_id = $request['order_id'];
-        $pagemeta = Pagemeta::getPagemeta('OW-ORD-07');
+        $pagemeta = Pagemeta::getPagemeta('OW-OD-060');
 
         $carrier_classes = CarrierClass::getNames(true);
         $timezones = Order::getTimezones();

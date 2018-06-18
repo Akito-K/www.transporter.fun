@@ -20,7 +20,7 @@ class placeController extends ownerController
 
     public function create($estimate_id){
         Log::saveData( __METHOD__ , 'estimate_id', $estimate_id, true);
-        $pagemeta = Pagemeta::getPagemeta('OW-PLC-01');
+        $pagemeta = Pagemeta::getPagemeta('OW-PL-020');
         $estimate_data = Estimate::getEstimateFromOwnerSide($estimate_id);
         $order_data = Order::getOrderFromOwnerSide($estimate_data->order_id);
         $owner_data = Owner::getData($order_data->owner_id);
@@ -34,7 +34,7 @@ class placeController extends ownerController
     public function confirm( MyRequest $request ){
         $estimate_id = $request['estimate_id'];
         Log::saveData( __METHOD__ , 'estimate_id', $estimate_id, true );
-        $pagemeta = Pagemeta::getPagemeta('OW-PLC-02');
+        $pagemeta = Pagemeta::getPagemeta('OW-PL-030');
 
         $estimate_data = Estimate::getEstimateFromOwnerSide($estimate_id);
         $order_data = Order::getOrderFromOwnerSide($estimate_data->order_id);

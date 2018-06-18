@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Model\MyUser;
 
 class AdminAuth
 {
@@ -15,7 +16,8 @@ class AdminAuth
      */
     public function handle($request, Closure $next)
     {
-        if( !in_array(99, $request->me->authorities) ){
+        $me = MyUser::getMe();
+        if( !in_array(99, $me->authorities) ){
             return redirect('/mypage')
                             ->withInput()
                             ->withErrors(['ID' => '権限がありません']);
