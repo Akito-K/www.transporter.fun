@@ -1,0 +1,109 @@
+// mixinsの読み込み
+@import "./mixins/include.scss";
+@import "_variables.scss";
+
+
+
+.page_register{
+	@extend .page_login;
+	@extend .page_contact;
+	.sec_form{
+		.form_groupe{
+			.form_parts_box{
+				&.form_parts_code{
+			        @include clearfix();
+			        input{
+			            border:1px solid #D3D3D3;
+			            width: 70px;
+			        }
+			        .code_1{
+			            float:left;
+			            margin: 0 10px;
+			        }
+			    }
+			}
+			&.form_groupe_ancate{
+				.title{
+					height: 120px;
+					@include sp{
+						height: auto;
+					}
+				}
+				.form_parts_box{
+					height: 120px;
+					@include sp{
+						height: auto;
+					}
+					label{
+						display: inline-block;
+						margin-right: 10px;
+						margin-top: 5px;
+					}
+					input{
+						height: auto;
+						width: auto;
+						display: inline-block;
+					}
+				}
+			}
+			.car_table_form{
+				table{
+					width: 100%;
+				}
+				th{
+					@include sp{
+						display: none;
+					}
+				}
+				td{
+					border:1px solid #D3D3D3;
+					vertical-align: middle;
+				}
+				.sub_title{
+					text-align: center;
+					width: 150px;
+					font-weight: bold;
+					span{
+						font-size: 14px;
+						font-weight: bold;
+					}
+				}
+				.title{
+					float:none;
+					height: auto;
+					text-align: left;
+					&.sp{
+						@include pc{
+							display: none;
+						}
+						@include sp{
+							display: block;
+						}
+					}
+				}
+				.form_parts_box{
+					float:none;
+					width: auto;
+					border:none;
+					&.form_parts_file{
+						input{
+							height: auto;
+							text-indent: 0;
+							margin-top: 10px;
+						}
+					}
+					&.form_parts_car_num{
+						input{
+							width: 70px;
+							border:1px solid #D3D3D3;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+

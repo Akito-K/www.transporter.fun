@@ -1,0 +1,40 @@
+@charset "utf-8";
+// mixinsの読み込み
+@import "./mixins/include.scss";
+@import "_variables.scss";
+
+.page_guide {
+
+	.step_box{
+		.step{
+			display: table;
+			float: left;
+			margin-right: 15px;
+			span {
+				display: table-cell;
+				color: #fff;
+				width: 70px;
+				height: 70px;
+				border-radius: 50%;
+				text-align: center;
+				vertical-align: middle;
+			}
+			&.step1 span{background-color:#F9CA0E;}
+			&.step2 span{background-color:#F9690E;}
+			&.step3 span{background-color:#C91D1D;}
+			&.step4 span{background-color:#4C1298;}
+			&.step5 span{background-color:#20326E;}
+			&.step6 span{background-color:#5184D1;}
+		}
+		.text_wrap {
+			overflow: hidden;
+			margin: 0;
+
+			.subtitle {
+				font-size: 16px;
+				font-weight: bold;
+			}
+		}
+	}
+
+}

@@ -1,0 +1,74 @@
+// mixinsの読み込み
+@import "./mixins/include.scss";
+@import "_variables.scss";
+
+/*** TOP ***/
+.page_what_transporter{
+	.hira_list{
+		padding: 0 30px;
+		ul{
+			border:1px solid #9ADFF5;
+			border-radius: 5px;
+			@include clearfix();
+			padding: 15px 30px;
+			background:#fff;
+			li{
+				width: 20%;
+				text-align: left;
+				float:left;
+				margin-bottom: 10px;
+				&:last-child{
+					width: 100%;
+					margin-bottom: 0;
+				}
+				a{
+					display: inline-block;
+					position: relative;
+					font-size: 22px;
+					color:#707070;
+					@include hover();
+					&:before{
+						content:"→ ";
+						color:#FA711B;
+					}
+				}
+			}
+		}
+	}
+	.word_wrap{
+		margin-top: 20px;
+		.word_title{
+			a{
+				display: block;
+				color:#1F3A93;
+				background:#EEFAFF;
+				padding: 3px 10px;
+				font-weight: bold;
+				font-size: 16px;
+				@include hover();
+			}
+		}
+		.word_text{
+
+			background:url("../images/what_transporter/026/triangle.png") no-repeat;
+		    background-position-x: 30px;
+		    background-position-y: 5px;
+		    padding-top: 25px;
+			display: none;
+			p{
+				border-radius: 7px;
+				padding: 10px 20px;
+				background:#EBF1FB;
+			}
+		}
+	}
+
+	.bum_box{
+		margin-bottom: 30px;
+	}
+	
+}
+
+
+
+

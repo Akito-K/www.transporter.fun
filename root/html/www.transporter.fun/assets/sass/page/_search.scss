@@ -1,0 +1,63 @@
+// mixinsの読み込み
+@import "./mixins/include.scss";
+@import "_variables.scss";
+
+.page_search{
+	.box_orange_search {
+		padding: 50px;
+		@include sp {
+			padding: 20px;
+		}
+
+		.search_checkboxes {
+			label {
+				display: inline-block;
+				white-space: nowrap;
+				margin-right: 10px;
+			}
+		}
+	}
+	@include pc {
+		.col2_left {
+			padding-right: 30px;
+		}
+		.col2_right {
+			padding-left: 30px;
+		}
+	}
+	.btn_select_value {
+		.label {
+			cursor: pointer;
+
+			&.selected {
+				color: inherit;
+			}
+		}
+		&.btn_select_count {
+			display: inline-block;
+			width: 140px;
+			margin-right: 40px;
+		}
+	}
+	.f_bold {
+		font-weight: bold;
+	}
+	.f_large {
+		font-size: 20px;
+	}
+	.table {
+		display: table;
+		table-layout: fixed;
+		width: 100%;
+
+		.cell {
+			display: table-cell;
+			vertical-align: middle;
+		}
+		@include sp {
+			.cell:empty {
+				display: none;
+			}
+		}
+	}
+}

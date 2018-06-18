@@ -1,0 +1,254 @@
+@charset "utf-8";
+// mixinsの読み込み
+@import "./mixins/include.scss";
+@import "_variables.scss";
+
+.page_campaign {
+
+	.pos_rel {
+		position: relative;
+	}
+
+	.sec_top_half {
+		min-height: 729px;
+
+		.str {
+			position: absolute;
+			top: -7px;
+			left: 123px;
+		}
+
+		.box_blue {
+			position: absolute;
+			background-color: #3C79B0;
+			color: white;
+			width: 432px;
+			padding: 50px 25px;
+			top: 335px;
+			left: 151px;
+
+			h3 {
+				font-size: 20px;
+				margin-bottom: 30px;
+			}
+			p {
+				font-size: 14px;
+				margin-bottom: 20px;
+			}
+			
+			.downwards_arrow_blue {
+				position: absolute;
+				background-color: #3C79B0;
+				width: 135px;
+				left: 0;
+				right: 0;
+				padding: 30px 0 0;
+				margin: auto;
+				z-index: 2;
+
+				.circled_white {
+					display: table;
+					width: 86px;
+					height: 86px;
+					border: solid 1px white;
+					border-radius: 50%;
+					margin: auto;
+
+					span {
+						display: table-cell;
+						font-size: 20px;
+						font-weight: bold;
+						text-align: center;
+						vertical-align: middle;
+					}
+
+					&::after {
+						content: "";
+						position: absolute;
+						width: 0;
+						height: 0;
+						border-color: #3C79B0 transparent transparent;
+						border-style: solid solid none;
+						border-width: 92px 152px 0;
+						bottom: -50%;
+						right: 50%;
+						transform: translateX(50%);
+						z-index: -1;
+					}
+				}
+			}
+		}
+	}
+
+	.sec_bottom_half {
+		min-height: 983px;
+		background-color: #3a4144;
+
+		.sec_middle {
+			position: absolute;
+			width: 1054px;
+			top: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+
+			.chipolo_box {
+				position: relative;
+				background-color: white;
+				border: solid 4px #3C79B0;
+				border-radius: 14px;
+				padding: 50px 30px;
+				background-repeat: no-repeat;
+				background-size: 439px 428px;
+				background-position: right center;
+				margin-top: 36px;
+				margin-bottom: 30px;
+				z-index: 1;
+
+				h2 {
+					font-size: 24px;
+					font-weight: bold;
+					margin-bottom: 50px;
+				}
+				.chipolo {
+					position: absolute;
+					width: 439px;
+					height: 428px;
+					right: 0;
+					top: 0;
+					bottom: 0;
+					margin: auto;
+					z-index: -1;
+				}
+				p {
+					font-size: 18px;
+					max-width: 517px;
+					margin-bottom: 50px;
+				}
+			}
+
+			.proviso {
+				color: white;
+				font-size: 14px;
+				padding: 0 14px;
+
+				.ti_-1 {
+					text-indent: -1em;
+					padding-left: 1em;
+				}
+			}
+		}
+
+		.btn_orange {
+			position: absolute;
+			display: block;
+			width: 1030px;
+			background-color: #F5AB35;
+			color: white;
+			font-size: 36px;
+			font-weight: bold;
+			text-align: center;
+			padding: 16px 0;
+			left: 0;
+			right: 0;
+			bottom: 143px;
+			margin: auto;
+			transition: background-color .3s;
+
+			&:hover {
+				background-color: #f8c36d;
+			}
+		}
+	}
+
+	@include sp {
+		.sec_top_half {
+			min-height: auto;
+
+			.str {
+				max-width: 499px;
+				width: 65%;
+				top: -3%;
+				bottom: 0;
+				left: -1.5%;
+				margin: auto;
+			}
+			.box_blue {
+				position: relative;
+				top: auto;
+				left: auto;
+				width: auto;
+				padding: 30px 20px;
+				margin-top: 15px;
+				margin-bottom: 90px;
+				p {
+					margin-bottom: 0;
+				}
+				.downwards_arrow_blue {
+					padding-top: 15px;
+
+					.circled_white::after {
+						bottom: -55px;
+						border-width: 75px 150px 0;
+						padding: 15px 0 0;
+					}
+				}
+			}
+		}
+
+		.sec_bottom_half {
+			min-height: auto;
+			background-color: transparent;
+
+			.bg_bottom_half {
+				display: none;
+			}
+
+			.sec_middle {
+				position: relative;
+				width: auto;
+				.chipolo_box {
+					background-size: 25%;
+					background-position: right 85%;
+					padding: 25px 15px;
+					margin-bottom: 20px;
+					h2 {
+						font-size: 18px;
+						margin-bottom: 25px;
+						br {
+							display: none;
+						}
+					}
+					.chipolo {
+						position: static;
+						float: right;
+						width: 109px;
+						height: 107px;
+						margin: 5px -15px 0 10px;
+					}
+					p {
+						font-size: 14px;
+						margin-bottom: 0;
+					}
+				}
+				.proviso {
+					color: black;
+					margin-bottom: 30px;
+					padding: 0;
+					.ti_-1 {
+						font-size: 12px;
+						br {
+							display: none;
+						}
+					}
+				}
+			}
+			.btn_orange {
+				position: static;
+				width: auto;
+				font-size: 18px;
+				padding: 16px 15px;
+			}
+		}
+	}
+}

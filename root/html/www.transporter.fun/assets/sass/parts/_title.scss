@@ -1,0 +1,79 @@
+// mixinsの読み込み
+@import "./mixins/include.scss";
+@import "_variables.scss";
+
+.title_style01{
+	background: url(../images/bg_gnav@2x.png) left center repeat-x;
+	background-size: 1201px 12px;
+	text-align: center;
+	margin-bottom: 20px;
+	.inner{
+		display: inline-block;
+		background-color: #FFFFFF;
+		font-size: 36px;
+		padding: 0px 45px;
+		@include sp{
+			font-size: 22px;
+			padding: 0px 10px;
+		}
+		.sitetitle{
+			font-size: 40px;
+			color: #102165;
+			@include sp{
+				font-size: 24px;
+			}
+		}
+		.catch{
+			font-size: 20px;
+			@include sp{
+				font-size: 14px;
+			}
+		}
+	}
+}
+
+.title_style02{
+	font-size: 20px;
+	font-weight: bold;
+	position: relative;
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+	@include sp{
+		font-size: 18px;
+	}
+	&:after{
+		content: "";
+		display: block;
+		width: 60px;
+		height: 5px;
+		background-color: #F9690E;
+		position: absolute;
+		left: 0px;
+		bottom: 0px;
+	}
+}
+
+.title_style03{
+	padding: 10px 22px;
+	font-size: 22px;
+	font-weight: bold;
+	background-color: #1F3A93;
+	color: white;
+	margin-bottom: 50px;
+	@include sp{
+		margin-bottom: 25px;
+	}
+}
+
+.title_style04{
+	font-size: 20px;
+	font-weight: bold;
+	color: #1F3A93;
+	margin-bottom: 10px;
+}
+
+
+
+
+
+

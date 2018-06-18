@@ -1,0 +1,54 @@
+// mixinsの読み込み
+@import "./mixins/include.scss";
+@import "_variables.scss";
+
+
+.side{
+	.block{
+		.side_title{
+			background-color: #F3F1EC;
+			font-size: 16px;
+			font-weight: bold;
+			color: #1F3A93;
+			padding: 10px 20px;
+			a{
+				display: block;
+			}
+		}
+		.side_list{
+			background-color: #FFFFFF;
+			padding: 20px 10px;
+			font-size: 12px;
+			li{
+				margin-bottom: 15px;
+				a{
+					background: url(../images/icon_arrow_orange@2x.png) left 3px no-repeat;
+					background-size: 12px 12px;
+					padding-left: 20px;
+					display: block;
+				}
+			}
+		}
+	}
+
+	&.side_qa {
+		.block {
+			.side_title {
+				background-color: #EBF1FB;
+			}
+			.side_list{
+				li {
+					a {
+						background: url(../images/qa_inquiry/icon_arrow_blue@2x.png) left 3px no-repeat;
+						background-size: 12px 12px;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+

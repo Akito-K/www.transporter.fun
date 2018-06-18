@@ -1,0 +1,702 @@
+// mixinsの読み込み
+@import "./mixins/include.scss";
+@import "_variables.scss";
+
+/******************************************
+* mt pd
+******************************************/
+@for $i from 0 through 20 {
+    .mt#{$i * 5} {margin-top:#{$i * 5}px!important;}
+    .mr#{$i * 5} {margin-right:#{$i * 5}px!important;}
+    .mb#{$i * 5} {margin-bottom:#{$i * 5}px!important;}
+    .ml#{$i * 5} {margin-left:#{$i * 5}px!important;}
+
+    .pt#{$i * 5} {padding-top:#{$i * 5}px!important;}
+    .pr#{$i * 5} {padding-right:#{$i * 5}px!important;}
+    .pb#{$i * 5} {padding-bottom:#{$i * 5}px!important;}
+    .pl#{$i * 5} {padding-left:#{$i * 5}px!important;}
+}
+
+@for $i from 0 through 20 {
+    .mt#{$i * -5} {margin-top:#{$i * -5}px!important;}
+    .mr#{$i * -5} {margin-right:#{$i * -5}px!important;}
+    .mb#{$i * -5} {margin-bottom:#{$i * -5}px!important;}
+    .ml#{$i * -5} {margin-left:#{$i * -5}px!important;}
+}
+
+
+
+/******************************************
+* reset
+******************************************/
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	font-size:100%;
+	line-height: 1.5;
+	font-weight: normal;
+	vertical-align:baseline;
+	background:transparent;
+    //font-family: "メイリオ",Meiryo,"游ゴシック",YuGothic,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",sans-serif;
+
+}
+
+body {
+	line-height:1;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section { 
+	display:block;
+}
+
+nav ul {
+	list-style:none;
+}
+
+blockquote, q {
+	quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content:'';
+	content:none;
+}
+
+a {
+	margin:0;
+	padding:0;
+	font-size:100%;
+	vertical-align:baseline;
+	background:transparent;
+	color: inherit;
+	text-decoration: none;
+	transition: all 0.3s ease;
+}
+a:focus{
+	outline: none;
+}
+
+img{
+	max-width: 100%;
+	height: auto;
+	vertical-align: middle;
+}
+
+
+/* change colours to suit your needs */
+ins {
+	background-color:#ff9;
+	color:#000;
+	text-decoration:none;
+}
+
+/* change colours to suit your needs */
+mark {
+	background-color:#ff9;
+	color:#000;
+	font-style:italic;
+	font-weight:bold;
+}
+
+del {
+	text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+	border-bottom:1px dotted;
+	cursor:help;
+}
+
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+
+/* change border colour to suit your needs */
+hr {
+	display:block;
+	height:1px;
+	border:0;
+	border-top:1px solid #cccccc;
+	margin:1em 0;
+	padding:0;
+}
+
+input, select {
+	vertical-align:middle;
+}
+
+ul,ol{
+	list-style-type: none;
+	
+}
+
+*{
+	box-sizing: border-box;
+}
+button{
+	background: none;
+	border: none;
+	cursor: pointer;
+	margin: 0;
+	padding: 0;
+}
+input:focus,
+button:focus{
+	outline: none;
+}
+
+
+
+/******************************************
+* common
+******************************************/
+html{
+	font-size: 14px;
+	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	@include sp{
+		font-size: 13px;
+	}
+}
+#wrapper{
+	/*min-width: 1200px;
+	overflow: hidden;
+	@include sp{
+		width: 100%;
+		min-width: inherit;
+		padding-top: 60px;
+		&.menu_active{
+			//-webkit-filter: blur(10px);
+			//filter: blur(10px);
+			position: fixed;
+		}
+	}*/
+}
+.container{
+	width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 10px;
+	padding-right: 10px;
+	box-sizing: content-box;
+	@include sp{
+		width: auto;
+	}
+}
+.page_main{
+	padding-bottom: 200px;
+	position: relative;
+	@include sp{
+		padding-bottom: 100px;
+	}
+}
+.totop{
+	position: fixed;
+	right: 15px;
+	bottom: 15px;
+
+	a {
+		display: block;
+		width: 75px;
+		height: 75px;
+		background-image: url(../images/btn_totop_upwards_arrow@2x.png);
+		background-size: 75px 75px;
+		background-repeat: no-repeat;
+		border-radius: 50%;
+
+		&:hover {
+			background-image: url(../images/btn_totop_upwards_arrow_inverted@2x.png);
+		}
+
+		@include sp {
+			width: 50px;
+			height: 50px;
+			background-size: 50px;
+		}
+	}
+}
+
+
+.sp{
+	display: none;
+	@include sp{
+		display: block !important;
+	}
+}
+@include sp{
+	img.sp{
+		display: inline !important;
+	}
+}
+.pc{
+	@include sp{
+		display: none !important;
+	}
+}
+.bg01{
+	background: url(../images/bg01@2x.png) center top repeat;
+	background-size: 1280px auto;
+	@include sp{
+		background: none;
+	}
+}
+.bg02{
+	background-color: #FAF9F4;
+}
+
+/*** subtitle ***/
+.subtitle_line02{
+	position: relative;
+	font-size: 186%;
+	font-weight: bold;
+	line-height: 1.2;
+	text-align: center;
+	padding-bottom: 10px;
+	margin-bottom: 70px;
+	@include sp{
+		margin-bottom: 35px;
+		font-size: 129%;
+	}
+	&:after{
+		content: "";
+		display: block;
+		background: url(../images/line02@2x.png) center top no-repeat;
+		background-size: contain;
+		width: 189px;
+		height: 13px;
+		position: absolute;
+		left: 50%;
+		bottom: -13px;
+		transform: translateX(-50%);
+		@include sp{
+			width: 140px;
+		}
+	}
+}
+
+.subtitle_style02{
+	font-size: 20px;
+	font-weight: bold;
+	color: #252764;
+	background-color: white;
+	padding: 8px 20px;
+	border: solid 2px #252764;
+	margin-bottom: 30px;
+}
+
+.num_wrap{
+	@include clearfix();
+	.num{
+		float: left;
+		margin-right: 15px;
+		span{
+			display: inline-block;
+			background-color: #1F3A93;
+			width: 40px;
+			height: 40px;
+			font-size: 24px;
+			font-weight: bold;
+			text-align: center;
+			line-height: 40px;
+			vertical-align: middle;
+			border-radius: 24px;
+			color: #FFFFFF;
+		}
+	}
+	.text_content{
+		overflow: hidden;
+	}
+}
+
+
+
+.opacity{
+	transition: all 0.3s ease;
+	opacity: 1;
+}
+.opacity:hover{
+	opacity: 0.8;
+}
+
+
+
+/*** crumb ***/
+.crumb{
+	border-bottom: 1px solid #F2F2F2;
+	padding-top: 25px;
+	padding-bottom: 15px;
+	margin-bottom: 50px;
+	@include sp{
+		margin-bottom: 25px;
+	}
+	ul{
+		@include clearfix();
+		li{
+			float: left;
+			&:after{
+				content: "＞";
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			&:last-child{
+				&:after{
+					content: none;
+				}
+			}
+			a{
+				&:hover{
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+}
+
+
+
+/*** col ***/
+.col{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-direction : normal;
+	-webkit-box-orient : normal;
+	-ms-flex-direction: row;
+	-webkit-flex-direction: row;
+	flex-direction: row;	
+	-webkit-box-lines : multiple;
+	-ms-flex-wrap : wrap;
+	-webkit-flex-wrap : wrap;
+	flex-wrap : wrap;
+	margin-left: -10px;
+	.col2{
+		width: 50%;
+		padding-left: 10px;
+		padding-bottom: 10px;
+	}
+	.col3{
+		width: 33.333333%;
+		padding-left: 10px;
+		padding-bottom: 10px;
+	}
+	.col4{
+		width: 25%;
+		padding-left: 10px;
+		padding-bottom: 10px;
+	}
+	.col5{
+		width: 20%;
+		padding-left: 10px;
+		padding-bottom: 10px;
+	}
+	@include sp{
+		.col2,.col3,.col4,.col5{
+			width: 100%;
+		}
+	}
+
+}
+
+.table_wrap{
+	@include sp{
+		overflow-x: scroll;
+		margin-right: -10px;
+		padding-bottom: 10px;
+		td{
+			white-space: nowrap;
+		}
+	}
+}
+
+
+/*** page 共通 ***/
+.sec_visual{
+	background-color: #000000;
+	.visual_wrap{
+		position: relative;
+		.visual_thumb{
+
+		}
+		.visual_title{
+			position: absolute;
+			left: 0px;
+			top: 50%;
+			transform: translateY(-50%);
+			font-size: 32px;
+			font-weight: bold;
+			color: #FFFFFF;
+			@include sp{
+				font-size: 18px;
+			}
+		}
+	}
+}
+
+.page_col2{
+	@include sp{
+		padding-top: 30px;
+	}
+	.container{
+		@include clearfix();
+		article.content{
+			width: 880px;
+			float: left;
+			@include sp{
+				width: auto;
+				float: none;
+			}
+		}
+		aside.side{
+			width: 260px;
+			float: right;
+			@include sp{
+				display: none;
+			}
+		}
+	}
+}
+
+.sec{
+	margin-bottom: 50px;
+	@include clearfix();
+	@include sp{
+		margin-bottom: 25px;
+	}
+	p,ol,ul{
+		font-size: 16px;
+		line-height: 1.8;
+		margin-bottom: 20px;
+		&:last-child{
+			margin-bottom: 0px;
+		}
+	}
+	.text_wrap{
+		overflow: hidden;
+		margin-bottom: 30px;
+		.subtitle{
+			font-size: 16px;
+			font-weight: bold;
+			color: #333333;
+			margin-bottom: 20px;
+		}
+		.text_content{
+			padding-left: 20px;
+			padding-right: 20px;
+			@include sp{
+				padding-left: 5px;
+				padding-right: 5px;
+			}
+		}
+	}
+}
+.f_small{
+	font-size: 90% !important;
+}
+.f_xsmall{
+	font-size: 80% !important;
+}
+
+.img_right{
+	float: right;
+	padding-left: 20px;
+	padding-bottom: 20px;
+	@include sp{
+		float: none;
+		padding-left: 0px;
+		text-align: center;
+	}
+}
+.img_center{
+	text-align: center;
+	padding-bottom: 20px;
+}
+.img_left{
+	float: left;
+	padding-right: 20px;
+	padding-bottom: 20px;
+	@include sp{
+		float: none;
+		padding-right: 0px;
+		text-align: center;
+	}
+}
+.textlink{
+	color: #1F3A93;
+	text-decoration: none;
+}
+.textlink:hover{
+	text-decoration: underline;
+}
+.alL{
+	text-align: left;
+}
+.alC{
+	text-align: center;
+}
+.alR{
+	text-align: right;
+}
+
+
+/*** block ***/
+.block_style01{
+	margin-bottom: 30px;
+	@include clearfix();
+	.thumb{
+		float: left;
+		@include sp{
+			float: none;
+			text-align: center;
+			margin-bottom: 20px;
+		}
+	}
+	.text_wrap{
+		overflow: hidden;
+		padding-left: 80px;
+		@include sp{
+			padding-left: 0px;
+		}
+	}
+}
+
+/*** list ***/
+.list_decimal{
+	list-style-type: decimal;
+	padding-left: 40px;
+	li{
+		margin-bottom: 5px;
+	}
+}
+.list_disc{
+	list-style-type: disc;
+	padding-left: 40px;
+	li{
+		margin-bottom: 5px;
+	}
+}
+
+
+/*** 星 ***/
+//レート評価 変数
+$starFull: 26px;//星1個の幅
+$starHalf: $starFull / 2;//星半分（0.5）の幅
+
+$rate1: $starFull;//星1
+$rate1-5: $starFull + $starHalf;//星1.5
+$rate2: $starFull * 2;//星2
+$rate2-5: ($starFull * 2) + $starHalf;//星2.5
+$rate3: $starFull * 3;//星3
+$rate3-5: ($starFull * 3) + $starHalf;//星3.5
+$rate4: $starFull * 4;//星4
+$rate4-5: ($starFull * 4) + $starHalf;//星4.5
+$rate5 :$starFull * 5;//星5
+
+.rate{
+  position: relative;
+  display: inline-block;
+  width: $starFull * 5;
+  height: $starFull;
+  font-size: $starFull;
+  &:before,&:after{
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '★★★★★';
+    display: inline-block;
+    height: $starFull;
+    line-height: $starFull;
+  }
+  &:before{
+  color: #ddd;
+  }
+  &:after{
+  color: #f5c53a;
+  overflow: hidden;
+  white-space: nowrap;//これがないと改行されて星の半分（0.5）が表現できなくなる
+  }
+}
+.rate0:after{//星0
+  width: 0;
+}
+.rate1:after{//星1
+  width: $rate1;
+}
+.rate1-5:after{//星1.5
+  width: $rate1-5;
+}
+.rate2:after{//星2
+  width: $rate2;
+}
+.rate2-5:after{//星2.5
+  width: $rate2-5;
+}
+.rate3:after{//星3
+  width: $rate3;
+}
+.rate3-5:after{//星3.5
+  width: $rate3-5;
+}
+.rate4:after{//星4
+  width: $rate4;
+}
+.rate4-5:after{//星4.5
+  width: $rate4-5;
+}
+.rate5:after{//星5
+  width: $rate5;
+}
+
+
+.wrap{
+  width: 5em;
+}
+
+
+.box_white{
+	background-color: #FFFFFF;
+	padding: 20px;
+	margin-bottom: 20px;
+	@include clearfix();
+	@include sp{
+		padding: 20px 10px;
+	}
+	&.bd_gray{
+		border: 1px solid #DFDED7;
+	}
+	&.bd_blue{
+		border: 1px solid #1F3A93;
+	}
+	&.bd_orange{
+		border: 1px solid #F9690E;
+	}
+}
+
+.box_orange{
+	background-color: #FBF7E7;
+	padding: 20px;
+	margin-bottom: 20px;
+	@include clearfix();
+	@include sp{
+		padding: 20px 10px;
+	}
+}
+
+.border_style1{
+	border: 1px solid #D3D3D3;
+}

@@ -1,0 +1,36 @@
+/* mixinsの読み込み */
+@import "mixins/include.scss";
+/* variablesの読み込み */
+@import "_variables.scss";
+/* commonの読み込み */
+@import "_common.scss";
+
+/* テンプレートで使用する pagesの読み込み */
+
+/* partsの読み込み */
+@import "parts/_header.scss";
+@import "parts/_footer.scss";
+@import "parts/_btn.scss";
+@import "parts/_title.scss";
+@import "parts/_side.scss";
+
+
+/* pageの読み込み */
+@import "page/_home.scss";
+@import "page/_transporter.scss";
+@import "page/_contact.scss";
+@import "page/_login.scss";
+@import "page/_register.scss";
+@import "page/_request_search.scss";
+@import "page/_search.scss";
+@import "page/_about_service.scss";
+@import "page/_campaign.scss";
+@import "page/_guide.scss";
+
+
+
+
+
+
+
+

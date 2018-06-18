@@ -1,0 +1,173 @@
+// mixinsの読み込み
+@import "./mixins/include.scss";
+@import "_variables.scss";
+
+.page_home{
+	.sec_visual{
+		background-color: #000000;
+		.container{
+			position: relative;
+
+			.visual_arrow {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				width: 36px;
+				height: 53px;
+				margin: auto;
+				z-index: 1;
+				background-image: url(../images/home/visual_arrows@2x.png);
+				background-size: 72px 53px;
+				background-repeat: no-repeat;
+
+				&.visual_arrow_prev {
+					left: 36px;
+					background-position: left center;
+				}
+				&.visual_arrow_next {
+					right: 36px;
+					background-position: right center;
+				}
+
+				@include sp {
+					width: 24px;
+					height: 35.3px;
+					background-size: 48px 35.3px;
+					&.visual_arrow_prev {
+						left: 2.5%;
+					}
+					&.visual_arrow_next {
+						right: 2.5%;
+					}
+				}
+			}
+		}
+	}
+
+	.sec_nav{
+		padding-top: 50px;
+		padding-bottom: 70px;
+		@include sp{
+			padding-top: 25px;
+			padding-bottom: 35px;
+		}
+		.nav_list{
+			margin-bottom: 60px;
+		}
+	}
+	.description{
+		text-align: center;
+		font-size: 16px;
+		margin-bottom: 30px;
+		@include sp{
+			font-size: 14px;
+			margin-bottom: 15px;
+		}
+	}
+	.sec_empty{
+		padding-bottom: 80px;
+		@include sp{
+			padding-bottom: 40px;
+		}
+		.table_empty{
+			width: 100%;
+			border-top: 1px solid #979797;
+			border-right: 1px solid #979797;
+			@include sp{
+				width: auto;
+			}
+			thead{
+				td{
+					width: 16.666666%;
+					background-color: #235190;
+					font-size: 16px;
+					color: #FFFFFF;
+					text-align: center;
+					border-left: 1px solid #979797;
+					border-bottom: 1px solid #979797;
+					padding: 20px 25px;
+					@include sp{
+						width: auto;
+						font-size: 12px;
+						padding: 10px 15px;
+						white-space: nowrap;
+					}
+				}
+			}
+			tbody{
+				tr{
+					&:nth-child(even){
+						background-color: #F9F3D1;
+					}
+				}
+				td{
+					font-size: 16px;
+					border-left: 1px solid #979797;
+					border-bottom: 1px solid #979797;
+					padding: 20px 25px;
+					@include sp{
+						font-size: 12px;
+						padding: 10px 15px;
+						white-space: nowrap;
+					}
+				}
+			}
+		}
+	}
+	.sec_service{
+		.list_service{
+				border-left: 1px solid #D8D8D8;
+				border-top: 1px solid #D8D8D8;
+			li{
+				position: relative;
+				padding: 15px 140px 15px 100px;
+				border-right: 1px solid #D8D8D8;
+				border-bottom: 1px solid #D8D8D8;
+				background: url(../images/home/icon_info@2x.png) 25px center no-repeat #FFFFFF;
+				background-size: 35px auto;
+				@include sp{
+					background: none;
+					padding: 10px;
+				}
+				a{
+					display: block;
+				}
+				.date{
+					font-size: 13px;
+					margin-bottom: 10px;
+				}
+				.icon{
+					display: inline-block;
+					font-size: 12px;
+					color: #ED543D;
+					background-color: #FFF3EC;
+					border: 1px solid #ED543D;
+					padding: 2px 20px;
+					margin-left: 20px;
+				}
+				.text{
+					font-size: 14px;
+				}
+				.more{
+					position: absolute;
+					right: 40px;
+					top: 50%;
+					transform: translateY(-50%);
+					@include sp{
+						position: static;
+						transform: translateY(0%);
+						text-align: right;
+						margin-top: 5px;
+					}
+				}
+			}
+		}
+	}
+}
+
+@include pc{
+}
+
+
+
+

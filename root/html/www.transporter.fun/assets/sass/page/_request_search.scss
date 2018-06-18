@@ -1,0 +1,122 @@
+// mixinsの読み込み
+@import "./mixins/include.scss";
+@import "_variables.scss";
+
+.page_request_search{
+	.search_box{
+		.form_groupe{
+			margin-top: 20px;
+			@include clearfix();
+            .title{
+                width: 230px;
+                float:left;
+                font-size: 16px;
+                text-align: right;
+                padding-top: 5px;
+                @include sp{
+                	width: auto;
+                	float:none;
+                }
+            }
+            .form_parts_box{
+                width: 900px;
+                float:left;
+                @include sp{
+                	width: auto;
+                	float:none;
+                }
+                select{
+                    font-size: 16px;
+                    border:1px solid #D3D3D3;
+                    height: 37px;
+                    text-indent: 10px;
+                    width: 350px;
+                }
+                input{
+                    height: 37px;
+                    font-size: 16px;
+                    border:none;
+                    text-indent: 10px;
+                    width: 100%;
+                }
+            }
+        }
+        .button_wrap{
+        	text-align: center;
+        	margin-top: 30px;
+        }
+	}
+	.result_table{
+		table{
+			width: 100%;
+			tr{
+				&:nth-child(odd) {background: #F9F3D1}
+				th{
+					border:1px solid #F9F3D1;
+					background:#235190;
+					color:#fff;
+					padding: 5px 0;
+				}
+				td{
+					border:1px solid #979797;
+					padding: 10px;
+					&.td1{
+						text-align: center;
+					}
+				}
+			}
+		}
+	}
+	.paginate_area{
+		.count{
+			text-align: center;
+			color:#235190;
+		}
+		text-align: center;
+		margin-top: 30px;
+		.paginate_lists{
+			display: inline-block;
+			.pagination {
+			    display: -webkit-box;
+			    display: -ms-flexbox;
+			    display: flex;
+			    padding-left: 0;
+			    list-style: none;
+			    border-radius: .25rem;
+			}
+			li {
+			    padding-left: 0;
+			    &.page-item{
+					.page-link {
+					    position: relative;
+					    display: block;
+					    padding: .5rem .75rem;
+					    margin-left: -1px;
+					    line-height: 1.25;
+					    color: #0275d8;
+					    background-color: #fff;
+					    border: 1px solid #ddd;
+					    &:hover {
+						    color: #014c8c;
+						    text-decoration: none;
+						    background-color: #eceeef;
+						    border-color: #ddd;
+						}
+					}
+
+					&:first-child .page-link {
+					    margin-left: 0;
+					    border-bottom-left-radius: .25rem;
+					    border-top-left-radius: .25rem;
+					}
+					&.active .page-link {
+					    z-index: 2;
+					    color: #fff;
+					    background-color: #0275d8;
+					    border-color: #0275d8;
+					}
+			    }
+			}
+		}
+	}
+}

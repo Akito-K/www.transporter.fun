@@ -1,0 +1,64 @@
+// mixinsの読み込み
+@import "./mixins/include.scss";
+@import "_variables.scss";
+
+.page_login{
+	.login_form_wrap{
+		ul{
+			text-align: center;
+			li{
+				display: inline-block;
+				padding: 20px;
+				vertical-align: top;
+				@include sp{
+					width: 100%;
+					text-align: left;
+					padding-left:10px;
+					padding-right:10px;
+				}
+				input{
+					width: 300px;
+					font-size: 20px;
+					@include sp{
+						width: 100%;
+					}
+				}
+				.error_message{
+					text-align: right;
+					color:#F9690E;
+				}
+			}
+		}
+		.is_save{
+			text-align: center;
+			label{
+				margin-left: 15px;
+				cursor: pointer;
+			}
+		}
+		.btn_wrap{
+			text-align: center;
+			margin-top: 30px;
+		}
+		.sm_send_btn{
+			display: inline-block;
+			color:#fff;
+			background:#1F3A93;
+			border:1px solid #707070;
+			text-align: center;
+			font-size: 18px;
+			padding: 0px 10px;
+			vertical-align: middle;
+			@include hover();
+			@include sp{
+				margin-top: 5px;
+				padding-left: 30px;
+				padding-right:30px;
+			}
+		}
+	}
+}
+
+
+
+

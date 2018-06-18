@@ -1,0 +1,161 @@
+// mixinsの読み込み
+@import "./mixins/include.scss";
+@import "_variables.scss";
+
+header{
+	border-bottom: 2px solid #DEDDDE;
+	background-color: #FFFFFF;
+	@include sp{
+		.sp_header{
+			padding: 10px;
+			.h_logo{
+				width: 200px;
+				.text{
+					font-size: 18px;
+					font-weight: bold;
+				}
+			}
+			.menu_open{
+				position: absolute;
+				top: 10px;
+				right: 10px;
+			}
+			.h_search {
+				.to_top_icon {
+					display: block;
+					margin: -12.5px 0 7.5px;
+					text-align: right;
+					img {
+						display: inline-block;
+						transition: opacity .3s;
+						width: 24px;
+						height: 24px;
+					}
+					span {
+						font-size: 13px;
+						white-space: nowrap;
+					}
+					&:hover img {
+						opacity: .6;
+					}
+				}
+				.search_word {
+					border-width: 3px;
+					.text .input_text {
+						height: 24px;
+					}
+					.submit {
+						border-width: 3px;
+						top: -3px;
+						right: -3px;
+						button {
+							height: 24px;
+						}
+					}
+				}
+			}
+		}
+		.header_wrap{
+			position: fixed;
+			left: 0px;
+			right: 20%;
+			top: 0px;
+			bottom: 0px;
+			z-index: 100;
+			background-color: #FFFFFF;
+			height: 100%;
+			overflow-y: scroll;
+			padding-bottom: 30px;
+			box-shadow: 5px 0px 10px rgba(0,0,0,0.3);
+			transform: translateX(-100%);
+			opacity: 0;
+			visibility: hidden;
+			transition: all 0.3s ease;
+			&.open{
+				transform: translateX(0%);
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+	}
+	.menu_close{
+		margin-top: 10px;
+	}
+	.h_top{
+		display: table;
+		width: 100%;
+		padding-top: 33px;
+		padding-bottom: 33px;
+		@include sp{
+			padding-top: 15px;
+			padding-bottom: 15px;
+		}
+		.h_logo{
+			display: table-cell;
+			vertical-align: middle;
+			.text{
+				font-size: 24px;
+				font-weight: bold;
+				vertical-align: bottom;
+				padding-left: 20px;
+			}
+		}
+		.h_search{
+			display: table-cell;
+			width: 1px;
+			vertical-align: middle;
+			ul{
+				@include clearfix();
+				display: table;
+				@include sp{
+					width: 100%;
+					display: block;
+				}
+				li{
+					padding-right: 30px;
+					display: table-cell;
+					vertical-align: middle;
+					@include sp{
+						padding-right: 0px;
+						display: block;
+					}
+					&.right{
+						padding-top: 10px;
+					}
+				}
+			}
+		}
+		.to_top_icon {
+			text-align: center;
+			img {
+				display: inline-block;
+				transition: opacity .3s;
+				margin-bottom: 5px;
+			}
+			span {
+				font-size: 13px;
+				white-space: nowrap;
+			}
+			&:hover img {
+				opacity: .6;
+			}
+		}
+	}
+	.search{
+		padding-bottom: 20px;
+	}
+
+	&.header_help {
+		.sp_header, .h_top {
+			.h_logo .text {
+				font-weight: normal;
+			}
+		}
+	}
+}
+
+
+
+
+
+

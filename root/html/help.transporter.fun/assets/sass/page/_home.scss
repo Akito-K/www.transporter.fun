@@ -1,0 +1,129 @@
+// mixinsの読み込み
+@import "./mixins/include.scss";
+@import "_variables.scss";
+
+/*** TOP ***/
+.page_home{
+	.sec_intro{
+		.cacth{
+			font-size: 22px;
+			font-weight: bold;
+			margin-bottom: 10px;
+			@include sp{
+				font-size: 18px;
+			}
+		}
+		.description{
+			font-size: 14px;
+			margin-bottom: 40px;
+			line-height: 2;
+		}
+	}
+	.sec_nav{
+		.side{
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+			-webkit-box-direction : normal;
+			-webkit-box-orient : normal;
+			-ms-flex-direction: row;
+			-webkit-flex-direction: row;
+			flex-direction: row;	
+			-webkit-box-lines : multiple;
+			-ms-flex-wrap : wrap;
+			-webkit-flex-wrap : wrap;
+			flex-wrap : wrap;
+			margin-left: -30px;
+			@include sp{
+				margin-left: 0px;
+			}
+			.block{
+				width: 50%;
+				padding-left: 30px;
+				padding-bottom: 30px;
+				@include sp{
+					width: 100%;
+					padding-left: 0px;
+					padding-bottom: 10px;
+				}
+				.inner{
+					border: 2px solid #DFDED7;
+					background-color: #FFFFFF;
+					height: 100%;
+				}
+			}
+		}
+	}
+}
+
+.sec_btn{
+	padding-bottom: 40px;
+	@include sp{
+		padding-bottom: 20px;
+	}
+	ul{
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-box-direction : normal;
+		-webkit-box-orient : normal;
+		-ms-flex-direction: row;
+		-webkit-flex-direction: row;
+		flex-direction: row;	
+		-webkit-box-lines : multiple;
+		-ms-flex-wrap : wrap;
+		-webkit-flex-wrap : wrap;
+		flex-wrap : wrap;
+		margin-left: -10px;
+		@include sp{
+			display: block;
+			margin-left: 0px;
+		}
+		li{
+			width: 33.333333%;
+			padding-left: 10px;
+			padding-bottom: 10px;
+			@include sp{
+				width: 100%;
+				padding-left: 0px;
+				padding-bottom: 10px;
+			}
+			a{
+				display: block;
+				border: 1px solid #DFDED7;
+				background-color: #FFFFFF;
+				height: 100%;
+				border-radius: 10px;
+				padding: 20px 25px 20px 10px;
+				text-align: center;
+				box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+				position: relative;
+				&:after{
+					content: "";
+					display: block;
+					background: url(../images/icon_right_orange@2x.png) left top no-repeat;
+					background-size: contain;
+					width: 9px;
+					height: 15px;
+					position: absolute;
+					right: 10px;
+					top: 50%;
+					transform: translateY(-50%);
+
+				}
+				&:hover{
+					opacity: 0.7;
+				}
+			}
+		}
+	}
+}
+
+@include pc{
+}
+
+
+
+
