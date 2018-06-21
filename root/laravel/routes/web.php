@@ -12,7 +12,7 @@
 */
 
 Auth::routes();
-//Route::get ('/',     'HomeController@index');
+Route::get ('/',     'HomeController@index');
 
 /*
 // テストコード
@@ -26,5 +26,5 @@ Route::post('/testcode/confirming/update',          'testcode\confirmingControll
 Route::get ('/testcode/confirming/{id}/delete',     'testcode\confirmingController@delete');
 */
 
-Route::get ('/',                              'common\wwwController@index');
+Route::get ('/www',                           'common\wwwController@index');
 Route::get ('/help',                          'common\helpController@index');

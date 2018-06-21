@@ -9,10 +9,10 @@ use App\Model\Signup;
 use App\Model\MyUser;
 use App\Model\Address;
 use App\Model\UserToAddress;
-use App\Model\Log;
 use App\Model\Pref;
 use App\Model\Carrier;
 use App\Model\Owner;
+use App\Model\Log;
 
 use App\Mail\MailSignup;
 use Illuminate\Support\Facades\Mail;

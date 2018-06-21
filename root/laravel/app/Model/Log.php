@@ -12,7 +12,7 @@ class Log extends Model
     public $timestamps = false;
 
     public static function saveData ( $controller, $target=NULL, $value=NULL, $result=true ){
-        $user_id = \Auth::user()->user_id;
+        $user_id = \Auth::check()? \Auth::user()->user_id: \Request::ip();
         $data = [
             'user_id' => $user_id,
             'controller' => $controller,
