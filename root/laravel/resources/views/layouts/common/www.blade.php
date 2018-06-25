@@ -30,21 +30,17 @@
 
 </head>
 <body>
-    <div id="wrapper">
+    <div id="wrapper" class="{{ $pagemeta->wrapper_class }}">
         @include('include.common.www.header')
 
-        <div class="page_home page_main">
-
-            @yield('content')
-
-            <div class="totop"><a class="scroll" href="#wrapper"></a></div>
-
-        </div><!-- .page_main -->
+        @yield('content')
 
     </div><!-- #wrapper -->
 
     @include('include.common.www.footer')
     @include('include.common.www.scripts')
+
+    @yield('script')
 
 </body>
 </html>

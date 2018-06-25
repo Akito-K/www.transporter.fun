@@ -19,6 +19,7 @@
                         <th class="pagemeta__cell">タイトル</th>
                         <th class="pagemeta__cell">説明</th>
                         <th class="pagemeta__cell">body付加class</th>
+                        <th class="pagemeta__cell">wrapper class</th>
                     </tr>
 
                     @foreach($datas as $data)
@@ -27,6 +28,7 @@
                         <td class="pagemeta__cell">{!! $data->title !!}</td>
                         <td class="pagemeta__cell">{!! $data->description !!}</td>
                         <td class="pagemeta__cell">{!! $data->body_class !!}</td>
+                        <td class="pagemeta__cell">{!! $data->wrapper_class !!}</td>
                     </tr>
                     @endforeach
                 </table>

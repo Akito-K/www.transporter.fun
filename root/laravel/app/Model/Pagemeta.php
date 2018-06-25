@@ -49,6 +49,7 @@ class Pagemeta extends Model
         $pagemeta->keywords = "";
         $pagemeta->description = "";
         $pagemeta->body_class = "";
+        $pagemeta->wrapper_class = '';
 
         return $pagemeta;
     }
@@ -61,13 +62,19 @@ class Pagemeta extends Model
         while ($line = fgets($handle)) {
             if( preg_match('/,/', $line) ){
                 $data = explode(',', $line);
-                $datas[ $data[1] ] = (object) [
+                $obj = (object) [
                     'id' => $data[0],
                     'page_id' => $data[1],
                     'title' => $data[2],
                     'description' => $data[3],
                     'body_class' => $data[4],
                 ];
+                $obj->wrapper_class = '';
+                if(isset($data[5])){
+                    $obj->wrapper_class = str_replace(["\r", "\n", "\n\r"], "", $data[5]);
+                }
+
+                $datas[ $data[1] ] = $obj;
             }
         }
         // ファイルポインタをクローズ
@@ -103,6 +110,10 @@ class Pagemeta extends Model
                 if( isset($data['階層2']) ){
                     $page->body_class .= ' '.$data['階層2'];
                 }
+                $page->wrapper_class = '';
+                if( isset($data['wrapper_class']) ){
+                    $page->wrapper_class = $data['wrapper_class'];
+                }
                 $ary[ $page->page_id ] = $page;
             }
         }
@@ -118,7 +129,8 @@ class Pagemeta extends Model
                 $body .= $data->page_id.",";
                 $body .= $data->title.",";
                 $body .= $data->description.",";
-                $body .= $data->body_class."\n";
+                $body .= $data->body_class.",";
+                $body .= $data->wrapper_class."\n";
             }
         }
 

@@ -1,11 +1,11 @@
 <header>
     <div class="sp_header sp">
-        <div class="h_logo"><a href="{{ env('www_url') }}"><img src="{{ env('www_url') }}/assets/images/h_logo.png" alt="transporter" width="283" height="55" srcset="{{ env('www_url') }}/assets/images/h_logo.png 1x,{{ env('www_url') }}/assets/images/h_logo@2x.png 2x"></a></div>
-        <div class="menu_open"><a href="{{ env('www_url') }}"><img src="{{ env('www_url') }}/assets/images/menu_open.png" alt="transporter" width="46" height="46" srcset="{{ env('www_url') }}/assets/images/menu_open.png 1x,{{ env('www_url') }}/assets/images/menu_open@2x.png 2x"></a></div>
+        <div class="h_logo"><a href="/"><img src="{{ env('www_url') }}/assets/images/h_logo.png" alt="transporter" width="283" height="55" srcset="{{ env('www_url') }}/assets/images/h_logo.png 1x,{{ env('www_url') }}/assets/images/h_logo@2x.png 2x"></a></div>
+        <div class="menu_open"><a href="/"><img src="{{ env('www_url') }}/assets/images/menu_open.png" alt="transporter" width="46" height="46" srcset="{{ env('www_url') }}/assets/images/menu_open.png 1x,{{ env('www_url') }}/assets/images/menu_open@2x.png 2x"></a></div>
         <div class="h_member sp">
             <ul>
-                <li class="signup"><a href="{{ env('www_url') }}/register/#registration">今すぐ会員登録<span class="icon icon_signup"></span></a></li>
-                <li class="login"><a href="{{ env('www_url') }}/login/">ログイン<span class="icon icon_login"></span></a></li>
+                <li class="signup"><a href="{{ url('') }}/signup">今すぐ会員登録<span class="icon icon_signup"></span></a></li>
+                <li class="login"><a href="{{ route('login') }}">ログイン<span class="icon icon_login"></span></a></li>
             </ul>
         </div>
         <div class="h_search sp">
@@ -20,30 +20,30 @@
 
     <div class="header_wrap">
         <div class="container">
-            <div class="menu_close sp"><a href="{{ env('www_url') }}"><img src="{{ env('www_url') }}/assets/images/menu_close.png" alt="transporter" width="46" height="46" srcset="{{ env('www_url') }}/assets/images/menu_close.png 1x,{{ env('www_url') }}/assets/images/menu_close@2x.png 2x"></a></div>
+            <div class="menu_close sp"><a href="/"><img src="{{ env('www_url') }}/assets/images/menu_close.png" alt="transporter" width="46" height="46" srcset="{{ env('www_url') }}/assets/images/menu_close.png 1x,{{ env('www_url') }}/assets/images/menu_close@2x.png 2x"></a></div>
             <div class="h_top">
-                <div class="h_logo pc"><a href="{{ env('www_url') }}"><img src="{{ env('www_url') }}/assets/images/h_logo.png" alt="transporter" width="283" height="55" srcset="{{ env('www_url') }}/assets/images/h_logo.png 1x,{{ env('www_url') }}/assets/images/h_logo@2x.png 2x"></a></div>
+                <div class="h_logo pc"><a href="/"><img src="{{ env('www_url') }}/assets/images/h_logo.png" alt="transporter" width="283" height="55" srcset="{{ env('www_url') }}/assets/images/h_logo.png 1x,{{ env('www_url') }}/assets/images/h_logo@2x.png 2x"></a></div>
                 <div class="h_text pc">平車・重量物・超重量物を取り扱う運送会社をお探しなら、<br>Transporter「トランスポーター」物流マッチングサイトがおすすめ！</div>
                 <div class="h_member pc">
                     <ul>
-                        <li class="signup"><a href="{{ env('www_url') }}/register/#registration">今すぐ会員登録<span class="icon icon_signup"></span></a></li>
-                        <li class="login"><a href="{{ env('www_url') }}/login/">ログイン<span class="icon icon_login"></span></a></li>
+                        <li class="signup"><a href="{{ url('') }}/signup">今すぐ会員登録<span class="icon icon_signup"></span></a></li>
+                        <li class="login"><a href="{{ route('login') }}">ログイン<span class="icon icon_login"></span></a></li>
                     </ul>
                 </div>
             </div>
             <nav class="gnav">
                 <ul>
-                    <li><a class="cur" href="{{ env('www_url') }}">home</a></li>
-                    <li><a href="{{ env('www_url') }}/delivery_services/">物流案件をお探しなら</a></li>
-                    <li><a href="{{ env('www_url') }}/transporter/">パーソナルポーター</a></li>
-                    <li><a href="{{ env('help_url') }}/qa_inquiry/">お困りの時は</a></li>
+                    <li><a class="cur" href="/">home</a></li>
+                    <li><a href="{{ env('www_url') }}/delivery_services">物流案件をお探しなら</a></li>
+                    <li><a href="{{ env('www_url') }}/transporter">パーソナルポーター</a></li>
+                    <li><a href="{{ env('help_url') }}/qa_inquiry">お困りの時は</a></li>
                     <li><a href="{{ env('help_url') }}">サービスについて</a></li>
                 </ul>
             </nav>
             <div class="search col">
-                <div class="col4"><a class="btn_style01" href="{{ env('www_url') }}/delivery_services/withintoday/">本日中まで</a></div>
-                <div class="col4"><a class="btn_style01" href="{{ env('www_url') }}/delivery_services/fewdays/">近日中</a></div>
-                <div class="col4"><a class="btn_style01" href="{{ env('www_url') }}/delivery_services/limitedtime/">期間限定</a></div>
+                <div class="col4"><a class="btn_style01" href="{{ env('www_url') }}/delivery_services/withintoday">本日まで</a></div>
+                <div class="col4"><a class="btn_style01" href="{{ env('www_url') }}/delivery_services/fewdays">近日中</a></div>
+                <div class="col4"><a class="btn_style01" href="{{ env('www_url') }}/delivery_services/limitedtime">期間限定</a></div>
                 <div class="col4 pc">
                     <form action="{{ env('www_url') }}/delivery_services/search/" method="get">
                         <div class="search_word">
@@ -66,19 +66,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="col4"><a class="btn_style01" href="{{ env('www_url') }}/delivery_services/Regularly/">定期案件</a></div>
-                <div class="col4"><a class="btn_style01" href="{{ env('www_url') }}/delivery_services/Occasionally/">不定期案件</a></div>
+                <div class="col4"><a class="btn_style01" href="{{ env('www_url') }}/delivery_services/Regularly">定期案件</a></div>
+                <div class="col4"><a class="btn_style01" href="{{ env('www_url') }}/delivery_services/Occasionally">不定期案件</a></div>
                 <div class="col4 pos_relative">
                     <div class="special_menu_wrap">
                         <ul class="menu">
-                            <li><a href="{{ env('www_url') }}/transporter/"><span class="text">トランスポーターについて</span><span class="img"><img src="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon1.png" alt="" width="39" height="28" srcset="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon1.png 1x,{{ env('www_url') }}/assets/images/home/special_menu_icon/icon1@2x.png 2x"></span></a></li>
+                            <li><a href="{{ env('www_url') }}/transporter"><span class="text">トランスポーターについて</span><span class="img"><img src="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon1.png" alt="" width="39" height="28" srcset="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon1.png 1x,{{ env('www_url') }}/assets/images/home/special_menu_icon/icon1@2x.png 2x"></span></a></li>
                             <li><a href="{{ env('www_url') }}/transporter/driver/#14free"><span class="text">14日間無料お試し</span><span class="img"><img src="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon2.png" alt="" width="51" height="18" srcset="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon2.png 1x,{{ env('www_url') }}/assets/images/home/special_menu_icon/icon2@2x.png 2x"></span></a></li>
-                            <li><a href="{{ env('www_url') }}/transporter/carrier/"><span class="text">トランスポーターになるには</span><span class="img"><img src="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon3.png" alt="" width="33" height="33" srcset="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon3.png 1x,{{ env('www_url') }}/assets/images/home/special_menu_icon/icon3@2x.png 2x"></span></a></li>
-                            <li><a href="{{ env('www_url') }}/transporter/ranking/"><span class="text">トランスポーター人気ランキング</span><span class="img"><img src="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon4.png" alt="" width="37" height="28" srcset="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon4.png 1x,{{ env('www_url') }}/assets/images/home/special_menu_icon/icon4@2x.png 2x"></span></a></li>
+                            <li><a href="{{ env('www_url') }}/transporter/carrier"><span class="text">トランスポーターになるには</span><span class="img"><img src="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon3.png" alt="" width="33" height="33" srcset="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon3.png 1x,{{ env('www_url') }}/assets/images/home/special_menu_icon/icon3@2x.png 2x"></span></a></li>
+                            <li><a href="{{ env('www_url') }}/transporter/ranking"><span class="text">トランスポーター人気ランキング</span><span class="img"><img src="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon4.png" alt="" width="37" height="28" srcset="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon4.png 1x,{{ env('www_url') }}/assets/images/home/special_menu_icon/icon4@2x.png 2x"></span></a></li>
                             <li><a href="#"><span class="text">物流ニュース</span><span class="img"><img src="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon5.png" alt="" width="36" height="36" srcset="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon5.png 1x,{{ env('www_url') }}/assets/images/home/special_menu_icon/icon5@2x.png 2x"></span></a></li>
-                            <li><a href="{{ env('www_url') }}/safety/"><span class="text">安心への取り組み</span><span class="img"><img src="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon6.png" alt="" width="25" height="28" srcset="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon6.png 1x,{{ env('www_url') }}/assets/images/home/special_menu_icon/icon6@2x.png 2x"></span></a></li>
-                            <li><a href="{{ env('www_url') }}/qa/"><span class="text">よくあるご質問</span><span class="img"><img src="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon7.png" alt="" width="35" height="35" srcset="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon7.png 1x,{{ env('www_url') }}/assets/images/home/special_menu_icon/icon7@2x.png 2x"></span></a></li>
-                            <li><a target="_blank" href="{{ env('www_url') }}/compliance/"><span class="text">コンプライアンス輸送</span><span class="img"><img src="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon8.png" alt="" width="33" height="33" srcset="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon8.png 1x,{{ env('www_url') }}/assets/images/home/special_menu_icon/icon8@2x.png 2x"></span></a></li>
+                            <li><a href="{{ env('www_url') }}/safety"><span class="text">安心への取り組み</span><span class="img"><img src="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon6.png" alt="" width="25" height="28" srcset="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon6.png 1x,{{ env('www_url') }}/assets/images/home/special_menu_icon/icon6@2x.png 2x"></span></a></li>
+                            <li><a href="{{ env('www_url') }}/qa"><span class="text">よくあるご質問</span><span class="img"><img src="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon7.png" alt="" width="35" height="35" srcset="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon7.png 1x,{{ env('www_url') }}/assets/images/home/special_menu_icon/icon7@2x.png 2x"></span></a></li>
+                            <li><a target="_blank" href="{{ env('www_url') }}/compliance"><span class="text">コンプライアンス輸送</span><span class="img"><img src="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon8.png" alt="" width="33" height="33" srcset="{{ env('www_url') }}/assets/images/home/special_menu_icon/icon8.png 1x,{{ env('www_url') }}/assets/images/home/special_menu_icon/icon8@2x.png 2x"></span></a></li>
                         </ul>
                         <div class="open_menu_btn">
                             <a class="cs_pointer">

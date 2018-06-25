@@ -9,6 +9,7 @@
 
 // ユーザー登録
   // メアド入力
+Route::get ('/register',                        'common\signupController@email');
 Route::get ('/signup',                          'common\signupController@email');
 Route::post('/signup',                          'common\signupController@sendSignupMail');
   // ログイン情報設定

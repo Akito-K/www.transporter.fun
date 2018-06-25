@@ -88,6 +88,8 @@ return [
 
     'password' => env('MAIL_PASSWORD'),
 
+    'pretend' => env('MAIL_PRETEND', false),
+
     /*
     |--------------------------------------------------------------------------
     | Sendmail System Path

@@ -2,7 +2,7 @@
 
     <div class="block">
         <div class="inner">
-            <h2 class="side_title"><a href="{{ env('help_url') }}/what_transporter/">Transporterとは？</a></h2>
+            <h2 class="side_title"><a href="{{ env('help_url') }}/what_transporter">Transporterとは？</a></h2>
             <ul class="side_list">
                 <li><a href="{{ env('help_url') }}/what_transporter/001.php">Transporter（トランスポーター）ってどんなサイト？</a></li>
                 <li><a href="{{ env('help_url') }}/what_transporter/006.php">Transporter（トランスポーター）の特徴</a></li>
@@ -17,7 +17,7 @@
 
     <div class="block">
         <div class="inner">
-            <h2 class="side_title"><a href="{{ env('help_url') }}/useful/">「Transporterを活用する！」</a></h2>
+            <h2 class="side_title"><a href="{{ env('help_url') }}/useful">「Transporterを活用する！」</a></h2>
             <ul class="side_list">
                 <li><a href="{{ env('help_url') }}/useful/001.php">お気に入り案件を登録する</a></li>
                 <li><a href="{{ env('help_url') }}/useful/006.php">運送依頼してみる</a></li>
@@ -32,7 +32,7 @@
 
     <div class="block">
         <div class="inner">
-            <h2 class="side_title"><a href="{{ env('help_url') }}/qa_inquiry/">QA・お問い合わせ</a></h2>
+            <h2 class="side_title"><a href="{{ env('help_url') }}/qa_inquiry">QA・お問い合わせ</a></h2>
             <ul class="side_list">
                 <li><a href="{{ env('help_url') }}/qa_inquiry/sys/#001">推奨環境のご案内</a></li>
                 <li><a href="{{ env('help_url') }}/qa_inquiry/#006">ご利用ガイドについてのご意見・ご要望</a></li>
@@ -42,7 +42,7 @@
 
     <div class="block">
         <div class="inner">
-            <h2 class="side_title"><a href="{{ env('help_url') }}/sender/">運送依頼する（荷主様ガイド）</a></h2>
+            <h2 class="side_title"><a href="{{ env('help_url') }}/sender">運送依頼する（荷主様ガイド）</a></h2>
             <ul class="side_list">
                 <li><a href="{{ env('help_url') }}/sender/#001">パーソナルポーターってどんな人？</a></li>
                 <li><a href="{{ env('help_url') }}/sender/#006">運送依頼（案件登録）から運送完了までの流れ</a></li>
@@ -60,7 +60,7 @@
 
     <div class="block">
         <div class="inner">
-            <h2 class="side_title"><a href="{{ env('help_url') }}/porter/">荷物を届ける（運送会社様ガイド）～基本編～</a></h2>
+            <h2 class="side_title"><a href="{{ env('help_url') }}/porter">荷物を届ける（運送会社様ガイド）～基本編～</a></h2>
             <ul class="side_list">
                 <li><a href="{{ env('help_url') }}/porter/#001">運送会社登録から完了までの流れ</a></li>
                 <li><a href="{{ env('help_url') }}/porter/#006">受注・取引ルール</a></li>
@@ -75,7 +75,7 @@
 
     <div class="block">
         <div class="inner">
-            <h2 class="side_title"><a href="{{ env('help_url') }}/porter2/">荷物を届ける（運送会社様ガイド）～実践編～</a></h2>
+            <h2 class="side_title"><a href="{{ env('help_url') }}/porter2">荷物を届ける（運送会社様ガイド）～実践編～</a></h2>
             <ul class="side_list">
                 <li><a href="{{ env('help_url') }}/porter2/#026">物流案件一覧で自分の見積提出案件・受注案件を探そう</a></li>
                 <li><a href="{{ env('help_url') }}/porter2/#031">レスポンス案件依頼・受注とは</a></li>
