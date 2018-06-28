@@ -50,6 +50,9 @@ Route::group(['middleware' => ['auth']], function () {
 
             // コンタクトボード
             Route::get ('/mypage/board/carrier/{carrier_id}',       'mypage\boardController@detailByCarrier');
+
+            // パスワードリセット完了
+            Route::get ('/mypage/password/reset/complete',          'mypage\homeController@passwordReset');
         });
 
     });

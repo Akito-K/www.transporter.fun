@@ -16,7 +16,7 @@
 	&:before{
 		content: "";
 		display: inline-block;
-		background: url(../images/icon_right01@2x.png) left top no-repeat;
+		background: url(#{$image_dir}/icon_right01@2x.png) left top no-repeat;
 		background-size: contain;
 		width: 8px;
 		height: 10px;
@@ -58,7 +58,7 @@
 		&:after{
 			content: "";
 			display: inline-block;
-			background: url(../images/icon_down01@2x.png) left top no-repeat;
+			background: url(#{$image_dir}/icon_down01@2x.png) left top no-repeat;
 			background-size: contain;
 			width: 10px;
 			height: 7px;

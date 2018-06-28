@@ -34,17 +34,17 @@
             <nav class="gnav">
                 <ul>
                     <li><a class="cur" href="/">home</a></li>
-                    <li><a href="{{ env('www_url') }}/delivery_services">物流案件をお探しなら</a></li>
-                    <li><a href="{{ env('www_url') }}/transporter">パーソナルポーター</a></li>
+                    <li><a href="{{ env('www_url') }}/delivery_services">荷主の皆様へ</a></li>
+                    <li><a href="{{ env('www_url') }}/delivery_services">運送会社の皆様へ</a></li>
+                    <li><a href="{{ env('www_url') }}/transporter">トランスポーターとは</a></li>
                     <li><a href="{{ env('help_url') }}/qa_inquiry">お困りの時は</a></li>
-                    <li><a href="{{ env('help_url') }}">サービスについて</a></li>
+                    <li><a href="{{ env('help_url') }}">ご利用ガイド</a></li>
                 </ul>
             </nav>
             <div class="search col">
-                <div class="col4"><a class="btn_style01" href="{{ env('www_url') }}/delivery_services/withintoday">本日まで</a></div>
-                <div class="col4"><a class="btn_style01" href="{{ env('www_url') }}/delivery_services/fewdays">近日中</a></div>
-                <div class="col4"><a class="btn_style01" href="{{ env('www_url') }}/delivery_services/limitedtime">期間限定</a></div>
-                <div class="col4 pc">
+                <div class="col3"><a class="btn_style01" href="{{ env('www_url') }}/delivery_services/withintoday">本日まで</a></div>
+                <div class="col3"><a class="btn_style01" href="{{ env('www_url') }}/delivery_services/fewdays">近日中</a></div>
+                <div class="col3 pc">
                     <form action="{{ env('www_url') }}/delivery_services/search/" method="get">
                         <div class="search_word">
                             <div class="text"><input class="input_text" type="text" value="" placeholder="フリーワード検索"></div>

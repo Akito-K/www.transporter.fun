@@ -331,13 +331,13 @@
 				}
 			}
 			&.ranking_first .ranking_title::before {
-				background-image: url(../images/transporter/ranking/first@2x.png);
+				background-image: url(#{$image_dir}/transporter/ranking/first@2x.png);
 			}
 			&.ranking_second .ranking_title::before {
-				background-image: url(../images/transporter/ranking/second@2x.png);
+				background-image: url(#{$image_dir}/transporter/ranking/second@2x.png);
 			}
 			&.ranking_third .ranking_title::before {
-				background-image: url(../images/transporter/ranking/third@2x.png);
+				background-image: url(#{$image_dir}/transporter/ranking/third@2x.png);
 			}
 
 			
@@ -369,13 +369,13 @@
 				}
 			}
 			&.ranking_up .ranking_title::after {
-				background-image: url(../images/transporter/ranking/up@2x.png);
+				background-image: url(#{$image_dir}/transporter/ranking/up@2x.png);
 			}
 			&.ranking_stay .ranking_title::after {
-				background-image: url(../images/transporter/ranking/stay@2x.png);
+				background-image: url(#{$image_dir}/transporter/ranking/stay@2x.png);
 			}
 			&.ranking_down .ranking_title::after {
-				background-image: url(../images/transporter/ranking/down@2x.png);
+				background-image: url(#{$image_dir}/transporter/ranking/down@2x.png);
 			}
 
 			.ranking_title {
@@ -513,13 +513,13 @@
 			}
 
 			&.ranking_up::after {
-				background-image: url(../images/transporter/ranking/up@2x.png);
+				background-image: url(#{$image_dir}/transporter/ranking/up@2x.png);
 			}
 			&.ranking_stay::after {
-				background-image: url(../images/transporter/ranking/stay@2x.png);
+				background-image: url(#{$image_dir}/transporter/ranking/stay@2x.png);
 			}
 			&.ranking_down::after {
-				background-image: url(../images/transporter/ranking/down@2x.png);
+				background-image: url(#{$image_dir}/transporter/ranking/down@2x.png);
 			}
 
 			.ranking_img {

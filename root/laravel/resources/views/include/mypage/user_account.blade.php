@@ -5,14 +5,14 @@
         <!-- The user image in the navbar-->
         <span class="account-icon account-icon--02 header__account__child" style="background-image: url({!! \Func::myIcon() !!});"></span>
         <!-- hidden-xs hides the username on small devices so only the image appears. -->
-        <span class="hidden-xs header__account__child">{!! \Auth::user()->name?: \Auth::user()->sei.\Auth::user()->mei !!}さん</span>
+        <span class="hidden-xs header__account__child">{!! \Auth::user()->sei.\Auth::user()->mei !!}さん</span>
     </a>
     <ul class="dropdown-menu">
         <!-- The user image in the menu -->
         <li class="user-header">
             <span class="account-icon account-icon--03" style="background-image: url({!! \Func::myIcon() !!});"></span>
             <p>
-                {!! \Auth::user()->name?: \Auth::user()->sei.\Auth::user()->mei !!}さん
+                {!! \Auth::user()->sei.\Auth::user()->mei !!}さん
                 <small>{!! \Auth::user()->created_at->format('F.Y') !!}</small>
             </p>
         </li>

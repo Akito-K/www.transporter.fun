@@ -75,7 +75,6 @@ class accountController extends mypageController
 
     public function validateUpdate($request, $login_id){
         $validates = [
-            'name' => 'required|max:20',
             'sei' => 'required|max:20',
             'mei' => 'required|max:20',
             'sei_kana' => 'required|max:20',

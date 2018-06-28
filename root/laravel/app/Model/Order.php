@@ -361,10 +361,10 @@ class Order extends Model
 */
     public static function getOwnerName($data, $owner=NULL){
         if( $data->flag_hide_owner ){
-            $name= '*** （非公開）';
+            $name = '*** （非公開）';
         }else{
             $owner = $owner?: Owner::getData($data->owner_id);
-            $name= $owner->company."\n".$owner->sei.' '.$owner->mei;
+            $name = $owner->company."\n".$owner->sei.' '.$owner->mei;
         }
 
         return $name;

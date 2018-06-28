@@ -135,7 +135,6 @@ class userController extends adminController
         $validates = [
             'login_id' => 'required|min:4|max:32|unique:users',
             'password' => 'required|min:8|max:32|confirmed',
-            'name' => 'required|max:10',
             'sei' => 'required|max:20',
             'mei' => 'required|max:20',
             'sei_kana' => 'required|max:20',

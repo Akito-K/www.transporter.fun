@@ -28,4 +28,11 @@ class homeController extends mypageController
         return view('mypage.home.status', compact('pagemeta', 'me'));
     }
 
+    public function passwordReset(){
+        Log::saveData( __METHOD__ );
+        $pagemeta = Pagemeta::getPagemeta('MY-HM-005');
+
+        return view('mypage.home.password_reset', compact('pagemeta'));
+    }
+
 }

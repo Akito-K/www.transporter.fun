@@ -40,10 +40,6 @@
                     </ul>
 
                     <ul class="lists account__lists">
-                        <li class="list list-title account__list">表示名</li>
-                        <li class="list list-value account__list">{!! Form::text('name', $data->name, ['class' => 'form-control form-control--mini form-control--60']) !!}</li>
-                    </ul>
-                    <ul class="lists account__lists">
                         <li class="list list-title account__list">氏名</li>
                         <li class="list list-value account__list">
                             <ul class="params">

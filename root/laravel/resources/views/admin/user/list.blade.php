@@ -13,7 +13,7 @@
             <tr>
                 <th class="user__cell user__cell--no">No.</th>
                 <th class="user__cell user__cell--icon">画像</th>
-                <th class="user__cell user__cell--name">表示名</th>
+                <th class="user__cell user__cell--name">氏名</th>
                 <th class="user__cell user__cell--company">荷主ID</th>
                 <th class="user__cell user__cell--company">運送会社ID</th>
                 <th class="user__cell user__cell--action">操作</th>
@@ -27,7 +27,7 @@
                         <span class="my-thumbnail__img" style="background-image: url({!! \Func::getImage($data->icon_filepath) !!});"></span>
                     </span>
                 </td>
-                <td class="user__cell user__cell--company">{{ $data->name }}</td>
+                <td class="user__cell user__cell--company">{{ $data->sei }} {{ $data->mei }}</td>
                 <td class="user__cell user__cell--name">{{ $data->owner_id }}</td>
                 <td class="user__cell user__cell--name">{{ $data->carrier_id }}</td>
                 <td class="user__cell user__cell--action">

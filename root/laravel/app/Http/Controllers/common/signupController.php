@@ -81,7 +81,10 @@ class signupController extends Controller
         Log::saveData( __METHOD__ , 'signup_key', $signup_key, true);
 
         $validates = [
-            'name' => 'required|max:20',
+            'sei' => 'required|max:20',
+            'mei' => 'required|max:20',
+            'sei_kana' => 'required|max:20',
+            'mei_kana' => 'required|max:20',
             'login_id' => 'required|min:4|max:32|unique:users',
             'password' => 'required|min:8|max:32',
             ];
@@ -89,7 +92,10 @@ class signupController extends Controller
 
         $data = Signup::getData($signup_key);
         $date_at = new \DatetimeImmutable();
-        $data->name        = $request['name'];
+        $data->sei         = $request['sei'];
+        $data->mei         = $request['mei'];
+        $data->sei_kana    = $request['sei_kana'];
+        $data->mei_kana    = $request['mei_kana'];
         $data->login_id    = $request['login_id'];
         $data->password    = bcrypt( $request['password'] );
         $data->updated_at  = $date_at;
@@ -105,7 +111,6 @@ class signupController extends Controller
         $pagemeta = Pagemeta::getPagemeta('CM-SU-040');
 
         $prefs = Pref::getNames();
-        \Func::array_append($prefs, [ 0 => '---' ], true);
         $data = Signup::getData($signup_key);
 
         return view('common.signup.edit', compact('signup_key', 'prefs', 'pagemeta', 'data'));
@@ -119,8 +124,6 @@ class signupController extends Controller
             'pref_id' => 'required',
             'city' => 'required',
             'address' => 'required',
-            'sei' => 'required|max:20',
-            'mei' => 'required|max:20',
             ];
         $this->validate($request, $validates);
 
@@ -128,10 +131,6 @@ class signupController extends Controller
 //        $address_id = Address::getNewId();
 
         $data = Signup::getData($request['signup_key']);
-        $data->sei = $request['sei'];
-        $data->mei = $request['mei'];
-        $data->sei_kana = $request['sei_kana'];
-        $data->mei_kana = $request['mei_kana'];
 
         $data->zip1 = $request['zip1'];
         $data->zip2 = $request['zip2'];
@@ -251,7 +250,6 @@ class signupController extends Controller
         $hashed_id = sha1( $user_id );
         $date_at = new \DatetimeImmutable();
         $data = [
-            'name' => $signup->name,
             'email' => $signup->email,
             'login_id' => $signup->login_id,
             'password' => $signup->password,

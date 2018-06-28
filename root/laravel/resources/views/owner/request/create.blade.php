@@ -55,7 +55,7 @@
         </div>
 
         <p>
-            <a href="{{ url('') }}/owner/order" class="btn btn-block btn-primary">一覧に戻る</a>
+            <a href="{{ url('') }}/owner/pre_order" class="btn btn-block btn-primary">一覧に戻る</a>
         </p>
 
     </div>

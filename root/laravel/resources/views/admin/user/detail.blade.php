@@ -24,10 +24,6 @@
                         </span>
                     </li>
                 </ul>
-                <ul class="lists">
-                    <li class="list list-title">表示名</li>
-                    <li class="list list-value">{{ $data->name }}</li>
-                </ul>
 
                 <ul class="lists">
                     <li class="list list-title">氏名</li>

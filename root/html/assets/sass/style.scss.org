@@ -28,6 +28,15 @@
 @import "page/_guide.scss";
 
 
+/**
+ * Harimanics Added at 2018.06.26 By Akito
+ */
+@import "add/mixins/placeholder.scss";
+@import "add/_font-awesome.min.scss";
+@import "add/_common.scss";
+@import "add/_bootstrap.scss";
+@import "add/page/_contact.scss";
+
 
 
 

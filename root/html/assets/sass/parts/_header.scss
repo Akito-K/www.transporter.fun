@@ -103,20 +103,20 @@ header{
 							transition: all 0.3s ease;
 							
 							&.icon_signup {
-								background-image: url(../images/icon_signup@2x.png);
+								background-image: url(#{$image_dir}/icon_signup@2x.png);
 							}
 							&.icon_login {
-								background-image: url(../images/icon_login@2x.png);
+								background-image: url(#{$image_dir}/icon_login@2x.png);
 							}
 						}
 					}
 					.signup, .login {
 						&:hover {
 							.icon_signup {
-								background-image: url(../images/icon_signup_inverted@2x.png);
+								background-image: url(#{$image_dir}/icon_signup_inverted@2x.png);
 							}
 							.icon_login {
-								background-image: url(../images/icon_login_inverted@2x.png);
+								background-image: url(#{$image_dir}/icon_login_inverted@2x.png);
 							}
 						}
 					}
@@ -196,20 +196,20 @@ header{
 						transition: all 0.3s ease;
 						
 						&.icon_signup {
-							background-image: url(../images/icon_signup@2x.png);
+							background-image: url(#{$image_dir}/icon_signup@2x.png);
 						}
 						&.icon_login {
-							background-image: url(../images/icon_login@2x.png);
+							background-image: url(#{$image_dir}/icon_login@2x.png);
 						}
 					}
 				}
 				.signup, .login {
 					&:hover {
 						.icon_signup {
-							background-image: url(../images/icon_signup_inverted@2x.png);
+							background-image: url(#{$image_dir}/icon_signup_inverted@2x.png);
 						}
 						.icon_login {
-							background-image: url(../images/icon_login_inverted@2x.png);
+							background-image: url(#{$image_dir}/icon_login_inverted@2x.png);
 						}
 					}
 				}
@@ -218,7 +218,7 @@ header{
 		}
 	}
 	.gnav{
-		background: url(../images/bg_gnav@2x.png) left bottom repeat-x;
+		background: url(#{$image_dir}/bg_gnav@2x.png) left bottom repeat-x;
 		background-size: 1201px 12px;
 		padding-bottom: 12px;
 		margin-bottom: 20px;
@@ -240,7 +240,7 @@ header{
 				}
 				a{
 					display: block;
-					background: url(../images/icon_gnav@2x.png) left center no-repeat;
+					background: url(#{$image_dir}/icon_gnav@2x.png) left center no-repeat;
 					background-size: 20px 18px;
 					padding: 10px 0px 10px 30px;
 					font-size: 14px;

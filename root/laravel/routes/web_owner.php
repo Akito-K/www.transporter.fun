@@ -36,11 +36,16 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get ('/owner/closed_order',                      'owner\closedOrderController@showList');
             Route::get ('/owner/closed_order/{order_id}/detail',    'owner\closedOrderController@showDetail');
 
-            // 見積依頼
+            // 一括見積依頼
             Route::get ('/owner/request/{order_id}/create',         'owner\requestController@create');
             Route::post('/owner/request/confirm',                   'owner\requestController@confirm');
             Route::post('/owner/request/execute',                   'owner\requestController@execute');
             Route::get ('/owner/request/{order_id}/cancel',         'owner\requestController@cancel');
+
+            // 指名見積依頼
+            Route::get ('/owner/nominate_request/{order_id}/create','owner\nominateRequestController@create');
+            Route::post('/owner/nominate_request/confirm',          'owner\nominateRequestController@confirm');
+            Route::post('/owner/nominate_request/execute',          'owner\nominateRequestController@execute');
 
             // 提案のあった見積
             Route::get ('/owner/estimate/{order_id}/list',          'owner\estimateController@showOrderList');

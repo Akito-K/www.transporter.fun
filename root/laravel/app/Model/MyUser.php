@@ -157,7 +157,6 @@ class MyUser extends Model
             'hashed_id' => sha1($user_id),
             'login_id' => $request['login_id'],
             'password' => bcrypt($request['password']),
-            'name' => $request['name'],
             'sei' => $request['sei'],
             'mei' => $request['mei'],
             'sei_kana' => $request['sei_kana'],
@@ -188,7 +187,6 @@ class MyUser extends Model
         $now_at = new \Datetime();
         $data = [
             'login_id' => $request['login_id'],
-            'name' => $request['name'],
             'sei' => $request['sei'],
             'mei' => $request['mei'],
             'sei_kana' => $request['sei_kana'],

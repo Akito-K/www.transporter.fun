@@ -1,0 +1,43 @@
+.title_style--child {
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+button {
+    &[disabled] {
+        opacity: 0.4;
+    }
+}
+
+.button_wrap {
+    a.btn {
+        color: #fff;
+        font-size: 18px;
+        padding: 13px 0;
+        width: 400px;
+        box-sizing: border-box;
+        display: inline-block;
+        text-decoration: none;
+        transition: none;
+        &-sm {
+            padding: 4px 0;
+            font-size: 15px;
+        }
+        &-primary {
+            background: #1F3A93;
+            border: 2px solid #1F3A93;
+        }
+        &-warning {
+            background: #ce6000;
+            border: 2px solid #ce6000;
+        }
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+}
+
+
+
+
+

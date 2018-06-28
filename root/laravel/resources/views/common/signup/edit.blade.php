@@ -1,95 +1,127 @@
-@extends('layouts.app')
+@extends('layouts.common.auth')
 @section('content')
 
-{!! MyHTML::errorMessage($errors) !!}
-{!! MyHTML::flashMessage() !!}
+<div class="crumb">
+    <div class="container">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><span>新規会員登録</span></li>
+        </ul>
+    </div>
+</div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">無料会員登録</div>
+<div class="page_register page_main">
+    <div class="container">
+        <article class="content">
 
-                <div class="panel-body">
+            <section class="sec_form_status mt30" id="registration">
+                <h1 class="title_style02">会員登録</h1>
+                <div class="status_in">
+                    <ul>
+                        <li>
+                            <span class="step">STEP1</span>
+                            <p>Eメール</p>
+                        </li>
+                        <li>
+                            <span class="step">STEP2</span>
+                            <p>認証情報</p>
+                        </li>
+                        <li class="active">
+                            <span class="step">STEP3</span>
+                            <p>会員情報</p>
+                        </li>
+                        <li>
+                            <span class="step">STEP4</span>
+                            <p>内容確認</p>
+                        </li>
+                        <li>
+                            <span class="step">STEP5</span>
+                            <p>登録完了</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="sec_form">
+                <div class="form_wrap">
+
                     <form class="form-horizontal" method="POST" action="{{ url('') }}/signup/update">
                         {{ csrf_field() }}
                         <input type="hidden" name="signup_key" value="{{ $signup_key }}">
 
-                        <div class="form-group signup__box">
-                            <label class="col-md-4 control-label">氏名</label>
-                            <ul class="col-md-6 signup__box__lists">
-                                <li class="signup__box__list signup__box__list--title">姓</li>
-                                <li class="signup__box__list signup__box__list--value">
-                                    <input id="sei" type="text" class="form-control" name="sei" value="{!! old('sei')?: $data->sei !!}">
-                                </li>
+                        <p class="mt30">基本情報を入力して、確認画面にお進みください。</p>
 
-                                <li class="signup__box__list signup__box__list--title">名</li>
-                                <li class="signup__box__list signup__box__list--value">
-                                    <input id="mei" type="text" class="form-control" name="mei" value="{!! old('mei')?: $data->mei !!}">
-                                </li>
-                            </ul>
+                        <div class="form_groupe">
+                            <div class="title">メールアドレス</div>
+                            <div class="form_parts_box">
+                                <p class="conf_text">{{ $data->email }}</p>
+                            </div>
                         </div>
-
-                        <div class="form-group signup__box">
-                            <label class="col-md-4 control-label">シメイ</label>
-                            <ul class="col-md-6 signup__box__lists">
-                                <li class="signup__box__list signup__box__list--title">セイ</li>
-                                <li class="signup__box__list signup__box__list--value">
-                                    <input id="sei_kana" type="text" class="form-control" name="sei_kana" value="{!! old('sei_kana')?: $data->sei_kana !!}">
-                                </li>
-
-                                <li class="signup__box__list signup__box__list--title">メイ</li>
-                                <li class="signup__box__list signup__box__list--value">
-                                    <input id="mei_kana" type="text" class="form-control" name="mei_kana" value="{!! old('mei_kana')?: $data->mei_kana !!}">
-                                </li>
-                            </ul>
+                        <div class="form_groupe">
+                            <div class="title">氏名</div>
+                            <div class="form_parts_box">
+                                <p class="conf_text">{{ $data->sei }} {{ $data->mei }} 様</p>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">郵便番号</label>
-                            <div class="col-md-6">
-                                <input id="zip1" type="text" class="form-control form-control--mini form-control--20" name="zip1" value="{!! old('zip1')?: $data->zip1 !!}" required autofocus>
-                                -
-                                <input id="zip2" type="text" class="form-control form-control--mini form-control--30" name="zip2" value="{!! old('zip2')?: $data->zip2 !!}" required onKeyUp="AjaxZip3.zip2addr('zip1', 'zip2', 'pref_id','city', 'address');">
+                        <div class="form_groupe">
+                            <div class="title">しめい（かな）</div>
+                            <div class="form_parts_box">
+                                <p class="conf_text">{{ $data->sei_kana }} {{ $data->mei_kana }} さま</p>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="pref_id" class="col-md-4 control-label">都道府県</label>
-                            <div class="col-md-6">
+{!! MyHTML::errorMessage($errors) !!}
+{!! MyHTML::flashMessage() !!}
+
+                        <div class="form_groupe">
+                            <div class="title">郵便番号<span class="hissu">必須</span></div>
+                            <div class="form_parts_box form_parts_box--zip">
+                                <input id="zip1" type="text" class="form-control form-control--mini form-control--20" name="zip1" value="{!! old('zip1')?: $data->zip1 !!}" required autofocus placeholder="例：123">
+                                <span class="hyphen"><i class="fa fa-minus"></i></span>
+                                <input id="zip2" type="text" class="form-control form-control--mini form-control--30" name="zip2" value="{!! old('zip2')?: $data->zip2 !!}" required onKeyUp="AjaxZip3.zip2addr('zip1', 'zip2', 'pref_id','city', 'address');" placeholder="例：4567">
+                            </div>
+                        </div>
+
+                        <div class="form_groupe">
+                            <div class="title">都道府県<span class="hissu">必須</span></div>
+                            <div class="form_parts_box form_parts_box--">
                                 {!! \Form::select('pref_id', $prefs, old('pref_id')?: $data->pref_id, ['class' => 'form-control']) !!}
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="city" class="col-md-4 control-label">市区郡</label>
-                            <div class="col-md-6">
-                                <input id="city" type="text" class="form-control" name="city" value="{!! old('city')?: $data->city !!}" required>
+                        <div class="form_groupe">
+                            <div class="title">市区郡<span class="hissu">必須</span></div>
+                            <div class="form_parts_box">
+                                <input id="city" type="text" class="form-control" name="city" value="{!! old('city')?: $data->city !!}" required autofocus placeholder="例：港区">
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="address" class="col-md-4 control-label">以降の住所</label>
-                            <div class="col-md-6">
-                                <input id="address" type="text" class="form-control" name="address" value="{!! old('address')?: $data->address !!}">
+                        <div class="form_groupe">
+                            <div class="title">以降の住所<span class="hissu">必須</span></div>
+                            <div class="form_parts_box">
+                                <input id="address" type="text" class="form-control" name="address" value="{!! old('address')?: $data->address !!}" required autofocus placeholder="例：1-2-3">
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="mobile1" class="col-md-4 control-label">携帯電話番号</label>
-                            <div class="col-md-6">
-                                <input id="mobile1" type="text" class="form-control form-control--mini form-control--20" name="mobiles[1]" value="{!! old('mobiles[1]')?: $data->mobiles[1] !!}">
-                                 - <input id="mobile2" type="text" class="form-control form-control--mini form-control--20" name="mobiles[2]" value="{!! old('mobiles[2]')?: $data->mobiles[2] !!}">
-                                 - <input id="mobile3" type="text" class="form-control form-control--mini form-control--20" name="mobiles[3]" value="{!! old('mobiles[3]')?: $data->mobiles[3] !!}">
+                        <div class="form_groupe">
+                            <div class="title">携帯電話番号<span class="hissu">必須</span></div>
+                            <div class="form_parts_box form_parts_box--tel">
+                                <input id="mobile1" type="text" class="form-control form-control--mini form-control--20" name="mobiles[1]" value="{!! old('mobiles[1]')?: $data->mobiles[1] !!}" placeholder="例：012">
+                                <span class="hyphen"><i class="fa fa-minus"></i></span>
+                                <input id="mobile2" type="text" class="form-control form-control--mini form-control--20" name="mobiles[2]" value="{!! old('mobiles[2]')?: $data->mobiles[2] !!}" placeholder="例：345">
+                                <span class="hyphen"><i class="fa fa-minus"></i></span>
+                                <input id="mobile3" type="text" class="form-control form-control--mini form-control--20" name="mobiles[3]" value="{!! old('mobiles[3]')?: $data->mobiles[3] !!}" placeholder="例：6789">
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="tel1" class="col-md-4 control-label">固定電話番号</label>
-                            <div class="col-md-6">
-                                <input id="tel1" type="text" class="form-control form-control--mini form-control--20" name="tels[1]" value="{!! old('tels[1]')?: $data->tels[1] !!}">
-                                 - <input id="tel2" type="text" class="form-control form-control--mini form-control--20" name="tels[2]" value="{!! old('tels[2]')?: $data->tels[2] !!}">
-                                 - <input id="tel3" type="text" class="form-control form-control--mini form-control--20" name="tels[3]" value="{!! old('tels[3]')?: $data->tels[3] !!}">
+                        <div class="form_groupe">
+                            <div class="title">固定電話番号</div>
+                            <div class="form_parts_box form_parts_box--tel">
+                                <input id="tel1" type="text" class="form-control form-control--mini form-control--20" name="tels[1]" value="{!! old('tels[1]')?: $data->tels[1] !!}" placeholder="例：012">
+                                <span class="hyphen"><i class="fa fa-minus"></i></span>
+                                <input id="tel2" type="text" class="form-control form-control--mini form-control--20" name="tels[2]" value="{!! old('tels[2]')?: $data->tels[2] !!}" placeholder="例：345">
+                                <span class="hyphen"><i class="fa fa-minus"></i></span>
+                                <input id="tel3" type="text" class="form-control form-control--mini form-control--20" name="tels[3]" value="{!! old('tels[3]')?: $data->tels[3] !!}" placeholder="例：6789">
                             </div>
                         </div>
 
@@ -122,21 +154,17 @@
                             </ul>
                         </div>
 
+                        <!--p class="mt30">下記のボタンを押して入力内容をご確認ください。</p-->
 
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-warning bulletNextBtn">
-                                    確認画面に進む
-                                </button>
-                            </div>
-                        </div>
+                        <div class="button_wrap"><button type="submit" class="bulletNextBtn">確認画面に進む</button></div>
                     </form>
 
-                    <a href="{!! url('') !!}/signup/{{ $signup_key }}/create" class="btn btn-primary">前のページに戻る</a>
-
+                    <div class="button_wrap mt10">
+                        <a href="{!! url('') !!}/signup/{{ $signup_key }}/create" class="btn btn-warning btn-sm">前のページに戻る</a>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </section>
+        </article>
     </div>
 </div>
 @endsection

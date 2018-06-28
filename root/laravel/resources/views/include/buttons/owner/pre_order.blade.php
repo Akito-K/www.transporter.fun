@@ -14,7 +14,8 @@
 ?>
 
 @if( in_array($data->status_id, ['O-05']) )
-<a href="{{ url('') }}/owner/request/{{ $data->order_id }}/create" class="orders__btn btn btn-success btn-md">見積依頼</a>
+<a href="{{ url('') }}/owner/request/{{ $data->order_id }}/create" class="orders__btn btn btn-success btn-md">一括見積依頼</a>
+<a href="{{ url('') }}/owner/nominate_request/{{ $data->order_id }}/create" class="orders__btn btn btn-success btn-md">指名見積依頼</a>
 <a href="{{ url('') }}/owner/pre_order/{{ $data->order_id }}/detail" class="orders__btn btn btn-primary btn-sm">詳細</a>
 <a href="{{ url('') }}/owner/order/{{ $data->order_id }}/edit" class="orders__btn btn btn-warning btn-sm">編集</a>
 <a href="{{ url('') }}/owner/order/{{ $data->order_id }}/delete" class="orders__btn btn btn-danger btn-sm">削除</a>

@@ -15076,10 +15076,6 @@ button.close {
   .board__you__box--info {
     width: 80%;
   }
-  .board__you__name {
-    font-size: 100%;
-    font-weight: bold;
-  }
   .board__you__comoany {
     font-size: 160%;
   }

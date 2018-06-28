@@ -214,13 +214,13 @@ html{
 		display: block;
 		width: 75px;
 		height: 75px;
-		background-image: url(../images/btn_totop_upwards_arrow@2x.png);
+		background-image: url(#{$image_dir}/btn_totop_upwards_arrow@2x.png);
 		background-size: 75px 75px;
 		background-repeat: no-repeat;
 		border-radius: 50%;
 
 		&:hover {
-			background-image: url(../images/btn_totop_upwards_arrow_inverted@2x.png);
+			background-image: url(#{$image_dir}/btn_totop_upwards_arrow_inverted@2x.png);
 		}
 
 		@include sp {
@@ -249,7 +249,7 @@ html{
 	}
 }
 .bg01{
-	background: url(../images/bg01@2x.png) center top repeat;
+	background: url(#{$image_dir}/bg01@2x.png) center top repeat;
 	background-size: 1280px auto;
 	@include sp{
 		background: none;
@@ -275,7 +275,7 @@ html{
 	&:after{
 		content: "";
 		display: block;
-		background: url(../images/line02@2x.png) center top no-repeat;
+		background: url(#{$image_dir}/line02@2x.png) center top no-repeat;
 		background-size: contain;
 		width: 189px;
 		height: 13px;

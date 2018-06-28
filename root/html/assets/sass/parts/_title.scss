@@ -3,7 +3,7 @@
 @import "_variables.scss";
 
 .title_style01{
-	background: url(../images/bg_gnav@2x.png) left center repeat-x;
+	background: url(#{$image_dir}/bg_gnav@2x.png) left center repeat-x;
 	background-size: 1201px 12px;
 	text-align: center;
 	margin-bottom: 20px;

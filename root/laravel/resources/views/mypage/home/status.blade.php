@@ -8,8 +8,8 @@
             <div class="status__block">
                 <div class="status__box">
                     <ul class="lists">
-                        <li class="list list-title">表示名</li>
-                        <li class="list list-value">{{ $me->name }}</li>
+                        <li class="list list-title">氏名</li>
+                        <li class="list list-value">{{ $me->sei }} {{ $me->mei }}</li>
                     </ul>
                     <ul class="lists">
                         <li class="list list-title">荷主登録</li>

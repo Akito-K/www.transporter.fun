@@ -77,7 +77,7 @@ class orderController extends ownerController
         OrderRequest::saveData($request_data, $order_id);
         Cargo::saveData($request_data, $order_id);
 
-        return redirect('owner/order');
+        return redirect('owner/pre_order');
     }
 
     public function edit( $order_id ){
@@ -142,14 +142,14 @@ class orderController extends ownerController
         OrderRequest::saveData($request_data, $order_id);
         Cargo::updateData($request_data);
 
-        return redirect('owner/order');
+        return redirect('owner/pre_order');
     }
 
     public function delete($order_id){
         Log::saveData( __METHOD__ , 'order_id', $order_id, true);
         Order::where('order_id', $order_id)->delete();
 
-        return redirect('owner/order');
+        return redirect('owner/pre_order');
     }
 
     public function duplicate($old_order_id){
@@ -159,6 +159,6 @@ class orderController extends ownerController
         OrderRequest::duplicateData($old_order_id, $new_order_id);
         Cargo::duplicateData($old_order_id, $new_order_id);
 
-        return redirect('owner/order');
+        return redirect('owner/pre_order');
     }
 }

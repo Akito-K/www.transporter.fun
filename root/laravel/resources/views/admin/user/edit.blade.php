@@ -43,12 +43,6 @@
                             </li>
                         </ul>
                         <ul class="lists">
-                            <li class="list list-title">表示名</li>
-                            <li class="list list-value">
-                                {!! Form::text('name', old('name')?: $data->name, ['class' => 'form-control form-control--mini form-control--60']) !!}
-                            </li>
-                        </ul>
-                        <ul class="lists">
                             <li class="list list-title">氏名</li>
                             <li class="list list-value">
                                 <ul class="staff__edit__names">

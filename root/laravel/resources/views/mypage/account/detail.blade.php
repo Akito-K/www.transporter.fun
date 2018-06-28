@@ -26,10 +26,6 @@
                         </li>
                     </ul>
                     <ul class="lists account__lists">
-                        <li class="list list-title account__list">表示名</li>
-                        <li class="list list-value account__list">{{ $data->name }}</li>
-                    </ul>
-                    <ul class="lists account__lists">
                         <li class="list list-title account__list">氏名</li>
                         <li class="list list-value account__list">{{ $data->sei }} {{ $data->mei }}</li>
                     </ul>
