@@ -28,10 +28,6 @@
                         <img src="{{ env('www_url') }}/assets/images/top/transportation/pdf_icon.png" alt="" width="30" height="34" srcset="{{ env('www_url') }}/assets/images/top/transportation/pdf_icon.png 1x,{{ env('www_url') }}/assets/images/top/transportation/pdf_icon@2x.png 2x"></a>
                     </p>
                 </div>
-                <div class="btnlinks">
-                    <a class="btnlink" href="{{ env('www_url') }}/contact/">お問い合せ</a>
-                    <a class="btnlink" href="{{ env('www_url') }}/register/">無料会員登録で予約申し込み</a>
-                </div>
             </section>
 
         </article>

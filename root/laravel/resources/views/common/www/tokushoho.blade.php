@@ -25,64 +25,7 @@
             <section class="sec">
                 <h2 class="title_style02">特定商取引法に関する表記</h2>
                 <div class="text_wrap">
-                    <p class="mb25">荷物・運搬物の運送・配送は全て各パーソナルポーター（運送会社様）自身が行っておりますので、直接パーソナルポーター様へご連絡ください。</p>
-                    <ol>
-                        <li><p class="f_bold mb15">１．役務のび配送代金</p>
-                            <ol>
-                                <li class="mb25">
-                                    <p class="mb10"><span class="f_bold">（1）手数料</span><br>
-                                        運送・配送依頼する場合・・・決済システム利用等を含め当サイトからはサイト利用料以外の一切料金はかかりません。</p>
-                                    <ul>
-                                        <li><a class="textlink" href="{{ env('help_url') }}/qa_inquiry/tp/contents/#001">サイト利用料とは →</a></li>
-                                        <li><a class="textlink" href="{{ env('help_url') }}/qa_inquiry/tp/contents/#006">配送料金のお支払いは →</a></li>
-                                    </ul>
-                                </li>
-                                <li class="mb40">
-                                    <p class="mb5"><span class="f_bold">（2）当社が掲載している配送案件価格</span><br>
-                                        当社が掲載する配送・運送価格は、表示された金額（表示価格/税込み）といたします。
-                                        なお、(1)のサイト利用料は別途発生いたしますのでご了承ください。</p>
-                                    <small class="f_small">※配送価格は物流案件内容に含めて表示</small>
-                                </li>
-                            </ol>
-                        </li>
-                        <li><p class="f_bold mb15">２．運送・配送代金の支払方法と支払時期</p>
-                            <ol>
-                                <li>
-                                    <p class="f_bold mb10">（1）支払方法</p>
-                                    <table class="separated stripe mb10">
-                                        <tr>
-                                            <th>販売価格帯</th>
-                                            <td>利用内容によって異なります。</td>
-                                        </tr>
-                                        <tr>
-                                            <th>輸送代金以外に必要な費用</th>
-                                            <td>消費税、振込手数料</td>
-                                        </tr>
-                                        <tr>
-                                            <th>商品等の引き渡し時期</th>
-                                            <td>本サービス上で予約成立後、予約内容に従い運送サービスが提供されます。</td>
-                                        </tr>
-                                        <tr>
-                                            <th>代金の支払い方法と時期</th>
-                                            <td>
-                                                <p class="mb10">当社では、以下の方法よりお支払い方法をご選択いただけます。<br>
-                                                代金は、ご利用毎の都度払いです（運送・配送サービス終了後のお支払い）</p>
-                                                <ul>
-                                                    <li>・コンビニ決済</li>
-                                                    <li>・クレジットカード（コーポレートカード）</li>
-                                                    <li>・請求書払い（法人向け）</li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <small class="f_xsmall">※ 法人/個人事業主のみご利用いただけます。請求書は、受注確定運送会社様宛に配送完了報告と同時にトランスポーター株式会社ウェブサイト上より発行されます。<br>
-                                    また、振込手数料等詳細は荷主様と受注運送会社様にてサイト上内にて予めお取決め願います。<br>
-                                    下記URLを参照いただき、ご了承の上お申込みください。<br>
-                                    <a class="textlink" href="{{ env('www_url') }}/guide/003">https://www.transporter.fun/guide/003</a></small>
-                                </li>
-                            </ol>
-                        </li>
-                    </ol>
+                    <p class="mb25">荷物・運搬物の運送・配送は全て各運送会社様自身が行っておりますので、直接運送会社様へご連絡ください。</p>
                 </div>
             </section>
             <section class="sec">
@@ -92,18 +35,24 @@
                 </div>
             </section>
             <section class="sec">
+                <h2 class="title_style02">運営会社</h2>
+                <div class="text_wrap">
+                    <p>ハリマニックス株式会社<br>
+                    <small class="f_small">※ハリマニックス株式会社はトランスポーター株式会社より運営を委託されています。</small></p>
+                </div>
+            </section>
+            <section class="sec">
                 <h2 class="title_style02">運営責任者</h2>
                 <div class="text_wrap">
-                    <p>代表取締役社長: 河野 公美</p>
+                    <p>菱田 好美</p>
                 </div>
             </section>
             <section class="sec">
                 <h2 class="title_style02">所在地および連絡先</h2>
                 <div class="text_wrap">
-                    <p>所在地：兵庫県姫路市白浜町丙152-1<br>
-                    TEL：090-6062-1551<br>
-                    FAX：079-245-2813<br>
-                    営業時間　平日8：30～18：30（土・日・祝日を除く）<br>
+                    <p>所在地：兵庫県高砂市高砂町浜田町1丁目7-28<br>
+                    TEL：079-443-5577<br>
+                    営業時間　平日8：30～17：30（土・日・祝日を除く）<br>
                     Mail: <a class="textlink" href="mailto:info@transporter.fun">info@transporter.fun</a></p>
                 </div>
             </section>
@@ -125,19 +74,19 @@
             <section class="sec">
                 <h2 class="title_style02">取引価格帯</h2>
                 <div class="text_wrap">
-                    <p>各種物流運搬物のサービス内容によって異なります。</p>
+                    <p>ご利用プランにより異なります。</p>
                 </div>
             </section>
             <section class="sec">
-                <h2 class="title_style02">荷物・運搬物の取引完了代金以外に必要な費用</h2>
+                <h2 class="title_style02">サービス利用料以外に必要な費用</h2>
                 <div class="text_wrap">
-                    <p>消費税、振込手数料</p>
+                    <p>消費税</p>
                 </div>
             </section>
             <section class="sec">
-                <h2 class="title_style02">荷物・運搬物の引き渡し時期</h2>
+                <h2 class="title_style02">商品(サービス)の引き渡し時期</h2>
                 <div class="text_wrap">
-                    <p>本サービス上で予約取引成立後、予約内容に従い運送サービスが提供されます。</p>
+                    <p>当サイト所定の手続き終了後、直ちにご利用いただけます。</p>
                 </div>
             </section>
             <section class="sec">
@@ -168,7 +117,7 @@
             <section class="sec">
                 <h2 class="title_style02">不良品の取扱条件</h2>
                 <div class="text_wrap">
-                    <p>取り扱い運搬物の特性上、不良品という概念は設けません。</p>
+                    <p>サービスの特性上、不良品という概念は設けません。</p>
                 </div>
             </section>
 
