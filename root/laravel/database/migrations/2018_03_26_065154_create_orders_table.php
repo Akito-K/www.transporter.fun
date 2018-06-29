@@ -51,6 +51,7 @@ class CreateOrdersTable extends Migration
 
             $table->datetime('estimate_start_at')->nullable();
             $table->datetime('estimate_close_at')->nullable();
+            $table->string('nominated_carrier_id', 32)->nullable();
             $table->boolean('flag_hide_owner');
             $table->datetime('evaluated_at')->nullable();
 

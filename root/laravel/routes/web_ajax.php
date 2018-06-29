@@ -14,6 +14,7 @@ Route::post('/ajax/quote_address',                          'AjaxController@quot
 Route::post('/ajax/add_estimate_item',                      'AjaxController@addEstimateItem');
 Route::post('/ajax/quote_item',                             'AjaxController@quoteItem');
 Route::post('/ajax/quote_order',                            'AjaxController@quoteOrder');
+Route::post('/ajax/quote_carrier',                          'AjaxController@quoteCarrier');
 
 Route::post('/ajax/get_over10',                             'AjaxController@getOver10');
 Route::post('/ajax/put_message',                            'AjaxController@putMessage');

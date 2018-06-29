@@ -100,6 +100,42 @@ class Order extends Model
         return $ary;
     }
 
+    public static function getEstimatableOrderDatas(){
+        $ary = [];
+        $datas = Order::where('status_id', 'O-10')->orderBy('estimate_close_at', 'ASC')->get();
+        if(!empty($datas)){
+            foreach($datas as $data){
+                $owner = Owner::getData($data->owner_id);
+                $data->owner_name = $data->flag_hide_owner? '***（非公開）': $owner->company.' '.$owner->sei.$owner->mei;
+                $data->owner_name .= '様';
+                $data->is_withtoday = Order::isWithToday($data);
+                $data->is_fewdays = Order::isFewDay($data);
+                $data->send = Order::getSendAddress($data);
+                $data->arrive = Order::getArriveAddress($data);
+
+                $ary[ $data->order_id ] = $data;
+            }
+        }
+
+        return $ary;
+    }
+
+    public static function isWithToday($data){
+        $estimate_close_at = new \Datetime($data->estimate_close_at);
+        $today_at = new \Datetime();
+        $diff = $estimate_close_at->diff($today_at);
+
+        return $diff->format('%R%a') == 0;
+    }
+
+    public static function isFewDay($data){
+        $estimate_close_at = new \Datetime($data->estimate_close_at);
+        $today_at = new \Datetime();
+        $diff = $estimate_close_at->diff($today_at);
+
+        return $diff->format('%R%a') > 0 && $diff->format('%R%a') < 5;
+    }
+
     public static function getPreOrdersFromOwnerSide( $owner_id ){
         $ary = [];
         $datas = Order::where('owner_id', $owner_id)
@@ -231,7 +267,13 @@ class Order extends Model
 
     public static function getEstimatableDatas(){
         $ary = [];
-        $datas = Order::where('status_id', 'O-10')->orderBy('estimate_close_at', 'ASC')->get();
+        $datas = Order::where('status_id', 'O-10')
+                        ->where( function($query){
+                            $query->where('nominated_carrier_id', \Auth::user()->carrier_id)
+                                  ->orWhereNull('nominated_carrier_id');
+                        })
+                        ->orderBy('estimate_close_at', 'ASC')
+                        ->get();
         if(!empty($datas)){
             foreach($datas as $data){
                 Order::addDeliveryData($data);
@@ -493,6 +535,7 @@ class Order extends Model
         $new_data->status_id = 'O-05';
         $new_data->estimate_start_at = NULL;
         $new_data->estimate_close_at = NULL;
+        $new_data->nominated_carrier_id = NULL;
 
         $new_data->save();
     }

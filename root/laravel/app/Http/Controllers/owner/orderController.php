@@ -159,6 +159,6 @@ class orderController extends ownerController
         OrderRequest::duplicateData($old_order_id, $new_order_id);
         Cargo::duplicateData($old_order_id, $new_order_id);
 
-        return redirect('owner/pre_order');
+        return redirect('owner/order/'.$new_order_id.'/edit');
     }
 }

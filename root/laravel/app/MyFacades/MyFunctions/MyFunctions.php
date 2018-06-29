@@ -9,6 +9,7 @@ use App\Model\Upload;
 use App\Model\MessageUnopen;
 use App\Model\UserToAuthority;
 use App\Model\MyUser;
+use App\Model\Carrier;
 use App\Model\Pref;
 
 class MyFunctions
@@ -628,8 +629,8 @@ class MyFunctions
      * date2 が大きい場合: 0
      * date1 と date2 が等しい場合：0
      */
-    public static function isOver( \Datetime $date2){
-        $date1 = new \Datetime();
+    public static function isOver( \Datetime $date2, \Datetime $date1=null){
+        $date1 = $data1?: new \Datetime();
 
         return $date2->diff($date1)->invert? false: true;
      }
@@ -675,6 +676,10 @@ class MyFunctions
 
      public static function getPrefNames(){
         return Pref::getNames();
+     }
+
+     public static function getCarrierCompany($carrier_id){
+        return Carrier::getCompany($carrier_id);
      }
 
      public static function isValidated( $errors ){

@@ -60,10 +60,32 @@ class Carrier extends Model
         return $ary;
     }
 
+    public static function getNames(){
+        $ary = ['' => '選択してください'];
+        $datas = Carrier::getDatas();
+        if(!empty($datas)){
+            foreach($datas as $data){
+                if( $data->carrier_id != \Auth::user()->carrier_id ){
+                    $str  = $data->company;
+                    $str .= '（'.\Func::getAddress( $data, ['pref'] ).'）';
+                    $ary[ $data->carrier_id ] = $str;
+                }
+            }
+        }
+
+        return $ary;
+    }
+
     public static function getData($carrier_id){
         $data = Carrier::where('carrier_id', $carrier_id)->first();
 
         return $data;
+    }
+
+    public static function getCompany($carrier_id){
+        $val = Carrier::where('carrier_id', $carrier_id)->value('company');
+
+        return $val;
     }
 
     public static function getCarrier($carrier_id){

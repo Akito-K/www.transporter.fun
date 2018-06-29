@@ -8,6 +8,18 @@
             <div class="account__block">
                 <div class="account__box">
                     <ul class="lists account__lists">
+                        <li class="list list-title account__list">ユーザーID</li>
+                        <li class="list list-value account__list">{{ $data->user_id }}</li>
+                    </ul>
+                    <ul class="lists account__lists">
+                        <li class="list list-title account__list">荷主会員ID</li>
+                        <li class="list list-value account__list">{{ $data->owner_id }}</li>
+                    </ul>
+                    <ul class="lists account__lists">
+                        <li class="list list-title account__list">運送会社会員ID</li>
+                        <li class="list list-value account__list">{{ $data->carrier_id }}</li>
+                    </ul>
+                    <ul class="lists account__lists">
                         <li class="list list-title account__list">ログインID</li>
                         <li class="list list-value account__list">{{ $data->login_id }}</li>
                     </ul>

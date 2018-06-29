@@ -13884,6 +13884,39 @@ button.close {
     height: 100%;
     z-index: 11;
   }
+  .push__box {
+    position: relative;
+    display: inline-block;
+  }
+  .push__box:hover .push__body {
+    opacity: 1;
+  }
+  .push__icon {
+    padding: 5px;
+  }
+  .push__icon--nominate {
+    color: #f00;
+  }
+  .push__body {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    border: 2px solid #f00;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 5px 8px;
+    z-index: 20;
+    width: 120px;
+    opacity: 0;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+  }
+  .push__carrier {
+    font-size: 80%;
+  }
   .evaluates {
     display: inline-block;
     position: relative;

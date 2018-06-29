@@ -5,19 +5,30 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Model\Pagemeta;
+use App\Model\Order;
+use App\Model\CarEmpty;
+use App\Model\Car;
+use App\Model\Area;
 
 class wwwController extends Controller
 {
     public function index (){
         $pagemeta = Pagemeta::getPagemeta('CM-HM-000');
+        $order_datas = Order::getEstimatableOrderDatas();
+        $empty_datas = CarEmpty::getAllEmpties();
+        $car_datas = Car::getAllCars();
+        $area_names = Area::getNames();
 
-        return view('common.www.index', compact('pagemeta'));
+        return view('common.www.index', compact('pagemeta', 'order_datas', 'empty_datas', 'car_datas', 'area_names'));
     }
 
     public function trucks (){
         $pagemeta = Pagemeta::getPagemeta('CM-HM-005');
+        $empty_datas = CarEmpty::getAllEmpties();
+        $car_datas = Car::getAllCars();
+        $area_names = Area::getNames();
 
-        return view('common.www.trucks', compact('pagemeta'));
+        return view('common.www.trucks', compact('pagemeta', 'empty_datas', 'car_datas', 'area_names'));
     }
 
     public function company(){

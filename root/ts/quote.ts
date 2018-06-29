@@ -34,6 +34,20 @@ namespace Quote {
                     return false;
                 }
             });
+
+            // 選択肢から指定見積依頼先の運送会社情報を引用
+            $('#trigQuoteCarrier').click( () => {
+                const carrierId = $('#paramQuoteCarrier :selected').val();
+                self.ajaxQuoteCarrier(carrierId);
+            });
+
+            // ページ読み込み時に指定見積依頼先の運送会社が選択されていれば情報を引用
+            if( $('#trigQuoteCarrier').length > 0){
+                const carrierId = $('#paramQuoteCarrier :selected').val();
+                if(carrierId){
+                    self.ajaxQuoteCarrier(carrierId);
+                }
+            };
         }
 
         public ajaxQuoteUserAccount(id): void{
@@ -99,6 +113,34 @@ namespace Quote {
                     $('#'+type+'_tels-1').val( data.tels[1] );
                     $('#'+type+'_tels-2').val( data.tels[2] );
                     $('#'+type+'_tels-3').val( data.tels[3] );
+                },
+                complete: function(){
+                    // 実行中画面を消す
+                    $('#ajaxing-waiting').hide();
+                    self.ajaxing = false;
+                }
+            });
+        }
+
+        public ajaxQuoteCarrier(carrierId): void{
+            let self = this;
+            self.ajaxing = true;
+            const token: string = $('meta[name="csrf-token"]').attr('content');
+            const D = {carrier_id: carrierId};
+
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': token},
+                url: '/ajax/quote_carrier',
+                type: 'post',
+                data: D,
+                dataType: 'json',
+                beforeSend: function(){
+                    // 実行中画面
+                    $('#ajaxing-waiting').show();
+                },
+                success: function( data ){
+                    //console.log(data);
+                    $('#bulletQuoteCarrier').html( data.view );
                 },
                 complete: function(){
                     // 実行中画面を消す

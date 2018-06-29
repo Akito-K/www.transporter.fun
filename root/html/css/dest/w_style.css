@@ -2640,6 +2640,7 @@ footer .copyright p {
 
 .page_home .sec_empty .table_empty thead td {
   width: 16.666666%;
+  vertical-align: middle;
   background-color: #235190;
   font-size: 16px;
   color: #FFFFFF;
@@ -2663,7 +2664,8 @@ footer .copyright p {
 }
 
 .page_home .sec_empty .table_empty tbody td {
-  font-size: 16px;
+  width: 14%;
+  vertical-align: middle;
   border-left: 1px solid #979797;
   border-bottom: 1px solid #979797;
   padding: 20px 25px;
@@ -2683,6 +2685,22 @@ footer .copyright p {
 }
 
 .page_home .sec_service .list_service li {
+  /*
+				position: relative;
+				padding: 15px 140px 15px 100px;
+				border-right: 1px solid #D8D8D8;
+				border-bottom: 1px solid #D8D8D8;
+				background: url(/assets/images/home/icon_info@2x.png) 25px center no-repeat #FFFFFF;
+				background-size: 35px auto;
+				@include sp{
+					background: none;
+					padding: 10px;
+				}
+*/
+}
+
+.page_home .sec_service .list_service li a {
+  display: block;
   position: relative;
   padding: 15px 140px 15px 100px;
   border-right: 1px solid #D8D8D8;
@@ -2692,14 +2710,14 @@ footer .copyright p {
 }
 
 @media screen and (min-width: 0) and (max-width: 768px) {
-  .page_home .sec_service .list_service li {
+  .page_home .sec_service .list_service li a {
     background: none;
     padding: 10px;
   }
 }
 
-.page_home .sec_service .list_service li a {
-  display: block;
+.page_home .sec_service .list_service li a:hover {
+  background-color: #f9f9f9;
 }
 
 .page_home .sec_service .list_service li .date {
@@ -4623,6 +4641,101 @@ footer .copyright p {
   color: #fff;
   background-color: #0275d8;
   border-color: #0275d8;
+}
+
+.page_request_search .deadline_badge {
+  display: inline-block;
+  width: 8em;
+  text-align: center;
+  font-size: 12px;
+  color: #ED543D;
+  background-color: #FFF3EC;
+  border: 1px solid #ED543D;
+  padding: 2px 0;
+  margin-left: 20px;
+  vertical-align: middle;
+}
+
+@media screen and (min-width: 0) and (max-width: 768px) {
+  .page_request_search .deadline_badge {
+    display: block;
+    margin-left: 0;
+  }
+}
+
+.page_request_search .d_table {
+  display: table;
+  width: 100%;
+}
+
+.page_request_search .d_table .cell {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.page_request_search .d_table .cell:first-child {
+  width: 295px;
+}
+
+.page_request_search .detail_img {
+  padding: 20px;
+  border: solid 1px #ddd;
+  float: left;
+}
+
+.page_request_search .detail_table {
+  width: 100%;
+  border: solid 1px #707070;
+  margin-bottom: 50px;
+}
+
+.page_request_search .detail_table th, .page_request_search .detail_table td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 8px;
+  border: solid 1px #707070;
+}
+
+.page_request_search .detail_table th {
+  font-weight: bold;
+}
+
+.page_request_search .detail_table thead th {
+  background-color: #73A9D8;
+  color: white;
+  font-size: 15px;
+  padding: 7px;
+}
+
+.page_request_search .detail_table tbody th {
+  background-color: #F6F9FC;
+}
+
+.page_request_search .detail_table tbody th[colspan] {
+  background-color: #D8EBFC;
+}
+
+.page_request_search .detail_table tbody th + td {
+  text-align: left;
+}
+
+@media screen and (min-width: 0) and (max-width: 768px) {
+  .page_request_search .d_table {
+    display: block;
+    text-align: center;
+  }
+  .page_request_search .d_table .cell {
+    display: block;
+  }
+  .page_request_search .d_table .cell:first-child {
+    display: inline-block;
+    width: auto;
+    margin-bottom: 20px;
+  }
+  .page_request_search .d_table .detail_table {
+    width: 100%;
+    margin-bottom: 40px;
+  }
 }
 
 .page_search .box_orange_search {

@@ -10691,7 +10691,7 @@ var Calendar;
             this.day = Number(today.getDate());
             var self = this;
             // 日付枠クリックでカレンダーを開く
-            $('.trigShowCalendar').click(function (e) {
+            $(document).on('click', '.trigShowCalendar', function (e) {
                 self.el = $(this);
                 self.showCalendar(e);
             });
@@ -10945,9 +10945,11 @@ var func_1 = __webpack_require__(1);
 var Upload;
 (function (Upload) {
     var MyUpload = /** @class */ (function () {
-        function MyUpload(ajaxing) {
+        function MyUpload(ajaxing, multipleNumber) {
             if (ajaxing === void 0) { ajaxing = false; }
+            if (multipleNumber === void 0) { multipleNumber = "0"; }
             this.ajaxing = ajaxing;
+            this.multipleNumber = multipleNumber;
             this.uploadSizeLimitImage = 15000000;
             this.enableExtensionsImage = ['jpg', 'jpeg', 'gif', 'png'];
             this.uploadSizeLimitZip = 1000000000;
@@ -10988,25 +10990,26 @@ var Upload;
                     return false;
                 }
             });
-            // ドラッグドロップからの入力
-            $(window).bind("drop", function (e) {
-                // false を返してデフォルトの処理を実行しないようにする
-                return false;
-            })
-                .bind("dragenter", function () {
-                $('#ajaxing-drag-enter').show();
-                // false を返してデフォルトの処理を実行しないようにする
-                return false;
-            })
-                .bind("dragover", function () {
-                // false を返してデフォルトの処理を実行しないようにする
-                return false;
-            })
-                .bind("dragleave", function () {
-                // false を返してデフォルトの処理を実行しないようにする
-                return false;
-            });
+            // 複数アップロード無効
             if ($('#flagMultipleUpload').length == 0) {
+                // ドラッグドロップからの入力
+                $(window).bind("drop", function (e) {
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                    .bind("dragenter", function () {
+                    $('#ajaxing-drag-enter').show();
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                    .bind("dragover", function () {
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                    .bind("dragleave", function () {
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                });
                 // ドラッグドロップからの入力
                 $('#ajaxing-drag-enter').bind("drop", function (event) {
                     $('#ajaxing-drag-enter').hide();
@@ -11025,6 +11028,7 @@ var Upload;
                     return false;
                 })
                     .bind("dragenter", function () {
+                    $('#ajaxing-drag-enter').show();
                     // false を返してデフォルトの処理を実行しないようにする
                     return false;
                 })
@@ -11040,6 +11044,74 @@ var Upload;
                 $('#ajaxing-drag-enter').bind("mouseleave click", function () {
                     $('#ajaxing-drag-enter').hide();
                 });
+            }
+            else {
+                // 複数アップロード有効
+                // ドラッグドロップからの入力
+                //                $('.trigAjaxingUploadingArea').bind("drop", function (e) {
+                $(document).on('drop', '.trigAjaxingUploadingArea', function (e) {
+                    //$('.bulletAjaxingDragEnters').hide();
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                    //                .bind("dragenter", function () {
+                    .on("dragenter", '.trigAjaxingUploadingArea', function () {
+                    self.multipleNumber = $(this).attr('data-num');
+                    $('.bulletAjaxingDragEnters[data-num="' + self.multipleNumber + '"]').show();
+                    console.log(self.multipleNumber);
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                    //                .bind("dragover", function () {
+                    .on("dragover", '.trigAjaxingUploadingArea', function () {
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                    //                .bind("dragleave", function () {
+                    .on("dragleave", '.trigAjaxingUploadingArea', function () {
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                });
+                // ドラッグドロップからの入力
+                //                $('.bulletAjaxingDragEnters').bind("drop", function (event: JQueryEventObject) {
+                $(document).on('drop', '.bulletAjaxingDragEnters', function (event) {
+                    $('.bulletAjaxingDragEnters').hide();
+                    // ドラッグされたファイル情報を取得
+                    var dragEvent = event.originalEvent, dataTransfer = dragEvent.dataTransfer, files = dataTransfer.files;
+                    var type = $('.bulletFakeInput[data-num="' + self.multipleNumber + '"]').attr("data-type");
+                    var target = $('.bulletFakeInput[data-num="' + self.multipleNumber + '"]').attr("data-target");
+                    var checked = self.checkUploadFile(files, type);
+                    console.log(files, type, target, checked);
+                    if (checked.result) {
+                        self.uploadFile(files[0], type, target);
+                    }
+                    else {
+                        alert(checked.errorMessage);
+                    }
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                    //                .bind("dragenter", function () {
+                    .on("dragenter", '.bulletAjaxingDragEnters', function () {
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                    //                .bind("dragover", function () {
+                    .on("dragover", '.bulletAjaxingDragEnters', function () {
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                })
+                    //                .bind("dragleave", function () {
+                    .on("dragleave", '.bulletAjaxingDragEnters', function () {
+                    $(this).hide();
+                    // false を返してデフォルトの処理を実行しないようにする
+                    return false;
+                });
+                /*
+                                $('#ajaxing-drag-enter').bind("mouseleave click", () => {
+                                    $('#ajaxing-drag-enter').hide();
+                                });
+                */
             }
             /*
                         // SUBMIT ボタン押した時に処理中画面表示
@@ -11107,9 +11179,43 @@ var Upload;
             if (target === "board-file") {
                 this.ajaxUploadFileAndPutBoardFile(fd, target, files.name);
             }
+            else if (target === "cars") {
+                this.ajaxUploadSomeFile(fd, files.name);
+            }
             else {
                 this.ajaxUploadFile(fd, target, files.name);
             }
+        };
+        MyUpload.prototype.ajaxUploadSomeFile = function (fd, filename) {
+            var self = this;
+            self.ajaxing = true;
+            var token = $('meta[name="csrf-token"]').attr('content');
+            //fd.append('multiple_number', self.multipleNumber);
+            $.ajax({
+                headers: { 'X-CSRF-TOKEN': token },
+                url: '/ajax/upload_some_file',
+                type: 'post',
+                data: fd,
+                dataType: 'json',
+                cache: false,
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    // 実行中画面
+                    $('#ajaxing-uploading').show();
+                },
+                success: function (data) {
+                    console.log(data);
+                    $('.bulletUploadedImage[data-num="' + self.multipleNumber + '"]').css('background-image', 'url(' + data.path + '/' + data.filename + ')');
+                    $('.bulletUploadId[data-num="' + self.multipleNumber + '"]').val(data.upload_id);
+                    $('.bulletUploadedFilepath[data-num="' + self.multipleNumber + '"]').val(data.path + '/' + data.filename);
+                },
+                complete: function () {
+                    // 実行中画面を消す
+                    $('#ajaxing-uploading').hide();
+                    self.ajaxing = false;
+                }
+            });
         };
         MyUpload.prototype.ajaxUploadFile = function (fd, target, filename) {
             var self = this;
@@ -11234,6 +11340,19 @@ var Quote;
                     return false;
                 }
             });
+            // 選択肢から指定見積依頼先の運送会社情報を引用
+            $('#trigQuoteCarrier').click(function () {
+                var carrierId = $('#paramQuoteCarrier :selected').val();
+                self.ajaxQuoteCarrier(carrierId);
+            });
+            // ページ読み込み時に指定見積依頼先の運送会社が選択されていれば情報を引用
+            if ($('#trigQuoteCarrier').length > 0) {
+                var carrierId = $('#paramQuoteCarrier :selected').val();
+                if (carrierId) {
+                    self.ajaxQuoteCarrier(carrierId);
+                }
+            }
+            ;
         }
         MyQuote.prototype.ajaxQuoteUserAccount = function (id) {
             var self = this;
@@ -11251,10 +11370,10 @@ var Quote;
                     $('#ajaxing-waiting').show();
                 },
                 success: function (data) {
-                    //console.log(data);
+                    console.log(data);
                     $('#zip1').val(data.zip1);
                     $('#zip2').val(data.zip2);
-                    $('#pref_code').val(data.pref_code);
+                    $('#pref_id').val(data.pref_id);
                     $('#city').val(data.city);
                     $('#address').val(data.address);
                     $('#tels-1').val(data.tels[1]);
@@ -11295,6 +11414,32 @@ var Quote;
                     $('#' + type + '_tels-1').val(data.tels[1]);
                     $('#' + type + '_tels-2').val(data.tels[2]);
                     $('#' + type + '_tels-3').val(data.tels[3]);
+                },
+                complete: function () {
+                    // 実行中画面を消す
+                    $('#ajaxing-waiting').hide();
+                    self.ajaxing = false;
+                }
+            });
+        };
+        MyQuote.prototype.ajaxQuoteCarrier = function (carrierId) {
+            var self = this;
+            self.ajaxing = true;
+            var token = $('meta[name="csrf-token"]').attr('content');
+            var D = { carrier_id: carrierId };
+            $.ajax({
+                headers: { 'X-CSRF-TOKEN': token },
+                url: '/ajax/quote_carrier',
+                type: 'post',
+                data: D,
+                dataType: 'json',
+                beforeSend: function () {
+                    // 実行中画面
+                    $('#ajaxing-waiting').show();
+                },
+                success: function (data) {
+                    //console.log(data);
+                    $('#bulletQuoteCarrier').html(data.view);
                 },
                 complete: function () {
                     // 実行中画面を消す

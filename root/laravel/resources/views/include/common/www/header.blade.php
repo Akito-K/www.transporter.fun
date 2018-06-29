@@ -3,10 +3,14 @@
         <div class="h_logo"><a href="/"><img src="{{ env('www_url') }}/assets/images/h_logo.png" alt="transporter" width="283" height="55" srcset="{{ env('www_url') }}/assets/images/h_logo.png 1x,{{ env('www_url') }}/assets/images/h_logo@2x.png 2x"></a></div>
         <div class="menu_open"><a href="/"><img src="{{ env('www_url') }}/assets/images/menu_open.png" alt="transporter" width="46" height="46" srcset="{{ env('www_url') }}/assets/images/menu_open.png 1x,{{ env('www_url') }}/assets/images/menu_open@2x.png 2x"></a></div>
         <div class="h_member sp">
+            @auth
+            <a href="{{ url('/mypage') }}" class="scroll textlink">ようこそ</a>　{{ \Auth::user()->sei }} {{ \Auth::user()->mei }} 様
+            @else
             <ul>
                 <li class="signup"><a href="{{ url('') }}/signup">今すぐ会員登録<span class="icon icon_signup"></span></a></li>
                 <li class="login"><a href="{{ route('login') }}">ログイン<span class="icon icon_login"></span></a></li>
             </ul>
+            @endauth
         </div>
         <div class="h_search sp">
             <form action="{{ env('www_url') }}/delivery_services/search/" method="get">
@@ -25,16 +29,21 @@
                 <div class="h_logo pc"><a href="/"><img src="{{ env('www_url') }}/assets/images/h_logo.png" alt="transporter" width="283" height="55" srcset="{{ env('www_url') }}/assets/images/h_logo.png 1x,{{ env('www_url') }}/assets/images/h_logo@2x.png 2x"></a></div>
                 <div class="h_text pc">平車・重量物・超重量物を取り扱う運送会社をお探しなら、<br>Transporter「トランスポーター」物流マッチングサイトがおすすめ！</div>
                 <div class="h_member pc">
+                    @auth
+                    <a href="{{ url('/mypage') }}" class="scroll textlink">ようこそ</a>　{{ \Auth::user()->sei }} {{ \Auth::user()->mei }} 様
+                    ({!! \MyHTML::logout('ログアウト', 'scroll textlink') !!})
+                    @else
                     <ul>
                         <li class="signup"><a href="{{ url('') }}/signup">今すぐ会員登録<span class="icon icon_signup"></span></a></li>
                         <li class="login"><a href="{{ route('login') }}">ログイン<span class="icon icon_login"></span></a></li>
                     </ul>
+                    @endauth
                 </div>
             </div>
             <nav class="gnav">
                 <ul>
                     <li><a class="cur" href="/">home</a></li>
-                    <li><a href="{{ env('www_url') }}/delivery_services">荷主の皆様へ</a></li>
+                    <li><a href="{{ env('www_url') }}/trucks">荷主の皆様へ</a></li>
                     <li><a href="{{ env('www_url') }}/delivery_services">運送会社の皆様へ</a></li>
                     <li><a href="{{ env('www_url') }}/transporter">トランスポーターとは</a></li>
                     <li><a href="{{ env('help_url') }}/qa_inquiry">お困りの時は</a></li>

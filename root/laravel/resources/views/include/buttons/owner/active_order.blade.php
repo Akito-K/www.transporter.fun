@@ -1,6 +1,7 @@
 <?php
 /**
  * 荷主 -> 案件
+ * 20, 25, 30, 35
  * 'O-00' => '取消',
  * 'O-05' => '下書き',
  * 'O-10' => '見積受付中',
@@ -32,5 +33,10 @@
 
 @endif
 
+@if( in_array($data->status_id, ['O-30', 'O-30']) )
+    @if(!$data->evaluated_at)
+    <a href="{{ url('') }}/owner/review/{{ $data->order_id }}/create" class="orders__btn btn btn-warning btn-md">運送会社を評価する</a>
+    @endif
+@endif
 
 <a href="{{ url('') }}/owner/board/order/{{ $data->order_id }}" class="btn btn-success btn-sm">運送会社にコンタクト</a>

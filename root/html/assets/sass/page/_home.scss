@@ -79,6 +79,7 @@
 			thead{
 				td{
 					width: 16.666666%;
+					vertical-align: middle;
 					background-color: #235190;
 					font-size: 16px;
 					color: #FFFFFF;
@@ -101,7 +102,8 @@
 					}
 				}
 				td{
-					font-size: 16px;
+					width: 14%;
+					vertical-align: middle;
 					border-left: 1px solid #979797;
 					border-bottom: 1px solid #979797;
 					padding: 20px 25px;
@@ -119,6 +121,7 @@
 				border-left: 1px solid #D8D8D8;
 				border-top: 1px solid #D8D8D8;
 			li{
+/*
 				position: relative;
 				padding: 15px 140px 15px 100px;
 				border-right: 1px solid #D8D8D8;
@@ -129,8 +132,22 @@
 					background: none;
 					padding: 10px;
 				}
+*/
 				a{
 					display: block;
+					position: relative;
+					padding: 15px 140px 15px 100px;
+					border-right: 1px solid #D8D8D8;
+					border-bottom: 1px solid #D8D8D8;
+					background: url(#{$image_dir}/home/icon_info@2x.png) 25px center no-repeat #FFFFFF;
+					background-size: 35px auto;
+					@include sp{
+						background: none;
+						padding: 10px;
+					}
+					&:hover {
+						background-color: #f9f9f9;
+					}
 				}
 				.date{
 					font-size: 13px;

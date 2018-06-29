@@ -53,61 +53,12 @@
             </div>
         </section>
 
-        <section class="sec_service">
+        <section class="sec_service mb50">
             <div class="container">
                 <h2 class="title_style01"><span class="inner">物流サービス情報</span></h2>
                 <p class="description">現在、見積り受付中の物流案件です。</p>
                 <ul class="list_service">
-                    <li><a href="#">
-                        <div class="date">2018/01/15<span class="icon">本日まで！</span></div>
-                        <p class="text">新橋から事務所移転→三田→東向島→大森</p>
-                        <p class="more">詳しく見る ＞</p>
-                    </a></li>
-                    <li><a href="#">
-                        <div class="date">2018/01/15<span class="icon">本日まで！</span></div>
-                        <p class="text">新橋から事務所移転→三田→東向島→大森</p>
-                        <p class="more">詳しく見る ＞</p>
-                    </a></li>
-                    <li><a href="#">
-                        <div class="date">2018/01/15<span class="icon">本日まで！</span></div>
-                        <p class="text">新橋から事務所移転→三田→東向島→大森</p>
-                        <p class="more">詳しく見る ＞</p>
-                    </a></li>
-                    <li><a href="#">
-                        <div class="date">2018/01/15<span class="icon">本日まで！</span></div>
-                        <p class="text">新橋から事務所移転→三田→東向島→大森</p>
-                        <p class="more">詳しく見る ＞</p>
-                    </a></li>
-                    <li><a href="#">
-                        <div class="date">2018/01/15<span class="icon">本日まで！</span></div>
-                        <p class="text">新橋から事務所移転→三田→東向島→大森</p>
-                        <p class="more">詳しく見る ＞</p>
-                    </a></li>
-                    <li><a href="#">
-                        <div class="date">2018/01/15<span class="icon">本日まで！</span></div>
-                        <p class="text">新橋から事務所移転→三田→東向島→大森</p>
-                        <p class="more">詳しく見る ＞</p>
-                    </a></li>
-                    <li><a href="#">
-                        <div class="date">2018/01/15<span class="icon">本日まで！</span></div>
-                        <p class="text">新橋から事務所移転→三田→東向島→大森</p>
-                        <p class="more">詳しく見る ＞</p>
-                    </a></li>
-                    <li><a href="#">
-                        <div class="date">2018/01/15<span class="icon">本日まで！</span></div>
-                        <p class="text">新橋から事務所移転→三田→東向島→大森</p>
-                        <p class="more">詳しく見る ＞</p>
-                    </a></li>
-                    <li><a href="#">
-                        <div class="date">2018/01/15<span class="icon">本日まで！</span></div>
-                        <p class="text">新橋から事務所移転→三田→東向島→大森</p>
-                        <p class="more">詳しく見る ＞</p>
-                    </a></li>
-                    <li><a href="#">
-                        <div class="date">2018/01/15<span class="icon">本日まで！</span></div>
-                        <p class="text">新橋から事務所移転→三田→東向島→大森</p>
-                        <p class="more">詳しく見る ＞</p>
-                    </a></li>
+                    @include('include.common.www.delivery_services', ['order_datas' => $order_datas])
                 </ul>
             </div>
         </section>
@@ -117,100 +68,7 @@
                 <h2 class="title_style01"><span class="inner">運送可能・空き車両情報</span></h2>
                 <p class="description">空きトラック情報です。月間20,000以上の情報があります。</p>
                 <div class="table_wrap">
-                    <table class="table_empty">
-                      <thead>
-                        <tr>
-                          <td>発時刻</td>
-                          <td>発地</td>
-                          <td>着時刻</td>
-                          <td>着地</td>
-                          <td>重量</td>
-                          <td>車種</td>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>4/21</td>
-                          <td>大阪府関西圏</td>
-                          <td>4/21 午前</td>
-                          <td>大阪府全国</td>
-                          <td>4t</td>
-                          <td>ウイング</td>
-                        </tr>
-                        <tr>
-                          <td>4/21</td>
-                          <td>大阪府関西圏</td>
-                          <td>4/21 午前</td>
-                          <td>大阪府全国</td>
-                          <td>4t</td>
-                          <td>ウイング</td>
-                        </tr>
-                        <tr>
-                          <td>4/21</td>
-                          <td>大阪府関西圏</td>
-                          <td>4/21 午前</td>
-                          <td>大阪府全国</td>
-                          <td>4t</td>
-                          <td>ウイング</td>
-                        </tr>
-                        <tr>
-                          <td>4/21</td>
-                          <td>大阪府関西圏</td>
-                          <td>4/21 午前</td>
-                          <td>大阪府全国</td>
-                          <td>4t</td>
-                          <td>ウイング</td>
-                        </tr>
-                        <tr>
-                          <td>4/21</td>
-                          <td>大阪府関西圏</td>
-                          <td>4/21 午前</td>
-                          <td>大阪府全国</td>
-                          <td>4t</td>
-                          <td>ウイング</td>
-                        </tr>
-                        <tr>
-                          <td>4/21</td>
-                          <td>大阪府関西圏</td>
-                          <td>4/21 午前</td>
-                          <td>大阪府全国</td>
-                          <td>4t</td>
-                          <td>ウイング</td>
-                        </tr>
-                        <tr>
-                          <td>4/21</td>
-                          <td>大阪府関西圏</td>
-                          <td>4/21 午前</td>
-                          <td>大阪府全国</td>
-                          <td>4t</td>
-                          <td>ウイング</td>
-                        </tr>
-                        <tr>
-                          <td>4/21</td>
-                          <td>大阪府関西圏</td>
-                          <td>4/21 午前</td>
-                          <td>大阪府全国</td>
-                          <td>4t</td>
-                          <td>ウイング</td>
-                        </tr>
-                        <tr>
-                          <td>4/21</td>
-                          <td>大阪府関西圏</td>
-                          <td>4/21 午前</td>
-                          <td>大阪府全国</td>
-                          <td>4t</td>
-                          <td>ウイング</td>
-                        </tr>
-                        <tr>
-                          <td>4/21</td>
-                          <td>大阪府関西圏</td>
-                          <td>4/21 午前</td>
-                          <td>大阪府全国</td>
-                          <td>4t</td>
-                          <td>ウイング</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    @include('include.common.www.trucks', ['empty_datas' => $empty_datas, '' => $car_datas, 'area_names' => $area_names])
                 </div>
             </div>
         </section>

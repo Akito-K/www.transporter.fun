@@ -9,7 +9,9 @@ use App\Model\Pref;
 use App\Model\MyUser;
 use App\Model\Item;
 use App\Model\Order;
+use App\Model\Carrier;
 use App\Model\Car;
+use App\Model\CarEmpty;
 use App\Model\Area;
 
 use App\Model\Board;
@@ -159,6 +161,15 @@ class AjaxController extends Controller
             'view' => view('include.carrier.order_estimate', compact('data', 'prefs') )->render(),
             'owner' => $data->owner,
             'name' => $data->name,
+            ]);
+    }
+
+    public function quoteCarrier(Request $request){
+        $carrier_id = $request['carrier_id'];
+        $carrier_data = Carrier::getData($carrier_id);
+
+        return  json_encode([
+            'view' => view('include.carrier.detail.base', compact('carrier_data') )->render(),
             ]);
     }
 

@@ -2,10 +2,11 @@
 namespace App\Http\Controllers\owner;
 use App\Http\Controllers\ownerController;
 use Illuminate\Http\Request;
-use App\Http\Requests\MyRequestRequest as MyRequest;
+use App\Http\Requests\MyNominateRequestRequest as MyRequest;
 
 //use App\Model\MyUser;
 use App\Model\Owner;
+use App\Model\Carrier;
 use App\Model\Order;
 use App\Model\StatusLog;
 
@@ -17,25 +18,29 @@ class nominateRequestController extends ownerController
 
     public function create($order_id){
         Log::saveData( __METHOD__ , 'order_id', $order_id, true);
-        $pagemeta = Pagemeta::getPagemeta('OW-RQ-020');
+        $pagemeta = Pagemeta::getPagemeta('OW-RQ-021');
         $data = Order::getOrderFromOwnerSide($order_id);
         Order::addOrderRequests($data);
+        $select_carriers_names = Carrier::getNames();
 
-        return view('owner.request.create', compact('data', 'pagemeta'));
+        return view('owner.nominate_request.create', compact('data', 'pagemeta', 'select_carriers_names'));
     }
 
     public function confirm(MyRequest $request){
         Log::saveData( __METHOD__ );
 
-        $request->flash();
-        $action = 'create';
-
-        $pagemeta = Pagemeta::getPagemeta('OW-RQ-030');
+        $pagemeta = Pagemeta::getPagemeta('OW-RQ-031');
         $order_id = $request['order_id'];
         $data = Order::getOrderFromOwnerSide($order_id);
         Order::addOrderRequests($data);
+        $select_carriers_names = Carrier::getNames();
 
-        return view('owner.request.confirm', compact('data', 'pagemeta'));
+        $carrier_id = $request['carrier_id'];
+        $carrier_data = Carrier::getData($carrier_id);
+
+        $request->flash();
+
+        return view('owner.nominate_request.confirm', compact('data', 'pagemeta', 'select_carriers_names', 'carrier_data'));
     }
 
     public function execute(Request $request){
@@ -53,6 +58,7 @@ class nominateRequestController extends ownerController
             $order->estimate_close_at = $estimate_close_at;
             $order->status_id = 'O-10';
             $order->updated_at = $now_at;
+            $order->nominated_carrier_id = $request_data['carrier_id'];
             $order->save();
 
             StatusLog::saveData( 'order_id', $order_id, 'O-10', __METHOD__ );

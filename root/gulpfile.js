@@ -14,7 +14,7 @@ var sass = require('gulp-sass');
 // webpack
 var TS_SRC = './ts/*.ts';
 var JS_DEST = nic+'/js/dest/';
-/*
+
 gulp.task('clean', function() {
     del([JS_DEST]);
 });
@@ -24,7 +24,7 @@ gulp.task('webpack', function () {
         .pipe(webpack(webpackConfig))
         .pipe(gulp.dest(JS_DEST));
 });
-*/
+
 
 // sass
 gulp.task('sass', function() {
@@ -60,6 +60,6 @@ gulp.task('watch', function() {
     ], ['sass']);
 });
 
-//gulp.task('default', ['webpack', 'sass', 'watch']);
-gulp.task('default', ['sass', 'watch']);
+gulp.task('default', ['webpack', 'sass', 'watch']);
+//gulp.task('default', ['sass', 'watch']);
 

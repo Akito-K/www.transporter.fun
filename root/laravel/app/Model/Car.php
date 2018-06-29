@@ -19,10 +19,28 @@ class Car extends Model
         return $new_id;
     }
 
+    public static function getAllDatas(){
+        $datas = Car::all();
+
+        return $datas;
+    }
+
     public static function getDatas($carrier_id){
         $datas = Car::where('carrier_id', $carrier_id)->get();
 
         return $datas;
+    }
+
+    public static function getAllCars(){
+        $ary = [];
+        $datas = Car::getAllDatas();
+        if(!empty($datas)){
+            foreach($datas as $data){
+                $ary[ $data->car_id ] = $data;
+            }
+        }
+
+        return $ary;
     }
 
     public static function getCars($carrier_id){

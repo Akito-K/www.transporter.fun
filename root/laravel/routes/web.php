@@ -26,14 +26,15 @@ Route::post('/testcode/confirming/update',          'testcode\confirmingControll
 Route::get ('/testcode/confirming/{id}/delete',     'testcode\confirmingController@delete');
 */
 
-Route::get ('/',                                'common\wwwController@index');
-Route::get ('/trucks',                          'common\wwwController@trucks');
-Route::get ('/delivery_services',               'common\deliveryServiceController@index');
-Route::get ('/delivery_services/withintoday',   'common\deliveryServiceController@withintoday');
-Route::get ('/delivery_services/fewdays',       'common\deliveryServiceController@fewdays');
-Route::get ('/delivery_services/Regularly',     'common\deliveryServiceController@Regularly');
-Route::get ('/delivery_services/Occasionally',  'common\deliveryServiceController@Occasionally');
-Route::get ('/delivery_services/Category',      'common\deliveryServiceController@Category');
+Route::get ('/',                                    'common\wwwController@index');
+Route::get ('/trucks',                              'common\wwwController@trucks');
+Route::get ('/delivery_services/{order_id}/detail', 'common\deliveryServiceController@detail');
+Route::get ('/delivery_services',                   'common\deliveryServiceController@index');
+Route::get ('/delivery_services/withintoday',       'common\deliveryServiceController@withintoday');
+Route::get ('/delivery_services/fewdays',           'common\deliveryServiceController@fewdays');
+Route::get ('/delivery_services/Regularly',         'common\deliveryServiceController@Regularly');
+Route::get ('/delivery_services/Occasionally',      'common\deliveryServiceController@Occasionally');
+Route::get ('/delivery_services/Category',          'common\deliveryServiceController@Category');
 
 Route::get ('/transporter',                     'common\transporterController@index');
 Route::get ('/transporter/driver',              'common\transporterController@driver');

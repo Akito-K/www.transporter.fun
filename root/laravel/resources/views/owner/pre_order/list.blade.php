@@ -35,7 +35,19 @@
                         <td>{!! \Func::getAddress($data->arrive, ['pref', 'city']) !!}</td>
                         <td>{!! \Func::dateFormat($data->estimate_start_at, 'y/n/j H:i') !!}</td>
                         <td>{!! \Func::dateFormat($data->estimate_close_at, 'y/n/j H:i') !!}</td>
-                        <td>{{ $status[$data->status_id] }}</td>
+                        <td>
+                            {{ $status[$data->status_id] }}
+                            @if($data->nominated_carrier_id)
+                            <span class="push__box">
+                                <span class="push__icon push__icon--nominate"><i class="fa fa-heart"></i></span>
+                                <span class="push__body">指定見積依頼案件です！</span>
+                            </span><br />
+                            <span class="push__carrier">
+                                （{{ \Func::getCarrierCompany($data->nominated_carrier_id) }}）
+                            </span>
+                            @endif
+
+                        </td>
                         <td>{{ $data->estimate_count }} 件</td>
                         <td>
                             @include('include.buttons.owner.pre_order', ['data' => $data])

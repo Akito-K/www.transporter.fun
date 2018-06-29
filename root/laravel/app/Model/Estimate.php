@@ -217,7 +217,7 @@ class Estimate extends Model
             foreach($work_datas as $work_data){
                 if( in_array($work_data->status_id, ['W-20', 'W-25', 'W-30', 'W-35', 'W-40']) ){
                     $item_data = Estimate::getItemData( $work_data->estimate_id );
-                    $count += $item_data->total;
+                    $total += $item_data->total;
                 }
             }
         }

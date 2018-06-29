@@ -119,4 +119,101 @@
 			}
 		}
 	}
+
+	.deadline_badge {
+		display: inline-block;
+		width: 8em;
+		text-align: center;
+		font-size: 12px;
+		color: #ED543D;
+		background-color: #FFF3EC;
+		border: 1px solid #ED543D;
+		padding: 2px 0;
+		margin-left: 20px;
+		vertical-align: middle;
+
+		@include sp {
+			display: block;
+			margin-left: 0;
+		}
+	}
+
+	.d_table {
+		display: table;
+		width: 100%;
+
+		.cell {
+			display: table-cell;
+			vertical-align: top;
+
+			&:first-child {
+				width: 295px;
+			}
+		}
+	}
+
+	.detail_img {
+		padding: 20px;
+		border: solid 1px #ddd;
+		float: left;
+	}
+
+	.detail_table {
+		width: 100%;
+		border: solid 1px #707070;
+		margin-bottom: 50px;
+
+		th, td {
+			text-align: center;
+			vertical-align: middle;
+			padding: 8px;
+			border: solid 1px #707070;
+		}
+
+		th {
+			font-weight: bold;
+		}
+
+		thead {
+			th {
+				background-color: #73A9D8;
+				color: white;
+				font-size: 15px;
+				padding: 7px;
+			}
+		}
+
+		tbody {
+			th {
+				background-color: #F6F9FC;
+
+				&[colspan] {
+					background-color: #D8EBFC;
+				}
+
+				& + td {
+					text-align: left;
+				}
+			}
+		}		
+	}
+
+	@include sp {
+		.d_table {
+			display: block;
+			text-align: center;
+			.cell {
+				display: block;
+				&:first-child {
+					display: inline-block;
+					width: auto;
+					margin-bottom: 20px;
+				}
+			}
+			.detail_table {
+				width: 100%;
+				margin-bottom: 40px;
+			}
+		}
+	}
 }

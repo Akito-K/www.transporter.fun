@@ -12,10 +12,41 @@ class CarEmpty extends Model
     protected $dates = ['start_at', 'end_at', 'published_at', 'deleted_at'];
     protected $guarded = ['id'];
 
+    public static function getAllDatas(){
+        $now_at = new \Datetime();
+        $datas = CarEmpty::whereDate('end_at', '>=', $now_at->format('Y-m-d H:i:s') )
+                            ->orderBy('start_at', 'ASC')
+                            ->orderBy('end_at', 'ASC')
+                            ->get();
+
+        return $datas;
+    }
+
     public static function getDatas($carrier_id){
         $datas = CarEmpty::where('carrier_id', $carrier_id)->get();
 
         return $datas;
+    }
+
+    public static function getAllEmpties(){
+        $ary = [];
+
+        $datas = CarEmpty::getAllDatas();
+        if(!empty($datas)){
+            foreach($datas as $data){
+                $start_at = new \DatetimeImmutable($data->start_at);
+                $end_at = new \DatetimeImmutable($data->end_at);
+//                $data->start_at = $start_at;
+                $data->start_hour = $start_at->format('H');
+                $data->start_minutes = $start_at->format('i');
+//                $data->end_at = $end_at;
+                $data->end_hour = $end_at->format('H');
+                $data->end_minutes = $end_at->format('i');
+                $ary[] = $data;
+            }
+        }
+
+        return $ary;
     }
 
     public static function getEmpties($carrier_id){

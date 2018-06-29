@@ -6,15 +6,27 @@
         <h2 class="page-header">見積依頼作成</h2>
 
         <div class="request__block">
-            {!! Form::open(['url' => 'owner/request/execute', 'class' => 'request__boxes']) !!}
+            {!! Form::open(['url' => 'owner/nominate_request/execute', 'class' => 'request__boxes']) !!}
                 {!! Form::hidden('order_id', $data->order_id) !!}
+                {!! Form::hidden('carrier_id', old('carrier_id')) !!}
 
                 <h4 class="order__box__title trigAccordOrderBox" data-open="1">案件情報</h4>
                 <div class="request__order bulletAccordOrderBox">
                     @include('include.owner.order_request', ['data' => $data])
                 </div>
 
-                <div class="order__box bulletAccordOrderBox">
+                <div class="order__box">
+                    <ul class="lists">
+                        <li class="list list-title">指定見積依頼先の運送会社</li>
+                        <li class="list list-value">
+                            {{ $select_carriers_names[ old('carrier_id') ] }}
+                        </li>
+                    </ul>
+
+                    <div class="request__order__carrier">
+                        @include('include.carrier.detail.base',  ['carrier_data' => $carrier_data])
+                    </div>
+
                     <ul class="lists">
                         <li class="list list-title">受付終了日時</li>
                         <li class="list list-value">
@@ -40,7 +52,7 @@
         </div>
 
         <p>
-            <a href="{{ url('') }}/owner/request/{{ $data->order_id }}/create" class="btn btn-block btn-primary">入力に戻る</a>
+            <a href="{{ url('') }}/owner/nominate_request/{{ $data->order_id }}/create" class="btn btn-block btn-primary">入力に戻る</a>
         </p>
 
     </div>
