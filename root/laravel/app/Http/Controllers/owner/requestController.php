@@ -61,7 +61,7 @@ class requestController extends ownerController
             // $data->body;
         }
 
-        return redirect('owner/active_order');
+        return redirect('owner/pre_order');
     }
 
     public function cancel($order_id, Request $request){

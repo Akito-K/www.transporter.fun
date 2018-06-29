@@ -29,4 +29,17 @@ class Pref extends Model
         return $ary;
     }
 
+    public static function toMatchedId($key){
+        $prefs = Pref::getNames();
+        $pref_id = '';
+        foreach($prefs as $id => $name){
+            if(preg_match('/'.$key.'/', $name)){
+                $pref_id = $id;
+                break;
+            }
+        }
+
+        return $pref_id;
+    }
+
 }

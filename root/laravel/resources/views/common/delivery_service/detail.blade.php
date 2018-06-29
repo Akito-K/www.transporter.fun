@@ -37,15 +37,15 @@
                             <tr><th colspan="2">基本情報</th></tr>
                             <tr><th>案件名</th><td>{{ $order_data->name }}</td></tr>
                             <tr><th>案件クラス</th><td>{{ $order_data->carrier_class }}</td></tr>
-                            <tr><th>発送予定日時</th><td>{!! \Func::dateFormat($order_data->send_at, 'Y/n/j(wday)') !!}</td></tr>
-                            <tr><th>到着予定日時</th><td>{!! \Func::dateFormat($order_data->arrive_at, 'Y/n/j(wday)') !!}</td></tr>
+                            <tr><th>発送予定日時</th><td>{!! \Func::dateFormat($order_data->send_at, 'Y/n/j(wday)') !!} {{ $order_data->send_timezone_str }}</td></tr>
+                            <tr><th>到着予定日時</th><td>{!! \Func::dateFormat($order_data->arrive_at, 'Y/n/j(wday)') !!} {{ $order_data->arrive_timezone_str }}</td></tr>
                             <tr><th colspan="2">運搬物</th></tr>
                             <tr><th>品名</th><td>{{ $order_data->cargo_name }}</td></tr>
                             <tr><th>寸法（mm）</th>
                                 <td>
-                                    L:{{ $order_data->cargo_size_L }}mm
-                                    W:{{ $order_data->cargo_size_W }}mm
-                                    H:{{ $order_data->cargo_size_H }}mm
+                                    L:{{ number_format($order_data->cargo_size_L) }}mm
+                                    W:{{ number_format($order_data->cargo_size_W) }}mm
+                                    H:{{ number_format($order_data->cargo_size_H) }}mm
                                 </td>
                             </tr>
                             <tr><th>個数（個）</th><td>{{ $order_data->cargo_count }}個</td></tr>

@@ -66,6 +66,6 @@ class suggestController extends carrierController
 
         StatusLog::saveData( 'order_id', $estimate_data->order_id, 'W-10', __METHOD__ );
 
-        return redirect('carrier/work');
+        return redirect('carrier/pre_work');
     }
 }

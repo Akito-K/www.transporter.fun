@@ -29,8 +29,14 @@
                     @foreach($datas as $k => $data)
                     <tr>
                         <td>{{ $k+1 }}</td>
-                        <td>{{ $data->name }}</td>
-                        <td>{!! $data->estimate_data->carrier_name_with_star !!}</td>
+                        <td>
+                            {!! \MyHTML::iconRegular($data->flag_regular) !!}
+                            {{ $data->name }}
+                        </td>
+                        <td>
+                            {!! \MyHTML::iconNominate($data->nominated_carrier_id ) !!}
+                            {!! $data->estimate_data->carrier_name_with_star !!}
+                        </td>
                         <td>{!! \Func::getAddress($data->send, ['pref', 'city']) !!}</td>
                         <td>{!! \Func::getAddress($data->arrive, ['pref', 'city']) !!}</td>
                         <td>￥{{ number_format($data->estimate_data->total) }}</td>

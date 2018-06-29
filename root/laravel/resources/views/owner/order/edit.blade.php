@@ -28,6 +28,15 @@
                         </li>
                     </ul>
                     <ul class="lists">
+                        <li class="list list-title">定期案件</li>
+                        <li class="list list-value">
+                            <label>
+                                {!! \Form::checkbox('flag_regular', 1, old('flag_regular', $data->flag_regular? 1: null), ['class' => '']) !!}
+                                定期案件
+                            </label>
+                        </li>
+                    </ul>
+                    <ul class="lists">
                         <li class="list list-title">案件クラス</li>
                         <li class="list list-value">
                             {!! \Form::select('class_id', $carrier_classes, old('class_id', $data->class_id), ['class' => 'form-control']) !!}

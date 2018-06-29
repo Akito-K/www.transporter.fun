@@ -30,6 +30,13 @@
                         </li>
                     </ul>
                     <ul class="lists">
+                        <li class="list list-title">定期案件</li>
+                        <li class="list list-value">
+                            {{ old('flag_regular')? '定期案件': '不定期案件' }}
+                            {!! Form::hidden('flag_regular', old('flag_regular')) !!}
+                        </li>
+                    </ul>
+                    <ul class="lists">
                         <li class="list list-title">案件クラス</li>
                         <li class="list list-value">
                             {{ $carrier_classes[ old('class_id') ] }}

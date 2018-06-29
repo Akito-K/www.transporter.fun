@@ -27,15 +27,13 @@
                     <tr>
                         <td>{{ $k+1 }}</td>
                         <td>
-                            @if($data->nominated_carrier_id)
-                            <span class="push__box">
-                                <span class="push__icon push__icon--nominate"><i class="fa fa-heart"></i></span>
-                                <span class="push__body">指定見積依頼案件です！</span>
-                            </span>
-                            @endif
+                            {!! \MyHTML::iconRegular($data->flag_regular) !!}
                             <a href="{{ url('') }}/carrier/request/{{ $data->order_id }}/detail">{{ $data->name }}</a>
                         </td>
-                        <td>{!! $data->owner_name_with_star !!}</td>
+                        <td>
+                            {!! \MyHTML::iconNominate($data->nominated_carrier_id ) !!}
+                            {!! $data->owner_name_with_star !!}
+                        </td>
                         <td>{!! \Func::getAddress($data->send, ['pref', 'city']) !!}</td>
                         <td>{!! \Func::getAddress($data->arrive, ['pref', 'city']) !!}</td>
                         <td>{!! \Func::dateFormat($data->estimate_close_at, 'y/n/j H:i') !!}</td>

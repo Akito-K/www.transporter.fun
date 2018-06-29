@@ -12,6 +12,20 @@
                 <td>{!! $data->owner_name_with_star !!}</td>
             </tr>
             <tr>
+                <th>見積依頼形式</th>
+                <td>
+                    {!! \MyHTML::iconNominate($data->nominated_carrier_id ) !!}
+                    @if($data->nominated_carrier_id) 指名見積依頼 @else 一括見積依頼 @endif
+                </td>
+            </tr>
+            <tr>
+                <th>定期案件</th>
+                <td>
+                    {!! \MyHTML::iconRegular($data->flag_regular) !!}
+                    @if($data->flag_regular) 定期案件 @else スポット案件 @endif
+                </td>
+            </tr>
+            <tr>
                 <th>案件クラス</th>
                 <td>{{ $data->carrier_class }}</td>
             </tr>

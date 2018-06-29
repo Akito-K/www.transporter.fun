@@ -21,8 +21,14 @@
                     @if(!empty($datas))
                     @foreach($datas as $k => $data)
                     <tr>
-                        <td><a href="{{ url('') }}/carrier/request/{{ $data->order_id }}/detail">{{ $data->order->name }}</a></td>
-                        <td>{!! $data->order->owner_name_with_star !!}</td>
+                        <td>
+                            {!! \MyHTML::iconRegular($data->order->flag_regular) !!}
+                            <a href="{{ url('') }}/carrier/request/{{ $data->order_id }}/detail">{{ $data->order->name }}</a>
+                        </td>
+                        <td>
+                            {!! \MyHTML::iconNominate($data->order->nominated_carrier_id ) !!}
+                            {!! $data->order->owner_name_with_star !!}
+                        </td>
                         <td>￥{{ number_format($data->total) }}</td>
                         <td>{{ \Func::dateFormat($data->updated_at, 'y/n/j H:i' ) }}</td>
                         <td>

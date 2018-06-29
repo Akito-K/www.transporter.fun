@@ -107,7 +107,7 @@ namespace Quote {
                     $('#'+type+'_mei').val( data.mei );
                     $('#'+type+'_zip1').val( data.zip1 );
                     $('#'+type+'_zip2').val( data.zip2 );
-                    $('#'+type+'_pref_code').val( data.pref_code );
+                    $('#'+type+'_pref_id').val( data.pref_id );
                     $('#'+type+'_city').val( data.city );
                     $('#'+type+'_address').val( data.address );
                     $('#'+type+'_tels-1').val( data.tels[1] );

@@ -630,7 +630,7 @@ class MyFunctions
      * date1 と date2 が等しい場合：0
      */
     public static function isOver( \Datetime $date2, \Datetime $date1=null){
-        $date1 = $data1?: new \Datetime();
+        $date1 = $date1?: new \Datetime();
 
         return $date2->diff($date1)->invert? false: true;
      }

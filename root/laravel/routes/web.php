@@ -35,6 +35,7 @@ Route::get ('/delivery_services/fewdays',           'common\deliveryServiceContr
 Route::get ('/delivery_services/Regularly',         'common\deliveryServiceController@Regularly');
 Route::get ('/delivery_services/Occasionally',      'common\deliveryServiceController@Occasionally');
 Route::get ('/delivery_services/Category',          'common\deliveryServiceController@Category');
+Route::get ('/delivery_services/search',            'common\deliveryServiceController@search');
 
 Route::get ('/transporter',                     'common\transporterController@index');
 Route::get ('/transporter/driver',              'common\transporterController@driver');

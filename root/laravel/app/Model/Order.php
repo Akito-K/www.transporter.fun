@@ -29,6 +29,8 @@ use App\Model\CargoForm;
 use App\Model\OrderRequest;
 use App\Model\OrderRequestOption;
 
+use App\Model\Pref;
+
 class Order extends Model
 {
     use softDeletes;
@@ -102,7 +104,7 @@ class Order extends Model
 
     public static function getEstimatableOrderDatas(){
         $ary = [];
-        $datas = Order::where('status_id', 'O-10')->orderBy('estimate_close_at', 'ASC')->get();
+        $datas = Order::whereNull('nominated_carrier_id')->where('status_id', 'O-10')->orderBy('estimate_close_at', 'ASC')->get();
         if(!empty($datas)){
             foreach($datas as $data){
                 $owner = Owner::getData($data->owner_id);
@@ -550,6 +552,7 @@ class Order extends Model
             'owner_id' => \Auth::user()->owner_id,
             'name' => $request_data->name,
             'flag_hide_owner' => $request_data->flag_hide_owner,
+            'flag_regular' => isset($request_data->flag_regular)? 1: NULL,
             'class_id' => $request_data->class_id,
             'send_at' => $request_data->hide_send_at,
             'send_timezone' => $request_data->send_timezone? $timezones[ $request_data->send_timezone ]: '',
@@ -595,6 +598,7 @@ class Order extends Model
 
         $data->name = $request_data->name;
         $data->flag_hide_owner = $request_data->flag_hide_owner;
+        $data->flag_regular = $request_data->flag_regular? 1: NULL;
         $data->class_id = $request_data->class_id;
         $data->send_at = $request_data->hide_send_at? new \Datetime($request_data->hide_send_at): NULL;
         $data->send_timezone = $request_data->send_timezone? $timezones[ $request_data->send_timezone ]: '';
@@ -629,4 +633,96 @@ class Order extends Model
         $data->save();
     }
 
+
+
+
+
+
+    public static function editDatas(&$datas, $commit=''){
+        switch($commit){
+            case 'withintoday':
+                if(!empty($datas)){
+                    foreach($datas as $k => $data){
+                        if( !$data->is_withtoday ){
+                            unset($datas[$k]);
+                        }
+                    }
+                }
+                break;
+
+            case 'fewdays':
+                if(!empty($datas)){
+                    foreach($datas as $k => $data){
+                        if( !$data->is_fewdays ){
+                            unset($datas[$k]);
+                        }
+                    }
+                }
+                break;
+
+            case 'Regularly':
+                if(!empty($datas)){
+                    foreach($datas as $k => $data){
+                        if( !$data->flag_regular ){
+                            unset($datas[$k]);
+                        }
+                    }
+                }
+                break;
+
+            case 'Occasionally':
+                if(!empty($datas)){
+                    foreach($datas as $k => $data){
+                        if( $data->flag_regular ){
+                            unset($datas[$k]);
+                        }
+                    }
+                }
+                break;
+
+            case 'Category':
+                break;
+        }
+    }
+
+
+    public static function searchFreeWords($key){
+        $zips = ['', ''];
+        if(preg_match('/[0-9]{3}\-[0-9]{4}/', $key)){
+            $zips = explode('-', $key);
+        }
+        $pref_id = Pref::toMatchedId($key);
+
+//        \Func::var_dump( $key, 'key' );
+//        \Func::var_dump( $zips, 'zips' );
+//        \Func::var_dump( $pref_id, 'pref_id' );
+
+        $datas = Order::whereNull('nominated_carrier_id')
+                        ->where('status_id', 'O-10')
+                        ->where( function($NAME) use ($key, $zips, $pref_id)  {
+                            $NAME->where('name', 'like', '%'.$key.'%')
+                                  ->orWhere( function($ZIP1) use ($zips) {
+                                        $ZIP1->where('send_zip1', $zips[0])
+                                             ->orWhere('send_zip2', $zips[1]);
+                                  })
+                                  ->orWhere( function($ZIP2) use ($zips) {
+                                        $ZIP2->where('arrive_zip1', $zips[0])
+                                             ->orWhere('arrive_zip2', $zips[1]);
+                                  })
+
+                                  ->orWhere('send_pref_id', $pref_id)
+                                  ->orWhere('arrive_pref_id', $pref_id)
+
+                                  ->orWhere('send_city', 'like', '%'.$key.'%')
+                                  ->orWhere('arrive_city', 'like', '%'.$key.'%')
+                                  ->orWhere('send_address', 'like', '%'.$key.'%')
+                                  ->orWhere('arrive_address', 'like', '%'.$key.'%');
+                                  ;
+                        })
+                        ->orderBy('estimate_close_at', 'ASC')
+                        ->get();
+
+        return $datas;
+//        return $datas? $datas->toArray(): NULL;
+    }
 }

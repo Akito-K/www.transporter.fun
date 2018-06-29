@@ -12,8 +12,9 @@
             @endif
         </div>
         <p class="text">
-            {{ \Func::getAddress($order_data->send, ['pref', 'city']) }} →
-            {{ \Func::getAddress($order_data->arrive, ['pref', 'city']) }}
+            {{ $order_data->name }}
+            [ {{ \Func::getAddress($order_data->send, ['pref', 'city']) }} →
+            {{ \Func::getAddress($order_data->arrive, ['pref', 'city']) }} ]
         </p>
         <p class="more">詳しく見る ＞</p>
     </a>

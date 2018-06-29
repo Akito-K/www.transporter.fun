@@ -13897,6 +13897,9 @@ button.close {
   .push__icon--nominate {
     color: #f00;
   }
+  .push__icon--regular {
+    color: #11b419;
+  }
   .push__body {
     position: absolute;
     bottom: 8px;
@@ -13906,13 +13909,18 @@ button.close {
     border-radius: 4px;
     padding: 5px 8px;
     z-index: 20;
-    width: 120px;
+    width: 180px;
     opacity: 0;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
+    text-align: center;
+  }
+  .push__body--regular {
+    border-color: #11b419;
+    width: 80px;
   }
   .push__carrier {
     font-size: 80%;

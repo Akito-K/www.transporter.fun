@@ -23,6 +23,24 @@
                         </li>
                     </ul>
                     <ul class="lists">
+                        <li class="list list-title">見積依頼形式</li>
+                        <li class="list list-value">
+                            {!! \MyHTML::iconNominate($data->nominated_carrier_id ) !!}
+                            @if($data->status_id == 'O-05')
+                                未定
+                            @else
+                                @if($data->nominated_carrier_id) 指名見積依頼 @else 一括見積依頼 @endif
+                            @endif
+                        </li>
+                    </ul>
+                    <ul class="lists">
+                        <li class="list list-title">定期案件</li>
+                        <li class="list list-value">
+                            {!! \MyHTML::iconRegular($data->flag_regular) !!}
+                            @if($data->flag_regular) 定期案件 @else スポット案件 @endif
+                        </li>
+                    </ul>
+                    <ul class="lists">
                         <li class="list list-title">案件クラス</li>
                         <li class="list list-value">
                             {{ $data->carrier_class }}

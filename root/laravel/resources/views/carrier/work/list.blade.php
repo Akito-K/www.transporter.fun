@@ -31,8 +31,14 @@
                     @foreach($datas as $k => $data)
                     <tr>
                         <td>{{ $k+1 }}</td>
-                        <td><a href="{{ url('') }}/carrier/request/{{ $data->order_id }}/detail">{{ $data->order->name }}</a></td>
-                        <td>{!! $data->order->owner_name_with_star !!}</td>
+                        <td>
+                            {!! \MyHTML::iconRegular($data->order->flag_regular) !!}
+                            <a href="{{ url('') }}/carrier/request/{{ $data->order_id }}/detail">{{ $data->order->name }}</a>
+                        </td>
+                        <td>
+                            {!! \MyHTML::iconNominate($data->order->nominated_carrier_id ) !!}
+                            {!! $data->order->owner_name_with_star !!}
+                        </td>
                         <td>
                             {{ $data->order->send_timezone_str }}<br />
                             {!! \Func::getAddress($data->order->send, ['pref', 'city']) !!}

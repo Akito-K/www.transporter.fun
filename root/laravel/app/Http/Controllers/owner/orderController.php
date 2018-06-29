@@ -34,9 +34,9 @@ class orderController extends ownerController
         $addresses = Address::getNames( \Auth::user()->user_id );
         $timezones = Order::getTimezones();
         $hide_owners = Order::getHideOwners();
-        $prefs = Pref::getNames(true);
-        $cargo_names = CargoName::getNames(true);
-        $cargo_forms = CargoForm::getNames(true);
+        $prefs = Pref::getNames();
+        $cargo_names = CargoName::getNames();
+        $cargo_forms = CargoForm::getNames();
         $option_datas = OrderRequestOption::getDatas();
         $option_car_names = OrderRequestOption::getCarNamesNest($option_datas);
         $option_equipments = OrderRequestOption::getEquipments($option_datas);
@@ -54,8 +54,8 @@ class orderController extends ownerController
         $timezones = Order::getTimezones();
         $hide_owners = Order::getHideOwners();
         $prefs = Pref::getNames();
-        $cargo_names = CargoName::getNames(true);
-        $cargo_forms = CargoForm::getNames(true);
+        $cargo_names = CargoName::getNames();
+        $cargo_forms = CargoForm::getNames();
         $option_datas = OrderRequestOption::getDatas();
         $option_car_names = OrderRequestOption::getCarNames($option_datas);
         $option_equipments = OrderRequestOption::getEquipments($option_datas);
@@ -88,9 +88,9 @@ class orderController extends ownerController
         $addresses = Address::getNames(\Auth::user()->user_id);
         $timezones = Order::getTimezones();
         $hide_owners = Order::getHideOwners();
-        $prefs = Pref::getNames(true);
-        $cargo_names = CargoName::getNames(true);
-        $cargo_forms = CargoForm::getNames(true);
+        $prefs = Pref::getNames();
+        $cargo_names = CargoName::getNames();
+        $cargo_forms = CargoForm::getNames();
         $option_datas = OrderRequestOption::getDatas();
         $option_car_names = OrderRequestOption::getCarNamesNest($option_datas);
         $option_equipments = OrderRequestOption::getEquipments($option_datas);
@@ -118,8 +118,8 @@ class orderController extends ownerController
         $timezones = Order::getTimezones();
         $hide_owners = Order::getHideOwners();
         $prefs = Pref::getNames();
-        $cargo_names = CargoName::getNames(true);
-        $cargo_forms = CargoForm::getNames(true);
+        $cargo_names = CargoName::getNames();
+        $cargo_forms = CargoForm::getNames();
         $option_datas = OrderRequestOption::getDatas();
         $option_car_names = OrderRequestOption::getCarNames($option_datas);
         $option_equipments = OrderRequestOption::getEquipments($option_datas);

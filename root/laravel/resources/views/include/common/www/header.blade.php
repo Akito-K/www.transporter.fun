@@ -56,7 +56,7 @@
                 <div class="col3 pc">
                     <form action="{{ env('www_url') }}/delivery_services/search/" method="get">
                         <div class="search_word">
-                            <div class="text"><input class="input_text" type="text" value="" placeholder="フリーワード検索"></div>
+                            <div class="text"><input name="keywords" class="input_text" type="text" value="{{ urldecode(request()->keywords) }}" placeholder="フリーワード検索"></div>
                             <div class="submit opacity"><button class="button_submit" type="submit"><img src="{{ env('www_url') }}/assets/images/icon_search.png" alt="検索" width="18" height="18" srcset="{{ env('www_url') }}/assets/images/icon_search.png 1x,{{ env('www_url') }}/assets/images/icon_search@2x.png 2x"></button></div>
                         </div>
                     </form>

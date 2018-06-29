@@ -352,5 +352,37 @@ class MyHTML
         return $body;
     }
 
+    public static function iconNominate($nominated_carrier_id=null, $need_company_name=null){
+        $body = '';
+        if($nominated_carrier_id){
+            $body = '
+                <span class="push__box">
+                    <span class="push__icon push__icon--nominate"><i class="fa fa-heart"></i></span>
+                    <span class="push__body">指定見積依頼案件です！</span>
+                </span>';
+            if($need_company_name){
+                $body .= '<br />
+                <span class="push__carrier">
+                    （'.\Func::getCarrierCompany($nominated_carrier_id).'）
+                </span>';
+            }
+        }
+
+        return $body;
+    }
+
+    public static function iconRegular($flag_regular=null){
+        $body = '';
+        if($flag_regular){
+            $body = '
+                <span class="push__box">
+                    <span class="push__icon push__icon--regular"><i class="fa fa-repeat"></i></span>
+                    <span class="push__body push__body--regular">定期案件</span>
+                </span>';
+        }
+
+        return $body;
+    }
+
 
 }
