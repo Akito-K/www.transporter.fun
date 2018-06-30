@@ -38,4 +38,22 @@ class CarrierClass extends Model
         return $ary;
     }
 
+    public static function getName($class_id){
+        return CarrierClass::where('class_id', $class_id)->value('name');
+    }
+
+    public static function getClasses(){
+        $ary = [];
+        $datas = CarrierClass::orderBy('id', 'ASC')->get();
+        if(!empty($datas)){
+            foreach($datas as $data){
+                $data->img_num = str_replace('CLS-', '', $data->class_id);
+                $ary[ $data->class_id ] = $data;
+            }
+        }
+
+        return $ary;
+    }
+
+
 }

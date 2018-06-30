@@ -32,6 +32,8 @@
 
 </head>
 <body>
+    @include('include.common.www.tagmanager')
+
     <div id="wrapper" class="{{ $pagemeta->wrapper_class }}">
         @include('include.common.www.header')
 

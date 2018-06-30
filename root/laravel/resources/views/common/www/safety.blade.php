@@ -5,7 +5,7 @@
     <div class="container">
         <ul>
             <li><a href="/">Home</a></li>
-            <li><span>あんしんへの取り組み</span></li>
+            <li><span>安心への取り組み</span></li>
         </ul>
     </div>
 </div>
@@ -15,8 +15,8 @@
 
         <article class="content">
             <section class="sec">
-                <h1 class="title_style03">あんしんへの取り組み</h1>
-                <h2 class="title_style02">Transporterのあんしんへの取り組み</h2>
+                <h1 class="title_style03">安心への取り組み</h1>
+                <h2 class="title_style02">Transporterの安心への取り組み</h2>
                 <p>Transporterでは、荷主様（お客様）と全ての運送会社様が安心して物流案件をお取引いただくために様々な取り組みや機能を提供しています。</p>
             </section>
 

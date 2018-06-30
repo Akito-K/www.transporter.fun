@@ -638,7 +638,7 @@ class Order extends Model
 
 
 
-    public static function editDatas(&$datas, $commit=''){
+    public static function editDatas(&$datas, $commit='', $class_id=''){
         switch($commit){
             case 'withintoday':
                 if(!empty($datas)){
@@ -681,6 +681,13 @@ class Order extends Model
                 break;
 
             case 'Category':
+                if(!empty($datas)){
+                    foreach($datas as $k => $data){
+                        if( $data->class_id != $class_id ){
+                            unset($datas[$k]);
+                        }
+                    }
+                }
                 break;
         }
     }

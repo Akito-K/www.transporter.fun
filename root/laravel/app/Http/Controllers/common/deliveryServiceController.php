@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Model\Pagemeta;
 use App\Model\Order;
 use App\Model\Owner;
+use App\Model\CarrierClass;
 
 class deliveryServiceController extends Controller
 {
@@ -26,7 +27,7 @@ class deliveryServiceController extends Controller
 
     // 本日まで
     public function withintoday(){
-        $pagemeta = Pagemeta::getPagemeta('CM-WW-000');
+        $pagemeta = Pagemeta::getPagemeta('CM-DS-010');
         $order_datas = Order::getEstimatableOrderDatas();
         $commit = 'withintoday';
         Order::editDatas($order_datas, $commit);
@@ -36,7 +37,7 @@ class deliveryServiceController extends Controller
 
     // 近日中
     public function fewdays(){
-        $pagemeta = Pagemeta::getPagemeta('CM-WW-000');
+        $pagemeta = Pagemeta::getPagemeta('CM-DS-020');
         $order_datas = Order::getEstimatableOrderDatas();
         $commit = 'fewdays';
         Order::editDatas($order_datas, $commit);
@@ -46,7 +47,7 @@ class deliveryServiceController extends Controller
 
     // 定期案件
     public function Regularly(){
-        $pagemeta = Pagemeta::getPagemeta('CM-WW-000');
+        $pagemeta = Pagemeta::getPagemeta('CM-DS-030');
         $order_datas = Order::getEstimatableOrderDatas();
         $commit = 'Regularly';
         Order::editDatas($order_datas, $commit);
@@ -54,9 +55,9 @@ class deliveryServiceController extends Controller
         return view('common.delivery_service.Regularly', compact('pagemeta', 'order_datas', 'commit'));
     }
 
-    // 不定期案件
+    // スポット案件
     public function Occasionally(){
-        $pagemeta = Pagemeta::getPagemeta('CM-WW-000');
+        $pagemeta = Pagemeta::getPagemeta('CM-DS-040');
         $order_datas = Order::getEstimatableOrderDatas();
         $commit = 'Occasionally';
         Order::editDatas($order_datas, $commit);
@@ -65,15 +66,19 @@ class deliveryServiceController extends Controller
     }
 
     // カテゴリー
-    public function Category(){
-        $pagemeta = Pagemeta::getPagemeta('CM-WW-000');
+    public function Category($class_id){
+        $pagemeta = Pagemeta::getPagemeta('CM-DS-050');
+        $order_datas = Order::getEstimatableOrderDatas();
+        $commit = 'Category';
+        Order::editDatas($order_datas, $commit, $class_id);
+        $class_name = CarrierClass::getName($class_id);
 
-        return view('common.delivery_service.Category', compact('pagemeta'));
+        return view('common.delivery_service.Category', compact('pagemeta', 'order_datas', 'commit', 'class_name'));
     }
 
     // フリーテキスト検索
     public function search(Request $request){
-        $pagemeta = Pagemeta::getPagemeta('CM-WW-000');
+        $pagemeta = Pagemeta::getPagemeta('CM-DS-060');
         $words = urldecode($request['keywords']);
         $words = str_replace('　', ' ', $words);
         if(strpos($words, ' ') !== false){

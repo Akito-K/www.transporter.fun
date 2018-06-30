@@ -27,6 +27,7 @@
 
 </head>
 <body>
+    @include('include.common.www.tagmanager')
     <div id="wrapper">
         @include('include.common.help.header')
 

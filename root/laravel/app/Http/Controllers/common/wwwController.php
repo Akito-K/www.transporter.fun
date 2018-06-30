@@ -9,6 +9,7 @@ use App\Model\Order;
 use App\Model\CarEmpty;
 use App\Model\Car;
 use App\Model\Area;
+use App\Model\CarrierClass;
 
 class wwwController extends Controller
 {
@@ -18,8 +19,9 @@ class wwwController extends Controller
         $empty_datas = CarEmpty::getAllEmpties();
         $car_datas = Car::getAllCars();
         $area_names = Area::getNames();
+        $class_datas = CarrierClass::getClasses();
 
-        return view('common.www.index', compact('pagemeta', 'order_datas', 'empty_datas', 'car_datas', 'area_names'));
+        return view('common.www.index', compact('pagemeta', 'order_datas', 'empty_datas', 'car_datas', 'area_names', 'class_datas'));
     }
 
     public function trucks (){
@@ -71,6 +73,12 @@ class wwwController extends Controller
         $pagemeta = Pagemeta::getPagemeta('CM-HM-040');
 
         return view('common.www.privacypolicy', compact('pagemeta'));
+    }
+
+    public function campaign(){
+        $pagemeta = Pagemeta::getPagemeta('CM-HM-045');
+
+        return view('common.www.campaign', compact('pagemeta'));
     }
 
 

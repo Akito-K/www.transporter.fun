@@ -5,7 +5,8 @@
     <div class="container">
         <ul>
             <li><a href="/">Home</a></li>
-            <li><span>物流サービス情報一覧</span></li>
+            <li><a href="/delivery_services">物流サービス情報一覧</a></li>
+            <li><span>運搬クラス別</span></li>
         </ul>
     </div>
 </div>

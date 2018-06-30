@@ -3927,15 +3927,15 @@ footer .copyright p {
   }
 }
 
-.page_contact a, .page_register a {
+.page_contact article a, .page_register article a {
   text-decoration: underline;
 }
 
-.page_contact a:hover, .page_register a:hover {
+.page_contact article a:hover, .page_register article a:hover {
   text-decoration: none;
 }
 
-.page_contact p, .page_register p {
+.page_contact article p, .page_register article p {
   color: #707070;
 }
 
@@ -8301,30 +8301,8 @@ button[disabled] {
   color: #843534;
 }
 
-.page_contact .sec_form_status .status_in ul li, .page_register .sec_form_status .status_in ul li {
-  width: 20%;
-  background-size: auto;
-  padding: 17px 35px 17px 35px;
-}
-
-.page_contact .sec_form_status .status_in ul li:nth-of-type(0), .page_register .sec_form_status .status_in ul li:nth-of-type(0) {
-  z-index: 50;
-}
-
-.page_contact .sec_form_status .status_in ul li:nth-of-type(1), .page_register .sec_form_status .status_in ul li:nth-of-type(1) {
-  z-index: 40;
-}
-
-.page_contact .sec_form_status .status_in ul li:nth-of-type(2), .page_register .sec_form_status .status_in ul li:nth-of-type(2) {
-  z-index: 30;
-}
-
-.page_contact .sec_form_status .status_in ul li:nth-of-type(3), .page_register .sec_form_status .status_in ul li:nth-of-type(3) {
-  z-index: 20;
-}
-
-.page_contact .sec_form_status .status_in ul li:nth-of-type(4), .page_register .sec_form_status .status_in ul li:nth-of-type(4) {
-  z-index: 10;
+.page_home .sec_nav nav ul a:hover {
+  opacity: 0.8;
 }
 
 .page_contact .sec_form .form_groupe .form_parts_box input, .page_register .sec_form .form_groupe .form_parts_box input {
@@ -8367,4 +8345,30 @@ button[disabled] {
   padding: 0 10px;
   color: #333;
   line-height: 37px;
+}
+
+.page_signup .sec_form_status .status_in ul li {
+  width: 20%;
+  background-size: auto;
+  padding: 17px 35px 17px 35px;
+}
+
+.page_signup .sec_form_status .status_in ul li:nth-of-type(0) {
+  z-index: 50;
+}
+
+.page_signup .sec_form_status .status_in ul li:nth-of-type(1) {
+  z-index: 40;
+}
+
+.page_signup .sec_form_status .status_in ul li:nth-of-type(2) {
+  z-index: 30;
+}
+
+.page_signup .sec_form_status .status_in ul li:nth-of-type(3) {
+  z-index: 20;
+}
+
+.page_signup .sec_form_status .status_in ul li:nth-of-type(4) {
+  z-index: 10;
 }

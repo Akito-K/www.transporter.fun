@@ -144,6 +144,19 @@ class MyForm
         return $body;
     }
 
+    public static function options($lists, $selected=""){
+        $body = "";
+
+        if(!empty($lists)){
+            foreach($lists as $key => $val){
+                $sel = $key == $selected? ' selected': '';
+                $body .= '<option value="'.$key.'"'.$sel.'>'.$val.'</option>';
+            }
+        }
+
+        return $body;
+    }
+
 
     /**
      * string Laravel.Form::input の引数

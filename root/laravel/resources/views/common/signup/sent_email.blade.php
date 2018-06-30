@@ -11,7 +11,7 @@
     </div>
 </div>
 
-<div class="page_register page_main">
+<div class="page_register page_main page_signup">
     <div class="container">
         <article class="content">
 

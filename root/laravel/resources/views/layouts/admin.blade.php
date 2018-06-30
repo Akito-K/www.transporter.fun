@@ -25,6 +25,7 @@
 
 </head>
 <body class="hold-transition sidebar-mini {!! $pagemeta->body_class !!} skin-green">
+@include('include.common.www.tagmanager')
 
 @include('include.admin.ajaxing')
 

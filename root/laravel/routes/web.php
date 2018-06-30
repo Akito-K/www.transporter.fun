@@ -26,22 +26,23 @@ Route::post('/testcode/confirming/update',          'testcode\confirmingControll
 Route::get ('/testcode/confirming/{id}/delete',     'testcode\confirmingController@delete');
 */
 
-Route::get ('/',                                    'common\wwwController@index');
-Route::get ('/trucks',                              'common\wwwController@trucks');
-Route::get ('/delivery_services/{order_id}/detail', 'common\deliveryServiceController@detail');
-Route::get ('/delivery_services',                   'common\deliveryServiceController@index');
-Route::get ('/delivery_services/withintoday',       'common\deliveryServiceController@withintoday');
-Route::get ('/delivery_services/fewdays',           'common\deliveryServiceController@fewdays');
-Route::get ('/delivery_services/Regularly',         'common\deliveryServiceController@Regularly');
-Route::get ('/delivery_services/Occasionally',      'common\deliveryServiceController@Occasionally');
-Route::get ('/delivery_services/Category',          'common\deliveryServiceController@Category');
-Route::get ('/delivery_services/search',            'common\deliveryServiceController@search');
+Route::get ('/',                                        'common\wwwController@index');
+Route::get ('/trucks',                                  'common\wwwController@trucks');
 
+Route::get ('/delivery_services/{order_id}/detail',     'common\deliveryServiceController@detail');
+Route::get ('/delivery_services',                       'common\deliveryServiceController@index');
+Route::get ('/delivery_services/withintoday',           'common\deliveryServiceController@withintoday');
+Route::get ('/delivery_services/fewdays',               'common\deliveryServiceController@fewdays');
+Route::get ('/delivery_services/Regularly',             'common\deliveryServiceController@Regularly');
+Route::get ('/delivery_services/Occasionally',          'common\deliveryServiceController@Occasionally');
+Route::get ('/delivery_services/Category/{class_id}',   'common\deliveryServiceController@Category');
+Route::get ('/delivery_services/search',                'common\deliveryServiceController@search');
+/*
 Route::get ('/transporter',                     'common\transporterController@index');
 Route::get ('/transporter/driver',              'common\transporterController@driver');
 Route::get ('/transporter/carrier',             'common\transporterController@carrier');
 Route::get ('/transporter/ranking',             'common\transporterController@ranking');
-
+*/
 Route::get ('/company',                         'common\wwwController@company');
 Route::get ('/compliance',                      'common\wwwController@compliance');
 Route::get ('/transportation',                  'common\wwwController@transportation');
@@ -51,6 +52,13 @@ Route::get ('/safety',                          'common\wwwController@safety');
 Route::get ('/corporate/rules',                 'common\wwwController@corporateRules');
 Route::get ('/tokushoho',                       'common\wwwController@tokushoho');
 Route::get ('/privacypolicy',                   'common\wwwController@privacypolicy');
+Route::get ('/campaign',                        'common\wwwController@campaign');
 
+Route::get ('/transport_news',                  'common\transportNewsController@index');
 
+// お問い合わせ
+Route::get ('/contact',                         'common\contactController@create');
+Route::post('/contact/confirm',                 'common\contactController@confirm');
+Route::post('/contact/execute',                 'common\contactController@execute');
+Route::get ('/contact/complete',                'common\contactController@complete');
 
