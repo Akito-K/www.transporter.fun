@@ -34,7 +34,7 @@
                                 <p class="ti_-1">※14日間のお試し終了後、ご利用中止をされない場合には、サービスは自動的に継続されクレジットにて決済されます。</p>
                             </div>
                         </div>
-                        <a class="btn_orange" href="{{ env('www_url') }}/signup">無料お試し14日間のお申込みはこちらから →</a>
+                        <!--a class="btn_orange" href="{{ env('www_url') }}/signup">無料お試し14日間のお申込みはこちらから →</a-->
                     </div>
                 </div>
             </section>

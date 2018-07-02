@@ -12,8 +12,8 @@ use App\Model\Log;
 use App\Model\Owner;
 use App\Model\Carrier;
 
-use App\Mail\MailAuthorization;
-use Illuminate\Support\Facades\Mail;
+// use App\Mail\MailAuthorization;
+// use Illuminate\Support\Facades\Mail;
 
 class startController extends mypageController
 {

@@ -62,3 +62,8 @@ Route::post('/contact/confirm',                 'common\contactController@confir
 Route::post('/contact/execute',                 'common\contactController@execute');
 Route::get ('/contact/complete',                'common\contactController@complete');
 
+Route::get ('/mailbody/authorization/email',    function(){ return view('mailbody.authorization.email', ['code' => 'hoge']); });
+Route::get ('/mailbody/authorization/password', function(){ return view('mailbody.authorization.passwordreset', ['reset_url' => 'hoge']); });
+Route::get ('/mailbody/contact/complete',       function(){ return view('mailbody.contact.complete'); });
+Route::get ('/mailbody/signup/email',           function(){ return view('mailbody.signup.email', ['key' => 'hoge']); });
+

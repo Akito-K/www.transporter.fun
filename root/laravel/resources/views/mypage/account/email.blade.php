@@ -6,7 +6,7 @@
 
     <div class="box">
         <div class="box-body">
-            <h2 class="page-header">メールアドレス変更のお申込み</h2>
+            <h2 class="page-header">メールアドレスの変更申請</h2>
 
             <div class="customer__block">
 

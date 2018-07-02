@@ -7,7 +7,7 @@
             <a href="{{ url('/mypage') }}" class="scroll textlink">ようこそ</a>　{{ \Auth::user()->sei }} {{ \Auth::user()->mei }} 様
             @else
             <ul>
-                <li class="signup"><a href="{{ url('') }}/signup">今すぐ会員登録<span class="icon icon_signup"></span></a></li>
+                <!--li class="signup"><a href="{{ url('') }}/signup">今すぐ会員登録<span class="icon icon_signup"></span></a></li-->
                 <li class="login"><a href="{{ route('login') }}">ログイン<span class="icon icon_login"></span></a></li>
             </ul>
             @endauth
@@ -34,7 +34,7 @@
                     ({!! \MyHTML::logout('ログアウト', 'scroll textlink') !!})
                     @else
                     <ul>
-                        <li class="signup"><a href="{{ url('') }}/signup">今すぐ会員登録<span class="icon icon_signup"></span></a></li>
+                        <!--li class="signup"><a href="{{ url('') }}/signup">今すぐ会員登録<span class="icon icon_signup"></span></a></li-->
                         <li class="login"><a href="{{ route('login') }}">ログイン<span class="icon icon_login"></span></a></li>
                     </ul>
                     @endauth

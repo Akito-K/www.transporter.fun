@@ -58,7 +58,7 @@
 
                     <p class="mt30">
                         <a href="{{ route('password.request') }}" class="scroll textlink">ログインID・パスワードを忘れた場合 → </a><br />
-                        <a href="{{ url('') }}/signup" class="scroll textlink">新規無料会員登録 → </a>
+                        <!--a href="{{ url('') }}/signup" class="scroll textlink">新規無料会員登録 → </a-->
                     </p>
                 </div>
             </section>

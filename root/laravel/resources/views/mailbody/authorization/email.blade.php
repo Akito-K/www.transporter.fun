@@ -1,10 +1,16 @@
-    <div class="box">
-        <div class="box-body">
-            <h2 class="page-header">入力されたメールアドレス宛てに認証メールを送りました。</h2>
-            <p>これより {!! env('AUTHORIZATION_LIMIT_HOURS', 24) !!} 時間以内に認証</p>
-            <p>URLはメールに載ってる</p>
-            <p>URLが途切れてるときはコピペしてね</p>
-            <p><a href="http://mypage.transporter.fun/authorization/{{ $code }}">こちら</a></p>
-        </div>
-    </div>
+@extends('mailbody.layouts.mail')
 
+@section('style')
+<style>
+</style>
+@endsection
+
+
+@section('content')
+    <div class="box">
+        <h1 class="center title">メールアドレスの変更申請を受け付けました。</h1>
+        <p class="body">申請内容に間違いない場合、これより <span class="bold">{!! env('AUTHORIZATION_LIMIT_HOURS', 24) !!}時間</span> 以内に下記の「認証する」ボタンよりアクセスして、認証を完了してください。</p>
+
+        <p class="center"><a href="http://www.transporter.fun/authorization/{{ $code }}" class="btn btn-auth">認証する</a></p>
+    </div>
+@endsection

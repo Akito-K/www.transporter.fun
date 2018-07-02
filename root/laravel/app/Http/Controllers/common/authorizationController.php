@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Authorization;
 use App\Model\MyUser;
+use App\Model\Log;
 
-use App\Mail\MailAuthorization;
-use Illuminate\Support\Facades\Mail;
+// use App\Mail\MailAuthorization;
+// use Illuminate\Support\Facades\Mail;
 
 class authorizationController extends Controller
 {
