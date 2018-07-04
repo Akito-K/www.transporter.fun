@@ -1,10 +1,10 @@
 AddHandler x-httpd-php71 .php
 suPHP_ConfigPath /usr/home/ae170v73lv/config/
 
-AuthUserFile "/usr/home/ae170v73lv/html/htpasswd/.htpasswd"
-AuthName "Development"
-AuthType BASIC
-require valid-user
+# AuthUserFile "/usr/home/ae170v73lv/html/htpasswd/.htpasswd"
+# AuthName "Development"
+# AuthType BASIC
+# require valid-user
 
 
 <IfModule mod_rewrite.c>
@@ -28,4 +28,9 @@ require valid-user
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    # www
+    RewriteCond %{HTTP_HOST} ^transporter\.fun
+    RewriteRule ^(.*)$ http://www.transporter.fun/$1 [R=301,L]
+
 </IfModule>
