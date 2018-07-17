@@ -42,3 +42,5 @@ root/laravel/composer.lock
 root/laravel/vendor
 root/laravel/*.env
 
+*.xml
+*.iml
